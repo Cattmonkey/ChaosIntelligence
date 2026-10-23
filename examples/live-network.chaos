@@ -1,0 +1,2 @@
+// 返回普通 UIArtifact；状态读取只由同项目的可信宿主视图执行。
+ui_artifact("page", "系统实时网络", ui_node("RuntimeGraph", ["真实运行状态", "radial", "project", "auto"]))

@@ -1,0 +1,2 @@
+let worker=process_from({kind:"process",name:"durable native Bot",module:"bot.chaos",export:"step",intervalSeconds:null,maxTurns:null});
+await process_start("durable-bot",worker,{goal:"three checked turns",context:{count:0,latest:null}});

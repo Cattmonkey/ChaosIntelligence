@@ -1,0 +1,9 @@
+let options=if input==null {{key:"dot",provider:"model",value:40,iterations:2}}else{input};
+let definition=process_from({
+  kind:"process",name:"atomic self-programming dot",module:"dot.chaos",export:"step",
+  intervalSeconds:get(options,"intervalSeconds",1),maxTurns:100
+});
+await definition(get(options,"key","dot"),{
+  generation:0,provider:get(options,"provider","model"),value:get(options,"value",40),
+  iterations:get(options,"iterations",2)
+});

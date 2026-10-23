@@ -1,0 +1,33 @@
+# Local state, configuration, credentials and development evidence
+.chaos/
+.development/
+.env
+.env.*
+!.env.example
+*.sqlite
+*.sqlite3
+*.db
+*.log
+*.key
+*.pem
+*.p12
+*.pfx
+secrets/
+credentials/
+keys/
+
+# Generated environments and build outputs
+.venv/
+venv/
+env/
+node_modules/
+__pycache__/
+*.py[cod]
+.DS_Store
+build/
+dist/
+*.egg-info/
+.pytest_cache/
+.coverage
+htmlcov/
+docs-site/

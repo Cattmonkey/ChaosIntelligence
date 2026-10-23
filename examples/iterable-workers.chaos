@@ -1,0 +1,7 @@
+fn* inputs() {
+  yield 20;
+  yield 21;
+}
+async fn work(value) { value * 2 }
+let jobs = map(work, inputs());
+await gather(jobs)

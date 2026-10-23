@@ -1,0 +1,3 @@
+let options=if input==null {{key:"dot",value:40,iterations:2}} else {input};
+let dot=process_from({kind:"process",name:"dot with function tools",module:"dot.chaos",export:"step",intervalSeconds:get(options,"intervalSeconds",1),maxTurns:100});
+await dot(get(options,"key","dot"),{generation:0,value:get(options,"value",40),iterations:get(options,"iterations",2)});

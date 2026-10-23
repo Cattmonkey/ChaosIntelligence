@@ -1,0 +1,11 @@
+'use strict';
+const fs=require('fs'),vm=require('vm'),path=require('path'),assert=require('assert'),root=process.argv[2]||path.resolve(__dirname,'..');
+const source=fs.readFileSync(path.join(root,'web/ide.js'),'utf8');const context=vm.createContext({});vm.runInContext(source.slice(0,source.indexOf('(()=>{'))+';globalThis.c=ChaosProgramContracts',context);const plain=x=>JSON.parse(JSON.stringify(x));
+const base={kind:'program',entry:'main.chaos',files:{'main.chaos':'42','lib/a.chaos':'export {}'},languageVersions:{'main.chaos':2,'lib/a.chaos':1}};
+assert.deepEqual(plain(context.c.changes(base,base)),[]);
+const candidate={...base,files:{'main.chaos':'43','lib/b.chaos':'export {}'},languageVersions:{'main.chaos':2,'lib/b.chaos':2}};const changes=plain(context.c.changes(base,candidate));assert.deepEqual(changes.map(x=>x.path),['lib/a.chaos','lib/b.chaos','main.chaos']);assert.equal(changes[0].after,null);assert.equal(changes[1].before,null);assert.equal(changes[2].before,'42');assert.equal(changes[2].after,'43');
+const dialect={...base,languageVersions:{...base.languageVersions,'main.chaos':1}};assert.equal(context.c.changes(base,dialect)[0].path,'main.chaos');
+const empty={...base,files:{'main.chaos':''},languageVersions:{'main.chaos':2}};assert.equal(context.c.changes(empty,{...empty,files:{'main.chaos':'42'}})[0].before,'');
+const malicious=JSON.parse('{"kind":"program","files":{"__proto__":"literal"},"languageVersions":{"__proto__":2}}');assert.equal(context.c.changes({files:{},languageVersions:{}},malicious)[0].after,'literal');
+new vm.Script(source);assert(!source.includes("callee.name==='program_from'"));
+console.log(JSON.stringify({status:'passed',checks:7,details:['unchanged definition','sorted add/remove/change files','source text exact','dialect-only diff','empty source retained','own property safe diff','IDE script parses without special-form call heuristic']}));

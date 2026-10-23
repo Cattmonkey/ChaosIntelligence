@@ -1,0 +1,35 @@
+// Deterministic protocol demonstration. All probes execute real Chaos programs.
+fn program(block_size:Int) {
+  {blockSize:block_size, program:{kind:"program", entry:"main.chaos", languageVersions:{"main.chaos":2}, files:{"main.chaos":
+    "var output=[];var cursor=0;var batches=0;while cursor<length(input.items){let block=take(input.blockSize,drop(cursor,input.items));output=output+map(fn(x){x*x},block);cursor=cursor+input.blockSize;batches=batches+1};{squares:output,batches:batches}"
+  }}}
+}
+fn base() { program(1) }
+fn propose(c) {
+  let size = if c.scope == "general" { 2 } else { 4 };
+  {harness:program(size),reason:"Change the batch width; execute the candidate to measure its work"}
+}
+async fn probe(c) {
+  let result = await run_program(program_from(c.harness.program), {items:c.task,blockSize:c.harness.blockSize});
+  {output:result,evidence:{batches:result.batches,itemCount:length(result.squares)}}
+}
+fn compose(c) {
+  let expected = c.records[0].output.squares;
+  var best = c.records[0];
+  for row in c.records {
+    if row.output.squares == expected && row.output.batches < best.output.batches { best=row } else { null };
+  };
+  {harness:best.harness,reason:"Retain observed output and reduce measured batch work on this input"}
+}
+fn select(c) {
+  var best=0;
+  for i in range(length(c.outputs)) { if c.outputs[i].batches < c.outputs[best].batches { best=i } else { null } };
+  best
+}
+fn learn(c) {
+  let ids=[c.records[0].id,c.selected];
+  {strategy:{compare:"Compare output preservation and actual batch counts before composing"},
+   lessons:[{cue:"Repeated independent transformations",lesson:"Try batching and compare outputs and measured work; this observation is scoped to this task.",evidence:ids}],evidence:ids}
+}
+fn operators() { {propose:propose,probe:probe,compose:compose,select:select,learn:learn} }
+export {base,operators};

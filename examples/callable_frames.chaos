@@ -1,0 +1,5 @@
+fn base(value=40){value+1}
+let built=function_from(code_from("fn(value=seed){value+1}"),{seed:40});
+let general=generic_method(generic_function("answer"),["Number"],base);
+let answer=generic_method(general,["Int"],fn(next,value){next()+1},with_next=true);
+[answer(40),built(),base()]

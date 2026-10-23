@@ -1,0 +1,7 @@
+// Reusable task state uses real tuple keys and ordinary function dispatch.
+import "std/hash" as H;
+import "std/generic" as G;
+let state = H.hash_map([(("score", 1), 40)]);
+let updated = H.hash_set(state, ("score", 1), 42);
+let read = G.generic_method(G.generic_function("read"), ["HashMap"], fn(mapping) { mapping[("score", 1)] });
+[read(state), read(updated), H.hash_info(updated).size]

@@ -1,0 +1,6 @@
+var [left,right]=[20,22];
+[left,right]=[right,left];
+match {pair:[left,right]} {
+  {pair:[a,b]} if a>0 => a+b;
+  _ => 0
+}

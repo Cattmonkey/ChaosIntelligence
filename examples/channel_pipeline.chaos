@@ -1,0 +1,11 @@
+// Run: chaos run examples/channel_pipeline.chaos
+async fn producer(out:Channel, action:Function, inputs:List) {
+    for value in inputs { await channel_send(out,action(value)) }
+    channel_close(out);
+    null
+}
+let results=channel(1);
+async with task_group() as workers {
+    workers.spawn(producer(results,fn(x){x*2},[20,21]));
+    await acollect(results)
+}

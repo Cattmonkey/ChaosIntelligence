@@ -1,0 +1,20 @@
+// Requires a trusted OpenBot profile named mobile and explicit robot.control.
+// The program uses real native observation/command/receipt values; it performs I/O only when run.
+import "std/robot" as R;
+fn channels(readings:Record)->Record {
+ let sonar=get(readings,"sonar",{value:null,unit:"cm"});
+ if sonar.unit!="cm" || sonar.value==null || sonar.value<30 {
+  {left:0,right:0}
+ } else { {left:0.2,right:0.2} }
+};
+async fn cycle(robot:Robot)->Record {
+ let observation=await R.robot_observe(robot);
+ let command=R.robot_command(observation,channels(R.robot_observation_info(observation).readings));
+ let receipt=await robot(command);
+ R.robot_receipt_info(receipt)
+};
+async with await R.robot_open("mobile") as robot {
+ let receipt=await cycle(robot);
+ let stopped=R.robot_receipt_info(await R.robot_stop(robot));
+ {receipt:receipt,stop:stopped,targetVerified:false}
+}

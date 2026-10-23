@@ -1,0 +1,266 @@
+/* Shared interface colors and one semantic code palette for editors and readers.
+   Syntax colors stay independent of interface roles and adapt to print. */
+:root {
+  color-scheme: dark;
+  --bg: #12151c;
+  --panel: #191e29;
+  --panel2: #232b39;
+  --inset: #10141b;
+  --hover: #283244;
+  --selected: #2d394d;
+  --border: #46546a;
+  --border-strong: #8193ad;
+  --text: #f1eee7;
+  --secondary: #d1d5df;
+  --muted: #bdc6d4;
+  --subtle: #b2bece;
+  --primary: #f1bc70;
+  --primary-hover: #ffd29a;
+  --on-primary: #232019;
+  --accent: #91b8f4;
+  --agent: #cab5ec;
+  --function: #91b8f4;
+  --tool: #f1bc70;
+  --success: #98c6ad;
+  --error: #f29c9c;
+  --warning: #f1bc70;
+  --agent-surface: #2a2638;
+  --agent-border: #a08abb;
+  --function-surface: #233149;
+  --function-border: #7297c8;
+  --tool-surface: #3c3024;
+  --tool-border: #b28a57;
+  --success-surface: #20382f;
+  --success-border: #779b89;
+  --error-surface: #3b252d;
+  --error-border: #c47c87;
+  --focus: var(--accent);
+  --syntax-keyword: #e1a6f2;
+  --syntax-string: #b7d993;
+  --syntax-number: #f3b5d4;
+  --syntax-comment: #a4afbe;
+  --syntax-operator: #d6dce8;
+  --syntax-punctuation: #acb7ca;
+  --syntax-variable: #abd9fa;
+  --syntax-function: #f3d68a;
+  --syntax-parameter: #f2b89c;
+  --syntax-type: #7cddc2;
+  --syntax-property: #a3baff;
+  --editor-bg: var(--inset);
+  --editor-gutter: var(--panel);
+  --editor-active: var(--panel2);
+  --editor-selection: var(--selected);
+  --editor-caret: var(--text);
+  --editor-tooltip: var(--panel2);
+  --editor-search: #342d25;
+  --editor-search-selected: #403528;
+  --editor-bracket: var(--function-surface);
+  --overlay-faint: rgb(145 184 244 / 5%);
+  --overlay-soft: rgb(145 184 244 / 10%);
+  --overlay: rgb(145 184 244 / 18%);
+  --overlay-strong: rgb(145 184 244 / 30%);
+  --agent-overlay: rgb(202 181 236 / 10%);
+  --shadow-soft: rgb(0 0 0 / 18%);
+  --shadow: rgb(0 0 0 / 35%);
+  --shadow-strong: rgb(0 0 0 / 60%);
+  --scrim: rgb(8 12 19 / 85%);
+  --print-bg: #ffffff;
+  --print-panel: #f4f5f7;
+  --print-text: #252932;
+  --print-muted: #505967;
+  --print-border: #9ba4b1;
+  --print-link: #254c83;
+  /* Compatibility aliases retain shared semantic meaning. */
+  --line: var(--border);
+  --teal: var(--accent);
+  --purple: var(--agent);
+  --blue: var(--function);
+  --orange: var(--tool);
+  --red: var(--error);
+}
+/* Backend semantic roles take precedence over nested lexical CodeMirror spans. */
+:is(.cm-content, .embedded-editor, .chaos-code, .code-appearance-dialog) :is(.ide-token-keyword, .chaos-token-keyword),
+:is(.cm-content, .embedded-editor, .chaos-code, .code-appearance-dialog) :is(.ide-token-keyword, .chaos-token-keyword) span { color: var(--syntax-keyword) !important; }
+:is(.cm-content, .embedded-editor, .chaos-code, .code-appearance-dialog) :is(.ide-token-string, .chaos-token-string),
+:is(.cm-content, .embedded-editor, .chaos-code, .code-appearance-dialog) :is(.ide-token-string, .chaos-token-string) span { color: var(--syntax-string) !important; }
+:is(.cm-content, .embedded-editor, .chaos-code, .code-appearance-dialog) :is(.ide-token-number, .chaos-token-number),
+:is(.cm-content, .embedded-editor, .chaos-code, .code-appearance-dialog) :is(.ide-token-number, .chaos-token-number) span { color: var(--syntax-number) !important; }
+:is(.cm-content, .embedded-editor, .chaos-code, .code-appearance-dialog) :is(.ide-token-comment, .chaos-token-comment),
+:is(.cm-content, .embedded-editor, .chaos-code, .code-appearance-dialog) :is(.ide-token-comment, .chaos-token-comment) span { color: var(--syntax-comment) !important; }
+:is(.cm-content, .embedded-editor, .chaos-code, .code-appearance-dialog) :is(.ide-token-operator, .chaos-token-operator),
+:is(.cm-content, .embedded-editor, .chaos-code, .code-appearance-dialog) :is(.ide-token-operator, .chaos-token-operator) span { color: var(--syntax-operator) !important; }
+:is(.cm-content, .embedded-editor, .chaos-code, .code-appearance-dialog) :is(.ide-token-punctuation, .chaos-token-punctuation),
+:is(.cm-content, .embedded-editor, .chaos-code, .code-appearance-dialog) :is(.ide-token-punctuation, .chaos-token-punctuation) span { color: var(--syntax-punctuation) !important; }
+:is(.cm-content, .embedded-editor, .chaos-code, .code-appearance-dialog) :is(.ide-token-variable, .chaos-token-variable),
+:is(.cm-content, .embedded-editor, .chaos-code, .code-appearance-dialog) :is(.ide-token-variable, .chaos-token-variable) span { color: var(--syntax-variable) !important; }
+:is(.cm-content, .embedded-editor, .chaos-code, .code-appearance-dialog) :is(.ide-token-function, .chaos-token-function),
+:is(.cm-content, .embedded-editor, .chaos-code, .code-appearance-dialog) :is(.ide-token-function, .chaos-token-function) span { color: var(--syntax-function) !important; }
+:is(.cm-content, .embedded-editor, .chaos-code, .code-appearance-dialog) :is(.ide-token-parameter, .chaos-token-parameter),
+:is(.cm-content, .embedded-editor, .chaos-code, .code-appearance-dialog) :is(.ide-token-parameter, .chaos-token-parameter) span { color: var(--syntax-parameter) !important; }
+:is(.cm-content, .embedded-editor, .chaos-code, .code-appearance-dialog) :is(.ide-token-type, .chaos-token-type),
+:is(.cm-content, .embedded-editor, .chaos-code, .code-appearance-dialog) :is(.ide-token-type, .chaos-token-type) span { color: var(--syntax-type) !important; }
+:is(.cm-content, .embedded-editor, .chaos-code, .code-appearance-dialog) :is(.ide-token-property, .chaos-token-property),
+:is(.cm-content, .embedded-editor, .chaos-code, .code-appearance-dialog) :is(.ide-token-property, .chaos-token-property) span { color: var(--syntax-property) !important; }
+:is(.cm-content, .embedded-editor, .chaos-code, .code-appearance-dialog) :is(.ide-token-comment, .chaos-token-comment),
+:is(.cm-content, .embedded-editor, .chaos-code, .code-appearance-dialog) :is(.ide-token-comment, .chaos-token-comment) span { font-style: normal; }
+:is(.cm-content, .embedded-editor, .chaos-code, .code-appearance-dialog) :is(.ide-token-keyword, .chaos-token-keyword, .ide-token-function, .chaos-token-function, .ide-token-type, .chaos-token-type) { font-weight: 500; }
+.cm-editor { background: var(--editor-bg); color: var(--text); }
+/* CodeMirror foundations also apply to isolated/offline mounts using code.css.
+   Content-level specificity beats the vendor light/dark active-line defaults. */
+.cm-editor .cm-content { caret-color: var(--editor-caret); }
+.cm-editor .cm-content .cm-activeLine { background: var(--editor-active); }
+.cm-editor .cm-scroller .cm-gutters { background: var(--editor-gutter); color: var(--muted); border: 0; }
+.cm-editor .cm-scroller .cm-activeLineGutter { background: var(--editor-active); color: var(--text); }
+.cm-editor .cm-scroller .cm-cursor { border-left-color: var(--editor-caret); }
+.cm-editor .cm-selectionBackground,
+.cm-editor .cm-content ::selection { background: var(--editor-selection) !important; }
+.cm-editor .cm-content .cm-searchMatch,
+.cm-editor .cm-content .cm-selectionMatch { background: var(--editor-search); }
+.cm-editor .cm-content .cm-searchMatch-selected { background: var(--editor-search-selected); }
+.cm-editor .cm-scroller .cm-content .cm-matchingBracket { background: var(--editor-bracket); }
+/* Signature help is part of the code surface, including its current parameter.
+   It inherits the same semantic palette without changing editor state. */
+:root :is(.ide-signature-parameter, .embedded-editor-parameters code) {
+  color: var(--syntax-parameter);
+}
+:root :is(.ide-signature-parameter, .embedded-editor-parameters code).active {
+  color: var(--syntax-parameter);
+  background: var(--editor-selection);
+  border-color: var(--syntax-parameter);
+  font-weight: 600;
+}
+:root :is(.ide-signature-label, .embedded-editor-signature > code) {
+  color: var(--syntax-function);
+}
+/* Completion, hover and search use the same colors on every editor mount.
+   Root specificity also covers CodeMirror's default light foundation. */
+:root .cm-editor .cm-tooltip {
+  background: var(--editor-tooltip);
+  color: var(--text);
+  border: 1px solid var(--border-strong);
+}
+:root .cm-editor .cm-tooltip-section { border-color: var(--border-strong); }
+:root .cm-editor .cm-tooltip-arrow:before {
+  border-top-color: var(--border-strong);
+  border-bottom-color: var(--border-strong);
+}
+:root .cm-editor .cm-tooltip-arrow:after {
+  border-top-color: var(--editor-tooltip);
+  border-bottom-color: var(--editor-tooltip);
+}
+:root .cm-editor .cm-tooltip-autocomplete ul li[aria-selected="true"] {
+  background: var(--editor-selection);
+  color: var(--text);
+}
+:root .cm-editor .cm-panels {
+  background: var(--panel2);
+  color: var(--text);
+  border-color: var(--border);
+}
+:root .cm-editor .cm-panels :where(input:not([type=checkbox]), select, button) {
+  background: var(--editor-bg);
+  background-image: none;
+  color: var(--text);
+  border-color: var(--border);
+}
+:root .cm-editor .cm-panels button { background: var(--panel); }
+:root .cm-editor .cm-panels button:hover { background: var(--hover); }
+:root .cm-editor .cm-panels input[type=checkbox] { accent-color: var(--accent); }
+:root :is(button, a, input, select, textarea, [tabindex], [contenteditable=true]):focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+@media print {
+  :root {
+    color-scheme: light;
+    --bg: var(--print-bg);
+    --panel: var(--print-panel);
+    --panel2: var(--print-panel);
+    --inset: var(--print-bg);
+    --hover: #e9edf2;
+    --selected: #dde6f3;
+    --text: var(--print-text);
+    --secondary: var(--print-text);
+    --muted: var(--print-muted);
+    --subtle: var(--print-muted);
+    --accent: var(--print-link);
+    --agent: #654483;
+    --function: var(--print-link);
+    --tool: #79531c;
+    --success: #285c41;
+    --error: #932c40;
+    --warning: #79531c;
+    --syntax-keyword: #60407f;
+    --syntax-string: #365f3f;
+    --syntax-number: #77511c;
+    --syntax-comment: #505967;
+    --syntax-operator: #394758;
+    --syntax-punctuation: #505967;
+    --syntax-variable: #252932;
+    --syntax-function: #28568b;
+    --syntax-parameter: #7c4a37;
+    --syntax-type: #23636c;
+    --syntax-property: #4b5085;
+    --editor-search: #eee5d3;
+    --editor-search-selected: #e4d8bd;
+    --editor-bracket: #dde6f3;
+  }
+}
+
+/* A code palette is local to code surfaces, never the surrounding workspace.
+   Screen-only overrides leave the original exported/printed palette intact. */
+@media screen {
+  :root[data-code-palette="paper"] :is(.cm-editor, pre.chaos-code, .code-appearance-dialog, .ide-signature, .embedded-editor-signature) {
+    color-scheme: light;
+    --bg: #fbfaf6; --panel: #f2f0ea; --panel2: #e8edf3; --inset: #fbfaf6;
+    --hover: #e5e9ef; --selected: #dce4ee; --border: #758294; --border-strong: #596b83;
+    --text: #252932; --secondary: #394758; --muted: #505967; --subtle: #505967;
+    --accent: #254c83; --focus: #254c83; --function: #28568b; --agent: #654483;
+    --tool: #79531c; --success: #285c41; --error: #932c40; --warning: #79531c;
+    --function-border: #596b83; --primary: #254c83; --primary-hover: #1d3e6c; --on-primary: #ffffff;
+    --syntax-keyword: #7b2f91; --syntax-string: #326326; --syntax-number: #963773;
+    --syntax-comment: #505967; --syntax-operator: #394758; --syntax-punctuation: #505967;
+    --syntax-variable: #155e87; --syntax-function: #795700; --syntax-parameter: #98452a;
+    --syntax-type: #086b5c; --syntax-property: #4a49a0;
+    --editor-bg: #fbfaf6; --editor-gutter: #f2f0ea; --editor-active: #f0eee8;
+    --editor-selection: #dce4ee; --editor-caret: #252932; --editor-tooltip: #f2f0ea;
+    --editor-search: #eee5d3; --editor-search-selected: #e4d8bd; --editor-bracket: #dde6f3;
+  }
+  :root[data-code-palette="contrast"] :is(.cm-editor, pre.chaos-code, .code-appearance-dialog, .ide-signature, .embedded-editor-signature) {
+    color-scheme: dark;
+    --bg: #080a0d; --panel: #10151c; --panel2: #151b23; --inset: #080a0d;
+    --hover: #202b3a; --selected: #202b3a; --border: #9aacc4; --border-strong: #c3d2e5;
+    --text: #f6f8fc; --secondary: #e0e7f0; --muted: #c2cad6; --subtle: #c2cad6;
+    --accent: #b6d7ff; --focus: #b6d7ff; --function: #b6d7ff; --agent: #e9c9ff;
+    --tool: #ffe493; --success: #c6edaf; --error: #ffc4c4; --warning: #ffe493;
+    --function-border: #b6d7ff; --primary: #ffe493; --primary-hover: #fff1c2; --on-primary: #080a0d;
+    --syntax-keyword: #e9c9ff; --syntax-string: #c6edaf; --syntax-number: #ffc4a5;
+    --syntax-comment: #c2cad6; --syntax-operator: #e8edf5; --syntax-punctuation: #c3d2e5;
+    --syntax-variable: #f6f8fc; --syntax-function: #ffe493; --syntax-parameter: #c7cfff;
+    --syntax-type: #8bedd7; --syntax-property: #a7cfff;
+    --editor-bg: #080a0d; --editor-gutter: #10151c; --editor-active: #151b23;
+    --editor-selection: #202b3a; --editor-caret: #f6f8fc; --editor-tooltip: #10151c;
+    --editor-search: #282318; --editor-search-selected: #302a1a; --editor-bracket: #202b3a;
+  }
+}
+.chaos-code ::selection { background: var(--editor-selection); }
+.code-appearance-dialog { position: fixed; inset: auto 20px 42px auto; margin: 0; width: min(430px, calc(100vw - 32px)); max-height: min(80dvh, 650px); overflow: auto; box-sizing: border-box; padding: 16px; border: 1px solid var(--border-strong); border-radius: 8px; background: var(--panel); color: var(--text); font: 13px/1.6 -apple-system, BlinkMacSystemFont, "PingFang SC", sans-serif; }
+.code-appearance-dialog::backdrop { background: rgb(0 0 0 / 24%); }
+.code-appearance-heading { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.code-appearance-dialog button { background: var(--panel2); color: var(--text); border: 1px solid var(--border); border-radius: 4px; padding: 4px 10px; cursor: pointer; }
+.code-appearance-choices { display: flex; flex-wrap: wrap; gap: 14px; padding: 12px 0; margin: 8px 0; border: 0; }
+.code-appearance-choices legend { padding: 0; color: var(--muted); font-size: 11px; }
+.code-appearance-choices label { display: inline-flex; gap: 5px; align-items: center; color: var(--text); font-size: 13px; cursor: pointer; }
+.code-appearance-choices input { width: auto; margin: 0; accent-color: var(--accent); }
+/* The preview is an ordinary analyzed read-only code surface. */
+.code-appearance-preview { margin: 10px 0; }
+.code-appearance-preview-title { margin: 0; color: var(--muted); font-size: 11px; }
+.code-appearance-preview pre.chaos-code { margin: 6px 0; font-size: 12px; }
+.code-appearance-preview pre.chaos-code > code { max-height: 240px; overflow: auto; }
+.code-appearance-dialog .code-appearance-preview .chaos-code-toolbar, .code-appearance-dialog .code-appearance-preview .chaos-code-hint { display: none; }
+.code-appearance-note { color: var(--muted); font-size: 11px; margin: 8px 0; }
+.code-appearance-legend { border-top: 1px solid var(--border); padding-top: 10px; }
+.code-appearance-legend summary { cursor: pointer; color: var(--text); }
+.code-appearance-role { display: grid; grid-template-columns: minmax(80px, 1fr) 1fr; gap: 12px; align-items: baseline; margin: 7px 0; color: var(--muted); }
+.code-appearance-role code { background: var(--editor-bg); padding: 1px 5px; border-radius: 3px; font: 12px/1.6 var(--mono, ui-monospace, monospace); }
+@media print { .code-appearance-dialog, #codeAppearanceButton { display: none !important; } }

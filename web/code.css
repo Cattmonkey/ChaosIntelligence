@@ -1,0 +1,20 @@
+@import url("./theme.css");
+/* One read-only code surface for live documentation, static exports and IDE previews. */
+pre.chaos-code{--code-font:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;position:relative;display:block;min-width:0;max-width:100%;margin:16px 0;padding:0;border:1px solid var(--border);border-radius:8px;background:var(--inset);color:var(--secondary);white-space:normal;overflow:hidden;font:13px/1.8 var(--code-font)}
+.chaos-code .chaos-code-toolbar{display:flex;align-items:center;gap:8px;padding:8px 11px;border-bottom:1px solid var(--border);background:var(--bg);white-space:normal;flex-wrap:wrap}
+.chaos-code .code-label{position:static;flex:1;min-width:60px;color:var(--accent);font:10px/1.6 var(--code-font);letter-spacing:.5px;overflow-wrap:anywhere;text-transform:none}
+.chaos-code .copy-code,.chaos-code .chaos-code-wrap{position:static;border:1px solid var(--border);border-radius:4px;padding:3px 9px;background:var(--panel);color:var(--secondary);font:11px/1.6 -apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif;cursor:pointer;white-space:nowrap}
+.chaos-code button:hover,.chaos-code .chaos-code-wrap[aria-pressed=true]{background:var(--selected);color:var(--accent);border-color:var(--border-strong)}
+.chaos-code:focus-visible,.chaos-code button:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+.chaos-code .chaos-code-status{color:var(--accent);font:10px/1.6 -apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif}
+pre.chaos-code>code{display:block;margin:0;padding:12px 12px 12px 0;border:0;border-radius:0;background:transparent;color:inherit;font:inherit;white-space:normal;overflow:auto;tab-size:2;scrollbar-width:thin}
+.chaos-code .chaos-code-line{position:relative;display:block;min-height:1.8em;padding-left:4.5em;white-space:pre;overflow-wrap:normal}
+.chaos-code .chaos-code-line:before{content:attr(data-line);position:absolute;left:0;width:3.3em;text-align:right;color:var(--muted);user-select:none;pointer-events:none;font:inherit}
+.chaos-code.chaos-code-wrapped .chaos-code-line{white-space:pre-wrap;overflow-wrap:anywhere}
+.chaos-code-clipboard{position:fixed;left:-10000px;top:0;width:1px;height:1px;opacity:0}
+@media(max-width:700px){pre.chaos-code{font-size:12px}.chaos-code .chaos-code-line{padding-left:3.6em}.chaos-code .chaos-code-line:before{width:2.7em}.chaos-code .chaos-code-toolbar{gap:6px;padding:7px 9px}.chaos-code .chaos-code-status:empty{display:none}}
+@media print{pre.chaos-code{background:var(--print-panel);color:var(--print-text);border-color:var(--print-border)}.chaos-code .chaos-code-toolbar{display:none}.chaos-code .chaos-code-line{white-space:pre-wrap;overflow-wrap:anywhere}.chaos-code .chaos-code-line:before{color:var(--print-muted)}}
+
+.chaos-code .chaos-code-format,.chaos-code .chaos-code-help,.chaos-code .chaos-code-appearance,.chaos-code .chaos-code-hint button{position:static;border:1px solid var(--border);border-radius:4px;padding:3px 9px;background:var(--panel);color:var(--secondary);font:11px/1.6 -apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif;cursor:pointer;white-space:nowrap}
+.chaos-code button:disabled{opacity:.5;cursor:default}.chaos-code .chaos-code-format[aria-pressed=true]{background:var(--selected);border-color:var(--border-strong)}.chaos-code .chaos-code-hint{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:9px 11px;border-top:1px solid var(--border);white-space:normal;background:var(--panel)}.chaos-code .chaos-code-hint[hidden]{display:none}.chaos-code .chaos-code-hint-text{flex:1;min-width:120px;overflow-wrap:anywhere;white-space:pre-wrap}.chaos-code code [title]{cursor:help}.chaos-code .chaos-code-selected-hint{outline:1px solid var(--border-strong);border-radius:2px;background:var(--selected)}
+@media print{.chaos-code .chaos-code-hint{display:none}.chaos-code .chaos-code-selected-hint{outline:0;background:transparent}}

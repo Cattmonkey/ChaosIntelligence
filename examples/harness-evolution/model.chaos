@@ -1,0 +1,24 @@
+// Model roles use the current project's Settings, never credentials in source.
+fn role(name:String, route:String, prompt:String) {
+  agent_from({kind:"agent",name:name,config:{provider:"model",role:route,prompt:prompt,tools:[]}})
+}
+fn decode(value) { if type_of(value)=="String" { parse_json(value) } else { value } }
+fn base() { {instruction:"Solve the user's task carefully. State assumptions and distinguish observations from claims."} }
+fn operators() {
+  let proposer=role("evolution_proposer","planner","Propose an improved instruction-only harness. Read the supplied task, scope, current harness, observed records, strategy and lessons. General changes should transfer; domain changes may be task-specific. Return exactly a JSON object with harness: {instruction: string}, reason: string. No markdown. Do not request tools or credentials.");
+  let composer=role("evolution_composer","planner","Compare actual records, including reference and general/domain probes. Use strategy and lessons. Retain helpful instruction changes, revise unsupported ones, or preserve the current harness. Return exactly JSON {harness: {instruction: string}, reason: string}. Selection alone does not prove improvement. No markdown.");
+  let selector=role("evolution_selector","reviewer","Select the strongest answer to task from outputs. Return only its zero-based integer index. Choose an existing answer; never synthesize a new one.");
+  let learner=role("evolution_learner","reviewer","Update the method used to improve harnesses from observed contrasts. Return exactly JSON {strategy: JSON, lessons: [{cue: string, lesson: string, evidence: [execution ID strings]}], evidence: [execution ID strings]}. Cite at least two distinct real record IDs for the strategy and each lesson. Max 8 lessons, cue 200 chars, lesson 800 chars. If effects are unsupported or confounded retain strategy and return lessons: []. Do not claim verified general improvement from selection. Only instruction behavior changes; no weights, authority or credentials. No markdown.");
+  async fn propose(c) { decode(proposer(c)) }
+  async fn compose(c) { decode(composer(c)) }
+  async fn select(c) { decode(selector(c)) }
+  async fn learn(c) { decode(learner(c)) }
+  async fn probe(c) {
+    fn instruction(h:Record) { if keys(h)!=["instruction"] {throw "Instruction harness requires exactly instruction"}else{null};fn string(s:String){s};string(h.instruction) }
+    let worker=role("evolution_worker","executor",instruction(c.harness));
+    let output=worker(c.task);
+    {output:output,evidence:{kind:"completed_agent_call",provider:"model",name:"evolution_worker"}}
+  }
+  {propose:propose,probe:probe,compose:compose,select:select,learn:learn}
+}
+export {base,operators};

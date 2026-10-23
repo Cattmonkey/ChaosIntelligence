@@ -1,0 +1,7 @@
+fn factory(name: String, bases: List, namespace, **options) {
+    let Generated = Type(name, bases, namespace, **options);
+    fn(input: Int) -> Int { input + Generated.offset }
+}
+class Component(metaclass=factory) { let offset: Int = 40 }
+let Dynamic = new_class("Dynamic", [], {offset: 40}, {metaclass: factory});
+[Component(2), Dynamic(2), type_of(Component)]

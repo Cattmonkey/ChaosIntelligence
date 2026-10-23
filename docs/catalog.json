@@ -1,0 +1,761 @@
+{
+  "schemaVersion": 1,
+  "pages": [
+    {
+      "id": "overview",
+      "path": "README.md",
+      "title": "文档导航",
+      "section": "开始使用",
+      "description": "按使用场景选择教程、参考和开发指南。"
+    },
+    {
+      "id": "getting-started",
+      "path": "GETTING_STARTED.md",
+      "title": "快速开始",
+      "section": "开始使用",
+      "description": "安装后运行第一个函数程序并进入可视化环境。"
+    },
+    {
+      "id": "licensing",
+      "path": "LICENSING.md",
+      "title": "使用许可与 AI 训练限制",
+      "section": "开始使用",
+      "description": "原创材料的禁止训练条款、正常智能体使用、第三方许可与托管平台边界。"
+    },
+    {
+      "id": "command-line",
+      "path": "COMMAND_LINE.md",
+      "title": "命令行与内置智能帮助",
+      "section": "开始使用",
+      "description": "直接运行表达式、文件和REPL；内置智能体、随时提问与共享IDE编程助手。"
+    },
+    {
+      "id": "project-package",
+      "path": "PROJECT_README.md",
+      "title": "目录包速查",
+      "section": "开始使用",
+      "description": "随包 README：直接运行、安装到已有工程、日常命令、换版与回退。"
+    },
+    {
+      "id": "installation",
+      "path": "INSTALLATION.md",
+      "title": "安装、部署与构建",
+      "section": "开始使用",
+      "description": "目录包、Python前提、工程安装与迁移、依赖准备、SDK嵌入和常驻服务。"
+    },
+    {
+      "id": "deployment",
+      "path": "DEPLOYMENT.md",
+      "title": "环境配置与自检",
+      "section": "开始使用",
+      "description": "系统环境检测、终端进度、分层模型向导、可选智能建议和持久默认设置。"
+    },
+    {
+      "id": "model-configuration",
+      "path": "MODEL_CONFIGURATION.md",
+      "title": "模型连接与智能体学习示例",
+      "section": "开始使用",
+      "description": "项目内持久配置、共享与独立Base URL、角色和智能体路由、真实模型示例及离线验证边界。"
+    },
+    {
+      "id": "model-agent-examples",
+      "path": "MODEL_EXAMPLES.md",
+      "title": "大模型智能体：五个可运行示例",
+      "section": "开始使用",
+      "description": "单智能体问答、多角色协作、并发分析、语言函数工具与有界 Bot；含源码、运行命令及验证边界。"
+    },
+    {
+      "id": "ide",
+      "path": "IDE.md",
+      "title": "IDE 与智能体编程",
+      "section": "使用与运行",
+      "description": "结构化编辑、颜色与代码提示、文件树、后台智能体对话和运行。"
+    },
+    {
+      "id": "language-server",
+      "path": "LANGUAGE_SERVER.md",
+      "title": "语言服务器、导航与重构",
+      "section": "使用与运行",
+      "description": "标准 LSP、外部编辑器、未保存多文件分析、定义跳转与安全重构。"
+    },
+    {
+      "id": "user-guide",
+      "path": "USER_GUIDE.md",
+      "title": "编程环境使用指南",
+      "section": "开始使用",
+      "description": "目录项目命令速查、入口与文件、IDE保存运行、模型配置、持久状态与日常维护。"
+    },
+    {
+      "id": "language",
+      "path": "LANGUAGE.md",
+      "title": "语言语法参考",
+      "section": "语言与计算",
+      "description": "值、函数、作用域、控制流、模式匹配与模块。"
+    },
+    {
+      "id": "generic-functions",
+      "path": "GENERIC_FUNCTIONS.md",
+      "title": "泛型函数与方法组合",
+      "section": "语言与计算",
+      "description": "按实际类型进行多参数分派、持久方法表、around／before／after 与冷任务边界。"
+    },
+    {
+      "id": "hash-maps",
+      "path": "HASH_MAPS.md",
+      "title": "通用键映射与用户哈希",
+      "section": "语言与计算",
+      "description": "持久有序 HashMap、复合键、用户哈希／相等协议与语言能力边界。"
+    },
+    {
+      "id": "contracts",
+      "path": "CONTRACTS.md",
+      "title": "组合契约与数据边界",
+      "section": "语言与计算",
+      "description": "原生结构化、递归与互递归契约，开放模板与闭合数据边界、命名注解及统一工具链。"
+    },
+    {
+      "id": "stdlib",
+      "path": "STDLIB.md",
+      "title": "标准库与内置函数",
+      "section": "语言与计算",
+      "description": "准确的函数签名、参数顺序和使用示例。"
+    },
+    {
+      "id": "streams",
+      "path": "STREAMS.md",
+      "title": "惰性流与函数管道",
+      "section": "语言与计算",
+      "description": "真实 std/iter 同步／异步函数，按需消费、借用游标、关闭、智能体回调与便携包。"
+    },
+    {
+      "id": "swarm",
+      "path": "SWARM.md",
+      "title": "群体非线性函数协议",
+      "section": "语言与计算",
+      "description": "用原生语言函数、智能体和 Team 角色组合循环反馈、任务屏障与可观测帧。"
+    },
+    {
+      "id": "harness-evolution",
+      "path": "HARNESS_EVOLUTION.md",
+      "title": "智能体 Harness 的持续改进",
+      "section": "语言与计算",
+      "description": "语言内提案、真实执行比较、组合、选择、跨任务经验与持久检查点。"
+    },
+    {
+      "id": "debugger",
+      "path": "DEBUGGER.md",
+      "title": "交互式调试",
+      "section": "语言与计算",
+      "description": "源码断点、单步、调用栈和运行快照。"
+    },
+    {
+      "id": "macros",
+      "path": "MACROS.md",
+      "title": "语法宏与编译阶段",
+      "section": "语言与计算",
+      "description": "AST 引用、卫生展开与纯编译期计算。"
+    },
+    {
+      "id": "effects",
+      "path": "EFFECTS.md",
+      "title": "生成器与异步任务",
+      "section": "语言与计算",
+      "description": "挂起恢复、任务组合、能力预算和取消。"
+    },
+    {
+      "id": "tasks",
+      "path": "TASKS.md",
+      "title": "词法任务组、并发汇合与运行态",
+      "section": "语言与计算",
+      "description": "原生TaskGroup、失败抢占、唯一任务归属、可靠gather及真实调试快照。"
+    },
+    {
+      "id": "cancellation",
+      "path": "CANCELLATION.md",
+      "title": "词法取消屏蔽",
+      "section": "语言与计算",
+      "description": "任务局部取消的延期交付、资源收尾、硬控制边界与共享调试状态。"
+    },
+    {
+      "id": "channels",
+      "path": "CHANNELS.md",
+      "title": "Channel：原生消息通信",
+      "section": "语言与计算",
+      "description": "冷发送与接收、FIFO背压、取消提交边界、异步消费及智能体函数管道。"
+    },
+    {
+      "id": "waits",
+      "path": "WAITS.md",
+      "title": "计时器与多源任务等待",
+      "section": "语言与计算",
+      "description": "原生单调计时、完成分区、超时和借用生命周期，组合响应多个智能体任务。"
+    },
+    {
+      "id": "select",
+      "path": "SELECT.md",
+      "title": "原子通道选择与候选值",
+      "section": "语言参考",
+      "description": "一等ChannelCase、只提交一个分支的收发选择、期限取消与同源调试。"
+    },
+    {
+      "id": "contexts",
+      "path": "CONTEXTS.md",
+      "title": "资源作用域与智能体组件",
+      "section": "语言与计算",
+      "description": "with/async with、类协议、流关闭、Computer 生命周期及共享效果边界。"
+    },
+    {
+      "id": "resource-stacks",
+      "path": "RESOURCE_STACKS.md",
+      "title": "动态资源栈与智能体组合",
+      "section": "语言与计算",
+      "description": "按数据获取资源、同步与异步清理、逆序退出、异常传播及所有权转移。"
+    },
+    {
+      "id": "objects",
+      "path": "OBJECTS.md",
+      "title": "类、继承与智能体组件",
+      "section": "语言与计算",
+      "description": "名义类型、C3多继承、绑定方法、可调用实例及智能体状态封装。"
+    },
+    {
+      "id": "decorators",
+      "path": "DECORATORS.md",
+      "title": "装饰器与属性协议",
+      "section": "语言与计算",
+      "description": "函数和智能体包装、静态方法、类方法、属性及受控访问。"
+    },
+    {
+      "id": "descriptor-protocol",
+      "path": "DESCRIPTOR_PROTOCOL.md",
+      "title": "用户描述符与属性生命周期",
+      "section": "语言与计算",
+      "description": "__get__/__set__/__delete__/__set_name__、缓存属性、删除与智能体效果。"
+    },
+    {
+      "id": "operators",
+      "path": "OPERATORS.md",
+      "title": "运算协议与智能体计算",
+      "section": "语言与计算",
+      "description": "正向与反向运算、比较、NotImplemented、容器协议与可挂起智能体效果。"
+    },
+    {
+      "id": "augmented-assignment",
+      "path": "AUGMENTED_ASSIGNMENT.md",
+      "title": "增强赋值、幂与位运算",
+      "section": "语言与计算",
+      "description": "单次目标求值、原位协议、宏、异步效果和源码结构一致性。"
+    },
+    {
+      "id": "iterators",
+      "path": "ITERATORS.md",
+      "title": "用户迭代器与智能体数据流",
+      "section": "语言与计算",
+      "description": "同步与异步迭代协议、双向委托、共享游标、生命周期及智能体效果。"
+    },
+    {
+      "id": "iterable-composition",
+      "path": "FUNCTION_COMPOSITION.md",
+      "title": "可迭代值与函数组合",
+      "section": "语言与计算",
+      "description": "统一生成器、用户数据源、函数展开与高阶消费，保留短路、游标和智能体效果语义。"
+    },
+    {
+      "id": "completion",
+      "path": "CONTROL_COMPLETION.md",
+      "title": "正常完成分支与智能体控制流",
+      "section": "语言与计算",
+      "description": "循环耗尽、try 成功分支、异步控制、词法作用域与智能体函数的统一完成语义。"
+    },
+    {
+      "id": "exceptions",
+      "path": "EXCEPTIONS.md",
+      "title": "模式异常处理与动态重抛",
+      "section": "语言与计算",
+      "description": "有序结构捕获、条件守卫、保留原错误的动态重抛及并发智能体隔离。"
+    },
+    {
+      "id": "class-patterns",
+      "path": "CLASS_PATTERNS.md",
+      "title": "类字段模式与智能体组件",
+      "section": "语言与计算",
+      "description": "类身份、纯存储字段解构、继承、权限投影以及源码和可视化一致的组件绑定。"
+    },
+    {
+      "id": "tuples",
+      "path": "TUPLES.md",
+      "title": "元组、函数组合与复合索引",
+      "section": "语言与计算",
+      "description": "原生不可变元组、所有结构绑定位置、复合切片键、函数角色组合及显式 JSON 边界。"
+    },
+    {
+      "id": "indexing",
+      "path": "INDEXING.md",
+      "title": "对象索引、切片与智能体访问",
+      "section": "语言与计算",
+      "description": "下标读写删除、Slice、属性访问隔离及旧语法兼容。"
+    },
+    {
+      "id": "agent-language",
+      "path": "AGENT_LANGUAGE.md",
+      "title": "智能体函数语言设计",
+      "section": "语言与计算",
+      "description": "可调用智能体、效果协议、思考执行与组合。"
+    },
+    {
+      "id": "advanced",
+      "path": "ADVANCED.md",
+      "title": "高级编程",
+      "section": "语言与计算",
+      "description": "闭包、状态、组合、互递归、模块和效果边界。"
+    },
+    {
+      "id": "semantics",
+      "path": "SEMANTICS.md",
+      "title": "计算语义与完备性",
+      "section": "语言与计算",
+      "description": "抽象计算能力、路径证书及实际资源边界。"
+    },
+    {
+      "id": "language-roadmap",
+      "path": "LANGUAGE_ROADMAP.md",
+      "title": "能力范围与路线图",
+      "section": "语言与计算",
+      "description": "语言组合目标、有限发布验收、已实现边界与实现历史。"
+    },
+    {
+      "id": "realtime",
+      "path": "REALTIME.md",
+      "title": "实时交互与界面／无界面开发",
+      "section": "使用与运行",
+      "description": "从运行进度、追加指导到终端流式输出；事件续传与源码同步边界。"
+    },
+    {
+      "id": "harness",
+      "path": "HARNESS.md",
+      "title": "智能体框架与配置",
+      "section": "使用与运行",
+      "description": "模型路由、后台任务、代码解释器、浏览器及插件。"
+    },
+    {
+      "id": "updates",
+      "path": "UPDATES.md",
+      "title": "自动更新与回滚",
+      "section": "使用与运行",
+      "description": "托管安装、签名更新、数据保留和失败恢复。"
+    },
+    {
+      "id": "troubleshooting",
+      "path": "TROUBLESHOOTING.md",
+      "title": "故障排查",
+      "section": "使用与运行",
+      "description": "安装、语言、运行、同步与更新的诊断方法。"
+    },
+    {
+      "id": "sdk",
+      "path": "SDK.md",
+      "title": "Python SDK",
+      "section": "开发与扩展",
+      "description": "嵌入执行环境、远程 Client、工具与智能体提供方。"
+    },
+    {
+      "id": "http-api",
+      "path": "HTTP_API.md",
+      "title": "HTTP API 目录",
+      "section": "开发与扩展",
+      "description": "从当前 OpenAPI 生成的接口清单与调用约定。"
+    },
+    {
+      "id": "developer",
+      "path": "DEVELOPER.md",
+      "title": "开发者指南",
+      "section": "开发与扩展",
+      "description": "系统结构、扩展契约、测试和接口兼容维护。"
+    },
+    {
+      "id": "releasing",
+      "path": "RELEASING.md",
+      "title": "构建与发布完整版本",
+      "section": "开发与扩展",
+      "description": "版本、安装包、发布签名和更新源发布流程。"
+    },
+    {
+      "id": "maintaining-docs",
+      "path": "MAINTAINING_DOCS.md",
+      "title": "文档维护与发布",
+      "section": "开发与扩展",
+      "description": "单一文档源、示例验证、静态导出和随版本维护。"
+    },
+    {
+      "id": "agent-modes",
+      "path": "AGENT_MODES.md",
+      "title": "目标、计划与可执行技能",
+      "section": "语言与计算",
+      "description": "一等 Plan/Goal/Skill、持久检查点、真实动作录制及浏览器会话。"
+    },
+    {
+      "id": "mode-authoring",
+      "path": "MODE_AUTHORING.md",
+      "title": "模式库编写与版本一致性",
+      "section": "语言与计算",
+      "description": "结构编辑、规范定义、固定修订加载、源码导出和冲突保留。"
+    },
+    {
+      "id": "agent-values",
+      "path": "AGENT_VALUES.md",
+      "title": "智能体定义值与角色重构",
+      "section": "语言与计算",
+      "description": "显式定义导入、隔离检查、函数式角色组合、源码导出和结构编辑。"
+    },
+    {
+      "id": "teams",
+      "path": "TEAMS.md",
+      "title": "语言团队、角色与能力范围",
+      "section": "语言与计算",
+      "description": "一等Team、冷角色函数、父子范围、源码导出与观察行动程序。"
+    },
+    {
+      "id": "self-programming",
+      "path": "SELF_PROGRAMMING.md",
+      "title": "Program 与语言内自编程",
+      "section": "语言与计算",
+      "description": "自身反射、结构修改、候选执行、纯测试与原子版本采用；语言实现dot机器人。"
+    },
+    {
+      "id": "program-linking",
+      "path": "PROGRAM_LINKING.md",
+      "title": "Program 库链接与工程复用",
+      "section": "语言与计算",
+      "description": "在原模块解析器中组合闭合 Program 库，保留源码、方言与权限边界；支持语言、SDK 和便携工程。"
+    },
+    {
+      "id": "processes",
+      "path": "PROCESSES.md",
+      "title": "Process：持续运行的语言函数",
+      "section": "语言与计算",
+      "description": "一等持久函数、JSON状态、邮箱与定时轮次、跨版本自编程和效果协调。"
+    },
+    {
+      "id": "sessions",
+      "path": "SESSIONS.md",
+      "title": "持久智能体会话",
+      "section": "语言参考",
+      "description": "原生消息协议、AgentSession 可调用值、持续上下文、幂等与效果协调。"
+    },
+    {
+      "id": "computers",
+      "path": "COMPUTERS.md",
+      "title": "Computer、观察与视觉行动",
+      "section": "语言参考",
+      "description": "受控环境值、真实图像输入、行动身份、持久证据与同源可视化。"
+    },
+    {
+      "id": "program-history",
+      "path": "PROGRAM_HISTORY.md",
+      "title": "程序历史与自编程恢复",
+      "section": "语言参考",
+      "description": "不可变源码版本、历史Program、测试后恢复和跨重启dot迭代。"
+    },
+    {
+      "id": "comprehensions",
+      "path": "COMPREHENSIONS.md",
+      "title": "推导式与生成器表达式",
+      "section": "语言参考",
+      "description": "原生列表、动态记录、同步及异步生成器推导，词法绑定、宏与IDE同源语义。"
+    },
+    {
+      "id": "pattern-bindings",
+      "path": "PATTERN_BINDINGS.md",
+      "title": "解构绑定与结构化智能体结果",
+      "section": "语言参考",
+      "description": "原生声明、循环、推导中的原子结构绑定，宏、模块与IDE一致的作用域。"
+    },
+    {
+      "id": "function-tools",
+      "path": "FUNCTION_TOOLS.md",
+      "title": "语言函数作为智能体工具",
+      "section": "语言与计算",
+      "description": "以原解释器中的闭包、异步函数和智能体构成模型可调用工具。"
+    },
+    {
+      "id": "agent-testing",
+      "path": "AGENT_TESTING.md",
+      "title": "智能体协议测试",
+      "section": "语言与计算",
+      "description": "显式模型响应、真实语言工具执行、可验证的候选采用与 IDE 草稿测试。"
+    },
+    {
+      "id": "process-evolution",
+      "path": "PROCESS_EVOLUTION.md",
+      "title": "Process 原子自我演进",
+      "section": "语言与计算",
+      "description": "将验证后的程序采用、持久状态、消息确认和运行终态一起提交。"
+    },
+    {
+      "id": "session-tools",
+      "path": "SESSION_TOOLS.md",
+      "title": "持久智能体函数工具",
+      "section": "语言",
+      "description": "会话与真实语言闭包组合、明确重绑定、幂等协议及源码证据。"
+    },
+    {
+      "id": "team-functions",
+      "path": "TEAM_FUNCTIONS.md",
+      "title": "函数角色团队",
+      "section": "语言",
+      "description": "Team 组合实际函数、工具智能体与持续会话，并保持角色能力及执行来源。"
+    },
+    {
+      "id": "symbol-refactoring",
+      "path": "SYMBOL_REFACTORING.md",
+      "title": "符号引用与程序重构",
+      "section": "语言",
+      "description": "同源 AST 引用、跨模块重命名、不可变 Program 候选和 IDE/LSP 同步。"
+    },
+    {
+      "id": "sets",
+      "path": "SETS.md",
+      "title": "集合、候选与访问状态",
+      "section": "语言",
+      "description": "原生不可变 Set、集合运算、推导、宏与智能体候选状态"
+    },
+    {
+      "id": "compiler",
+      "path": "COMPILER.md",
+      "title": "增量编译与程序分析",
+      "section": "语言与计算",
+      "description": "逐模块解析缓存、依赖身份、原生 program_compile 与同源 IDE／CLI 编译报告。"
+    },
+    {
+      "id": "compiler-runtime-design",
+      "path": "COMPILER_RUNTIME_DESIGN.md",
+      "title": "编译与运行时演进设计",
+      "section": "开发者",
+      "description": "JIT、重排、GC、调度与异构后端的语义合同、实现状态与验收路线。"
+    },
+    {
+      "id": "native-functions",
+      "path": "NATIVE_FUNCTIONS.md",
+      "title": "原生函数与智能体计算内核",
+      "section": "语言与计算",
+      "description": "可选 LLVM 整数函数 JIT、精确检查点、解释器回退及智能体函数组合。"
+    },
+    {
+      "id": "scalar-optimizer",
+      "path": "SCALAR_OPTIMIZER.md",
+      "title": "原生整数 DAG 优化",
+      "section": "语言与计算",
+      "description": "实际 LLVM 常量折叠、CSE 与依赖调度，完整逻辑检查点和同源优化证据。"
+    },
+    {
+      "id": "gpu-compute",
+      "path": "GPU_COMPUTE.md",
+      "title": "GPU 与 Mac M 系列计算",
+      "section": "语言与计算",
+      "description": "异步 Float32 函数映射、矩阵乘法、真实 MPS／CUDA 设备与明确 CPU 回退。"
+    },
+    {
+      "id": "gpu-metal",
+      "path": "GPU_METAL.md",
+      "title": "函数到融合 Metal 内核",
+      "section": "语言与计算",
+      "description": "真实算术 AST 内核生成、隔离 MPS 编译、Task 证据与兼容计算路径。"
+    },
+    {
+      "id": "web-color-design",
+      "path": "WEB_COLOR_DESIGN.md",
+      "title": "Web 色彩设计与维护",
+      "section": "开发者",
+      "description": "Itten 色彩对比、共享语义主题、编辑器与在线离线一致性及可读性验证。"
+    },
+    {
+      "id": "gpu-control-flow",
+      "path": "GPU_CONTROL_FLOW.md",
+      "title": "GPU 控制流编译",
+      "section": "语言与计算",
+      "description": "结构 IR2、局部状态、严格 Bool 与有界循环的 CPU／Tensor／Metal 一致执行。"
+    },
+    {
+      "id": "index-protocol",
+      "path": "INDEX_PROTOCOL.md",
+      "title": "无损整数索引协议",
+      "section": "语言与计算",
+      "description": "原生 __index__、序列与切片、效果边界及旧语法兼容。"
+    },
+    {
+      "id": "python-lisp-capabilities",
+      "path": "PYTHON_LISP_CAPABILITIES.md",
+      "title": "Python／Lisp 能力对照",
+      "section": "语言与计算",
+      "description": "Python／Lisp 能力差异与支持边界对照；发布范围以语言核心组合合同为准。"
+    },
+    {
+      "id": "class-creation",
+      "path": "CLASS_CREATION.md",
+      "title": "可编程类创建",
+      "section": "语言与计算",
+      "description": "原生动态建类、分配与初始化、协作继承通知和智能体组件生成。"
+    },
+    {
+      "id": "generative-ui",
+      "path": "GENERATIVE_UI.md",
+      "title": "生成式界面、报告与演示",
+      "section": "语言与运行时",
+      "description": "原生 UIArtifact、OpenUI 组件声明、流式智能体生成、需求验证和离线演示。"
+    },
+    {
+      "id": "metaclasses",
+      "path": "METACLASSES.md",
+      "title": "原生元类与命名空间",
+      "section": "语言与计算",
+      "description": "Type 自举身份、元类选择、prepare 命名空间、可调用创建工厂和智能体角色生成。"
+    },
+    {
+      "id": "type-protocols",
+      "path": "TYPE_PROTOCOLS.md",
+      "title": "类型判断与基类适配",
+      "section": "语言与计算",
+      "description": "原生元类判断、名义身份边界、一次基类展开与原始元数据。"
+    },
+    {
+      "id": "numbers",
+      "path": "NUMBERS.md",
+      "title": "精确数值与复数",
+      "section": "语言与计算",
+      "description": "原生 Fraction／Complex、精确代数、宏卫生、数值契约与显式无损数据 codec。"
+    },
+    {
+      "id": "decimals",
+      "path": "DECIMALS.md",
+      "title": "Decimal 与逻辑精度上下文",
+      "section": "语言与计算",
+      "description": "有限原生十进制、舍入信号、任务隔离和精确数据传输。"
+    },
+    {
+      "id": "conditions",
+      "path": "CONDITIONS.md",
+      "title": "情况处理与恢复出口",
+      "section": "语言与计算",
+      "description": "不可变Condition、动态处理器、inline与真实展开恢复、async与任务/生成器隔离。"
+    },
+    {
+      "id": "dynamic-contexts",
+      "path": "DYNAMIC_CONTEXTS.md",
+      "title": "任务局部上下文与动态绑定",
+      "section": "语言参考",
+      "description": "原生 ContextVar、Token、绑定作用域与上下文执行；智能体并发、取消恢复和统一工具链。"
+    },
+    {
+      "id": "native-control-regions",
+      "path": "NATIVE_CONTROL_REGIONS.md",
+      "title": "可变控制流中的原生计算区域",
+      "section": "语言与计算",
+      "description": "实际循环内LLVM整数计算、可变状态、真实迭代器、检查点与局部回退。"
+    },
+    {
+      "id": "native-flow",
+      "path": "NATIVE_FLOW.md",
+      "title": "可恢复的原生结构控制流",
+      "section": "语言与计算",
+      "description": "普通函数的实际 LLVM 续接 CFG、真实函数组合与参数绑定、受保护宿主事件、迭代和同位置便携续接。"
+    },
+    {
+      "id": "code-values",
+      "path": "CODE_VALUES.md",
+      "title": "Code 与运行时函数构造",
+      "section": "语言参考",
+      "description": "不可变代码、显式闭包构造、纯宏与统一工具链。"
+    },
+    {
+      "id": "attribute-protocol",
+      "path": "ATTRIBUTE_PROTOCOL.md",
+      "title": "属性访问与动态智能体接口",
+      "section": "语言参考",
+      "description": "实例与元类的五属性钩子、默认委托、目录和无副作用静态提示。"
+    },
+    {
+      "id": "bot-language-design",
+      "path": "BOT_LANGUAGE_DESIGN.md",
+      "title": "Bot 能力与语言设计",
+      "section": "智能体",
+      "description": "固定开源源码对照、函数与原生资源合同、持久交接、证据及自编程边界。"
+    },
+    {
+      "id": "native-bots",
+      "path": "NATIVE_BOTS.md",
+      "title": "原生 Bot（可调用值）",
+      "section": "语言与计算",
+      "description": "真实回调、长期目标与动态上下文，封闭决策的效果准入与显式协调。"
+    },
+    {
+      "id": "robot-devices",
+      "path": "ROBOT_DEVICES.md",
+      "title": "机器人与外接设备",
+      "section": "智能体",
+      "description": "组合长期角色、会话、进程和受控 HID 资源，区分设备回执与目标验证。"
+    },
+    {
+      "id": "raspberry-pi",
+      "path": "RASPBERRY_PI.md",
+      "title": "树莓派 4B／5 USB 键鼠",
+      "section": "智能体",
+      "description": "Linux USB gadget 部署、Device 适配器、标准 HID 报告和设备输入边界。"
+    },
+    {
+      "id": "multiple-values",
+      "path": "MULTIPLE_VALUES.md",
+      "title": "显式多返回值",
+      "section": "语言参考",
+      "description": "零／单／多个完成结果、首项投影、函数捕获、异步与纯宏合同。"
+    },
+    {
+      "id": "control-prompts",
+      "path": "CONTROL_PROMPTS.md",
+      "title": "身份提示与控制范围",
+      "section": "语言参考",
+      "description": "原生提示中止、动态 escape、向外屏障与 wind 清理的统一控制合同。"
+    },
+    {
+      "id": "execution-frames",
+      "path": "EXECUTION_FRAMES.md",
+      "title": "默认求值游标与执行帧",
+      "section": "语言与计算",
+      "description": "共享求值游标、真实执行帧、可组合续延及其原生协议边界。"
+    },
+    {
+      "id": "native-robots",
+      "path": "NATIVE_ROBOTS.md",
+      "title": "原生 Robot 与观察命令",
+      "section": "语言参考",
+      "description": "可信 profile、单包遥测、一次性命令与 OpenBot 串口的原生语言合同"
+    },
+    {
+      "id": "mobile-computers",
+      "path": "MOBILE_COMPUTERS.md",
+      "title": "移动设备与跨设备函数",
+      "section": "语言与运行时",
+      "description": "具名 Computer、Mobile MCP、智能体函数、权限与不确定结果。"
+    },
+    {
+      "id": "live-network-ui",
+      "path": "LIVE_NETWORK_UI.md",
+      "title": "实时网络页面",
+      "section": "语言与运行时",
+      "description": "函数生成复杂网络、真实运行状态绑定、OpenUI及事件证据。"
+    },
+    {
+      "id": "language-contract",
+      "path": "LANGUAGE_CONTRACT.md",
+      "title": "语言契约与功能组合",
+      "section": "语言与计算",
+      "description": "可依赖的函数、智能体、机器人、状态与效果组合规则和明确边界。"
+    },
+    {
+      "id": "continuations",
+      "path": "CONTINUATIONS.md",
+      "title": "可组合续延",
+      "section": "语言参考",
+      "description": "同一执行周期内捕获后续计算、多次恢复、动态清理和资源边界。"
+    }
+  ]
+}

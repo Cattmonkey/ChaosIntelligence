@@ -1,0 +1,6 @@
+import "std/swarm" as Swarm;
+fn logistic(context) { 3.9 * context.state * (1 - context.state) }
+fn distance(snapshot) { abs(snapshot.states.base - snapshot.states.perturbed) }
+let initial = Swarm.create({base:0.2, perturbed:0.200001});
+let last = await Swarm.run(initial, {base:logistic, perturbed:logistic}, 6, measure=distance);
+[last.snapshot.tick, floor(last.metrics * 1000000), initial.tick]

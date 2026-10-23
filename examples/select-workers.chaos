@@ -1,0 +1,13 @@
+// One submitted result branch; stop and result channels share the interpreter.
+let replies=channel();
+let stop=channel();
+async fn worker(n) {
+  await sleep(0);
+  await channel_send(replies,n*2)
+}
+let answer=async with task_group() as workers {
+  workers.spawn(worker(21));
+  let ready=await channel_select([receive_case(replies),receive_case(stop)],timeout=1);
+  [ready.index,ready.value,ready.timedOut]
+};
+[answer,channel_info(stop).waitingReceivers]

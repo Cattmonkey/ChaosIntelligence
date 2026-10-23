@@ -1,0 +1,15 @@
+agent brain {provider: "local", tools: []}
+fn plus(input: Record) -> Int { input.value + 2 }
+class RoleMeta(Type) {
+    fn __new__(mcls, name, bases, namespace, **options) {
+        Type.__new__(mcls, name, bases,
+            merge(namespace, {brain: brain, handler: plus}), **options)
+    }
+}
+class Role(metaclass=RoleMeta) {
+    fn __call__(self, input: Record) -> Int { self.handler(input) }
+}
+let component = Role();
+let tool = agent_tool("role", component, input_type="Record", output_type="Int");
+let equipped = agent_bind(component.brain, [tool]);
+[component({value: 40}), agent_tool_info(tool).name, type_of(equipped({value: 40}))]

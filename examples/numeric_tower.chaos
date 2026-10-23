@@ -1,0 +1,11 @@
+import "std/math" as M;
+let q:Fraction = M.fraction(1, 3);
+let phase:Complex = M.complex(q, M.fraction(2, 5));
+async fn energy(value:Complex) -> Numeric {
+  value * M.conjugate(value)
+}
+let result = await energy(phase);
+let record = parse_json(json_stringify(result));
+[result.real == fraction(61, 225), result.imag == 0,
+ type_of(q), type_of(phase), type_of(record),
+ M.numeric_decode(record) == result]

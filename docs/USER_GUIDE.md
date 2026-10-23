@@ -1,0 +1,240 @@
+# 用户指南
+
+从完整 project ZIP 解压出的目录开始：`python3 chaos.py run` 执行程序，首次 `python3 chaos.py setup` 后用 `python3 chaos.py` 打开 IDE。需要 Python 3.9+；Windows 将下文的 `python3` 换为 `py -3`。还没有项目时，先按[快速开始](GETTING_STARTED.md)运行返回 `42` 的默认程序；要放入已有工程，按[安装说明](INSTALLATION.md)使用 `install`，不覆盖解压整个项目包。
+
+本页前半部分使用目录入口 `chaos.py`。后半部分的 `chaos ...` 是已安装的 CLI；它也可访问独立 HTTP 服务，但默认配置、数据库和运行历史与目录入口不同。模型连接、工具和长期任务可在基础程序运行成功后逐步配置。
+
+## 先选对交互入口
+
+| 目的 | 使用入口 | 输入交给谁，怎样确认结果 |
+| --- | --- | --- |
+| 离线查语言和命令 | `python3 chaos.py docs list`／`docs show TOPIC_ID`，或网页文档 | 读取本版本随包文档，不需要模型或网络 |
+| 请智能体解释用法 | `python3 chaos.py ask '问题' --topic TOPIC_ID`，或 REPL `.ask 问题` | 使用当前模型配置；仅回答，不自动发送源码或执行回复 |
+| 让智能体修改程序 | 编辑器旁“与助手编程”或活动栏“助手” | 编程助手接收当前完整源码草稿；检查文件差异后点“应用并保存”，再运行验证 |
+| 在终端使用项目编程助手 | `assist` 的 ask／show／events／apply | 连接明确的服务和项目，读取已保存版本；检查提案后显式 apply，见[命令行教程](COMMAND_LINE.md) |
+| 调整正在运行的程序 | 命令面板“运行：追加当前运行指导” | 原运行的指导邮箱；程序在 `guidance_receive` 或原生 Bot 检查点接收后才可能影响下一步 |
+| 委托后台工具任务 | 系统配置 `/control` 的任务区 | 独立后台任务；查看活动卡片、任务状态及产物，不会自动变成当前编辑器的源码提案 |
+
+程序自己的 Agent／Bot 由源码定义，使用同一语言运行时。可以先完成下面的编辑与运行流程，再按[从运行到追加指导](REALTIME.md#从运行到追加指导)体验无需密钥的动态交互。编程助手和模型后台任务需要先[配置模型](MODEL_CONFIGURATION.md)。
+
+## 日常命令速查
+
+在自己的项目根目录执行。表中的环境管理命令适用于支持可替换环境协议的完整 project 包；历史项目升级见[更新说明](UPDATES.md)。
+
+| 要做什么 | 命令 | 结果与边界 |
+| --- | --- | --- |
+| 执行默认入口 | `python3 chaos.py run` | 执行 `chaos.project.json` 指定的入口；默认是 `main.chaos` |
+| 连续输出运行事件 | `python3 chaos.py run --stream` | stdout 输出逐行 JSON 事件，成功时以 `run.result` 返回最终结果 |
+| 在终端追加指导 | `python3 chaos.py run --interactive` | POSIX 真实终端显示 `guide>`；程序需要主动接收指导 |
+| 执行另一个文件 | `python3 chaos.py run src/example.chaos --input-json 21` | 本次运行传入 JSON 值 `21`，不修改默认入口 |
+| 检查文件 | `python3 chaos.py check src/example.chaos` | 检查语法、模块与导出，不执行智能体或工具 |
+| 查看格式化结果 | `python3 chaos.py fmt src/example.chaos` | 排版文本写到终端，不覆盖文件 |
+| 交互求值 | `python3 chaos.py repl --empty` | 不预加载入口；`.help` 查用法，`.ask 问题` 请求模型帮助，`.quit` 退出 |
+| 打开 IDE | `python3 chaos.py` | 默认选择本机空闲端口，并打开浏览器 |
+| 启动但不打开浏览器 | `python3 chaos.py ide --no-browser` | 按终端中的实际 URL 访问 |
+| 准备依赖 | `python3 chaos.py setup` | 关闭本项目 IDE／程序后执行，安装到活动环境内 |
+| 配置模型 | `python3 chaos.py configure --models` | 隐藏输入 Key，保存同一项目设置 |
+| 复查环境 | `python3 chaos.py doctor` | 运行隔离自检，不安装依赖、不调用建议模型 |
+| 查看实际环境 | `python3 chaos.py status` | 显示版本、活动运行时路径、上一环境与依赖指纹状态 |
+| 仅查看版本 | `python3 chaos.py --version` | 显示本次加载的语言环境版本 |
+
+把示例中的 `src/example.chaos` 换成实际文件。省略 `run`、`check`、`fmt` 的文件参数时使用默认入口；`repl` 省略 `--empty` 也会预加载该入口。纯语言计算不需要模型 Key；模型示例需要另按[模型配置](MODEL_CONFIGURATION.md)准备服务连接。
+
+## 项目文件、入口和保存位置
+
+| 文件或位置 | 用途 |
+| --- | --- |
+| `main.chaos`、自己的子目录和 `.chaos` 源文件 | 用户程序；文件扩展名 `.chaos` 与管理环境的隐藏 `.chaos/` 目录不是同一概念 |
+| `chaos.project.json` | 保存项目协议与默认 `entry`，不是模型配置文件 |
+| `chaos.py` | 稳定启动器，从它所在的项目目录定位环境 |
+| `.chaos/settings.json` | 当前项目的模型连接、角色和运行配置；由配置页面或[配置脚本](MODEL_CONFIGURATION.md)保存 |
+| `.chaos/project.sqlite3` | 目录 IDE 的项目、运行与事件状态 |
+| `.chaos/cli.sqlite3` | 显式使用 `run --persistent` 时的 CLI 状态；普通 run 使用内存数据库 |
+| `.chaos/runtime` | 初始运行时；替换后不一定是当前活动版本 |
+| `status` 输出的 `runtime` 及其同级 `deps` | 当前完整运行时与配套依赖；不要把用户源码或数据写进这里 |
+
+默认入口最初是 `main.chaos`，通常保留这个入口并从它导入更多模块即可。还没有打开过 IDE 时，可先创建 `src/main.chaos`，再将 `chaos.project.json` 的 `entry` 改为这个相对路径，保留原有 `schema` 字段。
+
+已经保存 IDE 状态后，入口同时存在于项目标记和 IDE 的持久项目中。需要换入口时，先在 IDE 把目标文件“设为程序入口”并保存；两侧入口暂时不一致会停止自动同步。随后正常关闭 IDE，将 `chaos.project.json` 的 `entry` 改为同一路径，再重新启动，让原同步协议更新本地元数据。仅修改标记再重启不会自动改写数据库中的旧入口。操作前保留源码与状态备份；只想临时运行某个文件时，直接使用 `python3 chaos.py run 文件.chaos`，无需修改入口。
+
+模块与入口应留在项目内，避免绝对路径、`..` 或受管理的 `.chaos/` 目录。
+
+配置文件不存在时，运行时使用默认配置；需要保存连接时从 `/control` 或配置脚本创建。不要用 `{}` 覆盖已有设置文件，也不要把项目元数据写入设置文件。外部编辑器中的未保存草稿不会自动写入磁盘或运行快照。
+
+## 一个目录内的学习循环
+
+在[快速开始](GETTING_STARTED.md)建立 `double.chaos` 后：
+
+```sh
+python3 chaos.py check double.chaos
+python3 chaos.py run double.chaos --input-json 21
+python3 chaos.py fmt double.chaos
+python3 chaos.py run double.chaos --input-json 21 --persistent
+```
+
+结果为42；fmt 输出文本，不覆盖源文件。默认 run 使用内存库，`--persistent` 明确使用 `.chaos/cli.sqlite3`；IDE 使用 `.chaos/project.sqlite3`。它们共用源码与设置，不自动共享运行历史。IDE 的磁盘同步是周期性的；暂时语法错误会等待修正，冲突或入口改变会报告并停止自动同步，保留双方供合并。
+
+## 网页中编辑和运行
+
+目录项目首次显式运行 `python3 chaos.py setup` 准备完整依赖，然后执行 `python3 chaos.py`。IDE 选择本机空闲端口、打印实际地址并打开浏览器；默认源码来自本目录，不使用另一套示例替换它。原 `chaos serve` 仍可打开数据库中的 `workspace` 项目，默认端口为8765。两种入口都按以下流程编辑：
+
+1. 默认进入源码工作台，从左侧文件列表选择入口文件及模块。需要修改语法节点时，用命令面板打开“视图：程序结构”；两种视图保存的是同一份程序。
+2. 从“运行 → 输入与调试设置”或活动栏“调试”打开运行面板，在其中输入运行数据。勾选“将输入作为 JSON 解析”时必须提供合法 JSON；不勾选时输入是字符串。
+3. 保存修改，然后点击顶部“运行”。运行按钮执行当前入口文件；入口包含 `workflow(...)` 时才按其中的关系图运行。
+4. 运行会展开底部输出，查看“执行事件”“运行结果”和“运行历史”；通过运行面板的“查看执行快照”或相应命令查看某次运行实际采用的版本。
+5. 要请求取消，点击“停止运行”。取消是协作式的，已完成的写入或外部工具副作用不会回滚。
+
+顶部搜索框或 `Ctrl/Cmd-Shift-P` 打开命令面板；`Ctrl/Cmd-P` 快速打开文件。编程助手默认关闭，通过活动栏显式打开；格式化、调试、团队、候选程序、进程、会话和电脑观察等功能均可从命令面板进入。活动栏还提供文档和系统设置入口。
+
+源码草稿、持久版本和执行快照是三个不同状态。保存成功会递增项目版本；运行冻结开始时的源码、模块、图和能力清单，后续编辑不会改变正在执行的版本。旧运行状态不会装饰另一版本的编辑图。
+
+执行事件默认跟随最新内容；向上阅读时暂停跟随，出现新事件后点击“跟随最新”回到底部。界面显示最近250条事件，完整持久记录可经接口分页读取。程序显式调用 `progress_emit` 时，“运行结果”显示执行中的公开进度；即使进度类型写作 `result`，也不代表运行已经结束。最后以运行状态和最终输出为准。先把[实时进度示例](../examples/live-progress.chaos)复制为入口并运行，可以看到三个计算结果依次返回。
+
+短暂断网时保留当前页面的源码和指导输入，恢复后补读事件；浏览器使用前进／后退缓存恢复该页面时也会重连。关闭网页只结束观察，服务中的任务仍按自身生命周期运行；停止本地 IDE 服务或关闭拥有运行的 CLI 是另一回事。页面刷新、切换服务或浏览器丢弃页面内存不保证恢复未保存草稿及未发送文本，操作前先保存或导出。完整协议见[实时交互](REALTIME.md)。
+
+### 关系画布与结构编辑
+
+先通过活动栏“画布”或“视图：关系画布”命令进入画布。从构建模块添加节点，拖动位置；从输出端口连到输入端口。构建模块和节点配置面板可用相应画布命令打开。选中节点后在配置面板调整函数源码、智能体、工具、层级或父节点，并应用配置。多个输入使用具名端口，节点收到相应记录，例如 `{analysis: ..., metrics: ...}`；仅有一个名为 `input` 的端口时直接传值。
+
+“关系画布”表示显式工作流；普通分支、循环和函数在“程序结构”中编辑。允许保存不完整的图草稿，运行前须通过完整路径检查。图循环会被拒绝；需要迭代时在语言中使用有预算的循环、递归或集合运算。详见 [高级编程](ADVANCED.md)。
+
+默认示例的“运行前由平台补充复核环节”会允许内置平台策略插入复核节点，因此运行前项目版本可能先增加。平台修改仍需通过能力、层级、管理域与版本校验。自建项目可根据需要关闭自动调整；SDK 的 `auto_optimize` 默认关闭。
+
+### 保存、导出与冲突
+
+命令面板中的“项目：导出 JSON”适合备份当前项目源码、模块与图投影；“项目：导入 JSON”用于恢复或迁移项目内容。运行历史、后台任务和全部数据库状态应按 [部署备份说明](INSTALLATION.md) 单独保存。
+
+网页、CLI 或另一个客户端同时修改时，服务返回版本冲突而不是覆盖远端内容。页面保留草稿，并提供“导出当前草稿”“备份草稿并载入远端”和“导出备份草稿”。先保留草稿，再比较并重新提交；不要把重试旧版本当作合并。同步协议和文件恢复目录见 [实时同步](REALTIME.md)。
+
+## 向当前语言运行追加指导
+
+先运行[完整交互教程](REALTIME.md#从运行到追加指导)中的入口程序。运行期间打开命令面板“运行：追加当前运行指导”，在“追加指导”填写自然语言并点“发送指导 ↑”。“指导目标”默认是当前运行；只有实际注册的 Bot／角色才提供其他可选目标。工作区把原文本作为 `{text: ...}` 数据投递到所选入口，不保存源码、不启动第二次运行。
+
+回执先显示“已入队”；程序通过 `guidance_receive` 接收后显示“运行已接收”。接收只证明消息已交给程序，不保证要求已被采用或操作已完成；应继续检查程序公开发布的进度和最终输出。输入期间的源码草稿保持原样，新输入不会被晚到的发送响应清除。
+
+指导只能影响程序在明确接收边界之后选择的行为，不自动中断模型请求、工具或物理操作。控制器仍需在重要动作前主动接收并决定如何处理；接收与下一次效果之间仍存在追加指导的时序窗口。长期目标仍受单轮预算、授权和既有 Process 生命周期限制，不代表永久运行、栈恢复或隐藏推理直播。需要自定义控制循环时，可导入[指导控制器模块](../examples/guided-bot.chaos)；它导出函数，需由自己的入口提供规划、执行与验证函数后调用。
+
+连接服务的命令行同样发送 JSON 数据；将下例地址替换为实际服务 URL，目录 IDE 使用启动时显示的端口：
+
+```shell
+chaos run-guide RUN_ID --server http://127.0.0.1:8765 --input '{"text":"请先验证结果，再继续下一步"}' --message-id review-first
+```
+
+同一 messageId 与相同输入返回原回执，不重复入队；不同输入冲突。已结束或正在取消的运行拒绝新的指导。
+
+
+## 在当前运行使用原生 Bot
+
+打开[原生 Bot 示例](../examples/native-bot.chaos)使用既有源码、结构或图运行。追加指导仍用现有输入区；宿主 queued／received 回执与 Bot 上下文应用、动作准入／结果事件各自表示实际阶段。原生 Bot 在效果边界检查已接受指导的 revision；执行主体进入后过期会停为 needs_reconciliation，已有工作不会自动重放。检查公开结果后由原程序调用 bot_reconcile。任意自定义接收循环仍是合作式的，未创建原生 Bot 不获得决策准入身份；持续目标仍受能力、预算、取消与持久 Process／Session 边界约束。
+
+
+## 向持续进程追加指导
+
+在现有持续进程详情的消息输入中填写 JSON（自然语言使用 `{"text":"..."}`），点击“追加持久指导”。“加入持久邮箱”仍是下一轮普通输入；同一 ID 不能混用两种用途。回执按已持久入队、运行已接收、运行已采用显示；这些状态不代表动作已完成。源码草稿和输入草稿保持原样。“查看实际运行”打开同一公开事件／结果控制台，pending.botWork 只展示实际阶段、动作和检查点。
+
+关闭页面后 Process 继续由服务调度；重启恢复已保存状态与未确认指导，不能恢复闭包或栈。使用[示例](../examples/durable-bot/main.chaos)每轮创建新的 Bot，按实际 Process 状态显式协调不确定工作。
+
+## 替换与维护
+
+停止本项目的 IDE／程序，先备份自己的源码与持久数据，然后使用可信发布者提供的完整 project ZIP 或 portable ZIP：
+
+```sh
+python3 chaos.py replace /absolute/path/Chaos-Project-New.zip
+python3 chaos.py status
+python3 chaos.py run
+```
+
+替换先校验包并执行候选语言自检，成功后才选择新环境。用户源码、设置、数据库与任务数据留在原位；依赖需求和 Python／平台指纹相符时可继承，不相符时按提示执行 `python3 chaos.py setup`。普通运行不会自动安装缺少的依赖。
+
+上一环境存在、完整且仍兼容当前 Python 时，可在停止本项目程序后执行 `python3 chaos.py rollback`，恢复那一套运行时与依赖。回退不撤销源码编辑、设置修改、数据库变化或工具的外部效果。历史项目没有 `replace` 命令时，从解压后的新版包执行 `python3 chaos.py install /absolute/path/old-project`；旧官方启动器可以迁移，不符合迁移条件的自定义启动器会拒绝覆盖。
+
+完整操作和旧版本边界见[更新说明](UPDATES.md)；可移动包、独立服务及数据备份见[安装与部署](INSTALLATION.md)。整个工程移动时保留隐藏 `.chaos/` 及工作区元数据，更换 Python／系统后重新检查依赖。环境损坏或操作失败时按[故障排查](TROUBLESHOOTING.md)处理，不能假定任何损坏都能通过 rollback 自动修复。
+
+## 使用命令行
+
+以下是已安装 `chaos` 的全局 CLI。操作指定工程时可用 `chaos project doctor --directory DIR`、`chaos project configure --directory DIR --models` 或 `chaos project ask --directory DIR '问题'`；命令帮助在工程外也可查看。全局 project 使用当前安装的运行时，完整目录包要使用它自己的版本则运行目标工程自己的 `chaos.py`。入口与配置选择见[命令行教程](COMMAND_LINE.md)，嵌入接口见[SDK](SDK.md)。
+
+已安装 `chaos` 后，可在任意目录运行自己的源文件：
+
+```sh
+chaos check hello.chaos
+chaos run hello.chaos --input-json null
+chaos fmt hello.chaos
+chaos ir hello.chaos
+chaos run hello.chaos --trace
+```
+
+`fmt` 与 `ir` 输出到 stdout，均不修改源文件。要保存格式化结果，先写到不同文件并检查，避免把输出直接重定向覆盖正在读取的文件。`--trace` 把有界 JSON 追踪写到 stderr，程序结果仍位于 stdout：
+
+```sh
+chaos run hello.chaos --trace > result.json 2> trace.jsonl
+```
+
+需要机器读取连续进度时，目录入口和已安装 CLI 都支持 `run --stream`。事件逐行写入 stdout，成功结束后另有 `run.result`；它与默认 run 的单个最终 JSON、`--trace` 的 stderr 追踪是不同输出格式。使用 `--stream` 的调用方应读取到实际终态，而不是把某条 `bot.progress` 当作结束。
+
+在 macOS／Linux 的真实终端可使用 `python3 chaos.py run --interactive`，在 `guide>` 后输入自然语言并回车。普通循环不会自动理解指导，程序需要调用接收函数或使用原生 Bot 的检查点。该模式要求 stdin 和 stdout 都是真实终端，不能同时从 `run -` 读取源码；Windows 或管道可使用 `--stream`，需要追加指导时使用网页或 SDK／HTTP。`/cancel`、Ctrl-C 或 Ctrl-D 会请求取消这个本地运行并等待清理；停止 CLI 不会把它转换为后台工作。详见[SDK 的终端交互协议](SDK.md#实时事件与运行中指导)。
+
+普通失败也可能写入 stderr；不要把任意 stderr 行都当成成功追踪事件。`check` 只能确认语法、模块和导出等结构条件；工具授权、类型、输入和资源预算仍需运行验证。
+
+命令行支持 `-` 从标准输入读取单文件程序：
+
+```sh
+printf 'fn square(x) { x * x }; square(input)' | chaos run - --input-json 7
+```
+
+需要项目记忆与运行证据持续存在时指定数据库：
+
+```sh
+chaos run hello.chaos --db ./local-program.sqlite3
+```
+
+此命令会更新该数据库中的 `workspace` 源码。不要将 `--db` 指向已经被服务打开的数据库；使用下面的 workspace 或 HTTP Client 共享服务。
+
+### 外部编辑器与网页同步
+
+保持服务运行，在另一个终端执行：
+
+```sh
+chaos workspace checkout ./my-program --server http://127.0.0.1:8765 --project workspace
+chaos workspace sync ./my-program --watch
+```
+
+检出目录必须为空。编辑并保存 `.chaos` 文件后，watch 会提交有效修改，并拉取网页已提交版本。无效语法会报告并等待修正；版本冲突会停止，需要按冲突文件手工处理。另一个终端可查询并运行：
+
+```sh
+chaos workspace status ./my-program
+chaos workspace run ./my-program --input-json 42
+```
+
+独立 `chaos run file.chaos` 不会连接服务。文件同步也不会读取外部编辑器尚未保存的内存内容。完整约束见 [实时同步](REALTIME.md)。
+
+## 连接自己的模型
+
+目录项目从终端报告的实际地址进入 `/control`；原默认服务为 `http://127.0.0.1:8765/control`。先按[模型配置教程](MODEL_CONFIGURATION.md)确认设置文件、环境变量与实际路由。在“服务连接”输入自己有权使用的 API 地址、密钥和准确模型 ID；不要把示例名称当作账号必然可用的模型。
+
+- 非本机地址要求 HTTPS；本机开发服务允许 HTTP。模型请求不跟随重定向。
+- 在“角色路由”选择规划、执行、复核等角色使用的提供方和模型；“智能体”可以进一步覆盖某个 agent ID 的配置。
+- 点击“保存并热生效”后，下次请求或迭代采用新配置；正在发送的请求不会中途换凭据。
+- 模型发现调用该提供方的 `/models`，目录可用不代表每个模型都有推理权限。需要固定模型时关闭对应自动升级设置。
+
+API 返回脱敏配置；空密钥输入默认保留已保存值，清除需使用显式清除操作。配置文件存放位置与权限见 [安装与部署](INSTALLATION.md)。基础语言和 `local` 提供方仍不需要密钥；`local` 是确定性规则演示，`model` 才通过已配置服务请求模型。
+
+## 后台任务
+
+控制台的任务区可以提交自然语言任务并设置角色、迭代次数与间隔。任务立即进入持久队列；保持服务运行即可，网页可以关闭。活动卡片通过实时事件显示进度，可收起或展开历史；读取失败时保留最后已知状态。控制台任务与编程助手对话各有独立任务记录，停止一个不会替代另一个的取消操作。也可从 CLI 提交：
+
+```sh
+chaos task start '在任务目录生成并测试一个排序函数' --role executor --iterations 1
+chaos task list
+chaos task get TASK_ID
+chaos task events TASK_ID --after 0
+chaos task cancel TASK_ID
+```
+
+将 `TASK_ID` 换成提交结果里的实际 ID。需要连接其他端口时在每条命令加 `--server http://127.0.0.1:8877`。这些是需要模型配置的任务，不是无密钥语言入门示例。
+
+重启后正在执行的任务标为 `interrupted`，排队任务仍保留；检查已产生的文件和外部效果后，可用 `chaos task resume TASK_ID` 显式恢复。恢复不保证外部副作用恰好发生一次。后台有限迭代、模型目录刷新和软件更新检查各有自己的机制，不等于文档自动维护或无限运行的远程调度器。
+
+代码工具、浏览器、图像和后台 Codex 的权限与限制见 [Harness](HARNESS.md)。运行错误、端口冲突及资源限制见 [故障排查](TROUBLESHOOTING.md)。
+
+源码编辑、文件树、代码提示和系统智能体对话的详细操作见[IDE 与智能体编程](IDE.md)。

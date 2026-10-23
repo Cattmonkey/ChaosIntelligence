@@ -1,0 +1,7 @@
+import "std/control" as C;
+var events=[];let tag=C.prompt_tag("work");
+fn stage(value:Int)->Int{C.abort_prompt(tag,value+1,{step:"stage"})}
+let result=multiple_value_list(fn(){C.call_prompt(tag,fn(){
+ C.dynamic_wind(fn(){events=append(events,"enter")},fn(){stage(41)},fn(){events=append(events,"leave")})
+})});
+{result:result,events:events,available:C.prompt_available(tag)}

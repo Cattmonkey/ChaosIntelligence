@@ -1,0 +1,7 @@
+// A reusable generic role is an ordinary Function value.
+import "std/generic" as G;
+class Request { let value = 40 }
+class ResearchRequest(Request) {}
+let fallback = G.generic_method(G.generic_function("solve"), [Request], fn(request) { request.value });
+let solve = G.generic_method(fallback, [ResearchRequest], fn(request) { request.value + 2 });
+[solve(ResearchRequest()), fallback(ResearchRequest()), G.generic_info(solve).methodCount]

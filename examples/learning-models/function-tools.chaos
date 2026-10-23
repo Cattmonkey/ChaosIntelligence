@@ -1,0 +1,33 @@
+// 金额使用整数分；模型负责解释，语言函数负责计算。
+fn amount(unitCents: Int, quantity: Int) -> Int {
+  if unitCents < 0 || quantity < 0 { throw "单价与数量不能为负数" } else { null };
+  unitCents * quantity
+}
+fn budget(spec: Record) -> Record {
+  let limit = amount(spec.limitCents, 1);
+  let total = sum(map(fn(item) { amount(item.unitCents, item.quantity) }, spec.items));
+  {totalCents: total, limitCents: limit, remainingCents: limit - total, withinBudget: total <= limit}
+}
+// 先校验输入；闭包保留真实计算结果，模型不能换掉待计算的订单。
+let calculated = budget(input);
+var receipts = [];
+fn calculate(request: Null) -> Record {
+  receipts = append(receipts, calculated);
+  calculated
+}
+agent accountant {
+  provider: "model",
+  role: "executor",
+  route: "learning-accountant",
+  prompt: "调用 calculate_budget 工具，参数 input 为 null。根据工具返回的整数分金额解释是否超出预算。只引用工具结果，不自行编造金额。",
+  tools: [],
+  maxSteps: 4
+}
+let equipped = agent_bind(accountant, [
+  agent_tool("calculate_budget", calculate,
+    description="返回已校验订单的预算：所有金额的单位均为分。输入必须为 null。",
+    input_type="Null", output_type="Record")
+]);
+let explanation = await equipped(input);
+if length(receipts) == 0 { throw "智能体没有调用预算工具，未通过程序验收" } else { null };
+{budget: receipts[-1], explanation: explanation, toolCalls: length(receipts)}

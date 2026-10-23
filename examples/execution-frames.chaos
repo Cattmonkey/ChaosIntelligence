@@ -1,0 +1,15 @@
+// The same default cursor runs ordinary operands, generated code and async results.
+// No saved-continuation API, model connection or device is needed.
+var events=[];
+fn mark(name:String,value:Int)->Int { events=append(events,name);value }
+fn report(left:Int,right:Int)->Int { return_values(left*10+right,"ordinary") }
+let ordinary=multiple_value_list(fn(){report(mark("left",4),mark("right",2))});
+macro invoke(callable,value) { quote { unquote(callable)(unquote(value)) } }
+let generated=function_from(code_from("fn(value:Int)->Int{return_values(value+1,\"code\")}"));
+let code=multiple_value_list(fn(){invoke!(generated,41)});
+var calls=0;
+async fn work(value:Int)->Int { calls=calls+1;await sleep(0);return_values(value+1,"task") }
+let pending=work(41);
+let before=calls;
+let task=multiple_value_list(async fn(){await pending});
+{ordinary:ordinary,events:events,code:code,task:task,again:multiple_value_list(pending),before:before,calls:calls}

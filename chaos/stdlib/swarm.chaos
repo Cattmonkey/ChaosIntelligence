@@ -1,0 +1,184 @@
+// A functional swarm protocol, executed by the ordinary Chaos AST scheduler.
+// Portable snapshots contain data; workers and hooks remain actual callables.
+import "std/context" as Context;
+
+fn identity(value) { value }
+fn no_measure(snapshot) { null }
+fn never_stop(frame) { false }
+
+fn closed_data(value, depth=0) {
+  if depth > 64 { throw "Swarm data exceeds depth 64" } else { null };
+  let kind=type_of(value);
+  if kind == "Record" {
+    for child in values(value) { closed_data(child,depth+1) };
+    null
+  } else if kind == "List" {
+    for child in value { closed_data(child,depth+1) };
+    null
+  } else if kind == "Null" || kind == "Bool" || kind == "Int" || kind == "Number" || kind == "String" {
+    null
+  } else {
+    throw "Swarm snapshots and callback results require finite JSON data"
+  }
+}
+
+fn copy_data(value) {
+  // Reject live values before serialization; never turn a handle into a tag.
+  closed_data(value);
+  parse_json(json_stringify(value))
+}
+
+fn node_id(value:String) {
+  if length(value) < 1 || length(value) > 128 {
+    throw "Swarm node IDs require 1..128 characters"
+  } else { value }
+}
+
+fn tick_value(value:Int) {
+  if value < 0 { throw "Swarm tick must be nonnegative" } else { value }
+}
+
+fn numeric_weight(value:Number) { value }
+
+fn validate_snapshot(value:Record) {
+  let snapshot=copy_data(value);
+  if length(keys(snapshot)) != 3 || !has(snapshot,"states") || !has(snapshot,"edges") || !has(snapshot,"tick") {
+    throw "Swarm snapshot requires exactly states, edges and tick"
+  } else { null };
+  fn states_record(states:Record) { states }
+  fn edge_list(edges:List) { edges }
+  let states=states_record(snapshot.states);
+  let edges=edge_list(snapshot.edges);
+  tick_value(snapshot.tick);
+  let ids=keys(states);
+  if length(ids) < 1 || length(ids) > 64 { throw "Swarm requires 1..64 nodes" } else { null };
+  for id in ids { node_id(id) };
+  if length(edges) > 4096 { throw "Swarm permits at most 4096 edges" } else { null };
+  var seen={};
+  fn edge_record(edge:Record) { edge }
+  for item in edges {
+    let edge=edge_record(item);
+    if length(keys(edge)) != 3 || !has(edge,"source") || !has(edge,"target") || !has(edge,"weight") {
+      throw "Swarm edge requires exactly source, target and weight"
+    } else { null };
+    let source=node_id(edge.source);
+    let target=node_id(edge.target);
+    numeric_weight(edge.weight);
+    if !has(states,source) || !has(states,target) { throw "Swarm edge endpoint is not a node" } else { null };
+    let targets=get(seen,source,{});
+    if has(targets,target) { throw "Swarm duplicate source-target edge" } else { null };
+    seen=set(seen,source,set(targets,target,true));
+  };
+  snapshot
+}
+
+fn callable_value(value) {
+  // Existing descriptor construction validates callability/ownership, without
+  // executing the target or inspecting a name, prompt or source keyword.
+  staticmethod(value);
+  value
+}
+
+fn validate_workers(snapshot:Record, workers:Record) {
+  let ids=keys(snapshot.states);
+  if length(keys(workers)) != length(ids) { throw "Swarm workers must match all node IDs" } else { null };
+  var bound={};
+  for id in ids {
+    if !has(workers,id) { throw "Swarm worker is missing for a node" } else { null };
+    bound=set(bound,id,callable_value(workers[id]));
+  };
+  bound
+}
+
+fn optional_callback(value) {
+  if type_of(value) == "Null" { null } else { callable_value(value); null }
+}
+
+fn round_count(value:Int) {
+  if value < 0 || value > 10000 { throw "Swarm rounds require 0..10000" } else { value }
+}
+
+fn exact_boolean(value:Bool) { value }
+
+fn create(states:Record, edges:List=[]) -> Record {
+  validate_snapshot({states:states,edges:edges,tick:0})
+}
+
+async fn invoke_worker(group:TaskGroup, worker, input) {
+  let result=worker(input);
+  let completed=if type_of(result) == "Task" {
+    // The ordinary group admits a cold Task and owns its lifecycle. Reusing
+    // that same group's Task is idempotent; outside running/owned Tasks fail.
+    await group.spawn(result)
+  } else { result };
+  // Await exactly one layer. A second Task, Generator or nested live value is
+  // rejected; no additional work is implicitly started or unwrapped.
+  copy_data(completed)
+}
+
+async fn step(snapshot:Record, workers:Record, *, prepare=identity, rewire=null) -> Record {
+  let old=validate_snapshot(snapshot);
+  let bound=validate_workers(old,workers);
+  callable_value(prepare);optional_callback(rewire);
+  let ids=keys(old.states);
+  var incoming={};
+  for id in ids { incoming=set(incoming,id,[]) };
+  for edge in old.edges {
+    incoming=set(incoming,edge.target,append(incoming[edge.target],{edge:edge,state:old.states[edge.source]}));
+  };
+  // Finish all preparations before starting any node. Each callback receives a
+  // defensive data copy, so even a trusted Native cannot mutate shared input.
+  var inputs={};
+  for id in ids {
+    let context={id:id,state:old.states[id],incoming:incoming[id],tick:old.tick};
+    inputs=set(inputs,id,copy_data(prepare(copy_data(context))));
+  };
+  let states=async with task_group() as group {
+    var tasks={};
+    for id in ids { tasks=set(tasks,id,group.spawn(invoke_worker(group,bound[id],inputs[id]))) };
+    var results={};
+    for id in ids { results=set(results,id,await tasks[id]) };
+    results
+  };
+  let next=validate_snapshot({states:states,edges:old.edges,tick:old.tick+1});
+  if type_of(rewire) == "Null" { next } else {
+    let edges=copy_data(rewire(copy_data(old),copy_data(next)));
+    validate_snapshot({states:next.states,edges:edges,tick:next.tick})
+  }
+}
+
+async fn* frames(initial:Record, workers:Record, rounds:Int, *, prepare=identity, rewire=null, measure=no_measure, stop=never_stop) {
+  var snapshot=validate_snapshot(initial);
+  let bound=validate_workers(snapshot,workers);
+  round_count(rounds);
+  callable_value(prepare);optional_callback(rewire);callable_value(measure);callable_value(stop);
+  for unused in range(rounds) {
+    // Own the operation, rather than borrowing an ordinary await chain. The
+    // scope closes before measurement and yield, including on local cancel.
+    snapshot=async with task_group() as round_group {
+      await round_group.spawn(step(snapshot,bound,prepare=prepare,rewire=rewire))
+    };
+    let metrics=copy_data(measure(copy_data(snapshot)));
+    let frame={snapshot:snapshot,metrics:metrics};
+    let done=exact_boolean(stop(copy_data(frame)));
+    // step's TaskGroup and all adopted workers have closed before this yield.
+    yield copy_data(frame);
+    if done { break } else { null };
+  }
+}
+
+async fn run(initial:Record, workers:Record, rounds:Int, *, prepare=identity, rewire=null, measure=no_measure, stop=never_stop) -> Record {
+  var last={snapshot:validate_snapshot(initial),metrics:null};
+  let stream=frames(initial,workers,rounds,prepare=prepare,rewire=rewire,measure=measure,stop=stop);
+  async with Context.aclosing(stream) as owned_stream {
+    while true {
+      let item=async with task_group() as advancement_group {
+        await advancement_group.spawn(anext(owned_stream))
+      };
+      if item.done { break } else { last=item.value };
+    };
+    last
+  }
+}
+
+export {create,step,frames,run};

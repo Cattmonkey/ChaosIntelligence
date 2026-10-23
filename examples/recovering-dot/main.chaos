@@ -1,0 +1,7 @@
+let options=if input==null {{}} else {input};
+let dot=process_from({kind:"process",name:"test and recover own program",module:"dot.chaos",export:"step",intervalSeconds:get(options,"intervalSeconds",1),maxTurns:3});
+await dot(get(options,"key","dot"),{
+  phase:"propose",value:get(options,"value",3),
+  probeCases:get(options,"probeCases",[{entry:"tests.chaos",input:2,expect:4}]),
+  acceptanceCases:get(options,"acceptanceCases",[{entry:"tests.chaos",input:2,expect:4},{entry:"tests.chaos",input:3,expect:9}])
+});

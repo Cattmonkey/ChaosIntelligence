@@ -1,0 +1,7 @@
+class Meta(Type) {}
+class Component(metaclass=Meta) {}
+class Child(Component) {}
+[class_of(Type) == Type, class_of(Meta) == Type,
+ class_of(Component) == Meta, class_of(Child) == Meta,
+ Type(Component) == Meta, Type(Component()) == Component,
+ isinstance(Component, Meta), issubclass(Meta, Type), type_of(Meta)]

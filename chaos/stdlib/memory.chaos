@@ -1,0 +1,15 @@
+// These ordinary functions use the caller's existing tool authority and budget.
+// A revision is a project/key version, not proof that a value does not exist.
+fn read(key:String)->Record {
+  tool("memory.read", key)
+}
+
+fn compare_exchange(key:String, expected_revision:Int, value)->Record {
+  tool("memory.compare_exchange", {
+    key: key,
+    expectedRevision: expected_revision,
+    value: value
+  })
+}
+
+export {read, compare_exchange};

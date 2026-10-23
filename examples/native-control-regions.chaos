@@ -1,0 +1,9 @@
+fn energy(values) -> Int {
+    var total: Int = 0;
+    for value in values {
+        total = total + (value + 1) * (value + 1);
+    }
+    total
+}
+let fast = compile_function(energy, target="auto-control");
+[fast([0, 1, 2]), compile_info(fast).parameterGuards, length(compile_info(fast))]

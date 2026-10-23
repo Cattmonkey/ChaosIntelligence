@@ -1,0 +1,14 @@
+// Structured parameters are the same call boundary in the IDE and CLI.
+fn sum(pair as [left, right]: List) -> Int {
+    left + right
+}
+
+async fn summarize(request as {rows: rows, ..metadata}: Record) {
+    {answers: map(sum, rows), metadata: metadata}
+}
+
+let report = await summarize(request={
+    rows: [[20, 22], [19, 23]],
+    role: "executor"
+});
+report

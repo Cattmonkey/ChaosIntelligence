@@ -1,0 +1,700 @@
+// Cold borrowed stream algebra, implemented in the ordinary Chaos language.
+// Never delegate yield: closing this wrapper does not own or close its input.
+fn checked_count(value: Int) {
+  if value < 0 {
+    throw ValueError("Stream count must be nonnegative")
+  } else {
+    value
+  }
+}
+fn checked_size(value: Int) {
+  if value < 1 || value > 10000 {
+    throw ValueError("Stream batch size must be 1..10000")
+  } else {
+    value
+  }
+}
+fn checked_callback(value: Function) {
+  staticmethod(value);
+  null
+}
+fn checked_bool(value: Bool) {
+  value
+}
+fn map(mapper: Function, source) -> Generator {
+  checked_callback(mapper);
+  (
+    fn*() {
+      let cursor = iter(source);
+      while true {
+        let step = next(cursor);
+        if step.done {
+          return null
+        } else {
+          null
+        };
+        let item = mapper(step.value);
+        yield (item);
+      }
+    }
+  )()
+}
+fn filter(predicate: Function, source) -> Generator {
+  checked_callback(predicate);
+  (
+    fn*() {
+      let cursor = iter(source);
+      while true {
+        let step = next(cursor);
+        if step.done {
+          return null
+        } else {
+          null
+        };
+        let accepted = predicate(step.value);
+        if checked_bool(accepted) {
+          yield (step.value)
+        } else {
+          null
+        };
+      }
+    }
+  )()
+}
+fn flat_map(mapper: Function, source) -> Generator {
+  checked_callback(mapper);
+  (
+    fn*() {
+      let cursor = iter(source);
+      while true {
+        let step = next(cursor);
+        if step.done {
+          return null
+        } else {
+          null
+        };
+        let items = mapper(step.value);
+        let nested = iter(items);
+        while true {
+          let item = next(nested);
+          if item.done {
+            break
+          } else {
+            yield (item.value)
+          };
+        };
+      }
+    }
+  )()
+}
+fn take(source, count: Int) -> Generator {
+  checked_count(count);
+  (
+    fn*() {
+      if count == 0 {
+        return null
+      } else {
+        null
+      };
+      let cursor = iter(source);
+      var remaining = count;
+      while remaining > 0 {
+        let step = next(cursor);
+        if step.done {
+          return null
+        } else {
+          null
+        };
+        remaining = remaining - 1;
+        yield (step.value);
+      }
+    }
+  )()
+}
+fn drop(source, count: Int) -> Generator {
+  checked_count(count);
+  (
+    fn*() {
+      let cursor = iter(source);
+      var remaining = count;
+      while remaining > 0 {
+        let step = next(cursor);
+        if step.done {
+          return null
+        } else {
+          null
+        };
+        remaining = remaining - 1;
+      };
+      while true {
+        let step = next(cursor);
+        if step.done {
+          return null
+        } else {
+          yield (step.value)
+        };
+      }
+    }
+  )()
+}
+fn take_while(predicate: Function, source) -> Generator {
+  checked_callback(predicate);
+  (
+    fn*() {
+      let cursor = iter(source);
+      while true {
+        let step = next(cursor);
+        if step.done {
+          return null
+        } else {
+          null
+        };
+        let accepted = predicate(step.value);
+        if checked_bool(accepted) {
+          yield (step.value)
+        } else {
+          return null
+        };
+      }
+    }
+  )()
+}
+fn drop_while(predicate: Function, source) -> Generator {
+  checked_callback(predicate);
+  (
+    fn*() {
+      let cursor = iter(source);
+      var dropping = true;
+      while true {
+        let step = next(cursor);
+        if step.done {
+          return null
+        } else {
+          null
+        };
+        if dropping {
+          let accepted = predicate(step.value);
+          dropping = checked_bool(accepted);
+        } else {
+          null
+        };
+        if dropping {
+          null
+        } else {
+          yield (step.value)
+        };
+      }
+    }
+  )()
+}
+fn enumerate(source, start: Int = 0) -> Generator {
+  (
+    fn*() {
+      let cursor = iter(source);
+      var index = start;
+      while true {
+        let step = next(cursor);
+        if step.done {
+          return null
+        } else {
+          null
+        };
+        yield ((index, step.value));
+        index = index + 1;
+      }
+    }
+  )()
+}
+fn zip(*sources) -> Generator {
+  (
+    fn*() {
+      if length(sources) == 0 {
+        return null
+      } else {
+        null
+      };
+      var cursors = [];
+      var index = 0;
+      while index < length(sources) {
+        cursors = append(cursors, iter(sources[index]));
+        index = index + 1
+      };
+      while true {
+        var row = [];
+        index = 0;
+        while index < length(cursors) {
+          let step = next(cursors[index]);
+          if step.done {
+            return null
+          } else {
+            null
+          };
+          row = append(row, step.value);
+          index = index + 1;
+        };
+        yield (tuple(row));
+      }
+    }
+  )()
+}
+fn chain(*sources) -> Generator {
+  (
+    fn*() {
+      var index = 0;
+      while index < length(sources) {
+        let cursor = iter(sources[index]);
+        while true {
+          let step = next(cursor);
+          if step.done {
+            break
+          } else {
+            yield (step.value)
+          };
+        };
+        index = index + 1;
+      }
+    }
+  )()
+}
+fn batches(source, size: Int) -> Generator {
+  checked_size(size);
+  (
+    fn*() {
+      let cursor = iter(source);
+      var chunk = [];
+      while true {
+        let step = next(cursor);
+        if step.done {
+          if length(chunk) > 0 {
+            yield (tuple(chunk))
+          } else {
+            null
+          };
+          return null;
+        } else {
+          null
+        };
+        chunk = append(chunk, step.value);
+        if length(chunk) == size {
+          let batch = tuple(chunk);
+          chunk = [];
+          yield (batch)
+        } else {
+          null
+        };
+      }
+    }
+  )()
+}
+fn scan(reducer: Function, initial, source) -> Generator {
+  checked_callback(reducer);
+  (
+    fn*() {
+      var accumulator = initial;
+      yield (accumulator);
+      let cursor = iter(source);
+      while true {
+        let step = next(cursor);
+        if step.done {
+          return null
+        } else {
+          null
+        };
+        let updated = reducer(accumulator, step.value);
+        accumulator = updated;
+        yield (accumulator);
+      }
+    }
+  )()
+}
+fn amap(mapper: Function, source) -> AsyncGenerator {
+  checked_callback(mapper);
+  (
+    async fn*() {
+      let cursor = aiter(source);
+      while true {
+        let step = await anext(cursor);
+        if step.done {
+          return null
+        } else {
+          null
+        };
+        let produced = mapper(step.value);
+        let item = if type_of(produced) == "Task" {
+          await produced
+        } else {
+          produced
+        };
+        yield (item);
+      }
+    }
+  )()
+}
+fn afilter(predicate: Function, source) -> AsyncGenerator {
+  checked_callback(predicate);
+  (
+    async fn*() {
+      let cursor = aiter(source);
+      while true {
+        let step = await anext(cursor);
+        if step.done {
+          return null
+        } else {
+          null
+        };
+        let produced = predicate(step.value);
+        let accepted = if type_of(produced) == "Task" {
+          await produced
+        } else {
+          produced
+        };
+        if checked_bool(accepted) {
+          yield (step.value)
+        } else {
+          null
+        };
+      }
+    }
+  )()
+}
+fn aflat_map(mapper: Function, source) -> AsyncGenerator {
+  checked_callback(mapper);
+  (
+    async fn*() {
+      let cursor = aiter(source);
+      while true {
+        let step = await anext(cursor);
+        if step.done {
+          return null
+        } else {
+          null
+        };
+        let produced = mapper(step.value);
+        let items = if type_of(produced) == "Task" {
+          await produced
+        } else {
+          produced
+        };
+        let nested = aiter(items);
+        while true {
+          let item = await anext(nested);
+          if item.done {
+            break
+          } else {
+            yield (item.value)
+          };
+        };
+      }
+    }
+  )()
+}
+fn atake(source, count: Int) -> AsyncGenerator {
+  checked_count(count);
+  (
+    async fn*() {
+      if count == 0 {
+        return null
+      } else {
+        null
+      };
+      let cursor = aiter(source);
+      var remaining = count;
+      while remaining > 0 {
+        let step = await anext(cursor);
+        if step.done {
+          return null
+        } else {
+          null
+        };
+        remaining = remaining - 1;
+        yield (step.value);
+      }
+    }
+  )()
+}
+fn adrop(source, count: Int) -> AsyncGenerator {
+  checked_count(count);
+  (
+    async fn*() {
+      let cursor = aiter(source);
+      var remaining = count;
+      while remaining > 0 {
+        let step = await anext(cursor);
+        if step.done {
+          return null
+        } else {
+          null
+        };
+        remaining = remaining - 1;
+      };
+      while true {
+        let step = await anext(cursor);
+        if step.done {
+          return null
+        } else {
+          yield (step.value)
+        };
+      }
+    }
+  )()
+}
+fn atake_while(predicate: Function, source) -> AsyncGenerator {
+  checked_callback(predicate);
+  (
+    async fn*() {
+      let cursor = aiter(source);
+      while true {
+        let step = await anext(cursor);
+        if step.done {
+          return null
+        } else {
+          null
+        };
+        let produced = predicate(step.value);
+        let accepted = if type_of(produced) == "Task" {
+          await produced
+        } else {
+          produced
+        };
+        if checked_bool(accepted) {
+          yield (step.value)
+        } else {
+          return null
+        };
+      }
+    }
+  )()
+}
+fn adrop_while(predicate: Function, source) -> AsyncGenerator {
+  checked_callback(predicate);
+  (
+    async fn*() {
+      let cursor = aiter(source);
+      var dropping = true;
+      while true {
+        let step = await anext(cursor);
+        if step.done {
+          return null
+        } else {
+          null
+        };
+        if dropping {
+          let produced = predicate(step.value);
+          let accepted = if type_of(produced) == "Task" {
+            await produced
+          } else {
+            produced
+          };
+          dropping = checked_bool(accepted);
+        } else {
+          null
+        };
+        if dropping {
+          null
+        } else {
+          yield (step.value)
+        };
+      }
+    }
+  )()
+}
+fn aenumerate(source, start: Int = 0) -> AsyncGenerator {
+  (
+    async fn*() {
+      let cursor = aiter(source);
+      var index = start;
+      while true {
+        let step = await anext(cursor);
+        if step.done {
+          return null
+        } else {
+          null
+        };
+        yield ((index, step.value));
+        index = index + 1;
+      }
+    }
+  )()
+}
+fn azip(*sources) -> AsyncGenerator {
+  (
+    async fn*() {
+      if length(sources) == 0 {
+        return null
+      } else {
+        null
+      };
+      var cursors = [];
+      var index = 0;
+      while index < length(sources) {
+        cursors = append(cursors, aiter(sources[index]));
+        index = index + 1
+      };
+      while true {
+        var row = [];
+        index = 0;
+        while index < length(cursors) {
+          let step = await anext(cursors[index]);
+          if step.done {
+            return null
+          } else {
+            null
+          };
+          row = append(row, step.value);
+          index = index + 1;
+        };
+        yield (tuple(row));
+      }
+    }
+  )()
+}
+fn achain(*sources) -> AsyncGenerator {
+  (
+    async fn*() {
+      var index = 0;
+      while index < length(sources) {
+        let cursor = aiter(sources[index]);
+        while true {
+          let step = await anext(cursor);
+          if step.done {
+            break
+          } else {
+            yield (step.value)
+          };
+        };
+        index = index + 1;
+      }
+    }
+  )()
+}
+fn abatches(source, size: Int) -> AsyncGenerator {
+  checked_size(size);
+  (
+    async fn*() {
+      let cursor = aiter(source);
+      var chunk = [];
+      while true {
+        let step = await anext(cursor);
+        if step.done {
+          if length(chunk) > 0 {
+            yield (tuple(chunk))
+          } else {
+            null
+          };
+          return null;
+        } else {
+          null
+        };
+        chunk = append(chunk, step.value);
+        if length(chunk) == size {
+          let batch = tuple(chunk);
+          chunk = [];
+          yield (batch)
+        } else {
+          null
+        };
+      }
+    }
+  )()
+}
+fn ascan(reducer: Function, initial, source) -> AsyncGenerator {
+  checked_callback(reducer);
+  (
+    async fn*() {
+      var accumulator = initial;
+      yield (accumulator);
+      let cursor = aiter(source);
+      while true {
+        let step = await anext(cursor);
+        if step.done {
+          return null
+        } else {
+          null
+        };
+        let produced = reducer(accumulator, step.value);
+        let updated = if type_of(produced) == "Task" {
+          await produced
+        } else {
+          produced
+        };
+        accumulator = updated;
+        yield (accumulator);
+      }
+    }
+  )()
+}
+fn from_sync(source) -> AsyncGenerator {
+  (
+    async fn*() {
+      let cursor = iter(source);
+      while true {
+        let step = next(cursor);
+        if step.done {
+          return null
+        } else {
+          yield (step.value)
+        };
+      }
+    }
+  )()
+}
+fn count(start: Int = 0, step: Int = 1) -> Generator {
+  (
+    fn*() {
+      var value = start;
+      while true {
+        yield (value);
+        value = value + step
+      }
+    }
+  )()
+}
+fn repeat(value, count = null) -> Generator {
+  if type_of(count) == "Null" {
+    null
+  } else {
+    checked_count(count)
+  };
+  (
+    fn*() {
+      var remaining = count;
+      while remaining == null || remaining > 0 {
+        yield (value);
+        if remaining == null {
+          null
+        } else {
+          remaining = remaining - 1
+        };
+      }
+    }
+  )()
+}
+export {
+  map,
+  filter,
+  flat_map,
+  take,
+  drop,
+  take_while,
+  drop_while,
+  enumerate,
+  zip,
+  chain,
+  batches,
+  scan,
+  amap,
+  afilter,
+  aflat_map,
+  atake,
+  adrop,
+  atake_while,
+  adrop_while,
+  aenumerate,
+  azip,
+  achain,
+  abatches,
+  ascan,
+  from_sync,
+  count,
+  repeat
+};

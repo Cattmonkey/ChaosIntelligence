@@ -1,0 +1,15 @@
+import "std/swarm" as Swarm;
+let policy = team_from({kind:"team", name:"research", entry:"planner", roles:[
+  {id:"planner", parent:null, capabilities:[], agent:{kind:"agent", name:"planner", config:{provider:"local", tools:[]}}},
+  {id:"reviewer", parent:"planner", capabilities:[], agent:{kind:"agent", name:"reviewer", config:{provider:"local", tools:[]}}}
+]});
+let crew = team_bind(policy, {
+  planner:fn(context) { context.state + 1 },
+  reviewer:fn(context) { context.state + context.incoming[0].state }
+});
+let initial = Swarm.create({planner:1, reviewer:2}, [
+  {source:"planner", target:"reviewer", weight:1},
+  {source:"reviewer", target:"planner", weight:-1}
+]);
+let result = await Swarm.step(initial, team_bindings(crew));
+[result.states, result.tick, team_binding_info(crew).team.roles[1].parent]

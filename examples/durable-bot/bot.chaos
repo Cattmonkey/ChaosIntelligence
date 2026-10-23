@@ -1,0 +1,14 @@
+async fn step(ctx) {
+  fn plan(s) {
+    if length(s.guidance)>0 {s.guidance[-1].input} else {s.input}
+  }
+  fn execute(proposal,state) {proposal}
+  fn verify(state) {
+    let count=state.context.count+1;
+    {done:count>=3,context:{count:count,latest:state.evidence[-1]},output:{count:count,latest:state.evidence[-1]}}
+  }
+  let worker=bot(ctx.state.goal,plan,execute,verify,context=ctx.state.context,max_iterations=1);
+  let actual=await worker(ctx.input);
+  process_step(actual.state,actual.output,actual.done)
+}
+export {step};

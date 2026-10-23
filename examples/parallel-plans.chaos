@@ -1,0 +1,18 @@
+// 有界依赖调度：独立研究并行，审核只接收声明的直接前驱。
+async fn research(ctx) {
+  await sleep(0);
+  ctx.input + 1
+}
+async fn implement(ctx) {
+  await sleep(0);
+  ctx.input + 3
+}
+fn review(ctx) {
+  ctx.results.research + ctx.results.implement
+}
+let pipeline = plan([
+  {id: "research", call: "research"},
+  {id: "implement", call: "implement"},
+  {id: "answer", call: "review", needs: ["research", "implement"]}
+], name="parallel roles", max_concurrency=2);
+await pipeline(19, {research: research, implement: implement, review: review})

@@ -1,0 +1,9 @@
+let trace = context_var("trace", "root");
+async fn worker(role) {
+  with context_bind([{variable: trace, value: role}]) as binding {
+    await sleep(0);
+    {role: trace.get(), context: context_info(copy_context()).bindingCount}
+  }
+}
+let results = await gather([worker("planner"), worker("executor")]);
+{results: results, caller: trace.get()}

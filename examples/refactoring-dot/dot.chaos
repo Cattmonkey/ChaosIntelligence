@@ -1,0 +1,14 @@
+import "behavior.chaos" as B;
+fn step(context) {
+  if context.turn==1 {
+    let base=current_program();
+    let proof=program_references(base,"behavior.chaos",3);
+    if !proof.complete { throw "Cannot prove complete references"; } else { null };
+    let candidate=program_rename(base,"behavior.chaos",3,"respond");
+    process_evolve(base,candidate,[{entry:"tests.chaos",input:40,expect:42}],
+      context.state+1,B.answer(40),false,"Rename by binding identity");
+  } else {
+    process_step(context.state+1,B.answer(40),true);
+  }
+}
+export {step};

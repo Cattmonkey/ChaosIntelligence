@@ -1,0 +1,23 @@
+import "math.chaos" as math;
+import "std/option" as option;
+rec {
+  fn even(n) { if n == 0 { true } else { odd(n - 1) } }
+  fn odd(n) { if n == 0 { false } else { even(n - 1) } }
+}
+fn sum_until(limit) {
+  var total: Int = 0;
+  for n in range(1, 100) {
+    if n > limit { break; } else { null };
+    if n % 2 == 0 { continue; } else { null };
+    total = total + n;
+  }
+  return total;
+}
+var count = 0;
+while count < 3 { count = count + 1; }
+let answer = match option.Some(math.twice(21)) {
+  option.Some(x) if x > 0 => x,
+  _ => 0
+};
+let handled = try { throw {reason: "demonstration"} } catch error { error.value.reason };
+{answer: answer, oddSum: sum_until(9), even: even(200), count: count, handled: handled}

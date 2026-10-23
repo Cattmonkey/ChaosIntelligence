@@ -1,0 +1,4 @@
+// Requires a configured text provider. The call may incur model API charges.
+// Pass a question as the run's input; nothing is read from your files implicitly.
+import "std/intelligence" as Intelligence;
+Intelligence.ask(input,role="assistant")

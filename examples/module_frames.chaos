@@ -1,0 +1,3 @@
+let definition={"kind": "program", "entry": "main.chaos", "files": {"main.chaos": "import \"lib.chaos\" as L;fn solve(x){L.add(x)};export{solve}", "lib.chaos": "fn add(x){x+2};export{add}"}, "languageVersions": {"main.chaos": 2, "lib.chaos": 2}};
+let library=module_from(program_from(definition));
+library.solve(40)

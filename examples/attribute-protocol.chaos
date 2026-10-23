@@ -1,0 +1,9 @@
+class Box {
+var base:Int=0;
+fn __getattribute__(self,name){if name=="answer"{default_getattr(self,"base")+2}else{default_getattr(self,name)}}
+fn __getattr__(self,name){if name=="missing"{40}else{throw AttributeError(name)}}
+fn __setattr__(self,name,item){default_setattr(self,name,item);null}
+fn __delattr__(self,name){default_delattr(self,name);null}
+fn __dir__(self){["base","answer","answer"]}
+};
+let box=Box();box.base=40;box.answer

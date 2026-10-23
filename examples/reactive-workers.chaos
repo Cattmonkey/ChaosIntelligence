@@ -1,0 +1,15 @@
+async fn invoke(action:Function,value) {
+  await sleep(0);
+  action(value)
+}
+async with task_group() as workers {
+  var pending=[workers.spawn(invoke(fn(x){x*2},20)),
+               workers.spawn(invoke(fn(x){x*2},21))];
+  var results=[];
+  while length(pending)>0 {
+    let ready=await task_wait(pending);
+    for task in ready.done { results=append(results,await task) }
+    pending=ready.pending
+  };
+  sort(results)
+}

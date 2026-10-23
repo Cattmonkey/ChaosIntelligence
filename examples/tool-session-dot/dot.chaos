@@ -1,0 +1,37 @@
+import "behavior.chaos" as Behavior;
+
+fn role(name:String,routing_role:String,prompt:String) {
+  agent_from({kind:"agent",name:name,config:{provider:"model",route:name,role:routing_role,prompt:prompt,tools:[]}})
+}
+
+async fn step(ctx) {
+  let state=ctx.state;
+  let before=Behavior.answer(state.value);
+  if state.generation>=state.iterations {
+    process_step(merge(state,{lastObserved:before}),{value:before,version:ctx.programVersion},true)
+  } else {
+    let programmer=await session_open("tool_programmer",role("programmer","planner","Call program_snapshot to read the exact current Program and requested increment. Return a complete Program JSON definition. Change behavior.answer to add that increment; preserve every other module and dialect."));
+    let reviewer=await session_open("tool_reviewer",role("reviewer","reviewer","Call check_candidate to execute the candidate checks. Return JSON {approve: boolean, reason: string}. Review does not replace the terminal executable checks."));
+    let baseline=current_program();
+    let requested=state.generation+2;
+    let propose=session_bind(programmer,[agent_tool("program_snapshot",fn(_:Null)->Record {
+      {definition:program_info(baseline),increment:requested}
+    },description="Read the current source and requested change",input_type="Null",output_type="Record")]);
+    let message_id="generation_"+str(state.generation);
+    let proposed=await propose({generation:state.generation},message_id=message_id);
+    let candidate=program_from(parse_json(proposed.output));
+    let cases=[{entry:"tests.chaos",input:state.value,expect:state.value+requested},{entry:"tests.chaos",input:0,expect:requested}];
+    let review=session_bind(reviewer,[agent_tool("check_candidate",async fn(_:Null)->Record {
+      await program_probe(candidate,cases)
+    },description="Execute the proposed program against the requested checks",input_type="Null",output_type="Record")]);
+    let reviewed=await review({generation:state.generation},message_id=message_id);
+    let decision=parse_json(reviewed.output);
+    if !decision.approve {throw decision} else {null};
+    process_evolve(baseline,candidate,cases,
+      merge(state,{generation:state.generation+1,lastObserved:before}),{
+        before:before,sameFunction:Behavior.answer(state.value),executedVersion:ctx.programVersion,
+        programmerMessageId:proposed.messageId,reviewerMessageId:reviewed.messageId
+      },reason="durable roles call current language functions before atomic adoption")
+  }
+}
+export {step};

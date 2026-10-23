@@ -1,0 +1,8 @@
+'use strict';
+const fs=require('fs'),vm=require('vm'),path=require('path'),assert=require('assert'),root=process.argv[2]||path.resolve(__dirname,'..');
+const source=fs.readFileSync(path.join(root,'web/ide.js'),'utf8'),context=vm.createContext({});
+vm.runInContext(source.slice(0,source.indexOf('(()=>{'))+';globalThis.c=ChaosIDEContracts',context);
+const plain=x=>JSON.parse(JSON.stringify(x)),body={source:'dependency editor',file:'lib/a.chaos',entry:'main.chaos',files:{'main.chaos':'import "lib/a.chaos" as A;A.n','lib/a.chaos':'let n=42;export{n}'},languageVersions:{'main.chaos':1,'lib/a.chaos':2},position:3};
+const request=context.c.compileRequest(body);assert.equal(request.source,body.files[body.entry]);assert.deepEqual(Object.keys(request).sort(),['entry','files','languageVersions','source']);assert.deepEqual(plain(request.files),body.files);assert.deepEqual(plain(request.languageVersions),body.languageVersions);request.files['main.chaos']='changed';assert.notEqual(body.files['main.chaos'],'changed');assert.throws(()=>context.c.compileRequest({...body,entry:'absent.chaos'}));
+const snapshot={projectId:'workspace',epoch:1,file:'main.chaos',revision:2,editRevision:3,source:'42',context:'bundle'};assert(context.c.snapshotMatches(snapshot,{...snapshot}));for(const field of Object.keys(snapshot))assert(!context.c.snapshotMatches(snapshot,{...snapshot,[field]:'changed'}));
+new vm.Script(source);console.log(JSON.stringify({status:'passed',checks:12,details:['entry source selected from complete draft','field allowlist','copied files and dialects','missing entry rejected','all seven stale snapshot fields checked','IDE JavaScript parses']}));

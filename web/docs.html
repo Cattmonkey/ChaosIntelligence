@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Chaos 文档中心：从安装与快速开始，到语言参考、运行机制和开发维护。">
+  <title>Chaos · 文档中心</title>
+  <link rel="stylesheet" href="theme.css">
+  <link rel="stylesheet" href="docs.css">
+  <link rel="stylesheet" href="code.css">
+  <script src="code.js" defer></script>
+  <script src="docs.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#docs-main">跳到正文</a>
+  <header class="docs-header">
+    <button class="icon-button menu-toggle" id="menu-toggle" type="button" aria-label="打开文档导航" aria-controls="docs-sidebar" aria-expanded="false">☰</button>
+    <a class="brand" href="#/overview" aria-label="Chaos 文档首页"><span class="brand-mark" aria-hidden="true">✳</span><span>CHAOS</span><span class="brand-label">文档中心</span></a>
+    <div class="search-box" role="search">
+      <span class="search-icon" aria-hidden="true">⌕</span>
+      <label class="sr-only" for="docs-search">搜索全部文档</label>
+      <input id="docs-search" type="search" placeholder="搜索文档、命令或概念…" autocomplete="off" spellcheck="false" aria-controls="search-results">
+      <kbd aria-hidden="true">/</kbd>
+    </div>
+    <a class="workspace-link" href="/" data-app-link>打开编程环境 <span aria-hidden="true">↗</span></a>
+    <span class="offline-label" id="offline-label" hidden>离线文档</span>
+  </header>
+  <div class="nav-backdrop" id="nav-backdrop" hidden></div>
+  <div class="docs-layout">
+    <aside class="docs-sidebar" id="docs-sidebar" aria-label="文档导航">
+      <div class="sidebar-intro"><span class="eyebrow">BUILD WITH CHAOS</span><p>从第一个程序，<br>到协作的智能。</p></div>
+      <nav id="docs-nav" aria-label="文档章节"><p class="muted loading-nav">正在载入目录…</p></nav>
+      <div class="sidebar-footer"><span class="version-dot" aria-hidden="true"></span><div>Chaos <span id="docs-version">—</span><small id="language-version">文档与安装版本保持一致</small></div></div>
+    </aside>
+    <main class="docs-main" id="docs-main" tabindex="-1">
+      <section id="search-results" class="search-results" aria-labelledby="search-title" hidden>
+        <div class="eyebrow">SEARCH DOCUMENTATION</div>
+        <div class="search-heading"><h1 id="search-title">搜索文档</h1><button id="clear-search" class="text-button" type="button">返回阅读 <span aria-hidden="true">↗</span></button></div>
+        <p class="search-summary" id="search-summary" role="status"></p>
+        <div id="search-list"></div>
+      </section>
+      <div id="reading-view">
+        <div class="article-meta"><nav class="breadcrumbs" aria-label="当前位置"><span>文档</span><span aria-hidden="true">/</span><span id="page-section">开始使用</span></nav><button class="text-button" id="copy-page-link" type="button" disabled>复制链接 <span aria-hidden="true">↗</span></button></div>
+        <header class="article-header"><div class="eyebrow" id="page-eyebrow">CHAOS DOCUMENTATION</div><h1 id="page-title" tabindex="-1">让每一步，都有迹可循。</h1><p id="page-description">正在载入文档…</p></header>
+        <div class="loading-message" id="load-status" role="status">正在连接文档服务…</div>
+        <article class="prose" id="article-content" aria-label="文档正文"></article>
+        <footer class="article-footer" id="article-footer" hidden><p class="source-note" id="source-note"></p><nav class="page-pagination" id="page-pagination" aria-label="上一篇与下一篇"></nav></footer>
+      </div>
+      <noscript><p class="error-message">文档中心需要 JavaScript。你也可以直接阅读项目 docs 目录中的 Markdown 文档。</p></noscript>
+    </main>
+    <aside class="docs-toc" id="docs-toc" aria-label="本页目录"><div class="toc-label">本页内容</div><nav id="toc-links" aria-label="本页标题"></nav><a class="back-to-top" href="#" id="back-to-top">↑ 回到顶部</a><div class="toc-note">专注构建，<br>让文档随手可得。</div></aside>
+  </div>
+  <div class="toast" id="docs-toast" role="status" hidden></div>
+  <!-- DOCS_BOOTSTRAP -->
+</body>
+</html>

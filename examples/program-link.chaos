@@ -1,0 +1,14 @@
+// Mount the same reusable library twice without rewriting its imports.
+let increment=program_from({
+  kind:"program",entry:"main.chaos",
+  files:{
+    "main.chaos":"import \"util.chaos\" as U;fn apply(x){U.step(x)};export{apply}",
+    "util.chaos":"fn step(x){x+1};export{step}"
+  },languageVersions:{"main.chaos":2,"util.chaos":2}
+});
+let combined=program_link({
+  kind:"program",entry:"main.chaos",
+  files:{"main.chaos":"import \"vendor/left/main.chaos\" as L;import \"vendor/right/main.chaos\" as R;fn solve(x){R.apply(L.apply(x))};export{solve}"},
+  languageVersions:{"main.chaos":2}
+},{"vendor/left":increment,"vendor/right":increment});
+[module_from(combined).solve(40),length(program_info(combined).files)]

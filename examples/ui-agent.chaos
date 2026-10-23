@@ -1,0 +1,1 @@
+agent designer {provider:"model",tools:[]};type_of(ui_generate(designer,"Generate a concise report",kind="report"))

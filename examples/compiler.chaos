@@ -1,0 +1,3 @@
+// Same compiler report is available in the language and IDE.
+let report = program_compile(current_program());
+{target: report.target, modules: report.summary.moduleCount, effects: report.summary.effects}

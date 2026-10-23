@@ -1,0 +1,8 @@
+fn identity(value){value}
+class Meta(Type){fn __new__(m,name,bases,namespace){
+  Type.__new__(m,name,bases,set(namespace,"answer",class_member(42)))
+}}
+@identity
+class Component(metaclass=Meta){fn own(self){Component}}
+let Dynamic=new_class("Dynamic",[],class_members(Component),{metaclass:Meta});
+[Component.answer,Dynamic.answer,Component().own()==Component,isinstance(Component,Meta)]

@@ -1,0 +1,11 @@
+// One reusable call path for portable SDKs, CLI, IDE, and agent implementations.
+import "std/generic" as G;
+import "std/contracts" as C;
+let Request = C.contract_record({values: C.contract_list("Int")});
+let base = G.generic_method(G.generic_function("solve"), ["Any"], fn(request: Request) -> Int {
+  request.values[0]
+});
+let solve = G.generic_method(base, ["Record"], fn(next, request: Request) -> Int {
+  next() + 2
+}, with_next=true);
+solve({values: [40]})

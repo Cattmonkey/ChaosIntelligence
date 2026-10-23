@@ -1,0 +1,12 @@
+// The model chooses a declared language function through the existing harness.
+// No external tool grant is needed for this pure function.
+import "std/intelligence" as Intelligence;
+fn twice(value:Int) -> Int { value*2 }
+let calculator=Intelligence.make(
+  "使用 twice 工具计算用户给出的整数的两倍，并报告工具的实际结果。",
+  route="calculator", name="calculator"
+);
+let calculate=agent_bind(calculator,[
+  agent_tool("twice",twice,description="计算整数的两倍",input_type="Int",output_type="Int")
+]);
+await calculate(21)

@@ -1,0 +1,5 @@
+{
+  "devices": [
+    {"name": "target", "transport": "linux-hid", "keyboard": "/dev/hidg0", "mouse": "/dev/hidg1", "timeout": 2}
+  ]
+}

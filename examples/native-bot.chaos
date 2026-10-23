@@ -1,0 +1,12 @@
+// Native Bot keeps one goal/context and real callback identities.
+import "std/bot" as B;
+fn planner(state) { {next:length(state.evidence)+1,goal:state.goal} }
+fn execute(proposal,state) { proposal.next*2 }
+fn verify(state) {
+ {done:length(state.evidence)>=2,context:{last:state.evidence[-1]},output:state.evidence}
+}
+let worker=B.bot({objective:"two verified steps"},planner,execute,verify,context={last:0});
+let cold=worker(input);
+let result=await cold;
+{status:result.status,output:result.output,goal:B.bot_context(worker).goal,
+ context:B.bot_context(worker).context,type:type_of(worker)}

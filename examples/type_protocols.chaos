@@ -1,0 +1,22 @@
+// A language-defined interface and implementation selection, without host types.
+class Worker {
+  fn score(self) { 42 }
+}
+class ReadyMeta(Type) {
+  fn __instancecheck__(cls, value) {
+    type_of(value) == "Record" && get(value, "ready", false) == true
+  }
+  fn __subclasscheck__(cls, child) {
+    Type.__subclasscheck__(cls, child)
+  }
+}
+class Ready(metaclass=ReadyMeta) {}
+class Implementation {
+  fn __mro_entries__(self, original:Tuple)->Tuple { (Worker,) }
+}
+let selected = Implementation();
+class Component(selected) {}
+let Dynamic = new_class("Dynamic", [selected]);
+[Component().score(), Dynamic().score(),
+ isinstance({ready:true}, Ready), isinstance({ready:false}, Ready),
+ issubclass(Component, Worker), Component.__orig_bases__ == (selected,)]

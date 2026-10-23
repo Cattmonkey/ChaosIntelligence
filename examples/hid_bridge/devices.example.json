@@ -1,0 +1,5 @@
+{
+  "devices": [
+    {"name": "desk", "port": "/dev/cu.usbserial-REPLACE_WITH_YOUR_UART_ADAPTER", "baudrate": 115200, "timeout": 2.0}
+  ]
+}

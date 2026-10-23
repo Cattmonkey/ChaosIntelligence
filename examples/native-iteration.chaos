@@ -1,0 +1,13 @@
+// Consume a bounded prefix through the original iterator protocol.
+import "std/iter" as I;
+fn solve(items) {
+    var total = 0;
+    for value in I.take(items, 2) {
+        total = total + value;
+    } else {
+        total = total + 1;
+    }
+    total
+}
+let fast = compile_function(solve, target="auto-flow");
+fast([40, 1])

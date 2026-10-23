@@ -1,0 +1,37 @@
+// Reusable ordinary language controller: pass real async Functions, Agents or
+// bound AgentTools through adapters. No text/keyword interpreted as code.
+async fn guidance_batch() {
+  var messages=[];
+  for unused in range(64) {
+    let item=await guidance_receive(0);
+    if !item.received { break } else { null };
+    messages=append(messages,item.message);
+  }
+  messages
+}
+async fn guided_bot(objective, planner:Function, execute:Function, verify:Function, max_rounds:Int=20) {
+  var state={objective:objective,guidance:[],evidence:[],round:0};
+  for round in range(max_rounds) {
+    state=set(state,"round",round);
+    let before=await guidance_batch();
+    state=set(state,"guidance",state.guidance+before);
+    await progress_emit("plan",{summary:"Planning next action",round:round});
+    let proposal=await planner(state);
+    // A proposal made before a newly received guide is discarded. Completed
+    // effects and evidence are retained. This is a cooperative decision point.
+    let after=await guidance_batch();
+    if length(after)>0 {
+      state=set(state,"guidance",state.guidance+after);
+      await progress_emit("progress",{summary:"Guidance received; replanning",messages:map(fn(x){x.messageId},after)});
+      continue;
+    } else { null };
+    await progress_emit("plan",{summary:"Executing current proposal",proposal:proposal});
+    let result=await execute(proposal,state);
+    state=set(state,"evidence",append(state.evidence,result));
+    await progress_emit("result",{summary:"Action completed",result:result});
+    let decision=await verify(state);
+    if decision.done { return {done:true,state:state,output:decision.output} } else { null };
+  }
+  {done:false,state:state,output:null}
+}
+export {guided_bot,guidance_batch}

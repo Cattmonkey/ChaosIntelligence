@@ -1,0 +1,15 @@
+import "std/swarm" as Swarm;
+fn prepare(context) {
+  context.state + sum(map(fn(link) { link.edge.weight * link.state }, context.incoming))
+}
+fn nonlinear(value) { value * value }
+fn feedback(old, next) {
+  map(fn(edge) { set(edge, "weight", -0.25) }, old.edges)
+}
+let initial = Swarm.create({a:0.5, b:0.25}, [
+  {source:"a", target:"b", weight:-0.5},
+  {source:"b", target:"a", weight:-0.5}
+]);
+let last = await Swarm.run(initial, {a:nonlinear, b:nonlinear}, 2,
+  prepare=prepare, rewire=feedback, measure=fn(snapshot) { snapshot.states });
+[last.snapshot.tick, last.snapshot.states, last.snapshot.edges[0].weight, initial.tick]

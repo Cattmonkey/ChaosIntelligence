@@ -1,0 +1,19 @@
+class Cached {
+    var saved: Any = null;
+    var value: Int = 0;
+    fn __new__(cls, value: Int) {
+        if cls.saved == null { cls.saved = alloc_instance(cls) } else {};
+        cls.saved
+    }
+    fn __init__(self, value: Int) {
+        self.value = value;
+        null
+    }
+}
+let first = Cached(10);
+let second = Cached(20);
+class Answer {
+    fn __new__(cls) { 42 }
+    fn __init__(self) { throw "must not initialize" }
+}
+[first == second, first.value, second.value, Answer()]

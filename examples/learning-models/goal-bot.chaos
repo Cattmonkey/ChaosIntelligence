@@ -1,0 +1,39 @@
+// 一个目标、最多三轮：模型写作，语言函数检查明确的长度合同。
+fn validate(spec: Record) -> Record {
+  fn bounds(topic: String, minChars: Int, maxChars: Int) {
+    if minChars < 1 || maxChars < minChars || maxChars > 1000 {
+      throw "长度范围须满足 1 <= minChars <= maxChars <= 1000"
+    } else { null }
+  }
+  bounds(spec.topic, spec.minChars, spec.maxChars);
+  spec
+}
+let request = validate(input);
+agent writer {
+  provider: "model",
+  role: "executor",
+  route: "learning-bot-writer",
+  prompt: "按输入的 topic 写一段中文说明。结合 goal、previous、feedback 和 guidance 调整，只返回正文。遵守 minChars/maxChars 的字符数范围；不声称字符检查已经通过。",
+  tools: [],
+  maxSteps: 2
+}
+fn plan(state) {
+  {topic: state.input.topic, minChars: state.input.minChars, maxChars: state.input.maxChars,
+    goal: state.goal, previous: state.context.draft, feedback: state.context.feedback,
+    guidance: state.guidance}
+}
+fn execute(proposal, state) { writer(proposal) }
+fn verify(state) {
+  let draft = state.evidence[-1];
+  let chars = length(draft);
+  let accepted = chars >= state.input.minChars && chars <= state.input.maxChars;
+  let feedback = if accepted { "字符数符合合同；内容质量仍需用户复核" }
+    else { "本次为 " + str(chars) + " 个字符，请调整到要求的区间" };
+  {done: accepted, context: {draft: draft, feedback: feedback},
+    output: {text: draft, characters: chars, lengthAccepted: accepted}}
+}
+let worker = bot("产出满足明确长度合同的中文说明", plan, execute, verify,
+  context={draft: "", feedback: "请先写第一稿"}, max_iterations=3);
+let result = await worker(request);
+{status: result.status, done: result.done, output: result.output,
+  iterations: result.state.iteration, context: result.state.context}

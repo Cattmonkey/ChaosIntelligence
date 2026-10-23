@@ -1,0 +1,3 @@
+var saved=null;var prefix=0;var suffix=0;let tag=prompt_tag("saved");
+let initial=call_prompt(tag,fn(){prefix+=1;let value=10+capture_continuation(tag,fn(k){saved=k;2});suffix+=1;value});
+let first=saved(30);let second=saved(40);[initial,first,second,prefix,suffix,type_of(saved),continuation_info(saved).invocations]

@@ -1,0 +1,9 @@
+agent teacher {
+  provider: "model",
+  role: "planner",
+  route: "learning-teacher",
+  prompt: "用一个短例子解释输入中的编程概念。明确区分事实与建议。",
+  tools: [],
+  maxSteps: 3
+}
+teacher(input)

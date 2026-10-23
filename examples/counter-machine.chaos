@@ -1,0 +1,78 @@
+// A replaceable finite instruction table, interpreted by ordinary Chaos.
+// Registers and labels are data; this is not a new runtime primitive.
+// inc:   {op:"inc", register:"a" or "b", next:label}
+// decjz: {op:"decjz", register:"a" or "b", zero:label, nonzero:label}
+// halt:  {op:"halt"}
+fn machine_invalid(reason:String, pc:Int) {
+  throw {kind:"counter_machine", reason:reason, pc:pc}
+}
+fn machine_target(value, size:Int, pc:Int) {
+  if type_of(value)!="Int" { machine_invalid("invalid_jump",pc) } else { null };
+  if value<0 || value>=size { machine_invalid("invalid_jump",pc) } else { null };
+  value
+}
+fn machine_validate(program:List) {
+  let size=length(program);
+  if size==0 { machine_invalid("empty_program",0) } else { null };
+  // Validate every row before execution, including unreachable instructions.
+  for pc in range(size) {
+    let instruction=program[pc];
+    if type_of(instruction)!="Record" { machine_invalid("invalid_instruction",pc) } else { null };
+    let op=get(instruction,"op");
+    if type_of(op)!="String" { machine_invalid("invalid_opcode",pc) } else { null };
+    if op!="inc" && op!="decjz" && op!="halt" { machine_invalid("invalid_opcode",pc) } else { null };
+    let fields=if op=="halt" { ["op"] } else {
+      if op=="inc" { ["op","register","next"] } else { ["op","register","zero","nonzero"] }
+    };
+    if length(keys(instruction))!=length(fields) || !all(fn(key){contains(fields,key)},keys(instruction)) {
+      machine_invalid("invalid_instruction",pc)
+    } else { null };
+    if op!="halt" {
+      let register=instruction.register;
+      if type_of(register)!="String" { machine_invalid("invalid_register",pc) } else { null };
+      if register!="a" && register!="b" { machine_invalid("invalid_register",pc) } else { null };
+      if op=="inc" { machine_target(instruction.next,size,pc) } else {
+        machine_target(instruction.zero,size,pc);
+        machine_target(instruction.nonzero,size,pc)
+      }
+    } else { null }
+  };
+  program
+}
+// steps counts executed inc/decjz instructions; halt itself costs no fuel.
+// Fuel exhaustion is an ordinary result. Host ResourceLimit still propagates.
+fn run(program:List, a:Int=0, b:Int=0, pc:Int=0, fuel:Int=10000) -> Record {
+  machine_validate(program);
+  if a<0 || b<0 || fuel<0 { machine_invalid("invalid_state",pc) } else { null };
+  machine_target(pc,length(program),pc);
+  var left=a;var right=b;var at=pc;var used=0;
+  while true {
+    let instruction=program[at];
+    if instruction.op=="halt" { return {status:"halted",pc:at,a:left,b:right,steps:used} } else { null };
+    if used==fuel { return {status:"fuel_exhausted",pc:at,a:left,b:right,steps:used} } else { null };
+    if instruction.op=="inc" {
+      if instruction.register=="a" { left=left+1 } else { right=right+1 };
+      at=instruction.next
+    } else {
+      let value=if instruction.register=="a" { left } else { right };
+      if value==0 { at=instruction.zero } else {
+        if instruction.register=="a" { left=left-1 } else { right=right-1 };
+        at=instruction.nonzero
+      }
+    };
+    used=used+1
+  }
+}
+
+// Two-register machine: transfer a to b; expected {a: 0, b: 42}.
+fn machine(pc: Int, a: Int, b: Int) -> Record {
+  if pc == 0 {
+    if a == 0 { machine(2, a, b) }
+    else { machine(1, a - 1, b) }
+  } else {
+    if pc == 1 { machine(0, a, b + 1) }
+    else { {a: a, b: b} }
+  }
+}
+export {machine,run};
+machine(0, 37, 5)

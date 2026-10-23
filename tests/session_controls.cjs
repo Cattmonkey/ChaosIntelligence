@@ -1,0 +1,15 @@
+'use strict';
+const fs=require('fs'),vm=require('vm'),path=require('path'),assert=require('assert'),root=process.argv[2]||path.resolve(__dirname,'..');
+const source=fs.readFileSync(path.join(root,'web/sessions.js'),'utf8'),context=vm.createContext({window:{},document:{querySelector:()=>null}});vm.runInContext(fs.readFileSync(path.join(root,'web/json.js'),'utf8'),context);vm.runInContext(source,context);const c=context.window.ChaosSessionContracts,plain=x=>JSON.parse(JSON.stringify(x));
+assert.deepEqual(plain(c.actions({status:'idle'})),{send:true,fork:true,compact:true,close:true,reconcile:false});
+assert.deepEqual(plain(c.actions({status:'running'})),{send:false,fork:false,compact:false,close:false,reconcile:false});
+assert.deepEqual(plain(c.actions({status:'needs_reconciliation'})),{send:false,fork:false,compact:false,close:false,reconcile:true});
+assert.deepEqual(plain(c.actions({status:'closed'})),{send:false,fork:true,compact:false,close:false,reconcile:false});
+assert(c.canReplaceDraft(null));assert(c.canReplaceDraft({dirty:false,saving:false}));assert(!c.canReplaceDraft({dirty:false,saving:true}));assert(!c.canReplaceDraft({dirty:true,saving:false}));
+assert(!c.label('idle').includes('思考'));assert(c.label('running').includes('运行'));
+const d={name:'worker',config:{provider:'model',prompt:'hello',maxSteps:1},buffers:{prompt:'edited',maxSteps:'invalid pending'},serial:2,dirty:true,validated:{}};c.clearField(d,'prompt');assert.equal(d.buffers.maxSteps,'invalid pending');assert(!('prompt'in d.config));assert.equal(d.serial,3);assert.equal(d.validated,null);c.commit(d,2);assert.equal(d.dirty,true);c.commit(d,3);assert.equal(d.dirty,false);
+assert(c.matches(d,3,'a','a'));assert(!c.matches(d,3,'a','b'));assert(!c.matches(d,2,'a','a'));
+const agent=c.agent({name:'worker',config:{provider:'model'}});assert.deepEqual(plain(agent),{kind:'agent',name:'worker',config:{provider:'model'}});assert(!Object.hasOwn(agent.config,'maxSteps'));
+vm.runInContext('globalThis.exact = stringifyJSON(parseJSON("{\\\"v\\\":900719925474099312345,\\\"f\\\":1.25000000000000000001}"))',context);assert(context.exact.includes('900719925474099312345'));assert(context.exact.includes('1.25000000000000000001'));
+assert(!source.includes('innerHTML'));assert(!source.includes('setProject('));assert(source.includes("'/api/v1/agents/validate'"));assert(source.includes("'session.manage'"));assert(source.includes("new EventSource('/api/events?projectId='"));assert(source.includes('state.busy===operation'));new vm.Script(source);
+console.log(JSON.stringify({status:'passed',checks:12,details:['pending clean fork draft cannot be replaced','idle lifecycle','running cannot mutate','uncertain requires evidence','closed only forks','no fabricated thinking','unrelated invalid config buffer retained','commit preserves later edits','generation guards','optional omission','lossless JSON','shared validation/SSE/no source overwrite']}));

@@ -1,0 +1,11 @@
+// Calls use the original binder and scheduler within the compiled CFG.
+fn adjust(value, /, *, offset=2) { value + offset }
+fn solve(values, /, *, offset=2) {
+    var total = 0;
+    for value in values {
+        total = total + adjust(value, offset=offset);
+    }
+    total
+}
+let fast = compile_function(solve, target="auto-flow");
+fast([40])

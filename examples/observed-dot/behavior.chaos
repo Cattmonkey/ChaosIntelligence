@@ -1,0 +1,6 @@
+fn choose(observed) {
+  let targets=filter(fn(target){target.text=="Advance 1"},observed.targets);
+  if length(targets)!=1 {throw "Expected a unique observed target"} else {null};
+  {action:"click",ref:targets.[0].ref}
+}
+export {choose};

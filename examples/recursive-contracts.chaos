@@ -1,0 +1,8 @@
+import "std/contracts" as C;
+let Tree = C.contract_recursive({
+  Node: C.contract_record({value: "Int", children: C.contract_list(C.contract_ref("Node"))})
+}, "Node");
+fn total(node: Tree) -> Int {
+  node.value + fold(fn(sum, child) { sum + total(child) }, 0, node.children)
+}
+total({value: 40, children: [{value: 2, children: []}]})

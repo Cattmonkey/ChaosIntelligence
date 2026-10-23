@@ -1,0 +1,2 @@
+fn answer(value:Int)->Int {value*value}
+export {answer};

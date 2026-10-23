@@ -1,0 +1,13 @@
+{
+  "repository": "https://github.com/deepseek-ai/deepseek-harness",
+  "commit": "5badb15009ae1756c3afe0ae0cef1faafc290ccc",
+  "files": {
+    "LICENSE": "ebb4f09972aee8608be255debaf78451a68e95c290f55c240dec2ecfa16ea6be",
+    "vendor/cordis/LICENSE": "034fb52b1d57360ecbae6cb1632a88f86fd7c3d3f5631a5f082710203dda0be7",
+    "vendor/cordis/src/fiber.ts": "b7661d6c19be76cef6b97d88719a8112c0f8b5abe65bd9e7d5947773fd4b96d4",
+    "packages/extensions/cordis-host-runner/src/lifecycle.ts": "21eaf07ad26c1a4463d8a91664d8e88c4ba93e714b93de0868918e3c0d2ef53d",
+    "packages/client/ui-chat/src/client/conversation-nodes/process-activity.ts": "3f8965ae644b13a28ba8b3710fa7d0b3049e1b6296cf06ee62416d3214ce6f2c",
+    "packages/client/ui-chat/src/client/chat/RunningStatus.tsx": "a1b1a866e7c6a07ab4233f27fe186079f24bfec3478a7b326ef248d3bdfcb225",
+    "packages/extensions/ui-cordis/src/client/status.ts": "4d76a0f2ce7c265d7b9fc080087d5cade350ec882b1355361dcfcfd17c45abe3"
+  }
+}

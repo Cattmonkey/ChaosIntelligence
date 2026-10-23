@@ -1,0 +1,17 @@
+// Exact native aliases; importing never starts a Process or reads its state.
+let process_from = process_from;
+let process_info = process_info;
+let process_source = process_source;
+let process_start = process_start;
+let process_send = process_send;
+let process_guide = process_guide;
+let process_message = process_message;
+let process_status = process_status;
+let process_events = process_events;
+let process_control = process_control;
+let process_configure = process_configure;
+let process_reconcile = process_reconcile;
+let process_step = process_step;
+let process_evolve = process_evolve;
+let process_evolution_info = process_evolution_info;
+export {process_from, process_info, process_source, process_start, process_send, process_guide, process_message, process_status, process_events, process_control, process_configure, process_reconcile, process_step, process_evolve, process_evolution_info};

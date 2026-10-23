@@ -1,0 +1,14 @@
+// Persistent membership and recursive keys use the same native Set.
+class Key {
+  var value = 0;
+  fn __init__(self, value) { self.value = value; null }
+  fn __hash__(self) { hash(self.value) }
+  fn __eq__(self, other) {
+    if isinstance(other, Key) { self.value == other.value } else { false }
+  }
+}
+let before = {Key(20), Key(22), Key(20)};
+let changed = set_discard(set_add(before, Key(42)), Key(20));
+let table = hash_map([((before,), 42)]);
+[map(fn(key) { key.value }, before), map(fn(key) { key.value }, changed),
+ table[({Key(22), Key(20)},)], hash(before) == hash({Key(22), Key(20)})]

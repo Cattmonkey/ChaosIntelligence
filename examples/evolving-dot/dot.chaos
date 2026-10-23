@@ -1,0 +1,44 @@
+import "behavior.chaos" as Behavior;
+
+fn roles(provider:String) {
+  team_from({kind:"team",name:"dot roles",entry:"programmer",roles:[
+    {id:"programmer",parent:null,capabilities:[],agent:{kind:"agent",name:"programmer",config:{
+      provider:provider,role:"planner",tools:[],
+      prompt:"Return only a complete Program JSON definition. Change behavior.answer to add the requested increment. Preserve all other modules, entry and dialects."
+    }}},
+    {id:"reviewer",parent:"programmer",capabilities:[],agent:{kind:"agent",name:"reviewer",config:{
+      provider:provider,role:"reviewer",tools:[],
+      prompt:"Review the candidate program change and the explicit request. Return only JSON {approve: boolean, reason: string}. This review does not replace executable tests."
+    }}}
+  ]})
+}
+
+async fn step(ctx) {
+  let state=ctx.state;
+  let before=Behavior.answer(state.value);
+  if state.generation>=state.iterations {
+    process_step(merge(state,{lastObserved:before}),{value:before,version:ctx.programVersion},true)
+  } else {
+    let baseline=current_program();
+    let team=roles(state.provider);
+    let requested=state.generation+2;
+    let raw=await team_role(team,"programmer")({
+      definition:program_info(baseline),increment:requested,message:ctx.input
+    });
+    let candidate=program_from(if type_of(raw)=="String" {parse_json(raw)} else {raw});
+    let review=await team_role(team,"reviewer")({
+      definition:program_info(candidate),increment:requested
+    });
+    let decision=if type_of(review)=="String" {parse_json(review)} else {review};
+    if !decision.approve {throw decision} else {null};
+    let cases=[
+      {entry:"tests.chaos",input:state.value,expect:state.value+requested},
+      {entry:"tests.chaos",input:0,expect:requested}
+    ];
+    process_evolve(baseline,candidate,cases,
+      merge(state,{generation:state.generation+1,lastObserved:before}),{
+        before:before,sameFunction:Behavior.answer(state.value),executedVersion:ctx.programVersion
+      },reason="dot candidate and checkpoint commit together")
+  }
+}
+export {step};

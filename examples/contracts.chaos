@@ -1,0 +1,5 @@
+// Typed agent boundaries are ordinary language functions in any host project.
+import "std/contracts" as C;
+let Request = C.contract_record({values: C.contract_list("Int")});
+fn solve(request: Request) -> Int { request.values[0] + 2 }
+solve({values: [40]})

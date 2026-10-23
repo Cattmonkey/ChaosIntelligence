@@ -1,0 +1,14 @@
+'use strict';
+const fs=require('fs'),vm=require('vm'),path=require('path'),assert=require('assert'),root=process.argv[2]||path.resolve(__dirname,'..');
+const source=fs.readFileSync(path.join(root,'web/processes.js'),'utf8'),context=vm.createContext({window:{},document:{querySelector:()=>null}});vm.runInContext(fs.readFileSync(path.join(root,'web/json.js'),'utf8'),context);vm.runInContext(source,context);const c=context.window.ChaosProcessContracts,plain=x=>JSON.parse(JSON.stringify(x));
+assert.equal(c.initialLocked({saving:true,baseRevision:null}),true);assert.equal(c.initialLocked({saving:false,baseRevision:1}),true);assert.equal(c.initialLocked({saving:false,baseRevision:null}),false);
+assert.deepEqual(plain(c.actions({status:'waiting',pending:null})),{pause:true,resume:false,stop:true,reconcile:false});
+assert.deepEqual(plain(c.actions({status:'needs_reconciliation',pending:{runId:'r'}})),{pause:false,resume:false,stop:false,reconcile:true});
+assert.equal(c.actions({status:'stopped',pending:{}}).resume,false);assert.equal(c.actions({status:'paused',pending:null}).resume,true);assert.equal(c.actions({status:'completed'}).resume,false);
+assert(!c.label('waiting').includes('思考'));assert(c.label('running').includes('执行'));
+const d={key:'alpha',baseRevision:2,serial:3,dirty:true,remote:null};c.observe(d,{key:'alpha',revision:4});assert.equal(d.remote,4);c.committed(d,{revision:5},2);assert.equal(d.dirty,true);assert.equal(d.baseRevision,5);assert.equal(d.remote,null);c.committed(d,{revision:6},3);assert.equal(d.dirty,false);
+assert(c.matches(d,3,'a','a'));assert(!c.matches(d,2,'a','a'));assert(!c.matches(d,3,'a','b'));
+const original=d.remote;c.observe(d,{key:'beta',revision:99});assert.equal(d.remote,original);
+vm.runInContext('globalThis.exact = stringifyJSON(parseJSON("{\\\"state\\\":900719925474099312345,\\\"output\\\":1.25000000000000000001}"))',context);assert(context.exact.includes('900719925474099312345'));assert(context.exact.includes('1.25000000000000000001'));
+assert(source.includes("'/api/v1/processes/validate'"));assert(!source.includes('innerHTML'));assert(!source.includes('setProject('));assert(source.includes("'process.manage'"));new vm.Script(source);
+console.log(JSON.stringify({status:'passed',checks:11,details:['initial state immutable during create and after commit','shared status actions','uncertain turns require reconciliation','pending stop cannot resume','completed terminal','waiting distinct from thinking','CAS commit preserves newer edits','remote key isolation','generation guards','lossless state JSON','no source overwrite or HTML interpolation']}));

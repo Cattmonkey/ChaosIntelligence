@@ -1,0 +1,15 @@
+// Run this complete program in the IDE. No model key or external tool is needed.
+await progress_emit("plan", {summary: "计算三个结果，并逐项返回进度", total: 3});
+var results = [];
+for number in range(1, 4) {
+  await sleep(0.3);
+  results = append(results, number * number);
+  await progress_emit("progress", {
+    summary: "已完成一项计算",
+    completed: length(results),
+    total: 3,
+    results: results
+  });
+}
+await progress_emit("result", {summary: "计算结束，准备返回最终结果"});
+{results: results, total: length(results)}

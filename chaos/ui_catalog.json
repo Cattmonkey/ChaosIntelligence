@@ -1,0 +1,768 @@
+{
+  "x-schema": "chaos.ui.catalog/1",
+  "$defs": {
+    "Stack": {
+      "type": "object",
+      "properties": {
+        "children": {
+          "type": "array",
+          "items": {
+            "x-ui-node": true,
+            "anyOf": [
+              {
+                "$ref": "#/$defs/Stack"
+              },
+              {
+                "$ref": "#/$defs/Heading"
+              },
+              {
+                "$ref": "#/$defs/Text"
+              },
+              {
+                "$ref": "#/$defs/Card"
+              },
+              {
+                "$ref": "#/$defs/Metric"
+              },
+              {
+                "$ref": "#/$defs/Table"
+              },
+              {
+                "$ref": "#/$defs/BarChart"
+              },
+              {
+                "$ref": "#/$defs/Tabs"
+              },
+              {
+                "$ref": "#/$defs/Tab"
+              },
+              {
+                "$ref": "#/$defs/Disclosure"
+              },
+              {
+                "$ref": "#/$defs/Code"
+              },
+              {
+                "$ref": "#/$defs/ActionButton"
+              },
+              {
+                "$ref": "#/$defs/Slides"
+              },
+              {
+                "$ref": "#/$defs/Slide"
+              },
+              {
+                "$ref": "#/$defs/NetworkGraph"
+              },
+              {
+                "$ref": "#/$defs/RuntimeGraph"
+              }
+            ]
+          },
+          "maxItems": 10000
+        },
+        "direction": {
+          "type": "string",
+          "enum": [
+            "column",
+            "row"
+          ],
+          "default": "column"
+        },
+        "gap": {
+          "type": "string",
+          "enum": [
+            "small",
+            "medium",
+            "large"
+          ],
+          "default": "medium"
+        }
+      },
+      "required": [
+        "children"
+      ],
+      "additionalProperties": false
+    },
+    "Heading": {
+      "type": "object",
+      "properties": {
+        "text": {
+          "type": "string"
+        },
+        "level": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 4,
+          "default": 2
+        }
+      },
+      "required": [
+        "text"
+      ],
+      "additionalProperties": false
+    },
+    "Text": {
+      "type": "object",
+      "properties": {
+        "text": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "text"
+      ],
+      "additionalProperties": false
+    },
+    "Card": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "children": {
+          "type": "array",
+          "items": {
+            "x-ui-node": true,
+            "anyOf": [
+              {
+                "$ref": "#/$defs/Stack"
+              },
+              {
+                "$ref": "#/$defs/Heading"
+              },
+              {
+                "$ref": "#/$defs/Text"
+              },
+              {
+                "$ref": "#/$defs/Card"
+              },
+              {
+                "$ref": "#/$defs/Metric"
+              },
+              {
+                "$ref": "#/$defs/Table"
+              },
+              {
+                "$ref": "#/$defs/BarChart"
+              },
+              {
+                "$ref": "#/$defs/Tabs"
+              },
+              {
+                "$ref": "#/$defs/Tab"
+              },
+              {
+                "$ref": "#/$defs/Disclosure"
+              },
+              {
+                "$ref": "#/$defs/Code"
+              },
+              {
+                "$ref": "#/$defs/ActionButton"
+              },
+              {
+                "$ref": "#/$defs/Slides"
+              },
+              {
+                "$ref": "#/$defs/Slide"
+              },
+              {
+                "$ref": "#/$defs/NetworkGraph"
+              },
+              {
+                "$ref": "#/$defs/RuntimeGraph"
+              }
+            ]
+          },
+          "maxItems": 10000
+        }
+      },
+      "required": [
+        "title",
+        "children"
+      ],
+      "additionalProperties": false
+    },
+    "Metric": {
+      "type": "object",
+      "properties": {
+        "label": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        },
+        "detail": {
+          "type": "string",
+          "default": ""
+        }
+      },
+      "required": [
+        "label",
+        "value"
+      ],
+      "additionalProperties": false
+    },
+    "Table": {
+      "type": "object",
+      "properties": {
+        "columns": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 10000
+        },
+        "rows": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "boolean"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "maxItems": 10000
+          },
+          "maxItems": 10000
+        }
+      },
+      "required": [
+        "columns",
+        "rows"
+      ],
+      "additionalProperties": false
+    },
+    "BarChart": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "labels": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 10000
+        },
+        "values": {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "maxItems": 10000
+        }
+      },
+      "required": [
+        "title",
+        "labels",
+        "values"
+      ],
+      "additionalProperties": false
+    },
+    "Tabs": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "x-ui-node": true,
+            "x-ui-tag": "Tab",
+            "$ref": "#/$defs/Tab"
+          },
+          "maxItems": 10000
+        }
+      },
+      "required": [
+        "items"
+      ],
+      "additionalProperties": false
+    },
+    "Tab": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "children": {
+          "type": "array",
+          "items": {
+            "x-ui-node": true,
+            "anyOf": [
+              {
+                "$ref": "#/$defs/Stack"
+              },
+              {
+                "$ref": "#/$defs/Heading"
+              },
+              {
+                "$ref": "#/$defs/Text"
+              },
+              {
+                "$ref": "#/$defs/Card"
+              },
+              {
+                "$ref": "#/$defs/Metric"
+              },
+              {
+                "$ref": "#/$defs/Table"
+              },
+              {
+                "$ref": "#/$defs/BarChart"
+              },
+              {
+                "$ref": "#/$defs/Tabs"
+              },
+              {
+                "$ref": "#/$defs/Tab"
+              },
+              {
+                "$ref": "#/$defs/Disclosure"
+              },
+              {
+                "$ref": "#/$defs/Code"
+              },
+              {
+                "$ref": "#/$defs/ActionButton"
+              },
+              {
+                "$ref": "#/$defs/Slides"
+              },
+              {
+                "$ref": "#/$defs/Slide"
+              },
+              {
+                "$ref": "#/$defs/NetworkGraph"
+              },
+              {
+                "$ref": "#/$defs/RuntimeGraph"
+              }
+            ]
+          },
+          "maxItems": 10000
+        }
+      },
+      "required": [
+        "title",
+        "children"
+      ],
+      "additionalProperties": false
+    },
+    "Disclosure": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "children": {
+          "type": "array",
+          "items": {
+            "x-ui-node": true,
+            "anyOf": [
+              {
+                "$ref": "#/$defs/Stack"
+              },
+              {
+                "$ref": "#/$defs/Heading"
+              },
+              {
+                "$ref": "#/$defs/Text"
+              },
+              {
+                "$ref": "#/$defs/Card"
+              },
+              {
+                "$ref": "#/$defs/Metric"
+              },
+              {
+                "$ref": "#/$defs/Table"
+              },
+              {
+                "$ref": "#/$defs/BarChart"
+              },
+              {
+                "$ref": "#/$defs/Tabs"
+              },
+              {
+                "$ref": "#/$defs/Tab"
+              },
+              {
+                "$ref": "#/$defs/Disclosure"
+              },
+              {
+                "$ref": "#/$defs/Code"
+              },
+              {
+                "$ref": "#/$defs/ActionButton"
+              },
+              {
+                "$ref": "#/$defs/Slides"
+              },
+              {
+                "$ref": "#/$defs/Slide"
+              },
+              {
+                "$ref": "#/$defs/NetworkGraph"
+              },
+              {
+                "$ref": "#/$defs/RuntimeGraph"
+              }
+            ]
+          },
+          "maxItems": 10000
+        }
+      },
+      "required": [
+        "title",
+        "children"
+      ],
+      "additionalProperties": false
+    },
+    "Code": {
+      "type": "object",
+      "properties": {
+        "source": {
+          "type": "string"
+        },
+        "language": {
+          "type": "string",
+          "default": "text"
+        }
+      },
+      "required": [
+        "source"
+      ],
+      "additionalProperties": false
+    },
+    "ActionButton": {
+      "type": "object",
+      "properties": {
+        "label": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "payload": {
+          "type": "object",
+          "default": {}
+        }
+      },
+      "required": [
+        "label",
+        "name"
+      ],
+      "additionalProperties": false
+    },
+    "Slides": {
+      "type": "object",
+      "properties": {
+        "children": {
+          "type": "array",
+          "items": {
+            "x-ui-node": true,
+            "x-ui-tag": "Slide",
+            "$ref": "#/$defs/Slide"
+          },
+          "maxItems": 10000
+        },
+        "interval": {
+          "type": "integer",
+          "minimum": 1000,
+          "maximum": 60000,
+          "default": 5000
+        }
+      },
+      "required": [
+        "children"
+      ],
+      "additionalProperties": false
+    },
+    "Slide": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "children": {
+          "type": "array",
+          "items": {
+            "x-ui-node": true,
+            "anyOf": [
+              {
+                "$ref": "#/$defs/Stack"
+              },
+              {
+                "$ref": "#/$defs/Heading"
+              },
+              {
+                "$ref": "#/$defs/Text"
+              },
+              {
+                "$ref": "#/$defs/Card"
+              },
+              {
+                "$ref": "#/$defs/Metric"
+              },
+              {
+                "$ref": "#/$defs/Table"
+              },
+              {
+                "$ref": "#/$defs/BarChart"
+              },
+              {
+                "$ref": "#/$defs/Tabs"
+              },
+              {
+                "$ref": "#/$defs/Tab"
+              },
+              {
+                "$ref": "#/$defs/Disclosure"
+              },
+              {
+                "$ref": "#/$defs/Code"
+              },
+              {
+                "$ref": "#/$defs/ActionButton"
+              },
+              {
+                "$ref": "#/$defs/Slides"
+              },
+              {
+                "$ref": "#/$defs/Slide"
+              },
+              {
+                "$ref": "#/$defs/NetworkGraph"
+              },
+              {
+                "$ref": "#/$defs/RuntimeGraph"
+              }
+            ]
+          },
+          "maxItems": 10000
+        }
+      },
+      "required": [
+        "title",
+        "children"
+      ],
+      "additionalProperties": false
+    },
+    "NetworkGraph": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "title",
+        "nodes",
+        "edges"
+      ],
+      "properties": {
+        "title": {
+          "type": "string",
+          "maxLength": 1000
+        },
+        "nodes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "id",
+              "label"
+            ],
+            "properties": {
+              "id": {
+                "type": "string",
+                "maxLength": 128,
+                "minLength": 1
+              },
+              "label": {
+                "type": "string",
+                "maxLength": 256
+              },
+              "kind": {
+                "type": "string",
+                "maxLength": 64,
+                "default": "entity"
+              },
+              "group": {
+                "type": "string",
+                "maxLength": 128,
+                "default": ""
+              },
+              "status": {
+                "type": "string",
+                "maxLength": 64,
+                "default": "not-observed"
+              },
+              "detail": {
+                "type": "string",
+                "maxLength": 1000,
+                "default": ""
+              }
+            }
+          },
+          "maxItems": 200
+        },
+        "edges": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "id",
+              "source",
+              "target"
+            ],
+            "properties": {
+              "id": {
+                "type": "string",
+                "maxLength": 128,
+                "minLength": 1
+              },
+              "source": {
+                "type": "string",
+                "maxLength": 128,
+                "minLength": 1
+              },
+              "target": {
+                "type": "string",
+                "maxLength": 128,
+                "minLength": 1
+              },
+              "kind": {
+                "type": "string",
+                "maxLength": 64,
+                "default": "relation"
+              },
+              "status": {
+                "type": "string",
+                "maxLength": 64,
+                "default": "not-observed"
+              }
+            }
+          },
+          "maxItems": 400
+        },
+        "layout": {
+          "type": "string",
+          "enum": [
+            "radial",
+            "layered"
+          ],
+          "default": "radial"
+        },
+        "theme": {
+          "type": "string",
+          "enum": [
+            "auto",
+            "dark",
+            "light"
+          ],
+          "default": "auto"
+        }
+      }
+    },
+    "RuntimeGraph": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "title": {
+          "type": "string",
+          "maxLength": 1000,
+          "default": "运行网络"
+        },
+        "layout": {
+          "type": "string",
+          "enum": [
+            "radial",
+            "layered"
+          ],
+          "default": "radial"
+        },
+        "scope": {
+          "type": "string",
+          "enum": [
+            "run",
+            "project"
+          ],
+          "default": "run"
+        },
+        "theme": {
+          "type": "string",
+          "enum": [
+            "auto",
+            "dark",
+            "light"
+          ],
+          "default": "auto"
+        }
+      }
+    }
+  },
+  "properties": {
+    "Stack": {
+      "$ref": "#/$defs/Stack"
+    },
+    "Heading": {
+      "$ref": "#/$defs/Heading"
+    },
+    "Text": {
+      "$ref": "#/$defs/Text"
+    },
+    "Card": {
+      "$ref": "#/$defs/Card"
+    },
+    "Metric": {
+      "$ref": "#/$defs/Metric"
+    },
+    "Table": {
+      "$ref": "#/$defs/Table"
+    },
+    "BarChart": {
+      "$ref": "#/$defs/BarChart"
+    },
+    "Tabs": {
+      "$ref": "#/$defs/Tabs"
+    },
+    "Tab": {
+      "$ref": "#/$defs/Tab"
+    },
+    "Disclosure": {
+      "$ref": "#/$defs/Disclosure"
+    },
+    "Code": {
+      "$ref": "#/$defs/Code"
+    },
+    "ActionButton": {
+      "$ref": "#/$defs/ActionButton"
+    },
+    "Slides": {
+      "$ref": "#/$defs/Slides"
+    },
+    "Slide": {
+      "$ref": "#/$defs/Slide"
+    },
+    "NetworkGraph": {
+      "$ref": "#/$defs/NetworkGraph"
+    },
+    "RuntimeGraph": {
+      "$ref": "#/$defs/RuntimeGraph"
+    }
+  }
+}

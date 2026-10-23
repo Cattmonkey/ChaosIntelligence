@@ -1,0 +1,14 @@
+// Run with {key: "form", url: "http://127.0.0.1:8000"} and browser.control.
+// The first connection navigates explicitly; later runs preserve the current page.
+async with await computer_connect(input.key) as computer {
+  let fresh = await computer_observe(computer);
+  if computer_info(computer).requiresReconcile {
+    throw "Inspect the observation and reconcile uncertain effects explicitly"
+  } else { null };
+  let info = observation_info(fresh);
+  if info.url == "about:blank" {
+    observation_info(await computer(computer_action(fresh, {action: "navigate", url: input.url})))
+  } else {
+    info
+  }
+}

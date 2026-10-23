@@ -1,0 +1,3 @@
+let c=code_from("fn fact(n){if n<=1{1}else{n*fact(n-1)}}");
+let f=function_from(c);
+[f(5),code_info(c)]

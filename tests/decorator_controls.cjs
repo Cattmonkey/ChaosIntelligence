@@ -1,0 +1,26 @@
+'use strict';
+const fs=require('fs'),path=require('path'),vm=require('vm'),assert=require('assert'),root=process.argv[2]||path.resolve(__dirname,'..');
+function el(tag){return {tagName:tag.toUpperCase(),children:[],value:'',attributes:{},append(...xs){this.children.push(...xs);if(tag==='select')for(const x of xs)if(x.selected)this.value=x.value},replaceChildren(...xs){this.children=xs},setAttribute(k,v){this.attributes[k]=v}}}
+const nodes=new Map(),context=vm.createContext({document:{createElement:el},crypto:require('crypto').webcrypto,parseJSON:JSON.parse,stringifyJSON:JSON.stringify,clone:x=>JSON.parse(JSON.stringify(x)),markDirty(){},flushControls(){},toast(){},$:q=>{if(!nodes.has(q))nodes.set(q,el('div'));return nodes.get(q)}});
+let source=fs.readFileSync(path.join(root,'web/language.js'),'utf8');source=source.slice(0,source.indexOf("$('#applyProgram')"));vm.runInContext(source,context);
+const run=s=>vm.runInContext(s,context),json=s=>JSON.parse(run('JSON.stringify('+s+')'));
+run(`syntaxInfo={syntax:{class:[['name','str'],['bases','nodes'],['body','node']],block:[['statements','nodes']],def:[['name','str'],['function','node']],fn:[['parameters','params'],['returns','str'],['body','node'],['name','str']],let:[['name','str'],['type','str'],['value','node']],var:[['name','str'],['type','str'],['value','node']],literal:[['value','literal']],name:[['name','str']],set_member:[['object','node'],['index','node'],['value','node']]},templates:{literal:{kind:'literal',id:'zero',value:0},name:{kind:'name',id:'ref',name:'Base'},let:{kind:'let',id:'field',name:'field',type:'Any',value:{kind:'literal',id:'fv',value:0}},var:{kind:'var',id:'field',name:'field',type:'Any',value:{kind:'literal',id:'fv',value:0}},def:{kind:'def',id:'method',name:'method',function:{kind:'fn',id:'fn',name:'method',parameters:[{name:'value',type:'Any'}],returns:'Any',body:{kind:'block',id:'fnbody',statements:[]}}}}};programDraft={root:{kind:'block',id:'root',statements:[{kind:'class',id:'class',name:'Example',bases:[],body:{kind:'block',id:'body',statements:[]}}]}};renderSyntax=()=>{};syntaxSelection='body';renderSyntaxFields();`);
+const descendants=x=>[x,...x.children.flatMap(descendants)],controls=()=>descendants(nodes.get('#syntaxFields'));
+run(`syntaxInfo.syntax.decorated=[['decorators','nodes'],['declaration','node']];syntaxInfo.templates.decorated={kind:'decorated',id:'wrapper',decorators:[{kind:'name',id:'decorator',name:'staticmethod'}],declaration:syntaxInfo.templates.def};`);
+assert.deepStrictEqual(json("chooseKind('def',()=>{},'classBody').children.map(x=>x.value)"),['let','var','def','decorated']);
+assert.deepStrictEqual(json("chooseKind('def',()=>{},'methodDeclaration').children.map(x=>x.value)"),['def']);
+assert(!json("chooseKind('name',()=>{},'expression').children.map(x=>x.value)").includes('decorated'));
+controls().find(x=>x.tagName==='BUTTON'&&x.textContent==='＋ 添加成员').onclick();
+run("syntaxSelection=programDraft.root.statements[0].body.statements[0].id;renderSyntaxFields()");
+const before=json('programDraft.root.statements[0].body.statements[0]');
+controls().find(x=>x.tagName==='BUTTON'&&x.textContent==='为声明添加装饰器').onclick();
+assert.deepStrictEqual(json('programDraft.root.statements[0].body.statements[0].declaration'),before);
+assert.strictEqual(run("syntaxContext({node:programDraft.root.statements[0].body.statements[0].declaration,parent:programDraft.root.statements[0].body.statements[0],slot:'declaration'})"),'methodDeclaration');
+assert.strictEqual(run("syntaxContext({node:{kind:'name'},parent:programDraft.root.statements[0].body.statements[0],slot:'decorators.0'})"),'expression');
+run('renderSyntaxFields()');
+assert(!controls().some(x=>x.tagName==='LABEL'&&x.textContent==='节点类型'));
+assert.deepStrictEqual(json('syntaxChildren(programDraft.root.statements[0].body.statements[0]).map(([slot])=>slot)'),['decorators.0','declaration']);
+controls().find(x=>x.tagName==='BUTTON'&&x.textContent==='移除装饰器包装，保留声明').onclick();
+assert.deepStrictEqual(json('programDraft.root.statements[0].body.statements[0]'),before);
+assert.strictEqual(run("languageNames.decorated"),'装饰声明');
+console.log(JSON.stringify({status:'passed',checks:10,details:['class body permits decorated methods','wrapped class member declaration restricts kind','decorated cannot be arbitrary expression','wrapping retains declaration and child ids','nested declaration context retained','decorator expression context','wrapper cannot be silently replaced','wrapper traversal','explicit unwrap retains declaration','Chinese label']}));

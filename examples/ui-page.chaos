@@ -1,0 +1,1 @@
+ui_artifact("page", "Hello", ui_node("Stack", [[ui_node("Heading", ["Hello",1]), ui_node("Text", ["Native Chaos + OpenUI"])]]))

@@ -1,0 +1,20 @@
+import "std/evolve" as Evolution;
+import "operators.chaos" as Demo;
+import "model.chaos" as Model;
+import "process.chaos" as Persistent;
+let options=if input==null {{}}else{input};
+let provider=get(options,"provider","local");
+if provider!="local" && provider!="model" {throw "provider must be local or model"}else{null};
+let task=get(options,"task",if provider=="model" {"Design a small, reproducible test plan for a temperature sensor; separate measured evidence from assumptions."}else{[1,2,3,4,5,6,7,8]});
+let base=if provider=="model" {Model.base()}else{Demo.base()};
+let snapshot=Evolution.create(base,{compare:"Use observed contrasts; preserve the base if no useful change is supported"});
+let mode=get(options,"mode","parallel");let k=get(options,"k",1);
+if get(options,"persistent",false) {
+  let parts=split(program_info(current_program()).entry,"/");
+  let process_module=join("/",take(length(parts)-1,parts)+["process.chaos"]);
+  let worker=process_from({kind:"process",name:"Harness learner",module:process_module,export:"step",intervalSeconds:null,maxTurns:20});
+  await worker(get(options,"key","harness-learner"),{snapshot:snapshot,task:task,provider:provider,mode:mode,k:k})
+} else {
+  let operators=if provider=="model" {Model.operators()}else{Demo.operators()};
+  await Evolution.run(snapshot,task,operators,mode=mode,k=k,observe=Persistent.observe)
+}

@@ -1,0 +1,6 @@
+class Position {
+    let value: Int = -1;
+    fn __index__(self) -> Int { self.value }
+}
+let position = Position();
+[index(position), [20, 22][position], (20, 22)[position], "AB"[position]]

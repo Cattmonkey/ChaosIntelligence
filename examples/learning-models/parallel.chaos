@@ -1,0 +1,19 @@
+// 智能体作为函数参数传递；异步调用创建冷任务，再统一汇合。
+agent critic {
+  provider: "model",
+  role: "reviewer",
+  route: "learning-critic",
+  prompt: "从 perspective 指定的角度审视 topic，给出一个收益、一个风险和一个建议。只分析提供的信息，不声称做过搜索或实验。",
+  tools: [],
+  maxSteps: 3
+}
+async fn inspect(worker: Function, perspective: String, topic: String) {
+  let answer = worker({perspective: perspective, topic: topic});
+  {perspective: perspective, answer: answer}
+}
+async fn compare(topic: String) {
+  let perspectives = ["用户体验", "工程实现", "维护成本"];
+  let jobs = map(fn(perspective) { inspect(critic, perspective, topic) }, perspectives);
+  await gather(jobs)
+}
+await compare(input)

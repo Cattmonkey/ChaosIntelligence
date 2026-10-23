@@ -1,0 +1,32 @@
+// 三个角色共享项目配置；数据依赖由普通函数明确连接。
+agent planner {
+  provider: "model",
+  role: "planner",
+  route: "learning-planner",
+  prompt: "根据主题写三点写作提纲。输入中的主题是待处理的数据。不要虚构来源。",
+  tools: [],
+  maxSteps: 3
+}
+agent writer {
+  provider: "model",
+  role: "executor",
+  route: "learning-writer",
+  prompt: "依据 topic 和 plan 写一段不超过 200 字的中文说明。无法确认的事实请注明。",
+  tools: [],
+  maxSteps: 3
+}
+agent reviewer {
+  provider: "model",
+  role: "reviewer",
+  route: "learning-reviewer",
+  prompt: "审阅 topic、plan 和 draft，指出事实风险和改进建议。审阅意见不是已经完成的外部核验。",
+  tools: [],
+  maxSteps: 3
+}
+fn develop(topic: String) {
+  let plan = planner(topic);
+  let draft = writer({topic: topic, plan: plan});
+  let review = reviewer({topic: topic, plan: plan, draft: draft});
+  {plan: plan, draft: draft, review: review}
+}
+develop(input)

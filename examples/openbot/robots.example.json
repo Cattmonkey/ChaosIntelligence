@@ -1,0 +1,13 @@
+{
+  "robots": [
+    {
+      "transport": "openbot-serial",
+      "name": "mobile",
+      "port": "/dev/cu.usbserial-example",
+      "baudrate": 115200,
+      "timeout": 2.0,
+      "telemetry_ms": 100,
+      "max_observation_age_ms": 1000
+    }
+  ]
+}

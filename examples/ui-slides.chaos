@@ -1,0 +1,1 @@
+ui_artifact("slides", "Overview", ui_node("Slides", [[ui_node("Slide", ["Functions", [ui_node("Text", ["Native computation"])]]), ui_node("Slide", ["Agents", [ui_node("Text", ["Cold tasks and explicit effects"])]])], 2000]))

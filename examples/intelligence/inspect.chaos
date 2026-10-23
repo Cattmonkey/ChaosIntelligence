@@ -1,0 +1,7 @@
+// Pure: no model call, key or network is required.
+import "std/intelligence" as Intelligence;
+let specialist=Intelligence.make(
+  "解释用户给出的程序，并提出可验证的改进建议。",
+  role="reviewer", route="program-tutor", name="program_tutor"
+);
+[agent_info(Intelligence.assistant),agent_info(specialist)]

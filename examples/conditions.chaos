@@ -1,0 +1,20 @@
+import "std/conditions" as Recovery;
+var events=[];
+let answer=Recovery.restart_case(async fn(){
+  events=append(events,"body");
+  with Recovery.handler_bind([{
+    predicate:fn(value){value.kind=="missing-input"},
+    handler:async fn(value){
+      events=append(events,"handler");
+      await sleep(0);
+      let payload=getattr(value,"data");
+      Recovery.invoke_restart(Recovery.find_restart("use-value",value),[payload.fallback]);
+    }
+  }]) as policy {
+    try { Recovery.error_condition(Recovery.condition("missing-input","提供明确替代值",{fallback:41,exact:decimal("0.10")})) }
+    finally { events=append(events,"cleanup") }
+  }
+},[{name:"use-value",report:"使用替代值",function:async fn(value:Int)->Int {
+  await sleep(0);events=append(events,"restart");value+1
+}}]);
+{answer:answer,events:events}

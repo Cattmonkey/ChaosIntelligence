@@ -1,0 +1,8 @@
+import "std/values" as V;
+var events=[];
+fn report(value:Int)->Int{V.values(value+1,{status:"ready"})}
+let primary=report(41);
+let captured=V.multiple_value_list(fn(){report(41)});
+let combined=V.multiple_value_call(fn(left:Int,right:Int)->Int{left+right},fn(){V.values(20,22)});
+let kept=V.multiple_value_list(fn(){V.multiple_value_prog1(fn(){report(combined-1)},fn(){events=append(events,"after")})});
+{primary:primary,captured:captured,kept:kept,events:events}

@@ -1,0 +1,6 @@
+// Structured results use native bindings in both the IDE and CLI.
+let results = [
+    {role: "planner", value: [20, 21]},
+    {role: "worker", value: [21, 22]}
+];
+{role: a + b for {role: role, value: [a, b]} in results}

@@ -1,0 +1,31 @@
+import "behavior.chaos" as Behavior;
+async fn step(ctx) {
+  let state=ctx.state;
+  async with await computer_open(state.url) as computer {
+    let before=await computer_observe(computer);
+    let metadata=observation_info(before);
+    let old_policy=Behavior.choose(metadata);
+    var adoption=null;
+    if state.generation<state.iterations {
+      agent programmer {provider:"model",role:"planner",tools:[],prompt:"Propose a complete Program JSON definition. Modify only behavior.chaos so choose(observed) selects the requested buttonText uniquely. Preserve other modules, entry and dialects. Return exact JSON, no Markdown."};
+      let conversation=await session_open("visual_programmer",programmer);
+      let baseline=current_program();
+      let desired="Advance "+str(state.generation+2);
+      let proposed=await conversation(observation_input(before,{definition:program_info(baseline),buttonText:desired}),message_id="generation_"+str(state.generation));
+      let candidate=program_from(parse_json(proposed.output));
+      let fixture={targets:[{text:"Advance 1",ref:"a"},{text:"Advance 2",ref:"b"},{text:"Advance 3",ref:"c"}]};
+      let expected=if state.generation==0 {"b"} else {"c"};
+      let cases=[{entry:"tests.chaos",input:fixture,expect:{action:"click",ref:expected}}];
+      let report=await program_probe(candidate,cases);
+      if !report.passed {throw report} else {null};
+      adoption=await program_adopt(baseline,candidate,cases,reason="Visual evidence and actual pure policy checks")
+    } else {null};
+    // The running lexical function stays on this turn's Program snapshot.
+    let still_current=Behavior.choose(metadata);
+    let after=observation_info(await computer(computer_action(before,still_current)));
+    let expected_text="count:"+str(state.generation+1);
+    if !contains(after.text,expected_text) {throw "Observed page did not satisfy this turn's acceptance"} else {null};
+    process_step(merge(state,{generation:state.generation+1}),{beforePolicy:old_policy,afterAdoptPolicy:still_current,adoption:adoption,observation:after,programVersion:ctx.programVersion},state.generation>=state.iterations)
+  }
+}
+export {step};

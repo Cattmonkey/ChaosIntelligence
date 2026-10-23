@@ -1,0 +1,3 @@
+// 冷任务示例：不附接设备、不发网络请求、不执行输入。
+// 宿主注册与显式 computer.control 授权后，await 才会触发效果。
+type_of(computer_attach("phone"))

@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Chaos · 智能体编程环境</title><link rel="stylesheet" href="/theme.css"><link rel="stylesheet" href="/style.css"><link rel="stylesheet" href="/activity.css"><link rel="stylesheet" href="/ide.css"><link rel="stylesheet" href="/code.css"><link rel="stylesheet" href="/editor.css"><link rel="stylesheet" href="/debugger.css"><link rel="stylesheet" href="/modes.css"><link rel="stylesheet" href="/processes.css"><link rel="stylesheet" href="/sessions.css"><link rel="stylesheet" href="/computers.css">
+<link rel="stylesheet" href="/runtime-network.css"><link rel="stylesheet" href="/artifacts.css"><link rel="stylesheet" href="/workbench.css">
+</head>
+<body class="workbench wb-output-collapsed" data-workbench-view="source">
+<header class="topbar">
+  <a class="brand" href="/" aria-label="Chaos 首页"><span class="brandmark">✳</span><span class="brand-name">Chaos</span></a>
+  <div class="breadcrumb"><span>工作空间</span><b>/</b><span id="projectName">多智能体研究工作流</span><span class="version" id="version">v1</span><span id="dirtyMark"></span></div>
+  <button id="wbCommandButton" class="wb-command-launcher" title="命令面板 · Ctrl / ⌘ Shift P"><span>搜索命令、打开文件…</span><kbd>⌘ ⇧ P</kbd></button><div class="top-actions"><span class="connection" id="connection">连接中</span><button class="icon-button" id="inspectorToggle" title="显示或隐藏配置面板">⚙</button><button class="icon-button" id="helpButton" title="语言与使用说明">?</button><button id="saveButton">保存 <kbd>⌘ S</kbd></button><button class="primary" id="runButton"><span>▶</span> 运行</button><button class="danger hidden" id="cancelButton">停止运行</button></div>
+</header>
+<nav id="wbMenubar" class="wb-menubar" aria-label="主菜单"><div id="wbMenuHeads" role="menubar" aria-label="工作台菜单"></div><span class="wb-menu-hint">编辑 → 保存 → 运行</span></nav>
+<div class="app">
+  <nav id="wbActivity" class="wb-activity" aria-label="工作台导航">
+    <button data-command="files" title="资源管理器 · Ctrl / ⌘ B" aria-label="资源管理器"><span aria-hidden="true">▱</span><small>文件</small></button>
+    <button data-command="search" title="查找当前文件" aria-label="查找"><span aria-hidden="true">⌕</span><small>查找</small></button>
+    <button data-command="run.options" title="运行输入与调试" aria-label="运行设置与调试"><span aria-hidden="true">▷</span><small>调试</small></button>
+    <button data-command="agent" title="打开编程助手" aria-label="编程助手"><span aria-hidden="true">✧</span><small>助手</small></button>
+    <button data-command="graph" title="关系画布" aria-label="关系画布"><span aria-hidden="true">◇</span><small>画布</small></button>
+    <div class="wb-activity-spacer"></div>
+    <button data-command="settings" title="系统配置" aria-label="系统配置"><span aria-hidden="true">⚙</span><small>设置</small></button>
+    <button data-command="docs" title="语言与开发文档" aria-label="文档"><span aria-hidden="true">▤</span><small>文档</small></button>
+  </nav>
+  <aside id="wbRunPanel" class="wb-run-panel" aria-label="运行与调试" hidden><div class="wb-pane-heading"><strong>运行与调试</strong><button data-command="run.close" aria-label="关闭运行面板">×</button></div><p class="wb-note" id="wbRunEntry">输入传给当前入口文件。运行前保存草稿。</p><div class="wb-run-actions"><button data-command="run.start" class="primary">▶ 运行程序</button><button data-command="debug">启动调试器</button></div><div id="wbRunOptions"></div><div id="wbRunHistory"></div></aside>
+  <aside class="library">
+    <div class="workspace-label"><span class="workspace-icon">C</span><div>Chaos 工作区<small>本地持久化 · 开发环境</small></div></div>
+    <div class="side-heading">构建模块 <span>05</span></div>
+    <p class="side-note">拖入画布，连接每一种可能。</p>
+    <div id="palette"></div>
+    <div class="side-heading separated">系统能力 <span>↗</span></div>
+    <div class="capability"><span class="tiny-dot teal"></span> 函数式语言 <span class="small-tag">CORE</span></div>
+    <div class="capability"><span class="tiny-dot purple"></span> 分层智能体 <span class="small-tag">3 层</span></div>
+    <div class="capability"><span class="tiny-dot orange"></span> 实时关系调整</div>
+    <div class="capability"><span class="tiny-dot blue"></span> 结构路径验证</div>
+    <a class="side-button" href="/control">⚙ 系统配置与后台任务 ↗</a>
+    <a class="side-button" href="/docs">▤ 文档中心与使用指南 ↗</a>
+    <div class="side-heading separated">工作区文件</div>
+    <button class="side-button" id="exportButton">↗ 导出项目 JSON</button>
+    <button class="side-button" id="importButton">↙ 导入项目 JSON</button><input class="hidden" id="importFile" type="file" accept="application/json,.json">
+    <button class="side-button" id="reloadButton">↻ 重新载入已保存版本</button>
+    <div class="library-footer"><span class="tiny-dot teal"></span> LOCAL ENGINE <b>CORE v1</b><p>每一个智能体，都是可组合的函数。</p></div>
+  </aside>
+  <main class="workspace">
+    <div class="sync-status"><span id="syncBadge">同步中</span><span id="runVersionNote"></span><label><input type="checkbox" id="followRuns" checked> 跟踪最新运行</label><button id="viewSnapshot" disabled>查看执行快照</button></div>
+    <div id="syncBanner" class="sync-banner hidden"><span id="syncText"></span><button id="exportConflict">导出当前草稿</button><button id="acceptRemote">备份草稿并载入远端</button></div>
+    <button id="restoreDraft" class="backup-draft">导出备份草稿</button>
+    <div class="workspace-toolbar"><div class="tabs"><button class="tab" data-view="graph">⌘ <span>关系画布</span></button><button class="tab active" data-view="source">ƒ <span>Chaos 源码</span></button><button class="tab" data-view="structure">⌥ <span>程序结构</span></button><button class="tab" data-view="proof">◇ <span>结构验证</span></button></div><div class="toolbar-right"><span id="nodeCount">7 个节点</span><button id="optimizeButton" class="subtle">✧ 平台调整关系</button></div></div>
+    <section id="graphView" class="view">
+      <div class="canvas-heading"><div class="eyebrow">AGENT FUNCTION GRAPH</div><h1>把想法，连接成智能。</h1><p>函数定义行为，关系组织协作。</p></div>
+      <div class="canvas" id="canvas" tabindex="0" aria-label="智能体关系画布"><div id="world"><svg id="edges" width="2400" height="1600"></svg><div id="nodes"></div></div></div>
+      <div class="canvas-legend"><span><i class="legend-line"></i> 数据流</span><span><i class="legend-line dashed"></i> 管理关系</span><span id="snapshotHint">编辑工作区</span></div>
+      <div class="canvas-controls"><button id="zoomOut" title="缩小">−</button><span id="zoomLabel">75%</span><button id="zoomIn" title="放大">＋</button><i></i><button id="fitButton" title="适应画布">⊡</button><button id="hierarchyButton" class="on" title="显示管理关系">⌘</button></div>
+    </section>
+    <section id="sourceView" class="view active" aria-label="Chaos 集成开发环境">
+      <div class="editor-heading"><div class="ide-module-tools"><span class="file-icon">ƒ</span><select id="moduleSelect" aria-label="模块文件"></select><button id="addModule" title="新建模块">＋ 文件</button><button id="setEntry" title="将当前文件设为程序入口">设为入口</button></div><div class="source-actions"><label class="ide-format-option"><input type="checkbox" id="formatOnSave" checked> 保存时格式化</label><button id="languageDemo">示例</button><button id="formatSource">格式化</button><button id="checkSource">检查</button><button id="debugToggle" aria-expanded="false" aria-controls="debugPanel">⌁ 调试</button><button id="ideFilesToggle" aria-expanded="false" aria-controls="ideFilesPanel">文件列表</button><button id="ideAssistantToggle" aria-expanded="false" aria-controls="ideAssistantPanel">✧ 编程助手</button></div></div>
+<div class="ide-small source-run-options" aria-label="源码运行选项"><label class="ide-format-option" title="开启时记录逐表达式轨迹，编译函数使用解释器；关闭后允许原生执行，仍保留任务、智能体和工具事件。"><input type="checkbox" id="expressionTrace" checked> 逐表达式追踪</label></div>
+      <div class="ide-layout assistant-closed">
+        <aside id="ideFilesPanel" class="ide-files" aria-label="项目文件"><div class="ide-pane-heading"><span>资源管理器</span><button id="ideNewFolder" title="新建目录与入口模块" aria-label="新建目录与入口模块">＋▱</button></div><p class="ide-small" id="ideProjectScope">项目内模块 · 本地保存</p><div id="ideFileTree" role="tree" aria-label="模块目录树"></div><div class="ide-file-actions"><button id="ideRename">重命名</button><button id="ideDelete">删除</button></div><p class="ide-small">目录由模块组成；新目录含 __init__.chaos。</p></aside>
+        <div class="ide-editor"><div class="wb-editor-heading"><div id="ideFileTabs" role="tablist" aria-label="已打开文件"></div><div id="wbEditorActions" aria-label="当前文件操作"></div></div><div class="ide-context-bar"><span id="ideEditorContext" role="status">当前文件</span><button id="ideContextAssistant" type="button" aria-controls="ideAssistantPanel">✧ 与助手编程</button></div><div class="code-container"><div id="lineNumbers"></div><textarea id="sourceEditor" spellcheck="false" aria-label="Chaos 源代码"></textarea><div id="ideEditorMount" aria-label="Chaos 代码编辑器"></div></div><div class="ide-editor-status"><span id="ideCursor">行 1，列 1</span><button id="ideSearch">查找 ⌘ F</button><span id="ideLanguageStatus">Chaos · UTF-8</span></div><div id="ideDiagnostics" class="ide-diagnostics" aria-live="polite"><span>正在载入语言服务…</span></div></div>
+        <aside id="ideAssistantPanel" class="ide-assistant" aria-label="系统编程助手"><div class="ide-pane-heading"><span>✧ 系统编程助手</span><div><button id="ideNewChat" title="新建对话">新对话</button><button id="ideAssistantClose" type="button">返回源码</button></div></div><div class="ide-assistant-intro"><b>一起完成这个程序</b><p>围绕当前文件与选区修改完整草稿。先检查提案，再应用并保存。</p></div><div id="ideChatHistory" class="ide-chat-history" role="log" aria-live="polite"></div><div id="ideAssistantState" class="ide-agent-state" role="status">使用系统中配置的编程智能体</div><form id="ideChatForm"><label class="sr-only" for="ideChatPrompt">编程需求</label><textarea id="ideChatPrompt" rows="3" placeholder="描述修改目标；当前文件、选区和源码草稿会一并发送…"></textarea><div class="ide-chat-actions"><span id="ideChatContext">基于已保存版本</span><button type="button" id="ideChatCancel" hidden>停止</button><button type="submit" id="ideChatSend" class="primary">发送 ↑</button></div></form><a class="ide-settings-link" href="/control">配置模型与系统智能体 ↗</a></aside>
+      </div>
+    </section>
+    <section id="structureView" class="view"><div class="structure-heading"><div><div class="eyebrow">CHAOS PROGRAM</div><h2>程序的结构，也是它的源码。</h2><p id="structureHint">选择节点设置属性，拖动同一语句块中的节点调整顺序。</p></div><button id="applyProgram" class="primary">保存程序结构</button></div><div class="structure-body"><div id="syntaxTree" aria-label="程序语法树"></div><div class="syntax-inspector"><h3 id="syntaxTitle">节点属性</h3><div id="syntaxFields"></div></div></div></section>
+    <section id="proofView" class="view"><div class="proof-heading"><div class="eyebrow">STRUCTURAL CERTIFICATE</div><h1>让每条路径都有据可依。</h1><p>验证图的结构与覆盖范围；程序终止性、模型判断正确性不在此证书的证明范围内。</p><button class="primary" id="validateButton">重新验证</button></div><div id="proofResults"></div><div class="theory-card"><h3>计算能力与现实边界</h3><p>抽象核心具有条件、递归和无界数据，可编码两寄存器机。实际运行采用有限的计算步数、内存和时间预算。智能体的提示词负责定义行为，不能单独构成图灵完备性的证明。</p><p>图形层采用无环数据流；迭代与条件分支在函数节点中表达。平台变更原子提交，正在执行的版本快照保持稳定。</p></div></section>
+    <section id="debugPanel" class="debug-panel" aria-label="源码调试器" hidden>
+      <div class="debug-toolbar"><strong>⌁ 源码调试</strong><button id="debugStart" class="primary">启动调试</button><label><input id="debugPauseEntry" type="checkbox" checked> 入口暂停</label><label><input id="debugPauseCondition" type="checkbox"> 未处理情况时暂停</label><button data-debug-command="continue" disabled>继续 ▶</button><button data-debug-command="pause" disabled>暂停 Ⅱ</button><button data-debug-command="step_into" disabled>步入 ↓</button><button data-debug-command="step_over" disabled>单步 ↷</button><button data-debug-command="step_out" disabled>步出 ↑</button><button data-debug-command="cancel" disabled>停止 ■</button></div>
+      <p id="debugStatus" class="debug-status" role="status">设置源码行断点，保存并启动独立执行快照。</p>
+      <section id="debugRecovery" class="debug-recovery" aria-label="条件与恢复出口" hidden>
+        <div class="debug-recovery-heading"><h3>条件与恢复出口</h3><p id="debugRecoverySummary" class="debug-note"></p></div>
+        <div class="debug-condition"><strong id="debugConditionKind"></strong><p id="debugConditionMessage"></p><pre id="debugConditionData"></pre></div>
+        <div id="debugRestarts" class="debug-restarts" aria-label="可选恢复出口"></div>
+        <div id="debugRecoveryForm" class="debug-recovery-form"><label for="debugRestartArgs">args · JSON 数组<textarea id="debugRestartArgs" rows="2" spellcheck="false" placeholder="[42]">[]</textarea></label><label for="debugRestartKwargs">kwargs · JSON 对象<textarea id="debugRestartKwargs" rows="2" spellcheck="false" placeholder="{}">{}</textarea></label><div class="debug-recovery-actions"><small>选择一个已声明出口并填写参数。参数会传入原语言函数；继续会拒绝此次恢复。</small><button id="debugRestart" class="primary" type="button" disabled>执行所选恢复出口</button></div></div>
+      </section>
+      <div class="debug-grid"><div><label for="debugBreakpoints">断点 · 项目文件:行号</label><textarea id="debugBreakpoints" placeholder="main.chaos:3" spellcheck="false"></textarea><button id="debugUpdateBreakpoints" disabled>更新断点</button><small> 每行一个；空白行不会命中。</small></div><div><h3>调用栈</h3><div id="debugFrames" class="debug-frames"></div></div><div><h3>局部变量 · 有界只读预览</h3><div id="debugLocals" class="debug-locals"></div></div><div><h3 id="debugSourceLabel">只读执行快照</h3><pre id="debugSource" class="debug-source"></pre></div></div>
+      <section class="debug-task-section" aria-label="任务组暂停快照"><h3>任务组 · 只读暂停快照</h3><p id="debugGroupSummary" class="debug-note">暂停时显示本解释器的任务组快照。</p><div id="debugGroups" class="debug-tasks"></div></section>
+      <section class="debug-task-section" aria-label="通道暂停快照"><h3>通道 · 只读暂停快照</h3><p id="debugChannelSummary" class="debug-note">暂停时显示本解释器的通道快照。</p><div id="debugChannels" class="debug-tasks"></div></section>
+      <section class="debug-task-section" aria-label="取消屏蔽暂停快照"><h3>取消屏蔽 · 只读暂停快照</h3><p id="debugShieldSummary" class="debug-note">暂停时显示本解释器的取消屏蔽快照。</p><div id="debugShields" class="debug-tasks"></div></section>
+      <section class="debug-task-section" aria-label="任务暂停快照"><h3>任务 · 只读暂停快照</h3><p id="debugTaskSummary" class="debug-note">暂停时显示本解释器的任务快照。</p><div id="debugTasks" class="debug-tasks"></div></section>
+      <p class="debug-note">按源码行暂停；暂停最多 300 秒，不消耗解释器运行时限。正在执行的外部工具不会冻结。任务列表记录暂停瞬间，不表示外部效果被冻结。编辑草稿不影响本次快照；关闭网页后可重新打开恢复控制，服务重启后原运行中断。</p>
+    </section>
+    <section id="modesPanel" aria-label="目标、计划与录制技能"></section>
+    <section class="console" id="console"><div class="console-tabs"><button class="active" data-console="events">执行事件 <span id="eventCount">0</span></button><button data-console="result">运行结果</button><button data-console="artifact">页面 / 报告</button><button data-console="history">运行历史</button><div class="run-status" id="runStatus"><i></i> 等待执行</div><button id="followEvents" hidden title="返回最新执行事件">跟随最新</button><button id="expandConsole" title="展开执行面板">↕</button></div><div class="console-content"><div id="eventsPanel" class="console-panel active"><div class="empty-console"><span>⌁</span><p>执行轨迹将在这里实时出现</p><small>节点状态、工具调用与拓扑修订，均会持久记录。</small></div></div><pre id="resultPanel" class="console-panel">运行工作流或函数程序后，在这里查看结果。</pre><section id="artifactPanel" class="console-panel" aria-label="生成页面、报告与演示"></section><div id="historyPanel" class="console-panel"></div></div></section>
+    <footer class="statusbar"><span><i class="tiny-dot teal"></i> Chaos runtime ready</span><span id="budgetInfo">100,000 步 / 60 秒 / 4 路并行</span><span id="statusMessage">已载入工作区</span></footer>
+  </main>
+  <aside class="inspector"><div class="inspector-title">配置面板 <span>⚙</span></div><div id="inspectorContent"></div><div class="input-section"><label for="taskInput">运行输入 <span>String / JSON</span></label><textarea id="taskInput" spellcheck="false">设计一个由智能体协作完成的研究系统：分析任务、并行收集信息、综合结果并复核质量。</textarea><form id="runGuidanceForm" class="run-guidance-form" hidden><label for="runGuidanceTarget">指导目标</label><select id="runGuidanceTarget" aria-label="指导目标" style="width:100%;max-width:100%"><option value="">当前运行（默认入口）</option></select><label for="runGuidanceInput">追加指导</label><textarea id="runGuidanceInput" rows="3" maxlength="20000" placeholder="补充目标或约束；接收方由所选 Bot / 角色决定…"></textarea><div class="run-guidance-actions"><span id="runGuidanceReceipt" role="status" aria-live="polite">发送后先入队；运行接收时会更新状态。</span><button type="submit" id="runGuidanceSend">发送指导 ↑</button></div></form><label class="checkbox-label"><input type="checkbox" id="jsonInput"> 将输入作为 JSON 解析</label><label class="checkbox-label"><input type="checkbox" id="autoOptimize" checked> 运行前由平台补充复核环节</label><div id="providerNotice" class="provider-note">◉ 本地规则演示<p>无需密钥。连接模型服务后可启用真实语义推理。</p></div></div></aside>
+</div>
+<div class="toast hidden" id="toast" role="status"></div>
+<dialog id="wbCommands" aria-labelledby="wbCommandTitle"><div class="wb-command-heading"><strong id="wbCommandTitle">命令面板</strong><button id="wbCommandClose" aria-label="关闭命令面板">Esc</button></div><label class="sr-only" for="wbCommandInput">搜索命令</label><input id="wbCommandInput" autocomplete="off" spellcheck="false" role="combobox" aria-autocomplete="list" aria-expanded="true" aria-controls="wbCommandList" placeholder="输入命令名称…"><div id="wbCommandList" role="listbox" aria-label="可用命令"></div><p id="wbCommandHint" class="wb-note">↑ ↓ 选择 · Enter 执行 · Esc 返回编辑器</p></dialog>
+<div id="wbLegacyActions" hidden></div>
+<dialog id="helpDialog"><button class="dialog-close" id="closeHelp">×</button><div class="eyebrow">CHAOS · QUICK START</div><h2>从一个文件开始。</h2><ol><li>在左侧“文件”打开或新建 .chaos 模块，直接编辑源码。</li><li>从“运行”菜单设置输入，确认入口文件，再用顶部“运行”保存并执行；底部自动显示结果。</li><li>打开“助手”描述编程需求；先查看提案差异，再应用修改。</li><li>文件标签旁可直接格式化或检查代码；“编辑”“视图”“运行”菜单提供更多操作。“智能体”菜单集中管理团队、会话与持续任务。命令面板仍支持 ⌘ / Ctrl Shift P，⌘ / Ctrl P 快速打开文件。</li><li>需要可视化工作流时，打开“画布”，拖拽模块并点击节点设置属性；从节点输出端口拖到另一个节点的输入端口，连接数据流。</li></ol><h3>语言示例</h3><pre>fn twice(f) { fn(x) { f(f(x)) } }
+let inc = fn(x: Int) -> Int { x + 1 };
+twice(inc)(40) // 42
+
+agent analyst {
+  prompt: "分析输入", provider: "local",
+  mode: "analyze", tools: ["text.stats"]
+};
+analyst(input)</pre><p>函数节点默认纯计算。工具调用需要显式授权。源码和程序结构编辑同一份程序。工作流画布对应 workflow(graph, input) 调用；普通函数、循环与分支可在“程序结构”中编辑。运行按钮始终运行当前入口文件。</p><p>本地模式是可审计的规则演示。<a href="/docs" style="color:var(--teal)">打开文档中心 ↗</a>，查看安装与快速开始、语言参考、模型配置和已实现边界。</p></dialog>
+<dialog id="ideFileDialog"><form id="ideFileForm"><h2 id="ideFileDialogTitle">新建文件</h2><label for="ideFilePath">项目内路径</label><input id="ideFilePath" required autocomplete="off" placeholder="lib/math.chaos"><p id="ideFileDialogHelp" class="ide-small"></p><div class="ide-dialog-actions"><button type="button" id="ideFileDismiss">取消</button><button type="submit" class="primary">确定</button></div></form></dialog>
+<dialog id="snapshotDialog"><button id="closeSnapshot">关闭</button><h2>只读执行快照</h2><pre id="snapshotSource"></pre></dialog>
+<dialog id="wbPermissions" aria-labelledby="wbPermissionTitle"><h2 id="wbPermissionTitle">项目权限</h2><p id="wbPermissionProject"></p><p class="wb-permission-note">宿主提供能力，项目显式授权，函数和团队再缩小使用范围。智能体的工具列表不能直接调用原生权限。</p><div id="wbPermissionList"></div><details class="wb-permission-devices"><summary>已注册设备 · 只读清单</summary><p>仅展示宿主注册的名称；不检测连接状态，也不会打开设备。</p><ul id="wbPermissionDevices"></ul></details><p id="wbPermissionStatus" role="status"></p><div class="wb-permission-actions"><button id="wbPermissionClose">取消</button><button id="wbPermissionApply" class="primary">应用到项目草稿</button></div></dialog>
+<script src="/json.js"></script><script src="/realtime.js"></script><script src="/app.js"></script><script src="/code.js"></script><script src="/language.js"></script><script src="/sync.js"></script><script src="/dsh-state.js"></script><script src="/activity.js"></script><script src="/vendor/codemirror.js"></script><script src="/editor-assist.js"></script><script src="/editor.js"></script><script src="/ide.js"></script><script src="/debugger.js"></script><script src="/modes.js"></script><script src="/processes.js"></script><script src="/sessions.js"></script><script src="/computers.js"></script>
+<script src="/runtime-network.js"></script><script src="/artifacts.js"></script><script src="/workbench.js"></script>
+</body></html>

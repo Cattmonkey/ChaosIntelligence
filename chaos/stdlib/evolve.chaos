@@ -1,0 +1,166 @@
+// Higher-order, bounded Propose–Probe–Compose. Runs in the ordinary scheduler.
+// A new task starts from base; task-specific successors are never promoted to base.
+fn copy_data(value, limit=240000) {
+  let copied = json_copy(value);
+  if length(json_stringify(copied)) > limit { throw "Evolution data exceeds its size budget" } else { copied }
+}
+fn exact(value:Record, names:List) {
+  if sort(keys(value)) != sort(names) { throw "Invalid evolution record fields" } else { value }
+}
+fn text(value:String, limit:Int) {
+  if length(trim(value)) == 0 || length(value) > limit { throw "Invalid evolution text" } else { value }
+}
+fn index(value:Int) { if value < 0 { throw "Evolution revision must be nonnegative" } else { value } }
+fn validate_state(value:Record) {
+  let state = copy_data(value, 30000);
+  exact(state, ["base", "strategy", "lessons", "revision"]);
+  index(state.revision); copy_data(state.base, 8000); copy_data(state.strategy, 8000);
+  fn lessons(items:List) {
+    if length(items) > 16 { throw "Evolution retains at most 16 lessons" } else { null };
+    for item in items {
+      exact(item, ["cue", "lesson", "evidence", "revision"]);
+      text(item.cue, 200); text(item.lesson, 800); index(item.revision);
+      if item.revision > state.revision { throw "Lesson revision is in the future" } else { null };
+      fn refs(ids:List) { if length(ids) < 2 || length(ids) > 16 { throw "Lessons require 2..16 evidence IDs" } else { null }; var seen={}; for id in ids { text(id, 80); if has(seen,id) {throw "Execution references must be distinct"}else{seen=set(seen,id,true)} } }
+      refs(item.evidence);
+    }; null
+  }
+  lessons(state.lessons); state
+}
+fn create(base, strategy=null) -> Record {
+  validate_state({base:base, strategy:strategy, lessons:[], revision:0})
+}
+fn callable_value(value) { staticmethod(value); value }
+async fn invoke(group:TaskGroup, callback, value) {
+  let result = callback(copy_data(value));
+  copy_data(if type_of(result) == "Task" { await group.spawn(result) } else { result })
+}
+async fn isolated(callback, value) {
+  async with task_group() as group { await group.spawn(invoke(group, callback, value)) }
+}
+async fn batch(callback, values:List) {
+  async with task_group() as group {
+    var tasks = [];
+    for value in values { tasks = append(tasks, group.spawn(invoke(group, callback, value))) };
+    var results = [];
+    for task in tasks { results = append(results, await task) };
+    results
+  }
+}
+fn proposal(value:Record) {
+  exact(value, ["harness", "reason"]); copy_data(value.harness, 8000); text(value.reason, 1000); value
+}
+fn observation(value:Record) {
+  exact(value, ["output", "evidence"]); copy_data(value, 8000); value
+}
+fn evidence_ids(ids:List, records:List) {
+  if length(ids) < 2 || length(ids) > 16 { throw "Expected 2..16 execution references" } else { null };
+  var seen = {};
+  for id in ids { text(id, 80); if has(seen, id) { throw "Execution references must be distinct" } else { seen = set(seen, id, true) } };
+  let known = map(fn(row) { row.id }, records);
+  for id in ids { if !contains(known, id) { throw "Unknown execution evidence ID" } else { null } };
+  ids
+}
+async fn quiet(event) { null }
+
+async fn run(snapshot:Record, task, operators:Record, *, mode="parallel", k:Int=1, observe=quiet) -> Record {
+  let initial = validate_state(snapshot);
+  let request = copy_data(task, 8000);
+  exact(operators, ["propose", "probe", "compose", "select", "learn"]);
+  for callback in values(operators) { callable_value(callback) }; callable_value(observe);
+  if k < 1 || k > 4 { throw "Evolution k requires 1..4" } else { null };
+  if mode != "parallel" && mode != "sequential" { throw "Evolution mode requires parallel or sequential" } else { null };
+  let revision = initial.revision+1;
+  var records = [];
+  var finals = [];
+  var current = initial.base;
+  async fn notify(phase, ids=[]) {
+    await isolated(observe, {phase:phase, revision:revision, ids:ids, executions:length(records), total:4*k}); null
+  }
+  fn context(scope, ordinal, harness) {
+    {scope:scope, ordinal:ordinal, task:request, harness:harness, strategy:initial.strategy,
+     lessons:initial.lessons, records:records, revision:revision}
+  }
+  async fn execute(contexts:List) {
+    let results = await batch(operators.probe, contexts);
+    var rows = [];
+    for i in range(length(results)) {
+      let seen = observation(results[i]); let c = contexts[i];
+      rows = append(rows, {id:c.id, harness:c.harness, output:seen.output, evidence:seen.evidence, reason:get(c,"reason",null)});
+    }; rows
+  }
+  await notify("reference.started");
+  let references = map(fn(i) { {id:"reference-"+str(i), harness:initial.base, task:request} }, range(k));
+  records = await execute(references);
+  await notify("reference.completed", map(fn(r) { r.id }, records));
+  let rounds = if mode == "parallel" { 1 } else { k };
+  for round in range(rounds) {
+    let width = if mode == "parallel" { k } else { 1 };
+    var requests = [];
+    for i in range(width) {
+      let ordinal = if mode == "parallel" { i } else { round };
+      requests = append(requests, context("general", ordinal, current));
+      requests = append(requests, context("domain", ordinal, current));
+    };
+    await notify("propose.started");
+    let proposals = await batch(operators.propose, requests);
+    var probes = [];
+    for i in range(length(proposals)) {
+      let proposed = proposal(proposals[i]); let r = requests[i];
+      probes = append(probes, {id:r.scope+"-"+str(r.ordinal), harness:proposed.harness, task:request, reason:proposed.reason});
+    };
+    await notify("probe.started", map(fn(p) { p.id }, probes));
+    let probed = await execute(probes);
+    records = records + probed;
+    await notify("probe.completed", map(fn(p) { p.id }, probed));
+    await notify("compose.started");
+    let compositions = await batch(operators.compose,
+      map(fn(i) { context("compose", if mode == "parallel" { i } else { round }, current) }, range(width)));
+    var successors = [];
+    for i in range(length(compositions)) {
+      let composed = proposal(compositions[i]);
+      successors = append(successors, {id:"composed-"+str(if mode == "parallel" { i } else { round }), harness:composed.harness, task:request, reason:composed.reason});
+    };
+    await notify("successor.started", map(fn(p) { p.id }, successors));
+    let composed_records = await execute(successors);
+    records = records + composed_records; finals = finals + composed_records;
+    if mode == "sequential" { current = composed_records[0].harness } else { null };
+    await notify("compose.completed", map(fn(p) { p.id }, composed_records));
+  };
+  await notify("select.started");
+  // Selection receives only anonymized final deliverables, never harnesses/traces.
+  let selected_index = if k == 1 { 0 } else {
+    let selection = await isolated(operators.select, {task:request, outputs:map(fn(row) { row.output }, finals)});
+    fn valid_selection(value:Int) {
+      if value < 0 || value >= k { throw "Selection must refer to an existing final output" } else { value }
+    }
+    valid_selection(selection)
+  };
+  let selected = finals[selected_index];
+  await notify("learn.started", [selected.id]);
+  let learning = await isolated(operators.learn, {
+    task:request, selected:selected.id, records:records, strategy:initial.strategy,
+    lessons:initial.lessons, revision:revision
+  });
+  exact(learning, ["strategy", "lessons", "evidence"]);
+  copy_data(learning.strategy, 8000);
+  let declined = json_stringify(learning.strategy)==json_stringify(initial.strategy) && learning.lessons==[] && learning.evidence==[];
+  if declined { null } else { evidence_ids(learning.evidence, records) };
+  fn new_lessons(items:List) {
+    if length(items) > 8 { throw "A task can add at most 8 lessons" } else { null };
+    var checked = [];
+    for item in items {
+      exact(item, ["cue", "lesson", "evidence"]);
+      text(item.cue, 200); text(item.lesson, 800); evidence_ids(item.evidence, records);
+      checked = append(checked, merge(item, {revision:revision}));
+    }; checked
+  }
+  let lessons = initial.lessons + new_lessons(learning.lessons);
+  let next = validate_state({base:initial.base, strategy:learning.strategy,
+    lessons:drop(if length(lessons)>16 {length(lessons)-16}else{0}, lessons), revision:revision});
+  let report = copy_data({snapshot:next, selected:selected, records:records,
+    learning:{evidence:learning.evidence}, mode:mode, k:k}, 240000);
+  await notify("completed", [selected.id]);
+  report
+}
+export {create, run};

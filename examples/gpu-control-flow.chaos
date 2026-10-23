@@ -1,0 +1,14 @@
+fn accumulate(x: Number) -> Number {
+    if x < 0 { return -x } else {}
+    var count = 0;
+    var total = x;
+    while count < 3 {
+        count = count + 1;
+        if count == 2 { continue } else {}
+        total = total + count;
+    }
+    total
+}
+let job = gpu_map(accumulate, [-2, 0, 3], device="cpu");
+let result = await job;
+{values: result.values, device: result.device, kernel: gpu_kernel_info(job)}

@@ -1,0 +1,5 @@
+// Value selection is an ordinary language value in the existing generic core.
+import "std/generic" as G;
+let base = G.generic_method(G.generic_function("answer"), ["Int"], fn(value) { value + 1 });
+let answer = G.generic_method(base, [G.generic_eql(40)], fn(next, value) { next() + 1 }, with_next=true);
+[answer(40), answer(41), G.generic_eql_info(G.generic_eql(40))]

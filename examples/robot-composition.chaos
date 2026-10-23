@@ -1,0 +1,15 @@
+let team = team_from({kind: "team", name: "robot", entry: "main", roles: [
+  {id: "main", parent: null, capabilities: [], agent: {kind: "agent", name: "main", config: {provider: "local", tools: []}}},
+  {id: "worker", parent: "main", capabilities: [], agent: {kind: "agent", name: "worker", config: {provider: "local", tools: []}}}
+]});
+let workers = team_bind(team, {worker: fn(value: Int) -> Int { value + 2 }});
+async fn dispatch(message: Record) {
+  let role = team_role(workers, message.to);
+  await role(message.value)
+};
+let robot = team_bind(team, {main: dispatch});
+let inbox = channel(1);
+await channel_send(inbox, {to: "worker", value: 40, text: "@someone [PASS]"});
+channel_close(inbox);
+let message = await channel_receive(inbox);
+await robot(message.value)

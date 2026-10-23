@@ -1,0 +1,46 @@
+// Intelligence is an ordinary Agent value. Importing or constructing it is
+// pure; calling it resolves the current project's Settings and host grants.
+// No model, credentials, transport, scheduler or permissions are duplicated.
+
+fn make(prompt:String, role:String="executor", route:String="intelligence", tools:List=[], max_steps:Int=8, name:String="intelligence_assistant") -> Function {
+  agent_from({
+    kind: "agent",
+    name: name,
+    config: {
+      provider: "model",
+      prompt: prompt,
+      role: role,
+      route: route,
+      tools: tools,
+      maxSteps: max_steps
+    }
+  })
+}
+
+let planner=make(
+  "根据用户目标与明确提供的上下文制定可执行计划。区分已知事实、假设与待验证事项，说明步骤、依赖和验收标准。只能使用当前授权的工具；缺少信息时提出具体问题。",
+  role="planner", route="intelligence-planner", name="intelligence_planner"
+);
+let executor=make(
+  "根据用户任务与明确提供的上下文完成工作。使用当前授权的工具和函数，说明实际结果与证据。不得声称执行过未执行的操作，缺少必要信息时提出具体问题。",
+  role="executor", route="intelligence-executor", name="intelligence_executor"
+);
+let reviewer=make(
+  "根据用户目标、提供的程序与执行证据进行审查。指出可复现的问题、影响及改进建议，区分验证结果与推测。只能使用当前授权的工具；资料不足时明确说明。",
+  role="reviewer", route="intelligence-reviewer", name="intelligence_reviewer"
+);
+let assistant=make(
+  "帮助用户理解和使用 Chaos 编程环境、编写和改进程序，并解决用户提出的问题。以提供的文档、程序、诊断和工具结果为依据；未知的语法或能力需要查证，不得编造。给出清晰的解释和可验证的下一步；只能使用当前授权的工具。",
+  role="executor", route="intelligence-assistant", name="intelligence_assistant"
+);
+
+// Role selection is an explicit program argument, never a prompt classifier.
+fn ask(input, role:String="executor") {
+  if role == "planner" { planner(input) }
+  else if role == "executor" { executor(input) }
+  else if role == "reviewer" { reviewer(input) }
+  else if role == "assistant" { assistant(input) }
+  else { throw "Intelligence.ask role must be planner, executor, reviewer or assistant; use Intelligence.make for a custom role" }
+}
+
+export {make,planner,executor,reviewer,assistant,ask};

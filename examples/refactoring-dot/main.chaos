@@ -1,0 +1,1 @@
+let dot=process_from({kind:"process",name:"semantic refactoring dot",module:"dot.chaos",export:"step",intervalSeconds:null,maxTurns:3});await process_start("dot",dot,0)

@@ -1,0 +1,14 @@
+'use strict';
+const fs=require('fs'),vm=require('vm'),assert=require('assert'),path=require('path');
+const root=process.argv[2]||path.resolve(__dirname,'..');
+const source=fs.readFileSync(path.join(root,'web/ide.js'),'utf8');
+const context=vm.createContext({});vm.runInContext(source.slice(0,source.indexOf('(()=>{'))+';globalThis.contracts=ChaosIDEContracts',context);
+const c=context.contracts,plain=x=>JSON.parse(JSON.stringify(x));const checks=[];
+assert(c.snapshotMatches({file:'a.chaos',revision:1,source:'x'},{file:'a.chaos',revision:1,source:'x'}));checks.push('unchanged format snapshot is applicable');
+for(const after of [{file:'b.chaos',revision:1,source:'x'},{file:'a.chaos',revision:2,source:'x'},{file:'a.chaos',revision:1,source:'y'}])assert(!c.snapshotMatches({file:'a.chaos',revision:1,source:'x'},after));checks.push('file switch, newer edit or changed text rejects stale formatter result');
+assert(c.snapshotMatches({file:'空.chaos',revision:0,source:''},{file:'空.chaos',revision:0,source:''}));checks.push('empty and Unicode source snapshots are valid');
+const files=['main.chaos','lib/math.chaos','lib/nested/util.chaos','library/other.chaos'];const all=plain(c.visibleEntries(files));assert.strictEqual(all.length,7);assert.strictEqual(new Set(all.map(x=>x.path)).size,7);assert.deepStrictEqual(all.filter(x=>x.directory).map(x=>x.path),['lib','lib/nested','library']);checks.push('flat module map yields unique nested virtual folders');
+const folded=plain(c.visibleEntries(files,['lib']));assert.deepStrictEqual(folded.map(x=>x.path),['lib','library','library/other.chaos','main.chaos']);checks.push('folder collapse hides descendants without prefix collision');
+assert.deepStrictEqual(plain(c.visibleEntries([])),[]);checks.push('empty folder view is safe');
+const bundle=fs.readFileSync(path.join(root,'web/vendor/codemirror.js'),'utf8');new vm.Script(bundle);new vm.Script(source);assert(fs.existsSync(path.join(root,'web/vendor/LICENSES.txt')));assert(fs.existsSync(path.join(root,'web/vendor/package-lock.json')));checks.push('offline editor bundle parses and ships license and dependency lock');
+console.log(JSON.stringify({status:'passed',checks:checks.length,details:checks},null,2));

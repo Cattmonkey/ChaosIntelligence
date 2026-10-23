@@ -1,0 +1,40 @@
+{
+  "name": "@openuidev/browser-bundle",
+  "version": "0.1.7",
+  "tarball": "https://registry.npmjs.org/@openuidev/browser-bundle/-/browser-bundle-0.1.7.tgz",
+  "integrity": "sha512-jdrqXK1PECEUvsWUmroN27hmxfEHjgPe6uj44vJ8knNjEoeeKiPW0+xz48ffIB8jRuTevVm6R86tFVcMNT3BBw==",
+  "sha256": "cf70e6a61ec69a912a8c10f55ed78b7b0ec69813b16746a951e3962291a37cce",
+  "files": [
+    {
+      "path": "browser-bundle/dist/openui-styles.css",
+      "bytes": 320804,
+      "sha256": "ed0d38897f0f405d22bb469a95f13754f6f0febffb63e501e8da772d10e65f4e"
+    },
+    {
+      "path": "browser-bundle/dist/openui-bundle.min.js",
+      "bytes": 3213685,
+      "sha256": "536e724dc02deda35a283b1ee3325bd7bcf29d3c441da59c202c5ce81e878108"
+    },
+    {
+      "path": "browser-bundle/package.json",
+      "bytes": 1952,
+      "sha256": "62415846f3c3e0d686137e3d006aa676c84401f79ba0fa8769cf3bff14d819b2"
+    },
+    {
+      "path": "browser-bundle/README.md",
+      "bytes": 2594,
+      "sha256": "8eac43da66ecfbbe5ce105b04b5b40880ce055f53bb75b1608d4c91abf0083b2"
+    },
+    {
+      "path": "browser-bundle/LICENSE",
+      "bytes": 1083,
+      "sha256": "b6bdd2d3d161722fb3f3afc039114cfa9f3236f036e1c98e0853bc3a85f6cd9e"
+    }
+  ],
+  "sourceRepository": "https://github.com/thesysdev/openui",
+  "referenceSourceCommit": "9c5c43e78b95b69a2220c9f0d4bc4919d29067c9",
+  "buildSourceIdentity": "Official npm distribution; reference source commit is separately pinned, not asserted identical to package build.",
+  "installedBundleSha256": "536e724dc02deda35a283b1ee3325bd7bcf29d3c441da59c202c5ce81e878108",
+  "license": "MIT",
+  "integration": "Actual upstream Renderer + streaming parser with Chaos shared catalog and custom React component library; no cloud SDK, npm scripts or telemetry."
+}

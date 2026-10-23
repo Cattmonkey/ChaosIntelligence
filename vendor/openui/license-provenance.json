@@ -1,0 +1,3868 @@
+{
+  "schema": "chaos.third-party-license-inventory/1",
+  "scope": "Conservative production dependency notice inventory from reference source lockfile; NOT an exact SBOM of the official prebuilt bundle.",
+  "referenceCommit": "9c5c43e78b95b69a2220c9f0d4bc4919d29067c9",
+  "referenceLockfile": "https://github.com/thesysdev/openui/blob/9c5c43e78b95b69a2220c9f0d4bc4919d29067c9/pnpm-lock.yaml",
+  "referenceLockfileSha256": "63a9f96385b703d1cd562cb4923e392d0463bc9bf7c55fd782500184a9a14e8c",
+  "referenceImporters": [
+    "packages/browser-bundle",
+    "packages/devtools",
+    "packages/lang-core",
+    "packages/observability",
+    "packages/react-lang",
+    "packages/react-ui"
+  ],
+  "installedBundleSha256": "536e724dc02deda35a283b1ee3325bd7bcf29d3c441da59c202c5ce81e878108",
+  "noticesSha256": "fcfaf36014b9419927c5bdc8e6fed387c1f696e753d1a73bbdcbbf0e11cba5c0",
+  "retrievedOn": "2026-10-23",
+  "packageCount": 255,
+  "packages": [
+    {
+      "name": "@babel/runtime",
+      "version": "7.29.7",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/@babel/runtime/7.29.7",
+      "tarball": "https://registry.npmjs.org/@babel/runtime/-/runtime-7.29.7.tgz",
+      "tarballSha256": "4d7f1bd502a1a64d47625cc738d13284865f0666d2ed01f244de0adf05b69aa5",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/LICENSE",
+          "sha256": "117da2af0d4ce0fe1c8e19b5cff9dcd806adf973d328d27b11d4448c4ff24f76"
+        }
+      ]
+    },
+    {
+      "name": "@date-fns/tz",
+      "version": "1.5.0",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/@date-fns/tz/1.5.0",
+      "tarball": "https://registry.npmjs.org/@date-fns/tz/-/tz-1.5.0.tgz",
+      "tarballSha256": "21bd94e11c66522dab4a27ccc9c6284a4b6190dfdcc1491de84b902830dfd041",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/LICENSE.md",
+          "sha256": "cc7267726f809c066c35c81a17d7525bccf588ecc826b15ca65a15d34106c804"
+        }
+      ]
+    },
+    {
+      "name": "@floating-ui/core",
+      "version": "1.8.0",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/@floating-ui/core/1.8.0",
+      "tarball": "https://registry.npmjs.org/@floating-ui/core/-/core-1.8.0.tgz",
+      "tarballSha256": "c86371bdb19948a71591d36f23ec33d2b54e06503bd5c2e00a2dbbfa389622fd",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/LICENSE",
+          "sha256": "0e4c9a9b6c71019cbbea3bdc20b01223110a9035700f9c960c8fcbf78c2325ce"
+        }
+      ]
+    },
+    {
+      "name": "@floating-ui/dom",
+      "version": "1.8.0",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/@floating-ui/dom/1.8.0",
+      "tarball": "https://registry.npmjs.org/@floating-ui/dom/-/dom-1.8.0.tgz",
+      "tarballSha256": "b9511cc8fd8898c7c67143ff8dd93a3d427108632c801a546ae72ab1df3cd6a5",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/LICENSE",
+          "sha256": "0e4c9a9b6c71019cbbea3bdc20b01223110a9035700f9c960c8fcbf78c2325ce"
+        }
+      ]
+    },
+    {
+      "name": "@floating-ui/react-dom",
+      "version": "2.1.3",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/@floating-ui/react-dom/2.1.3",
+      "tarball": "https://registry.npmjs.org/@floating-ui/react-dom/-/react-dom-2.1.3.tgz",
+      "tarballSha256": "4abc737b016dd0eb6e21fa319304a6f9cd6e34d09ff6e216f5445b68d9a6fd88",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/LICENSE",
+          "sha256": "0e4c9a9b6c71019cbbea3bdc20b01223110a9035700f9c960c8fcbf78c2325ce"
+        }
+      ]
+    },
+    {
+      "name": "@floating-ui/utils",
+      "version": "0.2.12",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/@floating-ui/utils/0.2.12",
+      "tarball": "https://registry.npmjs.org/@floating-ui/utils/-/utils-0.2.12.tgz",
+      "tarballSha256": "fe0800a3de3d9c819bf63e525bf26080ce692969dda400c715780141a187928f",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/LICENSE",
+          "sha256": "0e4c9a9b6c71019cbbea3bdc20b01223110a9035700f9c960c8fcbf78c2325ce"
+        }
+      ]
+    },
+    {
+      "name": "@radix-ui/number",
+      "version": "1.1.3",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/@radix-ui/number/1.1.3",
+      "tarball": "https://registry.npmjs.org/@radix-ui/number/-/number-1.1.3.tgz",
+      "tarballSha256": "d671e5fbc4bd5713614cde634b1de6bbb3d8f26836d1ff8633178e74c0566ed6",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/LICENSE",
+          "sha256": "0e80a2d229d2fd4fc7e8636142ec5d0ff0bc031f14c15b682e2ac01dfd5b5138"
+        }
+      ]
+    },
+    {
+      "name": "@radix-ui/primitive",
+      "version": "1.1.2",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/@radix-ui/primitive/1.1.2",
+      "tarball": "https://registry.npmjs.org/@radix-ui/primitive/-/primitive-1.1.2.tgz",
+      "tarballSha256": "c1a6b36ad1ab880584d1423c73acca4860c0956c6889f07f58ffc761d9a0afa3",
+      "noticeSourceKind": "supplement",
+      "notices": [
+        {
+          "path": "supplemental-license",
+          "sha256": "0e80a2d229d2fd4fc7e8636142ec5d0ff0bc031f14c15b682e2ac01dfd5b5138",
+          "url": "https://raw.githubusercontent.com/radix-ui/primitives/fcef0668a5c827e5a4baac405474d75680f9a4eb/LICENSE"
+        }
+      ]
+    },
+    {
+      "name": "@radix-ui/primitive",
+      "version": "1.1.3",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/@radix-ui/primitive/1.1.3",
+      "tarball": "https://registry.npmjs.org/@radix-ui/primitive/-/primitive-1.1.3.tgz",
+      "tarballSha256": "1385ada6b202ed965fb56764c94fc932c6ff945b86aa78a3242763d181087fbb",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/LICENSE",
+          "sha256": "0e80a2d229d2fd4fc7e8636142ec5d0ff0bc031f14c15b682e2ac01dfd5b5138"
+        }
+      ]
+    },
+    {
+      "name": "@radix-ui/primitive",
+      "version": "1.1.7",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/@radix-ui/primitive/1.1.7",
+      "tarball": "https://registry.npmjs.org/@radix-ui/primitive/-/primitive-1.1.7.tgz",
+      "tarballSha256": "aeb0887b22ceb9445f736d02848b2ae56de9a38e0621e8db2ec5c5ee4baf7930",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/LICENSE",
+          "sha256": "0e80a2d229d2fd4fc7e8636142ec5d0ff0bc031f14c15b682e2ac01dfd5b5138"
+        }
+      ]
+    },
+    {
+      "name": "@radix-ui/react-accordion",
+      "version": "1.2.20",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/@radix-ui/react-accordion/1.2.20",
+      "tarball": "https://registry.npmjs.org/@radix-ui/react-accordion/-/react-accordion-1.2.20.tgz",
+      "tarballSha256": "77c24a7da646eb301a3b1aaa038a1192df4eb00901a33e3ec5ad744798b9e054",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/LICENSE",
+          "sha256": "0e80a2d229d2fd4fc7e8636142ec5d0ff0bc031f14c15b682e2ac01dfd5b5138"
+        }
+      ]
+    },
+    {
+      "name": "@radix-ui/react-arrow",
+      "version": "1.1.15",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/@radix-ui/react-arrow/1.1.15",
+      "tarball": "https://registry.npmjs.org/@radix-ui/react-arrow/-/react-arrow-1.1.15.tgz",
+      "tarballSha256": "c727584bac33ac1b33f88463a7b9016175bd7b1d063a1c57d75a2258ea884148",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/LICENSE",
+          "sha256": "0e80a2d229d2fd4fc7e8636142ec5d0ff0bc031f14c15b682e2ac01dfd5b5138"
+        }
+      ]
+    },
+    {
+      "name": "@radix-ui/react-arrow",
+      "version": "1.1.7",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/@radix-ui/react-arrow/1.1.7",
+      "tarball": "https://registry.npmjs.org/@radix-ui/react-arrow/-/react-arrow-1.1.7.tgz",
+      "tarballSha256": "3d2df8c7ae550b5d6475858ec5a865593ea5d20522fd14ef451fd81468702dd7",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/LICENSE",
+          "sha256": "0e80a2d229d2fd4fc7e8636142ec5d0ff0bc031f14c15b682e2ac01dfd5b5138"
+        }
+      ]
+    },
+    {
+      "name": "@radix-ui/react-aspect-ratio",
+      "version": "1.1.15",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/@radix-ui/react-aspect-ratio/1.1.15",
+      "tarball": "https://registry.npmjs.org/@radix-ui/react-aspect-ratio/-/react-aspect-ratio-1.1.15.tgz",
+      "tarballSha256": "568243d4062961b1c41458ef6719bdbff2391eed4858eba7c550dde43901258f",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/LICENSE",
+          "sha256": "0e80a2d229d2fd4fc7e8636142ec5d0ff0bc031f14c15b682e2ac01dfd5b5138"
+        }
+      ]
+    },
+    {
+      "name": "@radix-ui/react-checkbox",
+      "version": "1.3.11",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/@radix-ui/react-checkbox/1.3.11",
+      "tarball": "https://registry.npmjs.org/@radix-ui/react-checkbox/-/react-checkbox-1.3.11.tgz",
+      "tarballSha256": "c0e4ca1e410e422ed8e8f2955969716b5c1d40a8b5411d9b164dc2791a7bc4d5",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/LICENSE",
+          "sha256": "0e80a2d229d2fd4fc7e8636142ec5d0ff0bc031f14c15b682e2ac01dfd5b5138"
+        }
+      ]
+    },
+    {
+      "name": "@radix-ui/react-collapsible",
+      "version": "1.1.20",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/@radix-ui/react-collapsible/1.1.20",
+      "tarball": "https://registry.npmjs.org/@radix-ui/react-collapsible/-/react-collapsible-1.1.20.tgz",
+      "tarballSha256": "596b57f4fae1a9372c50c84c1a93df14668a6d268a462b2047d34af61cbbeccf",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/LICENSE",
+          "sha256": "0e80a2d229d2fd4fc7e8636142ec5d0ff0bc031f14c15b682e2ac01dfd5b5138"
+        }
+      ]
+    },
+    {
+      "name": "@radix-ui/react-collection",
+      "version": "1.1.15",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/@radix-ui/react-collection/1.1.15",
+      "tarball": "https://registry.npmjs.org/@radix-ui/react-collection/-/react-collection-1.1.15.tgz",
+      "tarballSha256": "7f500bdd923323dd1072836b6631b396b982636657047c0049d434f6ac7d87bf",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/LICENSE",
+          "sha256": "0e80a2d229d2fd4fc7e8636142ec5d0ff0bc031f14c15b682e2ac01dfd5b5138"
+        }
+      ]
+    },
+    {
+      "name": "@radix-ui/react-compose-refs",
+      "version": "1.1.2",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/@radix-ui/react-compose-refs/1.1.2",
+      "tarball": "https://registry.npmjs.org/@radix-ui/react-compose-refs/-/react-compose-refs-1.1.2.tgz",
+      "tarballSha256": "a3417c6290a04dd4dc34a8ce6b17be86da6c6a7d7455c5f47e16d7911777169f",
+      "noticeSourceKind": "supplement",
+      "notices": [
+        {
+          "path": "supplemental-license",
+          "sha256": "0e80a2d229d2fd4fc7e8636142ec5d0ff0bc031f14c15b682e2ac01dfd5b5138",
+          "url": "https://raw.githubusercontent.com/radix-ui/primitives/fcef0668a5c827e5a4baac405474d75680f9a4eb/LICENSE"
+        }
+      ]
+    },
+    {
+      "name": "@radix-ui/react-compose-refs",
+      "version": "1.1.5",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/@radix-ui/react-compose-refs/1.1.5",
+      "tarball": "https://registry.npmjs.org/@radix-ui/react-compose-refs/-/react-compose-refs-1.1.5.tgz",
+      "tarballSha256": "a355b15dc60311aaf0d21e3f503a75b7799950f7ff03dcdc3265ec31d6bb4797",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/LICENSE",
+          "sha256": "0e80a2d229d2fd4fc7e8636142ec5d0ff0bc031f14c15b682e2ac01dfd5b5138"
+        }
+      ]
+    },
+    {
+      "name": "@radix-ui/react-context",
+      "version": "1.1.2",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/@radix-ui/react-context/1.1.2",
+      "tarball": "https://registry.npmjs.org/@radix-ui/react-context/-/react-context-1.1.2.tgz",
+      "tarballSha256": "f1ed108c0bf1896d19f7b695d882e0b9dddb23b1526eca6409e8b48149b8c934",
+      "noticeSourceKind": "supplement",
+      "notices": [
+        {
+          "path": "supplemental-license",
+          "sha256": "0e80a2d229d2fd4fc7e8636142ec5d0ff0bc031f14c15b682e2ac01dfd5b5138",
+          "url": "https://raw.githubusercontent.com/radix-ui/primitives/fcef0668a5c827e5a4baac405474d75680f9a4eb/LICENSE"
+        }
+      ]
+    },
+    {
+      "name": "@radix-ui/react-context",
+      "version": "1.2.2",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/@radix-ui/react-context/1.2.2",
+      "tarball": "https://registry.npmjs.org/@radix-ui/react-context/-/react-context-1.2.2.tgz",
+      "tarballSha256": "756bd1183c8e459586b8c03b9ebae5f04b3572436fb3edc370cdec7713cc97b4",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/LICENSE",
+          "sha256": "0e80a2d229d2fd4fc7e8636142ec5d0ff0bc031f14c15b682e2ac01dfd5b5138"
+        }
+      ]
+    },
+    {
+      "name": "@radix-ui/react-dialog",
+      "version": "1.1.15",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/@radix-ui/react-dialog/1.1.15",
+      "tarball": "https://registry.npmjs.org/@radix-ui/react-dialog/-/react-dialog-1.1.15.tgz",
+      "tarballSha256": "8fc125a0ec59b9091d053697fe7ba292bf5abc6ceec86aa3a50799deb2852b83",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/LICENSE",
+          "sha256": "0e80a2d229d2fd4fc7e8636142ec5d0ff0bc031f14c15b682e2ac01dfd5b5138"
+        }
+      ]
+    },
+    {
+      "name": "@radix-ui/react-direction",
+      "version": "1.1.4",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/@radix-ui/react-direction/1.1.4",
+      "tarball": "https://registry.npmjs.org/@radix-ui/react-direction/-/react-direction-1.1.4.tgz",
+      "tarballSha256": "0edc541afcb1d57e7129c153ed2a9c0bd255f6b9921dfdf9583b6d18dc92cff4",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/LICENSE",
+          "sha256": "0e80a2d229d2fd4fc7e8636142ec5d0ff0bc031f14c15b682e2ac01dfd5b5138"
+        }
+      ]
+    },
+    {
+      "name": "@radix-ui/react-dismissable-layer",
+      "version": "1.1.10",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/@radix-ui/react-dismissable-layer/1.1.10",
+      "tarball": "https://registry.npmjs.org/@radix-ui/react-dismissable-layer/-/react-dismissable-layer-1.1.10.tgz",
+      "tarballSha256": "279b7ce16294f58ff2e0bf03a0ea7495e2d1803c83655e47be7d4381cb27b4be",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/LICENSE",
+          "sha256": "0e80a2d229d2fd4fc7e8636142ec5d0ff0bc031f14c15b682e2ac01dfd5b5138"
+        }
+      ]
+    },
+    {
+      "name": "@radix-ui/react-dismissable-layer",
+      "version": "1.1.11",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/@radix-ui/react-dismissable-layer/1.1.11",
+      "tarball": "https://registry.npmjs.org/@radix-ui/react-dismissable-layer/-/react-dismissable-layer-1.1.11.tgz",
+      "tarballSha256": "4d904ed5c015afbbb1e0ee6a1ededb9254f7e64f5df54725ee3ffa11348ee893",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/LICENSE",
+          "sha256": "0e80a2d229d2fd4fc7e8636142ec5d0ff0bc031f14c15b682e2ac01dfd5b5138"
+        }
+      ]
+    },
+    {
+      "name": "@radix-ui/react-dismissable-layer",
+      "version": "1.1.19",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/@radix-ui/react-dismissable-layer/1.1.19",
+      "tarball": "https://registry.npmjs.org/@radix-ui/react-dismissable-layer/-/react-dismissable-layer-1.1.19.tgz",
+      "tarballSha256": "87b2b03c48fdf2770660031d97540d637288552612698d1f7ce3440e7958a0cc",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/LICENSE",
+          "sha256": "0e80a2d229d2fd4fc7e8636142ec5d0ff0bc031f14c15b682e2ac01dfd5b5138"
+        }
+      ]
+    },
+    {
+      "name": "@radix-ui/react-dropdown-menu",
+      "version": "2.1.24",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/@radix-ui/react-dropdown-menu/2.1.24",
+      "tarball": "https://registry.npmjs.org/@radix-ui/react-dropdown-menu/-/react-dropdown-menu-2.1.24.tgz",
+      "tarballSha256": "611afe4ccb51032fa5bde4efeb247e466f21cbe6ea749eaa2fb698bed7e6d056",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/LICENSE",
+          "sha256": "0e80a2d229d2fd4fc7e8636142ec5d0ff0bc031f14c15b682e2ac01dfd5b5138"
+        }
+      ]
+    },
+    {
+      "name": "@radix-ui/react-focus-guards",
+      "version": "1.1.3",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/@radix-ui/react-focus-guards/1.1.3",
+      "tarball": "https://registry.npmjs.org/@radix-ui/react-focus-guards/-/react-focus-guards-1.1.3.tgz",
+      "tarballSha256": "83ed44fa30c737de5e87087946c8cc0e7fb99be2d70ae31a7aa1978b8827e2e6",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/LICENSE",
+          "sha256": "0e80a2d229d2fd4fc7e8636142ec5d0ff0bc031f14c15b682e2ac01dfd5b5138"
+        }
+      ]
+    },
+    {
+      "name": "@radix-ui/react-focus-guards",
+      "version": "1.1.6",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/@radix-ui/react-focus-guards/1.1.6",
+      "tarball": "https://registry.npmjs.org/@radix-ui/react-focus-guards/-/react-focus-guards-1.1.6.tgz",
+      "tarballSha256": "5ab483e86bfce17782977b6b7990b8435991dd320ae0afda09c6f2529ee2d341",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/LICENSE",
+          "sha256": "0e80a2d229d2fd4fc7e8636142ec5d0ff0bc031f14c15b682e2ac01dfd5b5138"
+        }
+      ]
+    },
+    {
+      "name": "@radix-ui/react-focus-scope",
+      "version": "1.1.16",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/@radix-ui/react-focus-scope/1.1.16",
+      "tarball": "https://registry.npmjs.org/@radix-ui/react-focus-scope/-/react-focus-scope-1.1.16.tgz",
+      "tarballSha256": "7e661ca20062722ee1899d243a1ec2b40e453da0977f141f11518dcbfce11c95",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/LICENSE",
+          "sha256": "0e80a2d229d2fd4fc7e8636142ec5d0ff0bc031f14c15b682e2ac01dfd5b5138"
+        }
+      ]
+    },
+    {
+      "name": "@radix-ui/react-focus-scope",
+      "version": "1.1.7",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/@radix-ui/react-focus-scope/1.1.7",
+      "tarball": "https://registry.npmjs.org/@radix-ui/react-focus-scope/-/react-focus-scope-1.1.7.tgz",
+      "tarballSha256": "3fec5455c3248c861a6b3fb9a2de6f3f4e4819a2abbc0b6b76e4863132461435",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/LICENSE",
+          "sha256": "0e80a2d229d2fd4fc7e8636142ec5d0ff0bc031f14c15b682e2ac01dfd5b5138"
+        }
+      ]
+    },
+    {
+      "name": "@radix-ui/react-id",
+      "version": "1.1.1",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/@radix-ui/react-id/1.1.1",
+      "tarball": "https://registry.npmjs.org/@radix-ui/react-id/-/react-id-1.1.1.tgz",
+      "tarballSha256": "a10d67becad6bc10846f9bc0a79e4a15a285eadca6eae4d88d06bea5586bcafb",
+      "noticeSourceKind": "supplement",
+      "notices": [
+        {
+          "path": "supplemental-license",
+          "sha256": "0e80a2d229d2fd4fc7e8636142ec5d0ff0bc031f14c15b682e2ac01dfd5b5138",
+          "url": "https://raw.githubusercontent.com/radix-ui/primitives/fcef0668a5c827e5a4baac405474d75680f9a4eb/LICENSE"
+        }
+      ]
+    },
+    {
+      "name": "@radix-ui/react-id",
+      "version": "1.1.4",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/@radix-ui/react-id/1.1.4",
+      "tarball": "https://registry.npmjs.org/@radix-ui/react-id/-/react-id-1.1.4.tgz",
+      "tarballSha256": "d4a52062e411906b99b152eff6320ae0da6327789a62dccefb0ae58220916570",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/LICENSE",
+          "sha256": "0e80a2d229d2fd4fc7e8636142ec5d0ff0bc031f14c15b682e2ac01dfd5b5138"
+        }
+      ]
+    },
+    {
+      "name": "@radix-ui/react-label",
+      "version": "2.1.15",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/@radix-ui/react-label/2.1.15",
+      "tarball": "https://registry.npmjs.org/@radix-ui/react-label/-/react-label-2.1.15.tgz",
+      "tarballSha256": "f09d0718f1063ef7342e0a500e44029f9ec7037de7c2d821f56d783a8e6d0ab6",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/LICENSE",
+          "sha256": "0e80a2d229d2fd4fc7e8636142ec5d0ff0bc031f14c15b682e2ac01dfd5b5138"
+        }
+      ]
+    },
+    {
+      "name": "@radix-ui/react-menu",
+      "version": "2.1.24",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/@radix-ui/react-menu/2.1.24",
+      "tarball": "https://registry.npmjs.org/@radix-ui/react-menu/-/react-menu-2.1.24.tgz",
+      "tarballSha256": "c1888e20d6832c2b9483d99ee9d6dfe238e0db3f8a1b285eb35925cd2097613f",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/LICENSE",
+          "sha256": "0e80a2d229d2fd4fc7e8636142ec5d0ff0bc031f14c15b682e2ac01dfd5b5138"
+        }
+      ]
+    },
+    {
+      "name": "@radix-ui/react-popper",
+      "version": "1.2.7",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/@radix-ui/react-popper/1.2.7",
+      "tarball": "https://registry.npmjs.org/@radix-ui/react-popper/-/react-popper-1.2.7.tgz",
+      "tarballSha256": "c4ff685b12be63d30bcbdd4594314ebdff940b6991103b0e65e7ade18a0ffa5f",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/LICENSE",
+          "sha256": "0e80a2d229d2fd4fc7e8636142ec5d0ff0bc031f14c15b682e2ac01dfd5b5138"
+        }
+      ]
+    },
+    {
+      "name": "@radix-ui/react-popper",
+      "version": "1.3.7",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/@radix-ui/react-popper/1.3.7",
+      "tarball": "https://registry.npmjs.org/@radix-ui/react-popper/-/react-popper-1.3.7.tgz",
+      "tarballSha256": "d0c45096fbbb78613260f8c3611a6e98719b07305d53e91e77d973672affefb4",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/LICENSE",
+          "sha256": "0e80a2d229d2fd4fc7e8636142ec5d0ff0bc031f14c15b682e2ac01dfd5b5138"
+        }
+      ]
+    },
+    {
+      "name": "@radix-ui/react-portal",
+      "version": "1.1.17",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/@radix-ui/react-portal/1.1.17",
+      "tarball": "https://registry.npmjs.org/@radix-ui/react-portal/-/react-portal-1.1.17.tgz",
+      "tarballSha256": "5a770d26c759ae06eccf2e908fc9582bf1c6b45dc1c7a992f0497da7a06f226d",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/LICENSE",
+          "sha256": "0e80a2d229d2fd4fc7e8636142ec5d0ff0bc031f14c15b682e2ac01dfd5b5138"
+        }
+      ]
+    },
+    {
+      "name": "@radix-ui/react-portal",
+      "version": "1.1.9",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/@radix-ui/react-portal/1.1.9",
+      "tarball": "https://registry.npmjs.org/@radix-ui/react-portal/-/react-portal-1.1.9.tgz",
+      "tarballSha256": "52e61fcc709ecb2ecfbbaa626613290fc070eda00b226e8efa0e5f23b464fe8c",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/LICENSE",
+          "sha256": "0e80a2d229d2fd4fc7e8636142ec5d0ff0bc031f14c15b682e2ac01dfd5b5138"
+        }
+      ]
+    },
+    {
+      "name": "@radix-ui/react-presence",
+      "version": "1.1.10",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/@radix-ui/react-presence/1.1.10",
+      "tarball": "https://registry.npmjs.org/@radix-ui/react-presence/-/react-presence-1.1.10.tgz",
+      "tarballSha256": "53a71dbc834bf932d44b49c9fb0c730f68e1aee195646c815d2832d6aa09e01d",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/LICENSE",
+          "sha256": "0e80a2d229d2fd4fc7e8636142ec5d0ff0bc031f14c15b682e2ac01dfd5b5138"
+        }
+      ]
+    },
+    {
+      "name": "@radix-ui/react-presence",
+      "version": "1.1.4",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/@radix-ui/react-presence/1.1.4",
+      "tarball": "https://registry.npmjs.org/@radix-ui/react-presence/-/react-presence-1.1.4.tgz",
+      "tarballSha256": "b884877c3166118ba2d29071215d73f00737606702e18f807c78d435cb665d4f",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/LICENSE",
+          "sha256": "0e80a2d229d2fd4fc7e8636142ec5d0ff0bc031f14c15b682e2ac01dfd5b5138"
+        }
+      ]
+    },
+    {
+      "name": "@radix-ui/react-presence",
+      "version": "1.1.5",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/@radix-ui/react-presence/1.1.5",
+      "tarball": "https://registry.npmjs.org/@radix-ui/react-presence/-/react-presence-1.1.5.tgz",
+      "tarballSha256": "8f18de2c84a397e546ea265f4e31b4e5fa28e7a620bbe38baaf2d4981ce9d103",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/LICENSE",
+          "sha256": "0e80a2d229d2fd4fc7e8636142ec5d0ff0bc031f14c15b682e2ac01dfd5b5138"
+        }
+      ]
+    },
+    {
+      "name": "@radix-ui/react-primitive",
+      "version": "2.1.10",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/@radix-ui/react-primitive/2.1.10",
+      "tarball": "https://registry.npmjs.org/@radix-ui/react-primitive/-/react-primitive-2.1.10.tgz",
+      "tarballSha256": "0304bedc337d07ae1a630758319104ade8ae00668ca6a8851f37192e7b443c56",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/LICENSE",
+          "sha256": "0e80a2d229d2fd4fc7e8636142ec5d0ff0bc031f14c15b682e2ac01dfd5b5138"
+        }
+      ]
+    },
+    {
+      "name": "@radix-ui/react-primitive",
+      "version": "2.1.3",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/@radix-ui/react-primitive/2.1.3",
+      "tarball": "https://registry.npmjs.org/@radix-ui/react-primitive/-/react-primitive-2.1.3.tgz",
+      "tarballSha256": "f1c13d99d14188ba7415cbb2a235c1b5787c5071c72b169ece3128c213757141",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/LICENSE",
+          "sha256": "0e80a2d229d2fd4fc7e8636142ec5d0ff0bc031f14c15b682e2ac01dfd5b5138"
+        }
+      ]
+    },
+    {
+      "name": "@radix-ui/react-radio-group",
+      "version": "1.4.7",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/@radix-ui/react-radio-group/1.4.7",
+      "tarball": "https://registry.npmjs.org/@radix-ui/react-radio-group/-/react-radio-group-1.4.7.tgz",
+      "tarballSha256": "a4d1bd8384d4176dc7446ad0ace9b31073afdb1151df00c477acfe7f004a9c5d",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/LICENSE",
+          "sha256": "0e80a2d229d2fd4fc7e8636142ec5d0ff0bc031f14c15b682e2ac01dfd5b5138"
+        }
+      ]
+    },
+    {
+      "name": "@radix-ui/react-roving-focus",
+      "version": "1.1.19",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/@radix-ui/react-roving-focus/1.1.19",
+      "tarball": "https://registry.npmjs.org/@radix-ui/react-roving-focus/-/react-roving-focus-1.1.19.tgz",
+      "tarballSha256": "6d08280f4cd73059949cc4e72fd437232e3446a1eed541d55c52c21d9635cd8c",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/LICENSE",
+          "sha256": "0e80a2d229d2fd4fc7e8636142ec5d0ff0bc031f14c15b682e2ac01dfd5b5138"
+        }
+      ]
+    },
+    {
+      "name": "@radix-ui/react-select",
+      "version": "2.3.7",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/@radix-ui/react-select/2.3.7",
+      "tarball": "https://registry.npmjs.org/@radix-ui/react-select/-/react-select-2.3.7.tgz",
+      "tarballSha256": "2b87c7aae9df937564c0134b83c247c7e6393fb3fb40482c401ab8847a347c7b",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/LICENSE",
+          "sha256": "0e80a2d229d2fd4fc7e8636142ec5d0ff0bc031f14c15b682e2ac01dfd5b5138"
+        }
+      ]
+    },
+    {
+      "name": "@radix-ui/react-separator",
+      "version": "1.1.15",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/@radix-ui/react-separator/1.1.15",
+      "tarball": "https://registry.npmjs.org/@radix-ui/react-separator/-/react-separator-1.1.15.tgz",
+      "tarballSha256": "a787915a3edd57b2d2a450e51eee310d7c8a1ff9572fb0dc182363009ead316b",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/LICENSE",
+          "sha256": "0e80a2d229d2fd4fc7e8636142ec5d0ff0bc031f14c15b682e2ac01dfd5b5138"
+        }
+      ]
+    },
+    {
+      "name": "@radix-ui/react-slider",
+      "version": "1.4.7",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/@radix-ui/react-slider/1.4.7",
+      "tarball": "https://registry.npmjs.org/@radix-ui/react-slider/-/react-slider-1.4.7.tgz",
+      "tarballSha256": "7c1132760e3efb600e922d9f03c2717e8c4f653633720aec7bf829192e7b953f",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/LICENSE",
+          "sha256": "0e80a2d229d2fd4fc7e8636142ec5d0ff0bc031f14c15b682e2ac01dfd5b5138"
+        }
+      ]
+    },
+    {
+      "name": "@radix-ui/react-slot",
+      "version": "1.2.3",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/@radix-ui/react-slot/1.2.3",
+      "tarball": "https://registry.npmjs.org/@radix-ui/react-slot/-/react-slot-1.2.3.tgz",
+      "tarballSha256": "2273c7614cbe7b8335803b0d1fefb8042d6e1c2f3f2da71a6583875563042110",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/LICENSE",
+          "sha256": "0e80a2d229d2fd4fc7e8636142ec5d0ff0bc031f14c15b682e2ac01dfd5b5138"
+        }
+      ]
+    },
+    {
+      "name": "@radix-ui/react-slot",
+      "version": "1.3.3",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/@radix-ui/react-slot/1.3.3",
+      "tarball": "https://registry.npmjs.org/@radix-ui/react-slot/-/react-slot-1.3.3.tgz",
+      "tarballSha256": "43c36a34fb20ae97acbbf332d053b4cebbf34a2bb69e0af929514afd2dbad46f",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/LICENSE",
+          "sha256": "0e80a2d229d2fd4fc7e8636142ec5d0ff0bc031f14c15b682e2ac01dfd5b5138"
+        }
+      ]
+    },
+    {
+      "name": "@radix-ui/react-switch",
+      "version": "1.3.7",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/@radix-ui/react-switch/1.3.7",
+      "tarball": "https://registry.npmjs.org/@radix-ui/react-switch/-/react-switch-1.3.7.tgz",
+      "tarballSha256": "692fce9082de6fcc9268927d681d49e1fcedcaa7da63374a2a4b9dd7fc95d263",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/LICENSE",
+          "sha256": "0e80a2d229d2fd4fc7e8636142ec5d0ff0bc031f14c15b682e2ac01dfd5b5138"
+        }
+      ]
+    },
+    {
+      "name": "@radix-ui/react-tabs",
+      "version": "1.1.21",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/@radix-ui/react-tabs/1.1.21",
+      "tarball": "https://registry.npmjs.org/@radix-ui/react-tabs/-/react-tabs-1.1.21.tgz",
+      "tarballSha256": "93dcb4cbff123e8e2377b8af1d60ab082e80602beb2a7ad8d7179ad2939d11ca",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/LICENSE",
+          "sha256": "0e80a2d229d2fd4fc7e8636142ec5d0ff0bc031f14c15b682e2ac01dfd5b5138"
+        }
+      ]
+    },
+    {
+      "name": "@radix-ui/react-toggle",
+      "version": "1.1.18",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/@radix-ui/react-toggle/1.1.18",
+      "tarball": "https://registry.npmjs.org/@radix-ui/react-toggle/-/react-toggle-1.1.18.tgz",
+      "tarballSha256": "35e40b38e5cb28a0c7ff9fa0a4c828e8122ef9ecc180fa2451f7fb6f6898bd78",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/LICENSE",
+          "sha256": "0e80a2d229d2fd4fc7e8636142ec5d0ff0bc031f14c15b682e2ac01dfd5b5138"
+        }
+      ]
+    },
+    {
+      "name": "@radix-ui/react-toggle-group",
+      "version": "1.1.19",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/@radix-ui/react-toggle-group/1.1.19",
+      "tarball": "https://registry.npmjs.org/@radix-ui/react-toggle-group/-/react-toggle-group-1.1.19.tgz",
+      "tarballSha256": "516c602305f44995fa801644affa0d545aafe08056a03e3ce110aa4b41ad7091",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/LICENSE",
+          "sha256": "0e80a2d229d2fd4fc7e8636142ec5d0ff0bc031f14c15b682e2ac01dfd5b5138"
+        }
+      ]
+    },
+    {
+      "name": "@radix-ui/react-tooltip",
+      "version": "1.2.7",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/@radix-ui/react-tooltip/1.2.7",
+      "tarball": "https://registry.npmjs.org/@radix-ui/react-tooltip/-/react-tooltip-1.2.7.tgz",
+      "tarballSha256": "057808ba2aedd92dc16f196cd29602865ad3305bd95ae982eb0e6efbca83492b",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/LICENSE",
+          "sha256": "0e80a2d229d2fd4fc7e8636142ec5d0ff0bc031f14c15b682e2ac01dfd5b5138"
+        }
+      ]
+    },
+    {
+      "name": "@radix-ui/react-use-callback-ref",
+      "version": "1.1.1",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/@radix-ui/react-use-callback-ref/1.1.1",
+      "tarball": "https://registry.npmjs.org/@radix-ui/react-use-callback-ref/-/react-use-callback-ref-1.1.1.tgz",
+      "tarballSha256": "1c155d182c8a65220235aec52112944128866fb9524f5406203c47cd01c9a74b",
+      "noticeSourceKind": "supplement",
+      "notices": [
+        {
+          "path": "supplemental-license",
+          "sha256": "0e80a2d229d2fd4fc7e8636142ec5d0ff0bc031f14c15b682e2ac01dfd5b5138",
+          "url": "https://raw.githubusercontent.com/radix-ui/primitives/fcef0668a5c827e5a4baac405474d75680f9a4eb/LICENSE"
+        }
+      ]
+    },
+    {
+      "name": "@radix-ui/react-use-callback-ref",
+      "version": "1.1.4",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/@radix-ui/react-use-callback-ref/1.1.4",
+      "tarball": "https://registry.npmjs.org/@radix-ui/react-use-callback-ref/-/react-use-callback-ref-1.1.4.tgz",
+      "tarballSha256": "2b8287f7ca3f54df491a63a9e9a2e7070f289c4979056f1dab96a30188eadb35",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/LICENSE",
+          "sha256": "0e80a2d229d2fd4fc7e8636142ec5d0ff0bc031f14c15b682e2ac01dfd5b5138"
+        }
+      ]
+    },
+    {
+      "name": "@radix-ui/react-use-controllable-state",
+      "version": "1.2.2",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/@radix-ui/react-use-controllable-state/1.2.2",
+      "tarball": "https://registry.npmjs.org/@radix-ui/react-use-controllable-state/-/react-use-controllable-state-1.2.2.tgz",
+      "tarballSha256": "1dce920306510154046f7fd6b92d21dc8847b281c755d7c587bf712d62d8f6c4",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/LICENSE",
+          "sha256": "0e80a2d229d2fd4fc7e8636142ec5d0ff0bc031f14c15b682e2ac01dfd5b5138"
+        }
+      ]
+    },
+    {
+      "name": "@radix-ui/react-use-controllable-state",
+      "version": "1.2.6",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/@radix-ui/react-use-controllable-state/1.2.6",
+      "tarball": "https://registry.npmjs.org/@radix-ui/react-use-controllable-state/-/react-use-controllable-state-1.2.6.tgz",
+      "tarballSha256": "75c4ccec673739cb505d8791516d4343c0fb5690500c7774c74029276c05528d",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/LICENSE",
+          "sha256": "0e80a2d229d2fd4fc7e8636142ec5d0ff0bc031f14c15b682e2ac01dfd5b5138"
+        }
+      ]
+    },
+    {
+      "name": "@radix-ui/react-use-effect-event",
+      "version": "0.0.2",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/@radix-ui/react-use-effect-event/0.0.2",
+      "tarball": "https://registry.npmjs.org/@radix-ui/react-use-effect-event/-/react-use-effect-event-0.0.2.tgz",
+      "tarballSha256": "b9308ff7221590d0739ad1b06f458f480cb9c71428036228c3e41faa50cb20cc",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/LICENSE",
+          "sha256": "0e80a2d229d2fd4fc7e8636142ec5d0ff0bc031f14c15b682e2ac01dfd5b5138"
+        }
+      ]
+    },
+    {
+      "name": "@radix-ui/react-use-effect-event",
+      "version": "0.0.5",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/@radix-ui/react-use-effect-event/0.0.5",
+      "tarball": "https://registry.npmjs.org/@radix-ui/react-use-effect-event/-/react-use-effect-event-0.0.5.tgz",
+      "tarballSha256": "0add7f5ca8c7127902b93cfc2277e3c27d9f33bb9cf9a381741fdde361415eb2",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/LICENSE",
+          "sha256": "0e80a2d229d2fd4fc7e8636142ec5d0ff0bc031f14c15b682e2ac01dfd5b5138"
+        }
+      ]
+    },
+    {
+      "name": "@radix-ui/react-use-escape-keydown",
+      "version": "1.1.1",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/@radix-ui/react-use-escape-keydown/1.1.1",
+      "tarball": "https://registry.npmjs.org/@radix-ui/react-use-escape-keydown/-/react-use-escape-keydown-1.1.1.tgz",
+      "tarballSha256": "dc1121b1b1793279880daecfa04230de411404c8e9ac849c1d1c8714dd013e33",
+      "noticeSourceKind": "supplement",
+      "notices": [
+        {
+          "path": "supplemental-license",
+          "sha256": "0e80a2d229d2fd4fc7e8636142ec5d0ff0bc031f14c15b682e2ac01dfd5b5138",
+          "url": "https://raw.githubusercontent.com/radix-ui/primitives/fcef0668a5c827e5a4baac405474d75680f9a4eb/LICENSE"
+        }
+      ]
+    },
+    {
+      "name": "@radix-ui/react-use-is-hydrated",
+      "version": "0.1.3",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/@radix-ui/react-use-is-hydrated/0.1.3",
+      "tarball": "https://registry.npmjs.org/@radix-ui/react-use-is-hydrated/-/react-use-is-hydrated-0.1.3.tgz",
+      "tarballSha256": "cc309145b7f5ff83c68f0282bc0cb15df7bb32877d46b9f46b0a7120854e677f",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/LICENSE",
+          "sha256": "0e80a2d229d2fd4fc7e8636142ec5d0ff0bc031f14c15b682e2ac01dfd5b5138"
+        }
+      ]
+    },
+    {
+      "name": "@radix-ui/react-use-layout-effect",
+      "version": "1.1.1",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/@radix-ui/react-use-layout-effect/1.1.1",
+      "tarball": "https://registry.npmjs.org/@radix-ui/react-use-layout-effect/-/react-use-layout-effect-1.1.1.tgz",
+      "tarballSha256": "fc152ce4e230913604de541dfa46af95e4c13d60e92640407a973b81272b51a7",
+      "noticeSourceKind": "supplement",
+      "notices": [
+        {
+          "path": "supplemental-license",
+          "sha256": "0e80a2d229d2fd4fc7e8636142ec5d0ff0bc031f14c15b682e2ac01dfd5b5138",
+          "url": "https://raw.githubusercontent.com/radix-ui/primitives/fcef0668a5c827e5a4baac405474d75680f9a4eb/LICENSE"
+        }
+      ]
+    },
+    {
+      "name": "@radix-ui/react-use-layout-effect",
+      "version": "1.1.4",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/@radix-ui/react-use-layout-effect/1.1.4",
+      "tarball": "https://registry.npmjs.org/@radix-ui/react-use-layout-effect/-/react-use-layout-effect-1.1.4.tgz",
+      "tarballSha256": "7bc22fe5fb82a07133c61b640d50a9a3553b0da16ae8e6458c19053206563ed9",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/LICENSE",
+          "sha256": "0e80a2d229d2fd4fc7e8636142ec5d0ff0bc031f14c15b682e2ac01dfd5b5138"
+        }
+      ]
+    },
+    {
+      "name": "@radix-ui/react-use-previous",
+      "version": "1.1.4",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/@radix-ui/react-use-previous/1.1.4",
+      "tarball": "https://registry.npmjs.org/@radix-ui/react-use-previous/-/react-use-previous-1.1.4.tgz",
+      "tarballSha256": "893e6ce4eba1249d3bd6f308f1b350c4a572c60077b498e2d92144436cd90f98",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/LICENSE",
+          "sha256": "0e80a2d229d2fd4fc7e8636142ec5d0ff0bc031f14c15b682e2ac01dfd5b5138"
+        }
+      ]
+    },
+    {
+      "name": "@radix-ui/react-use-rect",
+      "version": "1.1.1",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/@radix-ui/react-use-rect/1.1.1",
+      "tarball": "https://registry.npmjs.org/@radix-ui/react-use-rect/-/react-use-rect-1.1.1.tgz",
+      "tarballSha256": "8a9cd8d9a2f962dd65ee2bc31fa874738aa7b778c8dd46810f8ce8ece78aabc6",
+      "noticeSourceKind": "supplement",
+      "notices": [
+        {
+          "path": "supplemental-license",
+          "sha256": "0e80a2d229d2fd4fc7e8636142ec5d0ff0bc031f14c15b682e2ac01dfd5b5138",
+          "url": "https://raw.githubusercontent.com/radix-ui/primitives/fcef0668a5c827e5a4baac405474d75680f9a4eb/LICENSE"
+        }
+      ]
+    },
+    {
+      "name": "@radix-ui/react-use-rect",
+      "version": "1.1.4",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/@radix-ui/react-use-rect/1.1.4",
+      "tarball": "https://registry.npmjs.org/@radix-ui/react-use-rect/-/react-use-rect-1.1.4.tgz",
+      "tarballSha256": "cf7caba094c925dd58b7a175070682066a3d59b2c42b9fbc6d6baad3bbd234d9",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/LICENSE",
+          "sha256": "0e80a2d229d2fd4fc7e8636142ec5d0ff0bc031f14c15b682e2ac01dfd5b5138"
+        }
+      ]
+    },
+    {
+      "name": "@radix-ui/react-use-size",
+      "version": "1.1.1",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/@radix-ui/react-use-size/1.1.1",
+      "tarball": "https://registry.npmjs.org/@radix-ui/react-use-size/-/react-use-size-1.1.1.tgz",
+      "tarballSha256": "c939dd43081637e69a7033e6a0e23ace43bc3edc2dbd2cb26b27fddcd80a6bbb",
+      "noticeSourceKind": "supplement",
+      "notices": [
+        {
+          "path": "supplemental-license",
+          "sha256": "0e80a2d229d2fd4fc7e8636142ec5d0ff0bc031f14c15b682e2ac01dfd5b5138",
+          "url": "https://raw.githubusercontent.com/radix-ui/primitives/fcef0668a5c827e5a4baac405474d75680f9a4eb/LICENSE"
+        }
+      ]
+    },
+    {
+      "name": "@radix-ui/react-use-size",
+      "version": "1.1.4",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/@radix-ui/react-use-size/1.1.4",
+      "tarball": "https://registry.npmjs.org/@radix-ui/react-use-size/-/react-use-size-1.1.4.tgz",
+      "tarballSha256": "51cdbce85969ecd9ba13c9c6df83affb8bcb181db2b8f57f5b0ebff4c7fb0631",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/LICENSE",
+          "sha256": "0e80a2d229d2fd4fc7e8636142ec5d0ff0bc031f14c15b682e2ac01dfd5b5138"
+        }
+      ]
+    },
+    {
+      "name": "@radix-ui/react-visually-hidden",
+      "version": "1.2.11",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/@radix-ui/react-visually-hidden/1.2.11",
+      "tarball": "https://registry.npmjs.org/@radix-ui/react-visually-hidden/-/react-visually-hidden-1.2.11.tgz",
+      "tarballSha256": "aa663962d91c68d6855e89accb861c7240f15f26de974d6dc4af1c61188168e5",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/LICENSE",
+          "sha256": "0e80a2d229d2fd4fc7e8636142ec5d0ff0bc031f14c15b682e2ac01dfd5b5138"
+        }
+      ]
+    },
+    {
+      "name": "@radix-ui/react-visually-hidden",
+      "version": "1.2.3",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/@radix-ui/react-visually-hidden/1.2.3",
+      "tarball": "https://registry.npmjs.org/@radix-ui/react-visually-hidden/-/react-visually-hidden-1.2.3.tgz",
+      "tarballSha256": "16f5f62c6831c87112ffb5d6b6a0ab6298906780ed59361fb747bf7c31c90335",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/LICENSE",
+          "sha256": "0e80a2d229d2fd4fc7e8636142ec5d0ff0bc031f14c15b682e2ac01dfd5b5138"
+        }
+      ]
+    },
+    {
+      "name": "@radix-ui/rect",
+      "version": "1.1.1",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/@radix-ui/rect/1.1.1",
+      "tarball": "https://registry.npmjs.org/@radix-ui/rect/-/rect-1.1.1.tgz",
+      "tarballSha256": "4a541ef9b63826a44e1d500a5a10e80f70d2934286156d73a8143d7e17f557af",
+      "noticeSourceKind": "supplement",
+      "notices": [
+        {
+          "path": "supplemental-license",
+          "sha256": "0e80a2d229d2fd4fc7e8636142ec5d0ff0bc031f14c15b682e2ac01dfd5b5138",
+          "url": "https://raw.githubusercontent.com/radix-ui/primitives/fcef0668a5c827e5a4baac405474d75680f9a4eb/LICENSE"
+        }
+      ]
+    },
+    {
+      "name": "@radix-ui/rect",
+      "version": "1.1.3",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/@radix-ui/rect/1.1.3",
+      "tarball": "https://registry.npmjs.org/@radix-ui/rect/-/rect-1.1.3.tgz",
+      "tarballSha256": "0dfd24afe3d0faf68408774f8c77d52a83d1188dbb38f082ddac12cce5c28953",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/LICENSE",
+          "sha256": "0e80a2d229d2fd4fc7e8636142ec5d0ff0bc031f14c15b682e2ac01dfd5b5138"
+        }
+      ]
+    },
+    {
+      "name": "@sindresorhus/is",
+      "version": "4.6.0",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/@sindresorhus/is/4.6.0",
+      "tarball": "https://registry.npmjs.org/@sindresorhus/is/-/is-4.6.0.tgz",
+      "tarballSha256": "3970eccc80741b86f3ca838c46b56c5303d0b827a4ce6c0681941ff5256e24f7",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/license",
+          "sha256": "5c932d88256b4ab958f64a856fa48e8bd1f55bc1d96b8149c65689e0c61789d3"
+        }
+      ]
+    },
+    {
+      "name": "@tabby_ai/hijri-converter",
+      "version": "1.0.5",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/@tabby_ai/hijri-converter/1.0.5",
+      "tarball": "https://registry.npmjs.org/@tabby_ai/hijri-converter/-/hijri-converter-1.0.5.tgz",
+      "tarballSha256": "1054b8fb7de59f5687b81af08187cb4e2c759f3c970b22d8df25d279c1634b50",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/LICENSE",
+          "sha256": "6ea4455143423b792278b5d1e25608beb88cf33b7cfb8eaa7fb691fc9527bd5f"
+        }
+      ]
+    },
+    {
+      "name": "@tanstack/react-table",
+      "version": "8.21.3",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/@tanstack/react-table/8.21.3",
+      "tarball": "https://registry.npmjs.org/@tanstack/react-table/-/react-table-8.21.3.tgz",
+      "tarballSha256": "3a8ef8748a46436ccfe7032ccd642b68eccabed57f3cbb4bc021813371fdec9c",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/LICENSE",
+          "sha256": "9db3f8ddd7031ab264b99bec49c221155d0c8649b53dd4aa007f2041d36cdf5f"
+        }
+      ]
+    },
+    {
+      "name": "@tanstack/table-core",
+      "version": "8.21.3",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/@tanstack/table-core/8.21.3",
+      "tarball": "https://registry.npmjs.org/@tanstack/table-core/-/table-core-8.21.3.tgz",
+      "tarballSha256": "1e5b2f4f04c8c31100ebd0b966fae5eadbb1d11bd45517edb9fc15fbd6a8f2a0",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/LICENSE",
+          "sha256": "9db3f8ddd7031ab264b99bec49c221155d0c8649b53dd4aa007f2041d36cdf5f"
+        }
+      ]
+    },
+    {
+      "name": "@types/debug",
+      "version": "4.1.13",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/@types/debug/4.1.13",
+      "tarball": "https://registry.npmjs.org/@types/debug/-/debug-4.1.13.tgz",
+      "tarballSha256": "19bb8d72e15e4fd407fb1d416aba3c42dde61fc9d50cdfdd313b85d351e56388",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "debug/LICENSE",
+          "sha256": "c2cfccb812fe482101a8f04597dfc5a9991a6b2748266c47ac91b6a5aae15383"
+        }
+      ]
+    },
+    {
+      "name": "@types/estree",
+      "version": "1.0.9",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/@types/estree/1.0.9",
+      "tarball": "https://registry.npmjs.org/@types/estree/-/estree-1.0.9.tgz",
+      "tarballSha256": "ec8f3c0dfb21497db5a3480c45a6cf6f9b18d3b337b2ea4d03e3ef2a9c2bb358",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "estree/LICENSE",
+          "sha256": "c2cfccb812fe482101a8f04597dfc5a9991a6b2748266c47ac91b6a5aae15383"
+        }
+      ]
+    },
+    {
+      "name": "@types/estree-jsx",
+      "version": "1.0.5",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/@types/estree-jsx/1.0.5",
+      "tarball": "https://registry.npmjs.org/@types/estree-jsx/-/estree-jsx-1.0.5.tgz",
+      "tarballSha256": "51e4a90e34bab73ec7c2ab32d2a0f166e3a1675559d5e7200575317b7db8883f",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "estree-jsx/LICENSE",
+          "sha256": "c2cfccb812fe482101a8f04597dfc5a9991a6b2748266c47ac91b6a5aae15383"
+        }
+      ]
+    },
+    {
+      "name": "@types/hast",
+      "version": "3.0.5",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/@types/hast/3.0.5",
+      "tarball": "https://registry.npmjs.org/@types/hast/-/hast-3.0.5.tgz",
+      "tarballSha256": "a9b9ae07cbef416c00a5f1d7149ca03c5e20e7f5addb67203b7849ac80f1f761",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "hast/LICENSE",
+          "sha256": "c2cfccb812fe482101a8f04597dfc5a9991a6b2748266c47ac91b6a5aae15383"
+        }
+      ]
+    },
+    {
+      "name": "@types/katex",
+      "version": "0.16.8",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/@types/katex/0.16.8",
+      "tarball": "https://registry.npmjs.org/@types/katex/-/katex-0.16.8.tgz",
+      "tarballSha256": "f9f54494b75d6c89ed93baf96d0d73d659e52a4318d67cbc6b99671772c4be96",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "katex/LICENSE",
+          "sha256": "c2cfccb812fe482101a8f04597dfc5a9991a6b2748266c47ac91b6a5aae15383"
+        }
+      ]
+    },
+    {
+      "name": "@types/mdast",
+      "version": "4.0.4",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/@types/mdast/4.0.4",
+      "tarball": "https://registry.npmjs.org/@types/mdast/-/mdast-4.0.4.tgz",
+      "tarballSha256": "ca9d3f571a96c57b9412fa9ccc009a356990e5334ce2c56587218a2fa2d57ef3",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "mdast/LICENSE",
+          "sha256": "c2cfccb812fe482101a8f04597dfc5a9991a6b2748266c47ac91b6a5aae15383"
+        }
+      ]
+    },
+    {
+      "name": "@types/ms",
+      "version": "2.1.0",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/@types/ms/2.1.0",
+      "tarball": "https://registry.npmjs.org/@types/ms/-/ms-2.1.0.tgz",
+      "tarballSha256": "a07f7b4d84e44bd8c55e44ee084f3529d5b3bbb2f212ef1749aced718bcb6c09",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "ms/LICENSE",
+          "sha256": "c2cfccb812fe482101a8f04597dfc5a9991a6b2748266c47ac91b6a5aae15383"
+        }
+      ]
+    },
+    {
+      "name": "@types/prismjs",
+      "version": "1.26.6",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/@types/prismjs/1.26.6",
+      "tarball": "https://registry.npmjs.org/@types/prismjs/-/prismjs-1.26.6.tgz",
+      "tarballSha256": "1fecea26b7a539e415819c0c2149180eb1cf26c9fcad0807697fab5b61d008b1",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "prismjs/LICENSE",
+          "sha256": "c2cfccb812fe482101a8f04597dfc5a9991a6b2748266c47ac91b6a5aae15383"
+        }
+      ]
+    },
+    {
+      "name": "@types/react",
+      "version": "19.2.17",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/@types/react/19.2.17",
+      "tarball": "https://registry.npmjs.org/@types/react/-/react-19.2.17.tgz",
+      "tarballSha256": "1f5f291750cc7ae78e5c2e581efd618be4e229ff43c813ea4bb6929b24511c20",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "react/LICENSE",
+          "sha256": "c2cfccb812fe482101a8f04597dfc5a9991a6b2748266c47ac91b6a5aae15383"
+        }
+      ]
+    },
+    {
+      "name": "@types/unist",
+      "version": "2.0.11",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/@types/unist/2.0.11",
+      "tarball": "https://registry.npmjs.org/@types/unist/-/unist-2.0.11.tgz",
+      "tarballSha256": "367d955567082f39480be382e2d649ff65ab7ab8377e240841bade2df4dd123a",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "unist v2.0/LICENSE",
+          "sha256": "c2cfccb812fe482101a8f04597dfc5a9991a6b2748266c47ac91b6a5aae15383"
+        }
+      ]
+    },
+    {
+      "name": "@types/unist",
+      "version": "3.0.3",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/@types/unist/3.0.3",
+      "tarball": "https://registry.npmjs.org/@types/unist/-/unist-3.0.3.tgz",
+      "tarballSha256": "b50fd32f739207d1e8c96ef0b0c9dd003ef9cb0403c5b4eb71796b87332a2843",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "unist/LICENSE",
+          "sha256": "c2cfccb812fe482101a8f04597dfc5a9991a6b2748266c47ac91b6a5aae15383"
+        }
+      ]
+    },
+    {
+      "name": "@ungap/structured-clone",
+      "version": "1.3.3",
+      "license": "ISC",
+      "registry": "https://registry.npmjs.org/@ungap/structured-clone/1.3.3",
+      "tarball": "https://registry.npmjs.org/@ungap/structured-clone/-/structured-clone-1.3.3.tgz",
+      "tarballSha256": "5c9bda243866c55b0ea20a367e495e1c18e6f337485eaa33b25ad760274ac92e",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/LICENSE",
+          "sha256": "dc6d4961d8b6ee747231582ae9c53ce1d66bf76bc9f5a28f554c0e97210953bf"
+        }
+      ]
+    },
+    {
+      "name": "aria-hidden",
+      "version": "1.2.6",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/aria-hidden/1.2.6",
+      "tarball": "https://registry.npmjs.org/aria-hidden/-/aria-hidden-1.2.6.tgz",
+      "tarballSha256": "bb3ff0d0a5b0c4a5ab5e579d79e91fbd41cd1700028ddf91ebd3154b3c13749e",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/LICENSE",
+          "sha256": "30f0cfddf483d1128e3610205020f2041a6c5e837aa999e0aa82e5576187d4a9"
+        }
+      ]
+    },
+    {
+      "name": "bail",
+      "version": "2.0.2",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/bail/2.0.2",
+      "tarball": "https://registry.npmjs.org/bail/-/bail-2.0.2.tgz",
+      "tarballSha256": "11719f7e1f7a31432177dd0cd987e7c967a826426d281c39c0025b474056c88b",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/license",
+          "sha256": "63cb98b3f6abfb3c3592c16f88253c1bdc834087bf52671e8ce5609e4eb693cf"
+        }
+      ]
+    },
+    {
+      "name": "ccount",
+      "version": "2.0.1",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/ccount/2.0.1",
+      "tarball": "https://registry.npmjs.org/ccount/-/ccount-2.0.1.tgz",
+      "tarballSha256": "bdda8b4b3c7c3049bb118a9a01e3638033473b90c09f58eee1e9f2dda27984ca",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/license",
+          "sha256": "63cb98b3f6abfb3c3592c16f88253c1bdc834087bf52671e8ce5609e4eb693cf"
+        }
+      ]
+    },
+    {
+      "name": "char-regex",
+      "version": "1.0.2",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/char-regex/1.0.2",
+      "tarball": "https://registry.npmjs.org/char-regex/-/char-regex-1.0.2.tgz",
+      "tarballSha256": "366fc94c4f6087985192b94fc7134601ddfc08ab5b7066c992c34956aa21ede1",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/LICENSE",
+          "sha256": "34239137535c0fee5a5b590310300f988fff92bbba6719889454eda410f536e3"
+        }
+      ]
+    },
+    {
+      "name": "character-entities",
+      "version": "2.0.2",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/character-entities/2.0.2",
+      "tarball": "https://registry.npmjs.org/character-entities/-/character-entities-2.0.2.tgz",
+      "tarballSha256": "0805c120e1147a250a87ed8752265b3bce7a76c44e9728dec1d11380e21fbc3d",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/license",
+          "sha256": "63cb98b3f6abfb3c3592c16f88253c1bdc834087bf52671e8ce5609e4eb693cf"
+        }
+      ]
+    },
+    {
+      "name": "character-entities-html4",
+      "version": "2.1.0",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/character-entities-html4/2.1.0",
+      "tarball": "https://registry.npmjs.org/character-entities-html4/-/character-entities-html4-2.1.0.tgz",
+      "tarballSha256": "a1cdca963945f3fbb4ac4932d4b8e54ceb66aba5a9bfc7254fb87a1f17cd04e6",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/license",
+          "sha256": "63cb98b3f6abfb3c3592c16f88253c1bdc834087bf52671e8ce5609e4eb693cf"
+        }
+      ]
+    },
+    {
+      "name": "character-entities-legacy",
+      "version": "3.0.0",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/character-entities-legacy/3.0.0",
+      "tarball": "https://registry.npmjs.org/character-entities-legacy/-/character-entities-legacy-3.0.0.tgz",
+      "tarballSha256": "f36404294f0713ab8e3a08f133195d3085d0367816fc6c74136babcf90fdc988",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/license",
+          "sha256": "63cb98b3f6abfb3c3592c16f88253c1bdc834087bf52671e8ce5609e4eb693cf"
+        }
+      ]
+    },
+    {
+      "name": "character-reference-invalid",
+      "version": "2.0.1",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/character-reference-invalid/2.0.1",
+      "tarball": "https://registry.npmjs.org/character-reference-invalid/-/character-reference-invalid-2.0.1.tgz",
+      "tarballSha256": "1c7cf768d20811f2e6e72b441986814c0264c668a19c73dd38ca10d66f3ecf02",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/license",
+          "sha256": "63cb98b3f6abfb3c3592c16f88253c1bdc834087bf52671e8ce5609e4eb693cf"
+        }
+      ]
+    },
+    {
+      "name": "ci-info",
+      "version": "4.4.0",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/ci-info/4.4.0",
+      "tarball": "https://registry.npmjs.org/ci-info/-/ci-info-4.4.0.tgz",
+      "tarballSha256": "90dc91404af2f0354fc8af1e6195eddc3df4a216b94aed7da602226b4cda591f",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/LICENSE",
+          "sha256": "f58943cb354fb2707fea2f7b26b04e6014ddb56835cdfd414c9d2c6c59165b64"
+        }
+      ]
+    },
+    {
+      "name": "clsx",
+      "version": "2.1.1",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/clsx/2.1.1",
+      "tarball": "https://registry.npmjs.org/clsx/-/clsx-2.1.1.tgz",
+      "tarballSha256": "6320104b491ca645120e8f99589ce663ff1fb337ba80066719a011bd95320303",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/license",
+          "sha256": "9a9edad7baae52622bddf3c15b2ef8a33d2c89f2d25408ad13e8a7481c6b0c97"
+        }
+      ]
+    },
+    {
+      "name": "comma-separated-tokens",
+      "version": "2.0.3",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/comma-separated-tokens/2.0.3",
+      "tarball": "https://registry.npmjs.org/comma-separated-tokens/-/comma-separated-tokens-2.0.3.tgz",
+      "tarballSha256": "88123eefbb07a6048efa112653c80f4a0ac2e993bd1388c00273e14de29ec886",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/license",
+          "sha256": "ca4662cb5d1b738fbe5350c0d5485ba11773b4b7208974082ae6e129a52d631d"
+        }
+      ]
+    },
+    {
+      "name": "commander",
+      "version": "8.3.0",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/commander/8.3.0",
+      "tarball": "https://registry.npmjs.org/commander/-/commander-8.3.0.tgz",
+      "tarballSha256": "1b38e65f9229a84060ca5d041a58e3bc1ea374da6d933f9060ca86a67949c10b",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/LICENSE",
+          "sha256": "04512a63dce4d2d506ad612dc0bd7681ccf6e3655f7b6eaef7dfac8323d1ec0b"
+        }
+      ]
+    },
+    {
+      "name": "csstype",
+      "version": "3.2.3",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/csstype/3.2.3",
+      "tarball": "https://registry.npmjs.org/csstype/-/csstype-3.2.3.tgz",
+      "tarballSha256": "f3501f8ee1c73f7568fecb22c11231162c0467e59262461da5579519307427a3",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/LICENSE",
+          "sha256": "11d55bd4541c75ee7879547ac49089c489163dae49551389713c3d026cab383e"
+        }
+      ]
+    },
+    {
+      "name": "d3-array",
+      "version": "3.2.4",
+      "license": "ISC",
+      "registry": "https://registry.npmjs.org/d3-array/3.2.4",
+      "tarball": "https://registry.npmjs.org/d3-array/-/d3-array-3.2.4.tgz",
+      "tarballSha256": "6dbf3f2be39e48f86775be6e166a5d3e5a585ca7144453cd6ad1912f5ae4417f",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/LICENSE",
+          "sha256": "3e6849627f74ff73c257a3ae1efb574015d94fc1035c05ec3c15805165efcbc4"
+        }
+      ]
+    },
+    {
+      "name": "d3-color",
+      "version": "3.1.0",
+      "license": "ISC",
+      "registry": "https://registry.npmjs.org/d3-color/3.1.0",
+      "tarball": "https://registry.npmjs.org/d3-color/-/d3-color-3.1.0.tgz",
+      "tarballSha256": "d41bbcd99dd4f00e696546bffc73fed9b8fb6c3354905b6ea1721bff25f33b42",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/LICENSE",
+          "sha256": "faa682e3e430941f958d26180458f5934a62f58dac4d70ccdd15608c15d0f884"
+        }
+      ]
+    },
+    {
+      "name": "d3-format",
+      "version": "3.1.2",
+      "license": "ISC",
+      "registry": "https://registry.npmjs.org/d3-format/3.1.2",
+      "tarball": "https://registry.npmjs.org/d3-format/-/d3-format-3.1.2.tgz",
+      "tarballSha256": "5bc80e685f5707846d9405e8fd7aec4425960d83cc98200bb94d64d6e6f63c10",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/LICENSE",
+          "sha256": "2a6d2d5f32ba0b755ddbc1c833f766e30cdbe6ebe9a6d4e3e24427721f0b63d3"
+        }
+      ]
+    },
+    {
+      "name": "d3-interpolate",
+      "version": "3.0.1",
+      "license": "ISC",
+      "registry": "https://registry.npmjs.org/d3-interpolate/3.0.1",
+      "tarball": "https://registry.npmjs.org/d3-interpolate/-/d3-interpolate-3.0.1.tgz",
+      "tarballSha256": "7e8df78d233cd102a0bb518658dc0b7d5c38442b6f2dbc8b95ffc14ba87c7c33",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/LICENSE",
+          "sha256": "e008c5e25a6be382593089c29bfabbc553c6378eee02895aec46ce396cc404ee"
+        }
+      ]
+    },
+    {
+      "name": "d3-path",
+      "version": "3.1.0",
+      "license": "ISC",
+      "registry": "https://registry.npmjs.org/d3-path/3.1.0",
+      "tarball": "https://registry.npmjs.org/d3-path/-/d3-path-3.1.0.tgz",
+      "tarballSha256": "94e9b69f82f113ed4ada36703c05f6b7406723c55affe2a443d69729d6d5da14",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/LICENSE",
+          "sha256": "a09b0d6d76e768fca2085fad05743ee81ddd11946bcda160a3cf5e1081a479aa"
+        }
+      ]
+    },
+    {
+      "name": "d3-scale",
+      "version": "4.0.2",
+      "license": "ISC",
+      "registry": "https://registry.npmjs.org/d3-scale/4.0.2",
+      "tarball": "https://registry.npmjs.org/d3-scale/-/d3-scale-4.0.2.tgz",
+      "tarballSha256": "bf50a1f34ba0e6fa25cb7ae902abe0b9e2f85ced39fdca7b18fbe863fbaa39a7",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/LICENSE",
+          "sha256": "e008c5e25a6be382593089c29bfabbc553c6378eee02895aec46ce396cc404ee"
+        }
+      ]
+    },
+    {
+      "name": "d3-selection",
+      "version": "3.0.0",
+      "license": "ISC",
+      "registry": "https://registry.npmjs.org/d3-selection/3.0.0",
+      "tarball": "https://registry.npmjs.org/d3-selection/-/d3-selection-3.0.0.tgz",
+      "tarballSha256": "a1f872f30dca23b76de89cae9e882f56c325433e7f3aee87b95fa830d12789f3",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/LICENSE",
+          "sha256": "e008c5e25a6be382593089c29bfabbc553c6378eee02895aec46ce396cc404ee"
+        }
+      ]
+    },
+    {
+      "name": "d3-shape",
+      "version": "3.2.0",
+      "license": "ISC",
+      "registry": "https://registry.npmjs.org/d3-shape/3.2.0",
+      "tarball": "https://registry.npmjs.org/d3-shape/-/d3-shape-3.2.0.tgz",
+      "tarballSha256": "8b4b2bc9daa99a957abe17656c5944fd3f28efb88f788e6b4fdba346cb80e602",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/LICENSE",
+          "sha256": "faa682e3e430941f958d26180458f5934a62f58dac4d70ccdd15608c15d0f884"
+        }
+      ]
+    },
+    {
+      "name": "d3-time",
+      "version": "3.1.0",
+      "license": "ISC",
+      "registry": "https://registry.npmjs.org/d3-time/3.1.0",
+      "tarball": "https://registry.npmjs.org/d3-time/-/d3-time-3.1.0.tgz",
+      "tarballSha256": "a9f2c8e177b76e7068e7c9c77722c4924c71c9e54f9b1e245d27ef11b28dbc08",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/LICENSE",
+          "sha256": "faa682e3e430941f958d26180458f5934a62f58dac4d70ccdd15608c15d0f884"
+        }
+      ]
+    },
+    {
+      "name": "d3-time-format",
+      "version": "4.1.0",
+      "license": "ISC",
+      "registry": "https://registry.npmjs.org/d3-time-format/4.1.0",
+      "tarball": "https://registry.npmjs.org/d3-time-format/-/d3-time-format-4.1.0.tgz",
+      "tarballSha256": "46f1492ef6be8afe04a844876a644a4a964da7f87937e90e93f9585acff9d30e",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/LICENSE",
+          "sha256": "e008c5e25a6be382593089c29bfabbc553c6378eee02895aec46ce396cc404ee"
+        }
+      ]
+    },
+    {
+      "name": "date-fns",
+      "version": "4.4.0",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/date-fns/4.4.0",
+      "tarball": "https://registry.npmjs.org/date-fns/-/date-fns-4.4.0.tgz",
+      "tarballSha256": "eb106d1e9276213d6144b221c103e4abb7d92186734f7505f5a3860427b41a06",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/LICENSE.md",
+          "sha256": "8d3951c38967b964b1fe259bfd200c2647cc04c858b55a4414e3122a60f1ef4b"
+        }
+      ]
+    },
+    {
+      "name": "date-fns-jalali",
+      "version": "4.1.0-0",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/date-fns-jalali/4.1.0-0",
+      "tarball": "https://registry.npmjs.org/date-fns-jalali/-/date-fns-jalali-4.1.0-0.tgz",
+      "tarballSha256": "0b0748d0adf1aab6b6b3e160a616b1875257e151b6ac1ae088d901dcd6f37922",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/LICENSE.md",
+          "sha256": "8d3951c38967b964b1fe259bfd200c2647cc04c858b55a4414e3122a60f1ef4b"
+        }
+      ]
+    },
+    {
+      "name": "debug",
+      "version": "4.4.3",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/debug/4.4.3",
+      "tarball": "https://registry.npmjs.org/debug/-/debug-4.4.3.tgz",
+      "tarballSha256": "89c1ac9c946ee8905a875837114528e97eeae35e03be3190584b2216af43e4a7",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/LICENSE",
+          "sha256": "3a61c6c96caf5c1d9b623fb9b04c822b783dfcb78aa7e49c76a3f643e6ed7f95"
+        }
+      ]
+    },
+    {
+      "name": "decode-named-character-reference",
+      "version": "1.3.0",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/decode-named-character-reference/1.3.0",
+      "tarball": "https://registry.npmjs.org/decode-named-character-reference/-/decode-named-character-reference-1.3.0.tgz",
+      "tarballSha256": "b4399b50188513b31e4642b25437c9c309776aa34b6acb3eb18a0ee792e16f38",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/license",
+          "sha256": "dd1081884a92952802f4803110a6bb543acea9a814c786d58605b4c1219b5ebb"
+        }
+      ]
+    },
+    {
+      "name": "dequal",
+      "version": "2.0.3",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/dequal/2.0.3",
+      "tarball": "https://registry.npmjs.org/dequal/-/dequal-2.0.3.tgz",
+      "tarballSha256": "941d90d6629878167d10d2a05d8c6df8f8fa13acc826616abb49db63ac6a5c35",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/license",
+          "sha256": "306fa513e39b23a6e8747520de761809d206b99800ef41907b530226574c59ae"
+        }
+      ]
+    },
+    {
+      "name": "detect-node-es",
+      "version": "1.1.0",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/detect-node-es/1.1.0",
+      "tarball": "https://registry.npmjs.org/detect-node-es/-/detect-node-es-1.1.0.tgz",
+      "tarballSha256": "bc0bc6ee6c25bfd3db4e44dbaa210011dc5a1937a381bbbd92ad857bf5183678",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/LICENSE",
+          "sha256": "54b32293ea560d22cd9b62af9b2cda1a030d910a48c6601d227c5ff2338d95f8"
+        }
+      ]
+    },
+    {
+      "name": "devlop",
+      "version": "1.1.0",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/devlop/1.1.0",
+      "tarball": "https://registry.npmjs.org/devlop/-/devlop-1.1.0.tgz",
+      "tarballSha256": "aed0b5ba97cc3aba851946766b1e4804e92a0d3b2051e047eed4e8bf508ecd5f",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/license",
+          "sha256": "6f296a5eccc1dc96714bb94ebaa9cac25b0a1467d74cc5263ac4d0646ab01f62"
+        }
+      ]
+    },
+    {
+      "name": "emojilib",
+      "version": "2.4.0",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/emojilib/2.4.0",
+      "tarball": "https://registry.npmjs.org/emojilib/-/emojilib-2.4.0.tgz",
+      "tarballSha256": "b005c01552a28721130c693f9ac0445964982340fe3fbd3a17d5c9399f1fa6be",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/LICENSE",
+          "sha256": "da00c2955742e85d06f80a34f5142f96a6167df2d8762b2dc5a998c9f919a715"
+        }
+      ]
+    },
+    {
+      "name": "emoticon",
+      "version": "4.1.0",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/emoticon/4.1.0",
+      "tarball": "https://registry.npmjs.org/emoticon/-/emoticon-4.1.0.tgz",
+      "tarballSha256": "a9e1117cfcd6451c91973f412a4efdf7db9e498cb399349edf2f5f4b9aeb7442",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/license",
+          "sha256": "9966260ba3ea9d6a5f839297dca80ddc99735a34b4ae82811cac7b956d2e3afd"
+        }
+      ]
+    },
+    {
+      "name": "entities",
+      "version": "6.0.1",
+      "license": "BSD-2-Clause",
+      "registry": "https://registry.npmjs.org/entities/6.0.1",
+      "tarball": "https://registry.npmjs.org/entities/-/entities-6.0.1.tgz",
+      "tarballSha256": "a4de957ab0852f6c91eae59a6000ced5a25a04f0b6e1c3062fbad732a6b5479d",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/LICENSE",
+          "sha256": "cb992345949ccd6e8394b2cd6c465f7b897c864f845937dbf64e8997f389e164"
+        }
+      ]
+    },
+    {
+      "name": "escape-string-regexp",
+      "version": "5.0.0",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/escape-string-regexp/5.0.0",
+      "tarball": "https://registry.npmjs.org/escape-string-regexp/-/escape-string-regexp-5.0.0.tgz",
+      "tarballSha256": "c8b662afe8aa2b852ecc27d766e584a502f8351fbbd890611f2509bf083d28e6",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/license",
+          "sha256": "5c932d88256b4ab958f64a856fa48e8bd1f55bc1d96b8149c65689e0c61789d3"
+        }
+      ]
+    },
+    {
+      "name": "estree-util-is-identifier-name",
+      "version": "3.0.0",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/estree-util-is-identifier-name/3.0.0",
+      "tarball": "https://registry.npmjs.org/estree-util-is-identifier-name/-/estree-util-is-identifier-name-3.0.0.tgz",
+      "tarballSha256": "fa9ffe7f957ff44a54894dd01e96851824e2f008181921585d69947a60eb702b",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/license",
+          "sha256": "536804b3adbff17dbbb9ed0d2bf9655b78f07640278581e37e3d7475282d5e61"
+        }
+      ]
+    },
+    {
+      "name": "extend",
+      "version": "3.0.2",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/extend/3.0.2",
+      "tarball": "https://registry.npmjs.org/extend/-/extend-3.0.2.tgz",
+      "tarballSha256": "1d91d0b0faa50cba223fa937c7b5a4a662968b1d78b3e59dca5c917dd5cf72b2",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/LICENSE",
+          "sha256": "97af7428f93afbab9bf79cd09254da1357161794f4255eb1b4599f04dd2d2e7c"
+        }
+      ]
+    },
+    {
+      "name": "fault",
+      "version": "1.0.4",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/fault/1.0.4",
+      "tarball": "https://registry.npmjs.org/fault/-/fault-1.0.4.tgz",
+      "tarballSha256": "e20c9449b908a8efc55678ed43fdde7c99e922107811b534b043a614148930c8",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/license",
+          "sha256": "63cb98b3f6abfb3c3592c16f88253c1bdc834087bf52671e8ce5609e4eb693cf"
+        }
+      ]
+    },
+    {
+      "name": "format",
+      "version": "0.2.2",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/format/0.2.2",
+      "tarball": "https://registry.npmjs.org/format/-/format-0.2.2.tgz",
+      "tarballSha256": "e3ff125b0cd4f74c3b03b5399d55f1c94d92ffeb706d7483c5ec437c2dc16076",
+      "noticeSourceKind": "supplement",
+      "notices": [
+        {
+          "path": "supplemental-license",
+          "sha256": "45077520b28d5135a32c591b418017aca09d3c99db0fcd4fd857bccbd49a5335",
+          "url": "https://raw.githubusercontent.com/spdx/license-list-data/main/text/MIT.txt",
+          "declarationUrl": "https://raw.githubusercontent.com/samsonjs/format/4f898096759776b7c84fa7a25b13c923dadfe46e/Readme.md",
+          "declarationSha256": "e078ab4217332db9ac446cdf23e932eabd21d6db7c239a6495df4d3802251f20",
+          "note": "Original npm package licenses[] and pinned upstream Readme declare MIT; copyright line copied from that Readme. Standard MIT text supplied from SPDX, with its placeholder copyright line replaced by the original notice."
+        }
+      ]
+    },
+    {
+      "name": "get-nonce",
+      "version": "1.0.1",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/get-nonce/1.0.1",
+      "tarball": "https://registry.npmjs.org/get-nonce/-/get-nonce-1.0.1.tgz",
+      "tarballSha256": "943112eb62102f2ef56bad6eb50a3fe12bc0b386da0893614d81c735baa05897",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/LICENSE",
+          "sha256": "acf3b087b348d2f2e731b9d4131af185aad694c1204ce14a46909483fd42da05"
+        }
+      ]
+    },
+    {
+      "name": "hast-util-from-dom",
+      "version": "5.0.1",
+      "license": "ISC",
+      "registry": "https://registry.npmjs.org/hast-util-from-dom/5.0.1",
+      "tarball": "https://registry.npmjs.org/hast-util-from-dom/-/hast-util-from-dom-5.0.1.tgz",
+      "tarballSha256": "2fafecd79507fdecc3c472c3c775a678e2aabb35c74aeb3e67bc3635679ca93d",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/license",
+          "sha256": "c01b44788e1829e81cb20d621c93c07a08ea010063118b956739f2ab050d17ca"
+        }
+      ]
+    },
+    {
+      "name": "hast-util-from-html",
+      "version": "2.0.3",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/hast-util-from-html/2.0.3",
+      "tarball": "https://registry.npmjs.org/hast-util-from-html/-/hast-util-from-html-2.0.3.tgz",
+      "tarballSha256": "7ef231301c252288e85b63e3d9f9d533cf47686ac1d0c9e0dba8c45e5677a4eb",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/license",
+          "sha256": "e620971c29d750df627f71f4e629618ef8fcbbea134ab95b344fc0c1a757cad1"
+        }
+      ]
+    },
+    {
+      "name": "hast-util-from-html-isomorphic",
+      "version": "2.0.0",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/hast-util-from-html-isomorphic/2.0.0",
+      "tarball": "https://registry.npmjs.org/hast-util-from-html-isomorphic/-/hast-util-from-html-isomorphic-2.0.0.tgz",
+      "tarballSha256": "97ff1cb0db9442878afc8c49c7356ff460c9a2f86a43875f910b90b66b0706d2",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/license",
+          "sha256": "fb5678944a6345b1d30a8fe006aef2be2f6bb1c22431a7cc92674fb0944a7578"
+        }
+      ]
+    },
+    {
+      "name": "hast-util-from-parse5",
+      "version": "8.0.3",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/hast-util-from-parse5/8.0.3",
+      "tarball": "https://registry.npmjs.org/hast-util-from-parse5/-/hast-util-from-parse5-8.0.3.tgz",
+      "tarballSha256": "085c56c1024d3b9cfd93d23cae61a20fca479e1d2a5a4cb8f6cc678c27bc306a",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/license",
+          "sha256": "dd1081884a92952802f4803110a6bb543acea9a814c786d58605b4c1219b5ebb"
+        }
+      ]
+    },
+    {
+      "name": "hast-util-is-element",
+      "version": "3.0.0",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/hast-util-is-element/3.0.0",
+      "tarball": "https://registry.npmjs.org/hast-util-is-element/-/hast-util-is-element-3.0.0.tgz",
+      "tarballSha256": "7cae5b84402bfed675a0c2c25cf8b3c7d09487e87fa715ae467771f8d150ddee",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/license",
+          "sha256": "ca4662cb5d1b738fbe5350c0d5485ba11773b4b7208974082ae6e129a52d631d"
+        }
+      ]
+    },
+    {
+      "name": "hast-util-parse-selector",
+      "version": "4.0.0",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/hast-util-parse-selector/4.0.0",
+      "tarball": "https://registry.npmjs.org/hast-util-parse-selector/-/hast-util-parse-selector-4.0.0.tgz",
+      "tarballSha256": "df79b69d2c5a494758576fe4016f1082aecb7ae1cde7cb908ad539ba4d8d8884",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/license",
+          "sha256": "ca4662cb5d1b738fbe5350c0d5485ba11773b4b7208974082ae6e129a52d631d"
+        }
+      ]
+    },
+    {
+      "name": "hast-util-to-jsx-runtime",
+      "version": "2.3.6",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/hast-util-to-jsx-runtime/2.3.6",
+      "tarball": "https://registry.npmjs.org/hast-util-to-jsx-runtime/-/hast-util-to-jsx-runtime-2.3.6.tgz",
+      "tarballSha256": "83468f1886b62230982ce2eb51a81173291e598e4ab532c81a95ea4db5d05fdc",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/license",
+          "sha256": "dd1081884a92952802f4803110a6bb543acea9a814c786d58605b4c1219b5ebb"
+        }
+      ]
+    },
+    {
+      "name": "hast-util-to-text",
+      "version": "4.0.2",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/hast-util-to-text/4.0.2",
+      "tarball": "https://registry.npmjs.org/hast-util-to-text/-/hast-util-to-text-4.0.2.tgz",
+      "tarballSha256": "0cbe35c3d652969dc8ecddff1afa20e64e5eac9a2e3e462acadc1ad8a97594b3",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/license",
+          "sha256": "691115fe0234b1f05cb52a9c4aded367e389784a6501af824e85a7e54ca47d38"
+        }
+      ]
+    },
+    {
+      "name": "hast-util-whitespace",
+      "version": "3.0.0",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/hast-util-whitespace/3.0.0",
+      "tarball": "https://registry.npmjs.org/hast-util-whitespace/-/hast-util-whitespace-3.0.0.tgz",
+      "tarballSha256": "673f97f5bba3cac0184726f519a5750273e4434b839a769f4fbf09e4b4da2ceb",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/license",
+          "sha256": "ca4662cb5d1b738fbe5350c0d5485ba11773b4b7208974082ae6e129a52d631d"
+        }
+      ]
+    },
+    {
+      "name": "hastscript",
+      "version": "9.0.1",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/hastscript/9.0.1",
+      "tarball": "https://registry.npmjs.org/hastscript/-/hastscript-9.0.1.tgz",
+      "tarballSha256": "1712fdcc26cd393a8f54f07232fbadb6b084af651beb11d0ec8af67eec00e3f3",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/license",
+          "sha256": "dd1081884a92952802f4803110a6bb543acea9a814c786d58605b4c1219b5ebb"
+        }
+      ]
+    },
+    {
+      "name": "highlight.js",
+      "version": "10.7.3",
+      "license": "BSD-3-Clause",
+      "registry": "https://registry.npmjs.org/highlight.js/10.7.3",
+      "tarball": "https://registry.npmjs.org/highlight.js/-/highlight.js-10.7.3.tgz",
+      "tarballSha256": "292968c31d106f910fdd2e4d73a98d9bdf621e5f6e0244d9f3fbfc3572bea91e",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/LICENSE",
+          "sha256": "6c081431591d9df696c82dc598fe1423765b8a299b200ed00b281afd0f64c490"
+        }
+      ]
+    },
+    {
+      "name": "highlightjs-vue",
+      "version": "1.0.0",
+      "license": "CC0-1.0",
+      "registry": "https://registry.npmjs.org/highlightjs-vue/1.0.0",
+      "tarball": "https://registry.npmjs.org/highlightjs-vue/-/highlightjs-vue-1.0.0.tgz",
+      "tarballSha256": "336f793a8eed769fb8632971113454e9a37e7794bf7bdbffbb9e8f16681ad000",
+      "noticeSourceKind": "supplement",
+      "notices": [
+        {
+          "path": "supplemental-license",
+          "sha256": "a2010f343487d3f7618affe54f789f5487602331c0a8d03f49e9a7c547cf0499",
+          "url": "https://raw.githubusercontent.com/spdx/license-list-data/main/text/CC0-1.0.txt",
+          "declarationUrl": "https://raw.githubusercontent.com/highlightjs/highlightjs-vue/2a0d197ec24ba70e019e12a13bd42f006124506a/README.md",
+          "declarationSha256": "80f9f8e1bc56298613fa5b2ee0b57ab040f319ce052b076d54c0f96f75c02d2b",
+          "note": "Original npm metadata and pinned README declare CC0-1.0; the package contains no standalone license. Full standard CC0-1.0 text supplied from SPDX. Author in original package metadata: Sara Lissette."
+        }
+      ]
+    },
+    {
+      "name": "html-url-attributes",
+      "version": "3.0.1",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/html-url-attributes/3.0.1",
+      "tarball": "https://registry.npmjs.org/html-url-attributes/-/html-url-attributes-3.0.1.tgz",
+      "tarballSha256": "9a63a922924f6d31add785bccd0a53706c047e0c0b56dcbcdc836254ded18ed9",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/license",
+          "sha256": "e18cf5173e928f808f0cd208097fee8fbec9d28fc0255213938e4c559e29ff58"
+        }
+      ]
+    },
+    {
+      "name": "inline-style-parser",
+      "version": "0.2.7",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/inline-style-parser/0.2.7",
+      "tarball": "https://registry.npmjs.org/inline-style-parser/-/inline-style-parser-0.2.7.tgz",
+      "tarballSha256": "edc328b12a2fc88d990bd877e4cebed9823b8427d79a6a73d9c65591d3ccb6bc",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/LICENSE",
+          "sha256": "395c95f20598da653ff1eb1cb9d74947c7fac689697147f1d192fd0242a0e635"
+        }
+      ]
+    },
+    {
+      "name": "internmap",
+      "version": "2.0.3",
+      "license": "ISC",
+      "registry": "https://registry.npmjs.org/internmap/2.0.3",
+      "tarball": "https://registry.npmjs.org/internmap/-/internmap-2.0.3.tgz",
+      "tarballSha256": "39d1936831a4d3f2bd6e088db28a10de4458d823f652c36b2c808bf5b978c48d",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/LICENSE",
+          "sha256": "9ea8903938dab5f12c4572d60725069bec2d1b0dc3bcc210b09bae946a5ebb1f"
+        }
+      ]
+    },
+    {
+      "name": "is-alphabetical",
+      "version": "2.0.1",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/is-alphabetical/2.0.1",
+      "tarball": "https://registry.npmjs.org/is-alphabetical/-/is-alphabetical-2.0.1.tgz",
+      "tarballSha256": "85dddfd165e6ac37b3229c3b1c181b92d1fdde68fd5a46acf8b14696c9729f81",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/license",
+          "sha256": "ca4662cb5d1b738fbe5350c0d5485ba11773b4b7208974082ae6e129a52d631d"
+        }
+      ]
+    },
+    {
+      "name": "is-alphanumerical",
+      "version": "2.0.1",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/is-alphanumerical/2.0.1",
+      "tarball": "https://registry.npmjs.org/is-alphanumerical/-/is-alphanumerical-2.0.1.tgz",
+      "tarballSha256": "b6f98de1bfab7ed76025357018b57593bacd2d177985cd04bbd2a5059d3ea92b",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/license",
+          "sha256": "ca4662cb5d1b738fbe5350c0d5485ba11773b4b7208974082ae6e129a52d631d"
+        }
+      ]
+    },
+    {
+      "name": "is-decimal",
+      "version": "2.0.1",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/is-decimal/2.0.1",
+      "tarball": "https://registry.npmjs.org/is-decimal/-/is-decimal-2.0.1.tgz",
+      "tarballSha256": "62b6375ccb0869ca7c26ccb1e5049de4c4f272157894360b50cf8466fc4c1beb",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/license",
+          "sha256": "ca4662cb5d1b738fbe5350c0d5485ba11773b4b7208974082ae6e129a52d631d"
+        }
+      ]
+    },
+    {
+      "name": "is-hexadecimal",
+      "version": "2.0.1",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/is-hexadecimal/2.0.1",
+      "tarball": "https://registry.npmjs.org/is-hexadecimal/-/is-hexadecimal-2.0.1.tgz",
+      "tarballSha256": "6234c672b1134b6ebc8b162eb119a4b1beebc6cd9217bdc66b2b9822570f8d81",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/license",
+          "sha256": "ca4662cb5d1b738fbe5350c0d5485ba11773b4b7208974082ae6e129a52d631d"
+        }
+      ]
+    },
+    {
+      "name": "is-plain-obj",
+      "version": "4.1.0",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/is-plain-obj/4.1.0",
+      "tarball": "https://registry.npmjs.org/is-plain-obj/-/is-plain-obj-4.1.0.tgz",
+      "tarballSha256": "c71d874f7ab7cd560329b080ce790f9768dea503337fe2e2719a18e28be621f7",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/license",
+          "sha256": "5c932d88256b4ab958f64a856fa48e8bd1f55bc1d96b8149c65689e0c61789d3"
+        }
+      ]
+    },
+    {
+      "name": "katex",
+      "version": "0.16.44",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/katex/0.16.44",
+      "tarball": "https://registry.npmjs.org/katex/-/katex-0.16.44.tgz",
+      "tarballSha256": "bf9f62441cc7fd5fe4479eb69033f5603d86854e15b0e6516f47f217cb4333c6",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/LICENSE",
+          "sha256": "766ccc1f306c885aa45542a9846bbd0a505b27a0374f146778171c2254ce18e3"
+        }
+      ]
+    },
+    {
+      "name": "lodash-es",
+      "version": "4.18.1",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/lodash-es/4.18.1",
+      "tarball": "https://registry.npmjs.org/lodash-es/-/lodash-es-4.18.1.tgz",
+      "tarballSha256": "b0c810e5cd4cd580ed7b18fc71384b9a80c151dc5c85b1729bd656a49e3f16f8",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/LICENSE",
+          "sha256": "f71e8ed126b46346494aad5486874cd8f0aafe95092ed67d2e3cb6110f939abc"
+        }
+      ]
+    },
+    {
+      "name": "longest-streak",
+      "version": "3.1.0",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/longest-streak/3.1.0",
+      "tarball": "https://registry.npmjs.org/longest-streak/-/longest-streak-3.1.0.tgz",
+      "tarballSha256": "384446c12b28a0f29cd68b22871cff7c1001fdca5c173930e4eeb4811de210f6",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/license",
+          "sha256": "9f084fac69d8cf1e6ce983ba5a3499c7695ed74a26ec625c38f0fd19fddd5e10"
+        }
+      ]
+    },
+    {
+      "name": "lowlight",
+      "version": "1.20.0",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/lowlight/1.20.0",
+      "tarball": "https://registry.npmjs.org/lowlight/-/lowlight-1.20.0.tgz",
+      "tarballSha256": "efe15511896ce4e8a9e4bb4bfeb8f9350d983032d61df1c7c2d444dbbfe49810",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/license",
+          "sha256": "ca4662cb5d1b738fbe5350c0d5485ba11773b4b7208974082ae6e129a52d631d"
+        }
+      ]
+    },
+    {
+      "name": "lucide-react",
+      "version": "0.562.0",
+      "license": "ISC",
+      "registry": "https://registry.npmjs.org/lucide-react/0.562.0",
+      "tarball": "https://registry.npmjs.org/lucide-react/-/lucide-react-0.562.0.tgz",
+      "tarballSha256": "a96de3519330653c08739c701b0e4f0a119659430f0a0653afa4e57b1a182625",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/LICENSE",
+          "sha256": "3c57143f22dac950efebf84002e360bba5458c7b90fe583b0667aaaef1a7256e"
+        }
+      ]
+    },
+    {
+      "name": "lucide-react",
+      "version": "0.575.0",
+      "license": "ISC",
+      "registry": "https://registry.npmjs.org/lucide-react/0.575.0",
+      "tarball": "https://registry.npmjs.org/lucide-react/-/lucide-react-0.575.0.tgz",
+      "tarballSha256": "b53d76a053b7295f332d65405ccdccdf013acda067d46345be82105b1da94ee3",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/LICENSE",
+          "sha256": "668dcc52803480e0a026b31140a4cae668772663cd764e5991d252eef03f98db"
+        }
+      ]
+    },
+    {
+      "name": "markdown-table",
+      "version": "3.0.4",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/markdown-table/3.0.4",
+      "tarball": "https://registry.npmjs.org/markdown-table/-/markdown-table-3.0.4.tgz",
+      "tarballSha256": "14e8b7c711b0be872cba307c2561ed991b089aa2e4dc4a8de74692a6d51bce58",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/license",
+          "sha256": "dd1081884a92952802f4803110a6bb543acea9a814c786d58605b4c1219b5ebb"
+        }
+      ]
+    },
+    {
+      "name": "mdast-util-find-and-replace",
+      "version": "3.0.2",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/mdast-util-find-and-replace/3.0.2",
+      "tarball": "https://registry.npmjs.org/mdast-util-find-and-replace/-/mdast-util-find-and-replace-3.0.2.tgz",
+      "tarballSha256": "6b7f6538b52715bdc63214511fdbd7c99040caf56efc6f01353e9705de1b109c",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/license",
+          "sha256": "dd1081884a92952802f4803110a6bb543acea9a814c786d58605b4c1219b5ebb"
+        }
+      ]
+    },
+    {
+      "name": "mdast-util-from-markdown",
+      "version": "2.0.3",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/mdast-util-from-markdown/2.0.3",
+      "tarball": "https://registry.npmjs.org/mdast-util-from-markdown/-/mdast-util-from-markdown-2.0.3.tgz",
+      "tarballSha256": "adc7944beb265a36cbc8b3f0ad019bc939f56eb11ab9cefccc964392e0b9597d",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/license",
+          "sha256": "dd1081884a92952802f4803110a6bb543acea9a814c786d58605b4c1219b5ebb"
+        }
+      ]
+    },
+    {
+      "name": "mdast-util-gfm",
+      "version": "3.1.0",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/mdast-util-gfm/3.1.0",
+      "tarball": "https://registry.npmjs.org/mdast-util-gfm/-/mdast-util-gfm-3.1.0.tgz",
+      "tarballSha256": "96204c6cdf253e43ee1431b88c7e46015a26d2b6d1d688a0153ce96eaecbe642",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/license",
+          "sha256": "dd1081884a92952802f4803110a6bb543acea9a814c786d58605b4c1219b5ebb"
+        }
+      ]
+    },
+    {
+      "name": "mdast-util-gfm-autolink-literal",
+      "version": "2.0.1",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/mdast-util-gfm-autolink-literal/2.0.1",
+      "tarball": "https://registry.npmjs.org/mdast-util-gfm-autolink-literal/-/mdast-util-gfm-autolink-literal-2.0.1.tgz",
+      "tarballSha256": "5860bd6db7eb6f6336c5ddd4c713900fb973a05cee8dd531cbcb8548a122c77c",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/license",
+          "sha256": "536804b3adbff17dbbb9ed0d2bf9655b78f07640278581e37e3d7475282d5e61"
+        }
+      ]
+    },
+    {
+      "name": "mdast-util-gfm-footnote",
+      "version": "2.1.0",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/mdast-util-gfm-footnote/2.1.0",
+      "tarball": "https://registry.npmjs.org/mdast-util-gfm-footnote/-/mdast-util-gfm-footnote-2.1.0.tgz",
+      "tarballSha256": "d4d26b4257e56dffa0499654e3e812bee7490c71422ddfc0972e1b30930f117b",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/license",
+          "sha256": "dd1081884a92952802f4803110a6bb543acea9a814c786d58605b4c1219b5ebb"
+        }
+      ]
+    },
+    {
+      "name": "mdast-util-gfm-strikethrough",
+      "version": "2.0.0",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/mdast-util-gfm-strikethrough/2.0.0",
+      "tarball": "https://registry.npmjs.org/mdast-util-gfm-strikethrough/-/mdast-util-gfm-strikethrough-2.0.0.tgz",
+      "tarballSha256": "690ed3ca53497269a5b41a0f95bfdd3a2a675ecd3aea3f1887665c412477e719",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/license",
+          "sha256": "536804b3adbff17dbbb9ed0d2bf9655b78f07640278581e37e3d7475282d5e61"
+        }
+      ]
+    },
+    {
+      "name": "mdast-util-gfm-table",
+      "version": "2.0.0",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/mdast-util-gfm-table/2.0.0",
+      "tarball": "https://registry.npmjs.org/mdast-util-gfm-table/-/mdast-util-gfm-table-2.0.0.tgz",
+      "tarballSha256": "c1d7b61db521f2279c32f1051dc42c98e99ac33538ae9f859b2f3daafb34366e",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/license",
+          "sha256": "536804b3adbff17dbbb9ed0d2bf9655b78f07640278581e37e3d7475282d5e61"
+        }
+      ]
+    },
+    {
+      "name": "mdast-util-gfm-task-list-item",
+      "version": "2.0.0",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/mdast-util-gfm-task-list-item/2.0.0",
+      "tarball": "https://registry.npmjs.org/mdast-util-gfm-task-list-item/-/mdast-util-gfm-task-list-item-2.0.0.tgz",
+      "tarballSha256": "3ca34f4601317823f202df4692310c5d37ca628b76cdda2bd59d32de2c0a5d01",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/license",
+          "sha256": "536804b3adbff17dbbb9ed0d2bf9655b78f07640278581e37e3d7475282d5e61"
+        }
+      ]
+    },
+    {
+      "name": "mdast-util-math",
+      "version": "3.0.0",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/mdast-util-math/3.0.0",
+      "tarball": "https://registry.npmjs.org/mdast-util-math/-/mdast-util-math-3.0.0.tgz",
+      "tarballSha256": "4de30d5fa2382687ff805a2abeb55465c48bed3c859aa6fac8292fb377e8cd90",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/license",
+          "sha256": "536804b3adbff17dbbb9ed0d2bf9655b78f07640278581e37e3d7475282d5e61"
+        }
+      ]
+    },
+    {
+      "name": "mdast-util-mdx-expression",
+      "version": "2.0.1",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/mdast-util-mdx-expression/2.0.1",
+      "tarball": "https://registry.npmjs.org/mdast-util-mdx-expression/-/mdast-util-mdx-expression-2.0.1.tgz",
+      "tarballSha256": "e63aaa9cf6caedaf03662caa66ac1d93943b9c6ff8b7484dcb0d1f03e8382d7b",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/license",
+          "sha256": "536804b3adbff17dbbb9ed0d2bf9655b78f07640278581e37e3d7475282d5e61"
+        }
+      ]
+    },
+    {
+      "name": "mdast-util-mdx-jsx",
+      "version": "3.2.0",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/mdast-util-mdx-jsx/3.2.0",
+      "tarball": "https://registry.npmjs.org/mdast-util-mdx-jsx/-/mdast-util-mdx-jsx-3.2.0.tgz",
+      "tarballSha256": "0de1dcf89da947830305200fd7ab36069e248f9522398ed791b5a0c5e3aa8230",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/license",
+          "sha256": "536804b3adbff17dbbb9ed0d2bf9655b78f07640278581e37e3d7475282d5e61"
+        }
+      ]
+    },
+    {
+      "name": "mdast-util-mdxjs-esm",
+      "version": "2.0.1",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/mdast-util-mdxjs-esm/2.0.1",
+      "tarball": "https://registry.npmjs.org/mdast-util-mdxjs-esm/-/mdast-util-mdxjs-esm-2.0.1.tgz",
+      "tarballSha256": "f62f301b48a383c8b6ff03e2a7091cfa96925af18de733cd59c1dad124dc7606",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/license",
+          "sha256": "536804b3adbff17dbbb9ed0d2bf9655b78f07640278581e37e3d7475282d5e61"
+        }
+      ]
+    },
+    {
+      "name": "mdast-util-newline-to-break",
+      "version": "2.0.0",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/mdast-util-newline-to-break/2.0.0",
+      "tarball": "https://registry.npmjs.org/mdast-util-newline-to-break/-/mdast-util-newline-to-break-2.0.0.tgz",
+      "tarballSha256": "1b6027e3c8ac5803b563b75a5359d41f68e6b438c427c8b1b5fdf156924604f1",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/license",
+          "sha256": "d8fc337aaf98fc7a0f5498edc18b47a9df8cdfcc1a0f013519105905722c7a4c"
+        }
+      ]
+    },
+    {
+      "name": "mdast-util-phrasing",
+      "version": "4.1.0",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/mdast-util-phrasing/4.1.0",
+      "tarball": "https://registry.npmjs.org/mdast-util-phrasing/-/mdast-util-phrasing-4.1.0.tgz",
+      "tarballSha256": "001c22ccbb8f66b889e468ba33c86df25aaf9e2cea1ee1d827fb172431f09835",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/license",
+          "sha256": "b6d1a4e1831b177acc96f22a817d4f0f4c18419355badc3125754445fc69e3a7"
+        }
+      ]
+    },
+    {
+      "name": "mdast-util-to-hast",
+      "version": "13.2.1",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/mdast-util-to-hast/13.2.1",
+      "tarball": "https://registry.npmjs.org/mdast-util-to-hast/-/mdast-util-to-hast-13.2.1.tgz",
+      "tarballSha256": "41f70e2f73a4ad9c67a401faa3143d16d6a1bda2c6bf9ae48073a2d4f5ebb1f4",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/license",
+          "sha256": "ca4662cb5d1b738fbe5350c0d5485ba11773b4b7208974082ae6e129a52d631d"
+        }
+      ]
+    },
+    {
+      "name": "mdast-util-to-markdown",
+      "version": "2.1.2",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/mdast-util-to-markdown/2.1.2",
+      "tarball": "https://registry.npmjs.org/mdast-util-to-markdown/-/mdast-util-to-markdown-2.1.2.tgz",
+      "tarballSha256": "a6a431a90230e4d57ccb7440e5f2e62c84022b241f10ff64b7fa6f32d9e6ac95",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/license",
+          "sha256": "dd1081884a92952802f4803110a6bb543acea9a814c786d58605b4c1219b5ebb"
+        }
+      ]
+    },
+    {
+      "name": "mdast-util-to-string",
+      "version": "4.0.0",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/mdast-util-to-string/4.0.0",
+      "tarball": "https://registry.npmjs.org/mdast-util-to-string/-/mdast-util-to-string-4.0.0.tgz",
+      "tarballSha256": "bbfe70a5652305df7e8e484f674975c69bddbbad048ced52dc71835e64bba37a",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/license",
+          "sha256": "63cb98b3f6abfb3c3592c16f88253c1bdc834087bf52671e8ce5609e4eb693cf"
+        }
+      ]
+    },
+    {
+      "name": "micromark",
+      "version": "4.0.2",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/micromark/4.0.2",
+      "tarball": "https://registry.npmjs.org/micromark/-/micromark-4.0.2.tgz",
+      "tarballSha256": "ddbea34c618d8b869600f2fdde7398526c40f6caf511fc6393877796459a7e66",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/license",
+          "sha256": "dd1081884a92952802f4803110a6bb543acea9a814c786d58605b4c1219b5ebb"
+        }
+      ]
+    },
+    {
+      "name": "micromark-core-commonmark",
+      "version": "2.0.3",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/micromark-core-commonmark/2.0.3",
+      "tarball": "https://registry.npmjs.org/micromark-core-commonmark/-/micromark-core-commonmark-2.0.3.tgz",
+      "tarballSha256": "05ae118b84ee424a213548e0121044b5a46cd899f00031dd96f9440ff4b2bd40",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/license",
+          "sha256": "dd1081884a92952802f4803110a6bb543acea9a814c786d58605b4c1219b5ebb"
+        }
+      ]
+    },
+    {
+      "name": "micromark-extension-gfm",
+      "version": "3.0.0",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/micromark-extension-gfm/3.0.0",
+      "tarball": "https://registry.npmjs.org/micromark-extension-gfm/-/micromark-extension-gfm-3.0.0.tgz",
+      "tarballSha256": "35f3336120e336f7bf4737a93ca90b5549a353efc9496a31feec97215b756cf1",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/license",
+          "sha256": "536804b3adbff17dbbb9ed0d2bf9655b78f07640278581e37e3d7475282d5e61"
+        }
+      ]
+    },
+    {
+      "name": "micromark-extension-gfm-autolink-literal",
+      "version": "2.1.0",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/micromark-extension-gfm-autolink-literal/2.1.0",
+      "tarball": "https://registry.npmjs.org/micromark-extension-gfm-autolink-literal/-/micromark-extension-gfm-autolink-literal-2.1.0.tgz",
+      "tarballSha256": "c26bf2024d0741030b554cd784413776291ab4904c1ab45a55fb98e66e5cc3bf",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/license",
+          "sha256": "536804b3adbff17dbbb9ed0d2bf9655b78f07640278581e37e3d7475282d5e61"
+        }
+      ]
+    },
+    {
+      "name": "micromark-extension-gfm-footnote",
+      "version": "2.1.0",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/micromark-extension-gfm-footnote/2.1.0",
+      "tarball": "https://registry.npmjs.org/micromark-extension-gfm-footnote/-/micromark-extension-gfm-footnote-2.1.0.tgz",
+      "tarballSha256": "a1b9858641efe4ddabf48062397663f9de3fdea1fb43b4c34faa9987eb6f2f8a",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/license",
+          "sha256": "807a88522a850092aece49486207c17c313c4d5708ac276524840fe1caa0b0fa"
+        }
+      ]
+    },
+    {
+      "name": "micromark-extension-gfm-strikethrough",
+      "version": "2.1.0",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/micromark-extension-gfm-strikethrough/2.1.0",
+      "tarball": "https://registry.npmjs.org/micromark-extension-gfm-strikethrough/-/micromark-extension-gfm-strikethrough-2.1.0.tgz",
+      "tarballSha256": "e3d9e7b8ee5d45c4c49835d2172492a5bb34f304dc5efbb68294f69a16d1c762",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/license",
+          "sha256": "536804b3adbff17dbbb9ed0d2bf9655b78f07640278581e37e3d7475282d5e61"
+        }
+      ]
+    },
+    {
+      "name": "micromark-extension-gfm-table",
+      "version": "2.1.1",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/micromark-extension-gfm-table/2.1.1",
+      "tarball": "https://registry.npmjs.org/micromark-extension-gfm-table/-/micromark-extension-gfm-table-2.1.1.tgz",
+      "tarballSha256": "61cb7bebe080cf884bd03c195803fc0f380e896a49daa7691f5ba02aaac0ea86",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/license",
+          "sha256": "dd1081884a92952802f4803110a6bb543acea9a814c786d58605b4c1219b5ebb"
+        }
+      ]
+    },
+    {
+      "name": "micromark-extension-gfm-tagfilter",
+      "version": "2.0.0",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/micromark-extension-gfm-tagfilter/2.0.0",
+      "tarball": "https://registry.npmjs.org/micromark-extension-gfm-tagfilter/-/micromark-extension-gfm-tagfilter-2.0.0.tgz",
+      "tarballSha256": "576e1be7c054b25c378e084482bc7fdd05c1a213b544866220b27fed82784128",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/license",
+          "sha256": "536804b3adbff17dbbb9ed0d2bf9655b78f07640278581e37e3d7475282d5e61"
+        }
+      ]
+    },
+    {
+      "name": "micromark-extension-gfm-task-list-item",
+      "version": "2.1.0",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/micromark-extension-gfm-task-list-item/2.1.0",
+      "tarball": "https://registry.npmjs.org/micromark-extension-gfm-task-list-item/-/micromark-extension-gfm-task-list-item-2.1.0.tgz",
+      "tarballSha256": "2af93a84aca7141d88f8967be748a2f84d5ac6dc7cdb14a62edcbbd8a27b11af",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/license",
+          "sha256": "536804b3adbff17dbbb9ed0d2bf9655b78f07640278581e37e3d7475282d5e61"
+        }
+      ]
+    },
+    {
+      "name": "micromark-extension-math",
+      "version": "3.1.0",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/micromark-extension-math/3.1.0",
+      "tarball": "https://registry.npmjs.org/micromark-extension-math/-/micromark-extension-math-3.1.0.tgz",
+      "tarballSha256": "a634d9a310781fa7385d28a66de744458a9da8330eef32952381e1ac004d05f1",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/license",
+          "sha256": "536804b3adbff17dbbb9ed0d2bf9655b78f07640278581e37e3d7475282d5e61"
+        }
+      ]
+    },
+    {
+      "name": "micromark-factory-destination",
+      "version": "2.0.1",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/micromark-factory-destination/2.0.1",
+      "tarball": "https://registry.npmjs.org/micromark-factory-destination/-/micromark-factory-destination-2.0.1.tgz",
+      "tarballSha256": "b4acd1721e4756a61f2482c3424344b8b01bdbf79180cf6e411ed491887bd8db",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/license",
+          "sha256": "dd1081884a92952802f4803110a6bb543acea9a814c786d58605b4c1219b5ebb"
+        }
+      ]
+    },
+    {
+      "name": "micromark-factory-label",
+      "version": "2.0.1",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/micromark-factory-label/2.0.1",
+      "tarball": "https://registry.npmjs.org/micromark-factory-label/-/micromark-factory-label-2.0.1.tgz",
+      "tarballSha256": "c65fb436893844fb5be29814dc2528a596236423c4c7e5b1130cd49b5bae8c1d",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/license",
+          "sha256": "dd1081884a92952802f4803110a6bb543acea9a814c786d58605b4c1219b5ebb"
+        }
+      ]
+    },
+    {
+      "name": "micromark-factory-space",
+      "version": "2.0.1",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/micromark-factory-space/2.0.1",
+      "tarball": "https://registry.npmjs.org/micromark-factory-space/-/micromark-factory-space-2.0.1.tgz",
+      "tarballSha256": "605220e300cf7601c9e8841b3310981400ac02706b499cf43222f43a14c61a24",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/license",
+          "sha256": "dd1081884a92952802f4803110a6bb543acea9a814c786d58605b4c1219b5ebb"
+        }
+      ]
+    },
+    {
+      "name": "micromark-factory-title",
+      "version": "2.0.1",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/micromark-factory-title/2.0.1",
+      "tarball": "https://registry.npmjs.org/micromark-factory-title/-/micromark-factory-title-2.0.1.tgz",
+      "tarballSha256": "2e247f3d7ddef39cde036ee828a66ec410059b3963ce3e376160e48011f257b0",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/license",
+          "sha256": "dd1081884a92952802f4803110a6bb543acea9a814c786d58605b4c1219b5ebb"
+        }
+      ]
+    },
+    {
+      "name": "micromark-factory-whitespace",
+      "version": "2.0.1",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/micromark-factory-whitespace/2.0.1",
+      "tarball": "https://registry.npmjs.org/micromark-factory-whitespace/-/micromark-factory-whitespace-2.0.1.tgz",
+      "tarballSha256": "57dc50841f76fac5cf46e093b8325397079e10406febebb6c58a58e1528a4fec",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/license",
+          "sha256": "dd1081884a92952802f4803110a6bb543acea9a814c786d58605b4c1219b5ebb"
+        }
+      ]
+    },
+    {
+      "name": "micromark-util-character",
+      "version": "2.1.1",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/micromark-util-character/2.1.1",
+      "tarball": "https://registry.npmjs.org/micromark-util-character/-/micromark-util-character-2.1.1.tgz",
+      "tarballSha256": "bacefea968d21cedf290ec319ec92e2bc20e4f7b02f62cb4ad1e7b07c5a45185",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/license",
+          "sha256": "dd1081884a92952802f4803110a6bb543acea9a814c786d58605b4c1219b5ebb"
+        }
+      ]
+    },
+    {
+      "name": "micromark-util-chunked",
+      "version": "2.0.1",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/micromark-util-chunked/2.0.1",
+      "tarball": "https://registry.npmjs.org/micromark-util-chunked/-/micromark-util-chunked-2.0.1.tgz",
+      "tarballSha256": "a7b753059876eda10e9e14c024d1cf6eb3a2eb2021c79ef59fb483d72cda754a",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/license",
+          "sha256": "dd1081884a92952802f4803110a6bb543acea9a814c786d58605b4c1219b5ebb"
+        }
+      ]
+    },
+    {
+      "name": "micromark-util-classify-character",
+      "version": "2.0.1",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/micromark-util-classify-character/2.0.1",
+      "tarball": "https://registry.npmjs.org/micromark-util-classify-character/-/micromark-util-classify-character-2.0.1.tgz",
+      "tarballSha256": "ae1040e3100c019e183e474cb7f174eb436d856013169a0c8783a52519bacced",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/license",
+          "sha256": "dd1081884a92952802f4803110a6bb543acea9a814c786d58605b4c1219b5ebb"
+        }
+      ]
+    },
+    {
+      "name": "micromark-util-combine-extensions",
+      "version": "2.0.1",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/micromark-util-combine-extensions/2.0.1",
+      "tarball": "https://registry.npmjs.org/micromark-util-combine-extensions/-/micromark-util-combine-extensions-2.0.1.tgz",
+      "tarballSha256": "717cb91921ff540a2c776317f31ad005c3c45ec0ae1c188f1b99de621521b4b5",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/license",
+          "sha256": "dd1081884a92952802f4803110a6bb543acea9a814c786d58605b4c1219b5ebb"
+        }
+      ]
+    },
+    {
+      "name": "micromark-util-decode-numeric-character-reference",
+      "version": "2.0.2",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/micromark-util-decode-numeric-character-reference/2.0.2",
+      "tarball": "https://registry.npmjs.org/micromark-util-decode-numeric-character-reference/-/micromark-util-decode-numeric-character-reference-2.0.2.tgz",
+      "tarballSha256": "cd26a08f068727f3cc892e8f2549b85065362bd920506649386c791fe349db98",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/license",
+          "sha256": "dd1081884a92952802f4803110a6bb543acea9a814c786d58605b4c1219b5ebb"
+        }
+      ]
+    },
+    {
+      "name": "micromark-util-decode-string",
+      "version": "2.0.1",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/micromark-util-decode-string/2.0.1",
+      "tarball": "https://registry.npmjs.org/micromark-util-decode-string/-/micromark-util-decode-string-2.0.1.tgz",
+      "tarballSha256": "09ab2cda2d2f4fec4e3b829042866fa3d619d4c48c895233495a4ac49f325059",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/license",
+          "sha256": "dd1081884a92952802f4803110a6bb543acea9a814c786d58605b4c1219b5ebb"
+        }
+      ]
+    },
+    {
+      "name": "micromark-util-encode",
+      "version": "2.0.1",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/micromark-util-encode/2.0.1",
+      "tarball": "https://registry.npmjs.org/micromark-util-encode/-/micromark-util-encode-2.0.1.tgz",
+      "tarballSha256": "c553824f256f5f99f8f8b172d25caa7b2270ece5a00774cd1dbbc8bf9cd9090a",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/license",
+          "sha256": "dd1081884a92952802f4803110a6bb543acea9a814c786d58605b4c1219b5ebb"
+        }
+      ]
+    },
+    {
+      "name": "micromark-util-html-tag-name",
+      "version": "2.0.1",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/micromark-util-html-tag-name/2.0.1",
+      "tarball": "https://registry.npmjs.org/micromark-util-html-tag-name/-/micromark-util-html-tag-name-2.0.1.tgz",
+      "tarballSha256": "9d56df2779bb23785d208136430484ccedca4378bd36976c4793ace4c1cae077",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/license",
+          "sha256": "dd1081884a92952802f4803110a6bb543acea9a814c786d58605b4c1219b5ebb"
+        }
+      ]
+    },
+    {
+      "name": "micromark-util-normalize-identifier",
+      "version": "2.0.1",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/micromark-util-normalize-identifier/2.0.1",
+      "tarball": "https://registry.npmjs.org/micromark-util-normalize-identifier/-/micromark-util-normalize-identifier-2.0.1.tgz",
+      "tarballSha256": "6687cbaaa6a420bad0e5ca2ea0dfaea409ba8dc9e13ca03059291da8b68ceb2d",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/license",
+          "sha256": "dd1081884a92952802f4803110a6bb543acea9a814c786d58605b4c1219b5ebb"
+        }
+      ]
+    },
+    {
+      "name": "micromark-util-resolve-all",
+      "version": "2.0.1",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/micromark-util-resolve-all/2.0.1",
+      "tarball": "https://registry.npmjs.org/micromark-util-resolve-all/-/micromark-util-resolve-all-2.0.1.tgz",
+      "tarballSha256": "f7c8f03bdbdb16113879dadabc7091aa4277a1c106f202e05af164a917964555",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/license",
+          "sha256": "dd1081884a92952802f4803110a6bb543acea9a814c786d58605b4c1219b5ebb"
+        }
+      ]
+    },
+    {
+      "name": "micromark-util-sanitize-uri",
+      "version": "2.0.1",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/micromark-util-sanitize-uri/2.0.1",
+      "tarball": "https://registry.npmjs.org/micromark-util-sanitize-uri/-/micromark-util-sanitize-uri-2.0.1.tgz",
+      "tarballSha256": "8fcf4cf2900f807194fc89fb3e4dd5e5b28143cb44e55955a9f31d764264547e",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/license",
+          "sha256": "dd1081884a92952802f4803110a6bb543acea9a814c786d58605b4c1219b5ebb"
+        }
+      ]
+    },
+    {
+      "name": "micromark-util-subtokenize",
+      "version": "2.1.0",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/micromark-util-subtokenize/2.1.0",
+      "tarball": "https://registry.npmjs.org/micromark-util-subtokenize/-/micromark-util-subtokenize-2.1.0.tgz",
+      "tarballSha256": "10aca3d9ae4d1776f029fa6dbf5d9706291cbafc55ff39ba88141e65b7c59a8b",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/license",
+          "sha256": "dd1081884a92952802f4803110a6bb543acea9a814c786d58605b4c1219b5ebb"
+        }
+      ]
+    },
+    {
+      "name": "micromark-util-symbol",
+      "version": "2.0.1",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/micromark-util-symbol/2.0.1",
+      "tarball": "https://registry.npmjs.org/micromark-util-symbol/-/micromark-util-symbol-2.0.1.tgz",
+      "tarballSha256": "d8d698fae34d4e5bcdc5caf552449dea8aa46709dc76caea815c931cbd61e222",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/license",
+          "sha256": "dd1081884a92952802f4803110a6bb543acea9a814c786d58605b4c1219b5ebb"
+        }
+      ]
+    },
+    {
+      "name": "micromark-util-types",
+      "version": "2.0.2",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/micromark-util-types/2.0.2",
+      "tarball": "https://registry.npmjs.org/micromark-util-types/-/micromark-util-types-2.0.2.tgz",
+      "tarballSha256": "4b7223263259987280cb0f970887702e7725af15644849cc584d300a43a6291d",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/license",
+          "sha256": "dd1081884a92952802f4803110a6bb543acea9a814c786d58605b4c1219b5ebb"
+        }
+      ]
+    },
+    {
+      "name": "ms",
+      "version": "2.1.3",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/ms/2.1.3",
+      "tarball": "https://registry.npmjs.org/ms/-/ms-2.1.3.tgz",
+      "tarballSha256": "f6616e15e530ed552f9daa2d3ce71963947c6bc7c98c9b64fd3e673fd02622c6",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/license.md",
+          "sha256": "1662fae9b5314d11cf51284e2dcd1f006a354f7343f08712a730fcff9a359801"
+        }
+      ]
+    },
+    {
+      "name": "node-emoji",
+      "version": "2.2.0",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/node-emoji/2.2.0",
+      "tarball": "https://registry.npmjs.org/node-emoji/-/node-emoji-2.2.0.tgz",
+      "tarballSha256": "beb9daa726cf6f2058ad46f4b049d1688d84301d84fd9082dca04924d6f2ea31",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/LICENSE.md",
+          "sha256": "2caf62c8f108ff082758ba9efe25afa937b1baf2556bc1faab50c141f018c46c"
+        }
+      ]
+    },
+    {
+      "name": "parse-entities",
+      "version": "4.0.2",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/parse-entities/4.0.2",
+      "tarball": "https://registry.npmjs.org/parse-entities/-/parse-entities-4.0.2.tgz",
+      "tarballSha256": "2edcf2a9a2095627bad46b524ae17dff2c97ab4dd13fccc34e2dc407b2a87304",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/license",
+          "sha256": "5d0698266086f217bb11ea0499d33453e401fe479fb9126ad04e625e63d3557b"
+        }
+      ]
+    },
+    {
+      "name": "parse5",
+      "version": "7.3.0",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/parse5/7.3.0",
+      "tarball": "https://registry.npmjs.org/parse5/-/parse5-7.3.0.tgz",
+      "tarballSha256": "9316ca7af41da9e85071b62b9605aa0a6aaeb0463f833c29e7a331e7898f0420",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/LICENSE",
+          "sha256": "8c535800331e1e4439835555b3f9edc7fe9dee2fab0d8bbbd5a982e8b8343d4d"
+        }
+      ]
+    },
+    {
+      "name": "prismjs",
+      "version": "1.30.0",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/prismjs/1.30.0",
+      "tarball": "https://registry.npmjs.org/prismjs/-/prismjs-1.30.0.tgz",
+      "tarballSha256": "ac16a9106a28c53b6a6313993c816a3a02525fdfefd7614fc1703df915a9fc11",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/LICENSE",
+          "sha256": "2b947f0901a7ffcf08a89957da9783c0e9c6e72cb6ce8e959f501ab5409e4d2b"
+        }
+      ]
+    },
+    {
+      "name": "property-information",
+      "version": "7.2.0",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/property-information/7.2.0",
+      "tarball": "https://registry.npmjs.org/property-information/-/property-information-7.2.0.tgz",
+      "tarballSha256": "22ab7ee8774c8c3c90086f2fec7d2d4cca7c16ac795596ae16cf326c763606c7",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/license",
+          "sha256": "5d0698266086f217bb11ea0499d33453e401fe479fb9126ad04e625e63d3557b"
+        }
+      ]
+    },
+    {
+      "name": "react",
+      "version": "19.2.4",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/react/19.2.4",
+      "tarball": "https://registry.npmjs.org/react/-/react-19.2.4.tgz",
+      "tarballSha256": "3f84c05e1a4701dd5981145e5c766e2517b74e8babc8e131749b9b9b22409279",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/LICENSE",
+          "sha256": "da6d3703ed11cbe42bd212c725957c98da23cbff1998c05fa4b3d976d1a58e93"
+        }
+      ]
+    },
+    {
+      "name": "react-day-picker",
+      "version": "9.14.0",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/react-day-picker/9.14.0",
+      "tarball": "https://registry.npmjs.org/react-day-picker/-/react-day-picker-9.14.0.tgz",
+      "tarballSha256": "ab56485d35014203cf281923e28a563e5aab6f9c6b3edeca2af3498c50ccbc9f",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/LICENSE",
+          "sha256": "45d115f88e2b50de2113bafbc5e877f8e85dc9236d5d304a855ed4756f7e4439"
+        }
+      ]
+    },
+    {
+      "name": "react-dom",
+      "version": "19.2.4",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/react-dom/19.2.4",
+      "tarball": "https://registry.npmjs.org/react-dom/-/react-dom-19.2.4.tgz",
+      "tarballSha256": "8e26a635367df9b583622a4b24bf7b068505c4b58a6e94876275b7b52731c842",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/LICENSE",
+          "sha256": "da6d3703ed11cbe42bd212c725957c98da23cbff1998c05fa4b3d976d1a58e93"
+        }
+      ]
+    },
+    {
+      "name": "react-markdown",
+      "version": "10.1.0",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/react-markdown/10.1.0",
+      "tarball": "https://registry.npmjs.org/react-markdown/-/react-markdown-10.1.0.tgz",
+      "tarballSha256": "205f5c607c68e1e42b8d7a036326bdb3a105ae55e6469ecfcaf998004609d5f7",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/license",
+          "sha256": "f6196c64e144f9a6fa9154c3a80bc8b89615a9567934b83a8951879f06ba2aef"
+        }
+      ]
+    },
+    {
+      "name": "react-remove-scroll",
+      "version": "2.7.2",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/react-remove-scroll/2.7.2",
+      "tarball": "https://registry.npmjs.org/react-remove-scroll/-/react-remove-scroll-2.7.2.tgz",
+      "tarballSha256": "b9c7cc76fbd5cfb209e03b668228d56e14a76afc922434e5964f2d2f36ccf1cc",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/LICENSE",
+          "sha256": "30f0cfddf483d1128e3610205020f2041a6c5e837aa999e0aa82e5576187d4a9"
+        }
+      ]
+    },
+    {
+      "name": "react-remove-scroll-bar",
+      "version": "2.3.8",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/react-remove-scroll-bar/2.3.8",
+      "tarball": "https://registry.npmjs.org/react-remove-scroll-bar/-/react-remove-scroll-bar-2.3.8.tgz",
+      "tarballSha256": "ccc872d7a2dc007cbf9d755f30d56b8d80eabdbe22c44c95a709129bfdc46f01",
+      "noticeSourceKind": "supplement",
+      "notices": [
+        {
+          "path": "supplemental-license",
+          "sha256": "a79aae0c0f21990d9d963bb3c5a79cdcea9a46f8523ba55c58d7fe776b6ebc84",
+          "url": "https://raw.githubusercontent.com/theKashey/react-remove-scroll-bar/8ca9ba5ea52de03308fe8ced94f7b159a44d28ff/LICENSE",
+          "note": "npm gitHead URL did not resolve; this is a separately pinned upstream LICENSE, consistent with the npm package MIT declaration."
+        }
+      ]
+    },
+    {
+      "name": "react-style-singleton",
+      "version": "2.2.3",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/react-style-singleton/2.2.3",
+      "tarball": "https://registry.npmjs.org/react-style-singleton/-/react-style-singleton-2.2.3.tgz",
+      "tarballSha256": "8cd3380ee25e0ac80060dcee138c61433862a992fc21d665da823efbfe43ff0f",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/LICENSE",
+          "sha256": "30f0cfddf483d1128e3610205020f2041a6c5e837aa999e0aa82e5576187d4a9"
+        }
+      ]
+    },
+    {
+      "name": "react-syntax-highlighter",
+      "version": "16.1.1",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/react-syntax-highlighter/16.1.1",
+      "tarball": "https://registry.npmjs.org/react-syntax-highlighter/-/react-syntax-highlighter-16.1.1.tgz",
+      "tarballSha256": "8a324f3d4d79e6b40b2f2279ee97285a0a85d552ecdf6f1910f178907cda31aa",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/LICENSE",
+          "sha256": "a74e9029bdf2e92141bc711a6b17fa77b90c10eeec51193c83279cc69848f5bf"
+        }
+      ]
+    },
+    {
+      "name": "refractor",
+      "version": "5.0.0",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/refractor/5.0.0",
+      "tarball": "https://registry.npmjs.org/refractor/-/refractor-5.0.0.tgz",
+      "tarballSha256": "a2b6bc3bde6f3d7be5f2af336a5deb3ee3ce1fcc20964024b146dc772d02741b",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/license",
+          "sha256": "4b74d4b7b5ec11a254b1482d85a23dd944c873dc73c2ec3a86eaee43c13bdb53"
+        }
+      ]
+    },
+    {
+      "name": "rehype-katex",
+      "version": "7.0.1",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/rehype-katex/7.0.1",
+      "tarball": "https://registry.npmjs.org/rehype-katex/-/rehype-katex-7.0.1.tgz",
+      "tarballSha256": "b76022624276e22d83bc214e998c7a744504ac1b837f9233d0e0c0ef2c0c5e7d",
+      "noticeSourceKind": "supplement",
+      "notices": [
+        {
+          "path": "supplemental-license",
+          "sha256": "cb992262f361a5359e6771c28740d33c7041e15332ae8537fae40538992591a9",
+          "url": "https://raw.githubusercontent.com/remarkjs/remark-math/88a9497e1ede93b958237c85edbf5651faeca7af/license"
+        }
+      ]
+    },
+    {
+      "name": "remark-breaks",
+      "version": "4.0.0",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/remark-breaks/4.0.0",
+      "tarball": "https://registry.npmjs.org/remark-breaks/-/remark-breaks-4.0.0.tgz",
+      "tarballSha256": "bccf6161a50ed008fe5c8405bee6c7e9bb5ae7709afb3568f65789374dd9fb94",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/license",
+          "sha256": "d8fc337aaf98fc7a0f5498edc18b47a9df8cdfcc1a0f013519105905722c7a4c"
+        }
+      ]
+    },
+    {
+      "name": "remark-emoji",
+      "version": "5.0.2",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/remark-emoji/5.0.2",
+      "tarball": "https://registry.npmjs.org/remark-emoji/-/remark-emoji-5.0.2.tgz",
+      "tarballSha256": "37e9a68fb2daec8dd32ce465cc5d606c2adbc8581ce98ec2381480fe3cf72403",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/LICENSE",
+          "sha256": "66cb0085a709c1ab770f58356db98fb7cf3b700a94918404a7fe27a849105660"
+        }
+      ]
+    },
+    {
+      "name": "remark-gfm",
+      "version": "4.0.1",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/remark-gfm/4.0.1",
+      "tarball": "https://registry.npmjs.org/remark-gfm/-/remark-gfm-4.0.1.tgz",
+      "tarballSha256": "a5c7441a02eb0c5f5b0a15b23f04c2a00b9faf698dc3dfb4e5c1a1d0991d4259",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/license",
+          "sha256": "dd1081884a92952802f4803110a6bb543acea9a814c786d58605b4c1219b5ebb"
+        }
+      ]
+    },
+    {
+      "name": "remark-math",
+      "version": "6.0.0",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/remark-math/6.0.0",
+      "tarball": "https://registry.npmjs.org/remark-math/-/remark-math-6.0.0.tgz",
+      "tarballSha256": "33d1b07c723a1167e0e4360437d98dedc1ef95cc9f0da1122147f26efb345417",
+      "noticeSourceKind": "supplement",
+      "notices": [
+        {
+          "path": "supplemental-license",
+          "sha256": "cb992262f361a5359e6771c28740d33c7041e15332ae8537fae40538992591a9",
+          "url": "https://raw.githubusercontent.com/remarkjs/remark-math/d5d0660b150810a535bbb07eac6cc96a4510aa24/license"
+        }
+      ]
+    },
+    {
+      "name": "remark-parse",
+      "version": "11.0.0",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/remark-parse/11.0.0",
+      "tarball": "https://registry.npmjs.org/remark-parse/-/remark-parse-11.0.0.tgz",
+      "tarballSha256": "381d16667f0d394ac045dad61cea875d680a49eae0cbe88a87b0259dc4b2dd33",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/license",
+          "sha256": "413654b0a78b98661dce96d2aff2e4d075603d220b8483e28b1aa010ccc138b4"
+        }
+      ]
+    },
+    {
+      "name": "remark-rehype",
+      "version": "11.1.2",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/remark-rehype/11.1.2",
+      "tarball": "https://registry.npmjs.org/remark-rehype/-/remark-rehype-11.1.2.tgz",
+      "tarballSha256": "7bb4ca02a6fe89bbfa5e56485bb5086e2cfa13bbbf7455cd29faac20a6eeaa82",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/license",
+          "sha256": "dd1081884a92952802f4803110a6bb543acea9a814c786d58605b4c1219b5ebb"
+        }
+      ]
+    },
+    {
+      "name": "remark-stringify",
+      "version": "11.0.0",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/remark-stringify/11.0.0",
+      "tarball": "https://registry.npmjs.org/remark-stringify/-/remark-stringify-11.0.0.tgz",
+      "tarballSha256": "b2190b6baf1b5e6e1b36f23c24c1658f2dab1a4315370435530cd8f78c390175",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/license",
+          "sha256": "413654b0a78b98661dce96d2aff2e4d075603d220b8483e28b1aa010ccc138b4"
+        }
+      ]
+    },
+    {
+      "name": "scheduler",
+      "version": "0.27.0",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/scheduler/0.27.0",
+      "tarball": "https://registry.npmjs.org/scheduler/-/scheduler-0.27.0.tgz",
+      "tarballSha256": "ab26ce35ce4032f04b78cfc5bbb4cfe13358e9fe7a5433a8aa6315c3debc5095",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/LICENSE",
+          "sha256": "da6d3703ed11cbe42bd212c725957c98da23cbff1998c05fa4b3d976d1a58e93"
+        }
+      ]
+    },
+    {
+      "name": "skin-tone",
+      "version": "2.0.0",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/skin-tone/2.0.0",
+      "tarball": "https://registry.npmjs.org/skin-tone/-/skin-tone-2.0.0.tgz",
+      "tarballSha256": "7445fb9aa94206c80a600e8a20d5a7772b3daa153a2b2f82cec8732d88474e7f",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/license",
+          "sha256": "48da2f39e100d4085767e94966b43f4fa95ff6a0698fba57ed460914e35f94a0"
+        }
+      ]
+    },
+    {
+      "name": "space-separated-tokens",
+      "version": "2.0.2",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/space-separated-tokens/2.0.2",
+      "tarball": "https://registry.npmjs.org/space-separated-tokens/-/space-separated-tokens-2.0.2.tgz",
+      "tarballSha256": "b386cce96593975cebbb054a8e287eb15c2e004cd6ef416f7a26b5c265930b67",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/license",
+          "sha256": "ca4662cb5d1b738fbe5350c0d5485ba11773b4b7208974082ae6e129a52d631d"
+        }
+      ]
+    },
+    {
+      "name": "stringify-entities",
+      "version": "4.0.4",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/stringify-entities/4.0.4",
+      "tarball": "https://registry.npmjs.org/stringify-entities/-/stringify-entities-4.0.4.tgz",
+      "tarballSha256": "89052f611f0656a0e7d7c312f7b2e75e949678ce4eff37a6fc416fa2be4f4024",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/license",
+          "sha256": "9f084fac69d8cf1e6ce983ba5a3499c7695ed74a26ec625c38f0fd19fddd5e10"
+        }
+      ]
+    },
+    {
+      "name": "style-to-js",
+      "version": "1.1.21",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/style-to-js/1.1.21",
+      "tarball": "https://registry.npmjs.org/style-to-js/-/style-to-js-1.1.21.tgz",
+      "tarballSha256": "87f2f0c9c052c7840d789c2389f1d212f3c5ba77c58b7d08ce4485f59d34f024",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/LICENSE",
+          "sha256": "bbb380e5c1a717079378d6ea4d33c8a5a81655d4612b749f882e34e46712aab5"
+        }
+      ]
+    },
+    {
+      "name": "style-to-object",
+      "version": "1.0.14",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/style-to-object/1.0.14",
+      "tarball": "https://registry.npmjs.org/style-to-object/-/style-to-object-1.0.14.tgz",
+      "tarballSha256": "edfb15e0912047f3f78e683015d310dc35903f1623aada6a8e629ed9077bf45d",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/LICENSE",
+          "sha256": "896c9fd6b5fc48ac31800b9d29a6e3ffcb0c2d534ed077ebfa5c2fa388cc38b7"
+        }
+      ]
+    },
+    {
+      "name": "tiny-invariant",
+      "version": "1.3.3",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/tiny-invariant/1.3.3",
+      "tarball": "https://registry.npmjs.org/tiny-invariant/-/tiny-invariant-1.3.3.tgz",
+      "tarballSha256": "746a0b1c98dafa3f96769e200a23fd10dacece300b312d111d19bb65c85c3d48",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/LICENSE",
+          "sha256": "b1c501095de70182748cb8e8d97ac5577701a4ef3b755ba30d59fd87b24bdb0f"
+        }
+      ]
+    },
+    {
+      "name": "trim-lines",
+      "version": "3.0.1",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/trim-lines/3.0.1",
+      "tarball": "https://registry.npmjs.org/trim-lines/-/trim-lines-3.0.1.tgz",
+      "tarballSha256": "5880f0ef03e792c4705dc0789f2999671d4796d1d10a0110df059f25c565d63d",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/license",
+          "sha256": "9f084fac69d8cf1e6ce983ba5a3499c7695ed74a26ec625c38f0fd19fddd5e10"
+        }
+      ]
+    },
+    {
+      "name": "trough",
+      "version": "2.2.0",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/trough/2.2.0",
+      "tarball": "https://registry.npmjs.org/trough/-/trough-2.2.0.tgz",
+      "tarballSha256": "0a357f8de5e3a6f69fa3672daf31a19a87fc153b21085790c78fa4097263ab58",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/license",
+          "sha256": "6c03fd41cfd7c92d8aa8a2fa521b94b2683f059123281dcf921ddea9216b6254"
+        }
+      ]
+    },
+    {
+      "name": "tslib",
+      "version": "2.8.1",
+      "license": "0BSD",
+      "registry": "https://registry.npmjs.org/tslib/2.8.1",
+      "tarball": "https://registry.npmjs.org/tslib/-/tslib-2.8.1.tgz",
+      "tarballSha256": "66f635d5eeabae44807534976913a102cf615b9a045368359c9f79ae6ee2119e",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/LICENSE.txt",
+          "sha256": "210b19e543130388c68654b7497e967119ce17145f66ab7d85688fbd70f08751"
+        }
+      ]
+    },
+    {
+      "name": "unicode-emoji-modifier-base",
+      "version": "1.0.0",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/unicode-emoji-modifier-base/1.0.0",
+      "tarball": "https://registry.npmjs.org/unicode-emoji-modifier-base/-/unicode-emoji-modifier-base-1.0.0.tgz",
+      "tarballSha256": "b753860ffa1f54f2b415de82e23d2ce79a89bfdc5fff1a4361a32cc8215ff4e5",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/LICENSE-MIT.txt",
+          "sha256": "483acb265f182907d1caf6cff9c16c96f31325ed23792832cc5d8b12d5f88c8a"
+        }
+      ]
+    },
+    {
+      "name": "unified",
+      "version": "11.0.5",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/unified/11.0.5",
+      "tarball": "https://registry.npmjs.org/unified/-/unified-11.0.5.tgz",
+      "tarballSha256": "bc6d6d9e336d7d775f3c369f0a29462523ae75254d4a6e4888b95eba44c4aa78",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/license",
+          "sha256": "05811400116ed61f1a7693b78fe8ca6598c155a12f3978e609db4df648a4cb3d"
+        }
+      ]
+    },
+    {
+      "name": "unist-util-find-after",
+      "version": "5.0.0",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/unist-util-find-after/5.0.0",
+      "tarball": "https://registry.npmjs.org/unist-util-find-after/-/unist-util-find-after-5.0.0.tgz",
+      "tarballSha256": "09ca2ef0344212863bb39ec000effdc518d4a5b3e60c645b7607172da0641da9",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/license",
+          "sha256": "63cb98b3f6abfb3c3592c16f88253c1bdc834087bf52671e8ce5609e4eb693cf"
+        }
+      ]
+    },
+    {
+      "name": "unist-util-is",
+      "version": "6.0.1",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/unist-util-is/6.0.1",
+      "tarball": "https://registry.npmjs.org/unist-util-is/-/unist-util-is-6.0.1.tgz",
+      "tarballSha256": "6d406238b6e281d38d30c30f77287ce8d70f6d9c4503612f979333865aaafff5",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/license",
+          "sha256": "82974dbf2639d13edab95c32ed9cb6c0867ede272cd2e07ce47ce8548fe55c05"
+        }
+      ]
+    },
+    {
+      "name": "unist-util-position",
+      "version": "5.0.0",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/unist-util-position/5.0.0",
+      "tarball": "https://registry.npmjs.org/unist-util-position/-/unist-util-position-5.0.0.tgz",
+      "tarballSha256": "248cefc2080c0a78817b20e88da7324e7dee7175c5df8ac0e6d193d2d381c200",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/license",
+          "sha256": "63cb98b3f6abfb3c3592c16f88253c1bdc834087bf52671e8ce5609e4eb693cf"
+        }
+      ]
+    },
+    {
+      "name": "unist-util-remove-position",
+      "version": "5.0.0",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/unist-util-remove-position/5.0.0",
+      "tarball": "https://registry.npmjs.org/unist-util-remove-position/-/unist-util-remove-position-5.0.0.tgz",
+      "tarballSha256": "75c0ac5d1c2fc1cb83a90753016c67cd94d4eb6f19ed0e8b195c25392feafe56",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/license",
+          "sha256": "ca4662cb5d1b738fbe5350c0d5485ba11773b4b7208974082ae6e129a52d631d"
+        }
+      ]
+    },
+    {
+      "name": "unist-util-stringify-position",
+      "version": "4.0.0",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/unist-util-stringify-position/4.0.0",
+      "tarball": "https://registry.npmjs.org/unist-util-stringify-position/-/unist-util-stringify-position-4.0.0.tgz",
+      "tarballSha256": "8692d2396f091680fe342c344acc4594534a9a811b0a9cbcfae7d71c694168b4",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/license",
+          "sha256": "ca4662cb5d1b738fbe5350c0d5485ba11773b4b7208974082ae6e129a52d631d"
+        }
+      ]
+    },
+    {
+      "name": "unist-util-visit",
+      "version": "5.1.0",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/unist-util-visit/5.1.0",
+      "tarball": "https://registry.npmjs.org/unist-util-visit/-/unist-util-visit-5.1.0.tgz",
+      "tarballSha256": "8d5724e443d279deda20fe03ce18de53a944f8154e94297de0f49c5fb51f72ef",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/license",
+          "sha256": "63cb98b3f6abfb3c3592c16f88253c1bdc834087bf52671e8ce5609e4eb693cf"
+        }
+      ]
+    },
+    {
+      "name": "unist-util-visit-parents",
+      "version": "6.0.2",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/unist-util-visit-parents/6.0.2",
+      "tarball": "https://registry.npmjs.org/unist-util-visit-parents/-/unist-util-visit-parents-6.0.2.tgz",
+      "tarballSha256": "5250902af03c4b335c68cd60ed5eb4f1d9fbd6338e129d7df476690b8a245da5",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/license",
+          "sha256": "ca4662cb5d1b738fbe5350c0d5485ba11773b4b7208974082ae6e129a52d631d"
+        }
+      ]
+    },
+    {
+      "name": "use-callback-ref",
+      "version": "1.3.3",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/use-callback-ref/1.3.3",
+      "tarball": "https://registry.npmjs.org/use-callback-ref/-/use-callback-ref-1.3.3.tgz",
+      "tarballSha256": "f1c0efff7a48011a8ad317c555fd043ef6e427c78b00ca2d438682958d880600",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/LICENSE",
+          "sha256": "30f0cfddf483d1128e3610205020f2041a6c5e837aa999e0aa82e5576187d4a9"
+        }
+      ]
+    },
+    {
+      "name": "use-sidecar",
+      "version": "1.1.3",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/use-sidecar/1.1.3",
+      "tarball": "https://registry.npmjs.org/use-sidecar/-/use-sidecar-1.1.3.tgz",
+      "tarballSha256": "06e3040fe38ac958402bbda2cd640b556786048b6bd3d97900eec1d80702c0f8",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/LICENSE",
+          "sha256": "30f0cfddf483d1128e3610205020f2041a6c5e837aa999e0aa82e5576187d4a9"
+        }
+      ]
+    },
+    {
+      "name": "use-sync-external-store",
+      "version": "1.6.0",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/use-sync-external-store/1.6.0",
+      "tarball": "https://registry.npmjs.org/use-sync-external-store/-/use-sync-external-store-1.6.0.tgz",
+      "tarballSha256": "4f003b4c39114ca6a6989033ae2013a583fbd4073ee40badb7dd9cbacc1af3ae",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/LICENSE",
+          "sha256": "da6d3703ed11cbe42bd212c725957c98da23cbff1998c05fa4b3d976d1a58e93"
+        }
+      ]
+    },
+    {
+      "name": "vfile",
+      "version": "6.0.3",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/vfile/6.0.3",
+      "tarball": "https://registry.npmjs.org/vfile/-/vfile-6.0.3.tgz",
+      "tarballSha256": "a0dbad2fd8dcc9ae9f652dee6ba49a1db5db2843a8ec2ceb9190ccdba0e0df0c",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/license",
+          "sha256": "05811400116ed61f1a7693b78fe8ca6598c155a12f3978e609db4df648a4cb3d"
+        }
+      ]
+    },
+    {
+      "name": "vfile-location",
+      "version": "5.0.3",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/vfile-location/5.0.3",
+      "tarball": "https://registry.npmjs.org/vfile-location/-/vfile-location-5.0.3.tgz",
+      "tarballSha256": "8b8cf426e26395482ca8c4485dc3f98e29628711c69b5f3dc2673ed00940ce58",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/license",
+          "sha256": "ca4662cb5d1b738fbe5350c0d5485ba11773b4b7208974082ae6e129a52d631d"
+        }
+      ]
+    },
+    {
+      "name": "vfile-message",
+      "version": "4.0.3",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/vfile-message/4.0.3",
+      "tarball": "https://registry.npmjs.org/vfile-message/-/vfile-message-4.0.3.tgz",
+      "tarballSha256": "9d6d94ee59296ef0516217a79e902ba417fe3d8816ab1d0527ddf353b455c2cb",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/license",
+          "sha256": "dd1081884a92952802f4803110a6bb543acea9a814c786d58605b4c1219b5ebb"
+        }
+      ]
+    },
+    {
+      "name": "web-namespaces",
+      "version": "2.0.1",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/web-namespaces/2.0.1",
+      "tarball": "https://registry.npmjs.org/web-namespaces/-/web-namespaces-2.0.1.tgz",
+      "tarballSha256": "df250d9dc73331f79700486335f046bdebb09158d172754220cc546fb5149a84",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/license",
+          "sha256": "ca4662cb5d1b738fbe5350c0d5485ba11773b4b7208974082ae6e129a52d631d"
+        }
+      ]
+    },
+    {
+      "name": "zod",
+      "version": "4.4.3",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/zod/4.4.3",
+      "tarball": "https://registry.npmjs.org/zod/-/zod-4.4.3.tgz",
+      "tarballSha256": "ee38f17f533fd500610685a483ae2f413c26f4eb33a51684314563c8d60f279c",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/LICENSE",
+          "sha256": "3f1189b28e3866e0d979968d466b78f813f76827cfdca1fbb124cc0a5c8841f8"
+        }
+      ]
+    },
+    {
+      "name": "zustand",
+      "version": "4.5.7",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/zustand/4.5.7",
+      "tarball": "https://registry.npmjs.org/zustand/-/zustand-4.5.7.tgz",
+      "tarballSha256": "5240b7736397aa0e8442d290dea0ce7a6dd324c986e1a8644ff91bf61864e863",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/LICENSE",
+          "sha256": "c1e6e266563517467b1bf874817d23e426f3149252bd7d42758cd697514b8417"
+        }
+      ]
+    },
+    {
+      "name": "zwitch",
+      "version": "2.0.4",
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/zwitch/2.0.4",
+      "tarball": "https://registry.npmjs.org/zwitch/-/zwitch-2.0.4.tgz",
+      "tarballSha256": "2c162e000f5fb5a816987d6f8ad7aad295203f777a5992d514ae4660778a51a4",
+      "noticeSourceKind": "official-npm-tarball",
+      "notices": [
+        {
+          "path": "package/license",
+          "sha256": "ca4662cb5d1b738fbe5350c0d5485ba11773b4b7208974082ae6e129a52d631d"
+        }
+      ]
+    }
+  ]
+}

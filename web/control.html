@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Chaos · 系统控制台</title>
+  <link rel="stylesheet" href="/theme.css"><link rel="stylesheet" href="/control.css"><link rel="stylesheet" href="/activity.css"><link rel="stylesheet" href="/updates.css">
+</head>
+<body class="control-page">
+  <header class="control-header">
+    <a class="brand" href="/"><span aria-hidden="true">✳</span> CHAOS <small>CONTROL</small></a>
+    <div class="header-context"><span>系统控制台</span><span class="revision" id="settingsVersion">连接中</span></div>
+    <div class="header-actions"><span id="serverStatus" class="connection">正在连接</span><a href="/docs" class="button quiet">文档中心</a><a href="/" class="button quiet">打开编程环境 ↗</a><button id="saveSettings" class="primary" disabled>保存并热生效</button></div>
+  </header>
+  <div id="configConflict" class="notice warning" hidden><span>服务端配置已更新。当前修改已保留，保存前请处理版本冲突。</span><button id="exportConfigDraft">导出无密钥草稿</button><button id="reloadSettings">放弃当前修改并载入远端</button></div>
+  <div id="controlNotice" class="notice" role="status" hidden></div>
+  <main class="control-layout">
+    <aside class="provider-rail">
+      <div class="rail-intro"><div class="eyebrow">CONNECTED INTELLIGENCE</div><h1>让能力，各就其位。</h1><p>统一配置，按角色分工。<br>每轮迭代保留自己的执行快照。</p></div>
+      <div class="section-label">模型服务 <button id="refreshModels" class="text-button" title="探测当前服务可用模型">↻ 探测</button></div>
+      <nav id="providerList" aria-label="模型服务"></nav>
+      <div class="rail-bottom"><span class="pulse-dot"></span><span>独立后台服务<small>浏览器关闭后，已提交任务继续运行。</small></span></div>
+    </aside>
+    <section class="configuration">
+      <nav class="config-tabs" aria-label="配置分类">
+        <button class="active" data-tab="provider">服务连接</button><button data-tab="roles">角色路由</button><button data-tab="agents">智能体</button><button data-tab="runtime">运行与插件</button><button data-tab="updates">更新</button>
+      </nav>
+      <div class="config-scroll">
+        <section id="providerPanel" class="config-panel active" aria-label="模型服务配置"></section>
+        <section id="rolesPanel" class="config-panel" aria-label="角色路由配置"></section>
+        <section id="agentsPanel" class="config-panel" aria-label="智能体独立配置"></section>
+        <section id="runtimePanel" class="config-panel" aria-label="运行与插件配置"></section>
+        <section id="updatesPanel" class="config-panel" aria-label="软件更新"></section>
+      </div>
+      <footer class="config-footer"><span id="configState">载入配置中…</span><span>凭据仅在服务端保存</span></footer>
+    </section>
+    <aside class="operations">
+      <section class="task-composer">
+        <div class="section-label">异步任务 <span class="tag">BACKGROUND</span></div>
+        <h2>交给系统，继续你的工作。</h2>
+        <form id="taskForm">
+          <label class="sr-only" for="harnessPrompt">任务描述</label><textarea id="harnessPrompt" required maxlength="20000" placeholder="描述目标、约束与完成标准。智能体会根据工具结果继续执行。" rows="4"></textarea>
+          <div class="task-options"><label>角色<select id="taskRole"></select></label><label>智能体<select id="taskAgent"><option value="">默认配置</option></select></label></div>
+          <div class="task-options"><label>迭代次数<input id="taskIterations" type="number" min="1" max="100" value="1"></label><label>迭代间隔 / 秒<input id="taskInterval" type="number" min="1" max="3600" value="5"></label></div>
+          <button id="submitTask" class="primary">＋ 提交后台任务</button>
+          <p class="helper">任务提交后立即返回。活动卡片展示执行摘要与工具状态，不展示模型的隐藏推理。</p>
+        </form>
+      </section>
+      <section class="task-monitor">
+        <div class="section-label">工作态势 <span id="taskCount">0 个任务</span></div>
+        <div id="taskList" class="task-list" aria-label="后台任务列表"><p class="empty">暂无任务。已提交的任务会在这里持续更新。</p></div>
+      </section>
+      <section class="task-detail" id="taskDetail" hidden><div class="section-label"><span id="taskDetailTitle">任务详情</span><button id="closeTaskDetail" class="text-button">关闭</button></div><pre id="taskDetailContent"></pre></section>
+    </aside>
+  </main>
+  <script src="/json.js"></script><script src="/realtime.js"></script><script src="/dsh-state.js"></script><script src="/control.js"></script><script src="/activity.js"></script><script src="/updates.js"></script>
+</body>
+</html>

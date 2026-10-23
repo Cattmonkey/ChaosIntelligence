@@ -1,0 +1,2 @@
+let dot=process_from({kind:"process",name:"self-programming visual dot",module:"dot.chaos",export:"step",intervalSeconds:1,maxTurns:3});
+await dot(get(input,"key","observed_dot"),{url:input.url,generation:0,iterations:2});

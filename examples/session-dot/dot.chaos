@@ -1,0 +1,39 @@
+import "behavior.chaos" as Behavior;
+
+fn role(name:String,routing_role:String,prompt:String) {
+  agent_from({kind:"agent",name:name,config:{provider:"model",route:name,role:routing_role,prompt:prompt,tools:[]}})
+}
+
+async fn step(ctx) {
+  let state=ctx.state;
+  let observed=Behavior.answer(state.value);
+  if state.generation>=state.iterations {
+    process_step(merge(state,{lastObserved:observed}),{value:observed,version:ctx.programVersion},true)
+  } else {
+    var programmer=await session_open("dot_programmer",role("programmer","planner","Propose a complete Program JSON definition matching the explicit request. Preserve every other module and dialect."));
+    var reviewer=await session_open("dot_reviewer",role("reviewer","reviewer","Review the proposed definition and requested change. Return JSON {approve: boolean, reason: string}. Executable checks remain required."));
+    // Keep complete turns in the active context; the archived protocol remains queryable.
+    if session_info(programmer).turn>4 {
+      await session_compact("dot_programmer",session_info(programmer).revision,2);
+      programmer=await session_load("dot_programmer")
+    } else {null};
+    if session_info(reviewer).turn>4 {
+      await session_compact("dot_reviewer",session_info(reviewer).revision,2);
+      reviewer=await session_load("dot_reviewer")
+    } else {null};
+    let baseline=current_program();
+    let increment=state.generation+2;
+    let message_id="generation_"+str(state.generation);
+    let proposed=await programmer({definition:program_info(baseline),increment:increment,message:ctx.input},message_id=message_id);
+    let candidate=program_from(parse_json(proposed.output));
+    let reviewed=await reviewer({definition:program_info(candidate),increment:increment},message_id=message_id);
+    let decision=parse_json(reviewed.output);
+    if !decision.approve {throw decision} else {null};
+    let cases=[{entry:"tests.chaos",input:state.value,expect:state.value+increment},{entry:"tests.chaos",input:0,expect:increment}];
+    let report=await program_probe(candidate,cases);
+    if !report.passed {throw report} else {null};
+    let receipt=await program_adopt(baseline,candidate,cases,reason="durable roles and actual checks");
+    process_step(merge(state,{generation:state.generation+1,lastObserved:observed}),{before:observed,afterCommitSameFunction:Behavior.answer(state.value),receipt:receipt,programmerMessageId:proposed.messageId,reviewerMessageId:reviewed.messageId},false)
+  }
+}
+export {step};

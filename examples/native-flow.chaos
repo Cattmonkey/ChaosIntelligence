@@ -1,0 +1,11 @@
+fn sum_to(n) {
+    var i = 0;
+    var total = 0;
+    while i < n {
+        total = total + i;
+        i = i + 1;
+    }
+    total
+}
+let fast = compile_function(sum_to, target="auto-flow");
+[fast(4), compile_flow_info(fast).abi, length(compile_info(fast))]

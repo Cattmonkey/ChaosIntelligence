@@ -1,0 +1,26 @@
+class Named {
+    var kind: String = "";
+    fn __init_subclass__(cls, kind: String = "", **options) {
+        super(Named, cls).__init_subclass__(**options);
+        cls.kind = kind;
+        null
+    }
+}
+let members = {
+    value: class_member(0, mutable=true, contract="Int"),
+    __init__: class_member(fn(self, start: Int = 0) {
+        self.value = start;
+        null
+    }, method=true),
+    __call__: class_member(fn(self, step: Int = 1) -> Int {
+        self.value = self.value + step;
+        self.value
+    }, method=true)
+};
+let Role = new_class("Role", [Named], members, {kind: "worker"});
+let Mirror = new_class("Mirror", [Named], class_members(Role), {kind: "mirror"});
+let worker = Role(40);
+worker(2);
+Role.value = 10;
+[worker.value, Mirror.value, class_members(Role).value.contract,
+ class_members(Role).__call__.method, Role.kind]

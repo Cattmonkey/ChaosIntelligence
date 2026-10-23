@@ -1,0 +1,47 @@
+import "behavior.chaos" as Behavior;
+
+async fn step(ctx) {
+  let state=ctx.state;
+  let baseline=current_program();
+  let observed=Behavior.answer(state.value);
+  if state.phase=="propose" {
+    agent programmer {provider:"model",role:"planner",tools:[],prompt:"Propose a complete Program JSON definition optimizing behavior.chaos while preserving the square function for all integers. Preserve every other file, entry and languageVersions. Return exact JSON, no Markdown."};
+    let conversation=await session_open("recovering_programmer",programmer);
+    let proposed=await conversation({definition:program_info(baseline),cases:state.probeCases},message_id="proposal");
+    let definition=parse_json(proposed.output);
+    let original=program_info(baseline);
+    // The language itself checks the modification boundary; the prompt is not enforcement.
+    let unchanged=merge(definition,{files:merge(definition.files,{"behavior.chaos":original.files.["behavior.chaos"]})});
+    if unchanged!=original {throw "Candidate changed a module outside behavior.chaos"} else {null};
+    let candidate=program_from(definition);
+    let report=await program_probe(candidate,state.probeCases);
+    if !report.passed {throw report} else {null};
+    let receipt=await program_adopt(baseline,candidate,state.probeCases,reason="Candidate passed explicit initial cases");
+    process_step(merge(state,{phase:"check",baselineVersion:ctx.programVersion}),{
+      before:observed,afterAdoptSameFunction:Behavior.answer(state.value),receipt:receipt
+    },false)
+  } else if state.phase=="check" {
+    let report=await program_probe(baseline,state.acceptanceCases);
+    if report.passed {
+      process_step(merge(state,{phase:"complete"}),{value:observed,version:ctx.programVersion,recovered:false},true)
+    } else {
+      let previous=await program_revision(state.baselineVersion);
+      let recovery=await program_probe(previous,state.acceptanceCases);
+      if !recovery.passed {throw recovery} else {null};
+      let receipt=await program_adopt(baseline,previous,state.acceptanceCases,reason="Observed regression; historical program passed acceptance cases");
+      process_step(merge(state,{phase:"verify"}),{
+        regression:report,restoredFrom:program_metadata(previous).origin,
+        before:observed,afterAdoptSameFunction:Behavior.answer(state.value),receipt:receipt
+      },false)
+    }
+  } else if state.phase=="verify" {
+    let report=await program_probe(baseline,state.acceptanceCases);
+    if !report.passed {throw report} else {null};
+    let history=await program_history();
+    process_step(merge(state,{phase:"complete"}),{
+      value:observed,version:ctx.programVersion,recovered:true,
+      historyVersions:map(fn(item){item.version},history.items)
+    },true)
+  } else {throw "Unknown recovery phase"}
+}
+export {step};

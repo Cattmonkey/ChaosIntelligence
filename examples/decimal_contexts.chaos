@@ -1,0 +1,9 @@
+import "std/math" as M;
+async fn calculate(precision) {
+  with M.decimal_context(precision=precision) as local {
+    await sleep(0);
+    {value:M.decimal_text(M.decimal(1)/M.decimal(7)),flags:local.flags}
+  }
+}
+let answers=await gather([calculate(3),calculate(6)]);
+{answers:answers,exact:M.decimal_text(M.decimal("0.10")+M.decimal("0.20")),saved:numeric_encode(M.decimal("-0.00"))}

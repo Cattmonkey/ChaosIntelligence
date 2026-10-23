@@ -1,0 +1,11 @@
+// Ordinary compiled functions keep language control flow and agent ownership.
+fn magnitude(x: Int) -> Int {
+    let doubled = x * 2;
+    if doubled >= 0 {
+        let answer = doubled + 2;
+        if answer > 10 { answer } else { answer * 2 }
+    } else { return -doubled + 2 }
+}
+let compiled = compile_function(magnitude);
+let answers = [compiled(20), compiled(-20), compiled(3)];
+{answers: answers, compilation: compile_info(compiled)}

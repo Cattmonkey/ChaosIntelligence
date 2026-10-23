@@ -1,0 +1,22 @@
+async with await computer_open(input.url) as computer {
+  agent planner {provider:"model",role:"planner",tools:[],prompt:"Propose one action as exact JSON. Use only targets in the current observation. Allowed: navigate(url), click(ref), type(ref,text), press(ref,key), scroll(deltaX,deltaY), with an action discriminator. Return no Markdown."};
+  let key=get(input,"sessionKey","visual_planner");
+  var conversation=await session_open(key,planner);
+  fn plan_next(ctx) {plan([{id:"act",call:"advance"}])}
+  async fn advance(ctx) {
+    let before=await computer_observe(computer);
+    if session_info(conversation).turn>=2 {
+      await session_compact(key,session_info(conversation).revision,1);
+      conversation=await session_load(key)
+    } else {null};
+    let metadata=observation_info(before);
+    let proposal=await conversation(observation_input(before,{objective:input.objective}),message_id="observe_"+metadata.id);
+    let action=computer_action(before,parse_json(proposal.output));
+    observation_info(await computer(action))
+  }
+  fn verify(ctx) {
+    let observed=ctx.results.act;
+    {done:contains(observed.text,input.expected),state:observed,evidence:{observationId:observed.id,receipt:observed.receipt}}
+  }
+  await pursue(goal(input.objective,"plan_next","verify",get(input,"maxIterations",4)),{plan_next:plan_next,advance:advance,verify:verify},null)
+}

@@ -1,0 +1,7 @@
+// 可移植示例；真实 Mac GPU 将 device="cpu" 改为 "mps"、compiler 改为 "metal"。
+fn score(x: Number) -> Number { x * x + 2 }
+let job = gpu_map(score, [1, 2, 3], device="cpu", compiler="auto");
+let before = gpu_kernel_info(job);
+let result = await job;
+{values: result.values, actualDevice: result.device,
+ kernel: gpu_kernel_info(job), cold: before.status}

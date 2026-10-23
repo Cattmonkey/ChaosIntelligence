@@ -1,0 +1,115 @@
+Chaos Intelligence Source-Available License — No AI Training, Version 1.0
+License identifier: LicenseRef-Chaos-No-AI-Training-1.0
+
+Copyright (c) 2026 Cattmonkey and other copyright holders identified in the
+applicable files. All rights reserved except as expressly granted below.
+
+1. Scope and definitions
+
+This license applies only to original Chaos Intelligence source code,
+documentation, examples and other material supplied under this license
+("Covered Material"), to the extent the applicable copyright holder has
+authority to license that material. A modified, translated, tokenized,
+embedded or otherwise transformed copy remains Covered Material to the
+extent it contains or is derived from protectable Covered Material.
+
+Third-party components and upstream-derived portions identified in
+THIRD_PARTY_NOTICES.md, their own notices, or their own license files are
+excluded from Covered Material. They remain under their respective licenses.
+This license does not remove, narrow or replace rights granted directly by
+their copyright holders. Independently created user programs and data are
+not Covered Material merely because they use or are processed by Chaos.
+
+2. Permission for ordinary use
+
+Subject to all conditions of this license, you may use, execute, inspect,
+copy, modify, combine, redistribute, host and sell Covered Material and
+products or services containing it, for personal, educational, research or
+commercial purposes. No license fee is required for these permitted uses.
+
+When redistributing Covered Material in source or compiled form, include
+this license, preserve applicable copyright and third-party notices, and
+identify material modifications. The Covered Material contained in your
+distribution remains subject to this license, including Section 3. You may
+license your independent additions separately, but may not grant permission
+to use Covered Material in violation of this license.
+
+3. No AI or machine-learning training
+
+Unless the applicable copyright holder grants you separate written
+permission, you may not use Covered Material, in whole or in part, as input,
+training data, labels, targets, rewards, exemplars, or other learning material
+for training, pre-training, continued training, fine-tuning, reinforcement
+learning, distillation or other fitting or updating of the learned weights
+or parameters of any artificial-intelligence or machine-learning model,
+including language models, code models and large language models.
+
+You may not collect, scrape, convert, annotate, synthesize or distribute
+Covered Material, or data generated from it that reproduces or reconstructs
+its protectable expression, for those purposes. In particular, changing its
+format, translating it, generating code explanations or question/answer
+pairs from it, or routing it through another model does not remove this
+restriction when the resulting material contains such expression.
+
+You may not authorize a third party to perform these prohibited activities
+under this license. When you send Covered Material to a model service for a
+permitted purpose, use a service and configuration whose applicable terms do
+not permit that submission to be used for the prohibited training purposes.
+
+4. Permitted intelligent assistance and language capabilities
+
+Section 3 does not prohibit inference with an already trained model to
+explain, search, review, debug, complete, modify or generate programs or
+documentation; retrieval-augmented assistance; creating or searching an
+embedding index using fixed model weights; executing agents; robot/device
+control; or the language's self-inspection and self-modification features.
+These uses are permitted provided they do not fit or update model weights
+or learned parameters from Covered Material or supply it for Section 3's
+prohibited purposes. Editing ordinary code, prompts, workflows, configuration
+or explicit task memory is not itself model training under this license.
+
+Using the language or runtime solely as a tool to train a model on your own
+independent data is also permitted, provided Covered Material is not used as
+learning material. This license places no restriction on independently
+created outputs merely because Chaos was used to produce them; any Covered
+Material reproduced in an output remains subject to this license.
+
+5. Third-party rights, platform terms and limits
+
+No trademark rights are granted. You are responsible for rights required
+from other parties. This license grants only the permissions stated here;
+it does not amend or supersede a separate agreement with a hosting platform,
+model provider or other service, revoke rights already independently granted
+to them, or restrict uses that applicable law permits without permission.
+A notice in a repository cannot by itself prevent scraping or ensure that a
+hosting platform will refrain from training. Select hosting and service terms
+consistent with the intended no-training restriction before uploading.
+
+6. Termination
+
+The permissions granted by this license terminate automatically if you
+materially violate its conditions. Termination does not remove obligations
+concerning copies already distributed, third-party rights or liability for
+past violations. The copyright holder may reinstate permission in writing.
+
+7. Disclaimer
+
+TO THE EXTENT PERMITTED BY APPLICABLE LAW, COVERED MATERIAL IS PROVIDED
+"AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT
+NOT LIMITED TO MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NONINFRINGEMENT. IN NO EVENT SHALL THE COPYRIGHT HOLDERS BE LIABLE FOR ANY
+CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN CONTRACT, TORT OR OTHERWISE,
+ARISING FROM, OUT OF OR IN CONNECTION WITH COVERED MATERIAL OR ITS USE.
+
+8. License status and contact
+
+This is a custom source-available license with a restriction on a field of
+use. It is not an OSI-approved open-source license and must not be represented
+as MIT, Apache-2.0 or another unrestricted open-source license for Covered
+Material. The English text above controls; explanatory translations do not
+expand the permission grant.
+
+For separate permission concerning Cattmonkey's rights, contact the project
+maintainer through the project repository associated with
+https://github.com/Cattmonkey. A separate permission from Cattmonkey does not
+grant rights held by another copyright holder.

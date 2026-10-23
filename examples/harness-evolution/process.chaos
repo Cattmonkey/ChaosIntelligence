@@ -1,0 +1,15 @@
+import "std/evolve" as Evolution;
+import "operators.chaos" as Demo;
+import "model.chaos" as Model;
+async fn observe(event) { await progress_emit("progress",merge({summary:"Harness evolution"},event));null }
+async fn step(ctx) {
+  let state=ctx.state;
+  let task=if ctx.input==null {state.task}else{ctx.input};
+  let operators=if state.provider=="model" {Model.operators()}else{Demo.operators()};
+  let result=await Evolution.run(state.snapshot,task,operators,mode=state.mode,k=state.k,observe=observe);
+  process_step(merge(state,{snapshot:result.snapshot,task:task}),{
+    revision:result.snapshot.revision,selected:result.selected,executions:length(result.records),
+    learning:result.learning, records:result.records
+  })
+}
+export {step,observe};

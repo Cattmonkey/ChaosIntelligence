@@ -1,0 +1,13 @@
+include README.md
+include LICENSE
+include THIRD_PARTY_NOTICES.md
+recursive-include web *.html *.js *.css
+recursive-include docs *.md *.json
+recursive-include examples *.py *.chaos
+
+recursive-include vendor/deepseek *
+recursive-include vendor/openui *
+recursive-include chaos *.json
+recursive-include chaos *.chaos
+
+recursive-include web/vendor *.json *.cjs *.txt

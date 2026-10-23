@@ -1,0 +1,14 @@
+'use strict';
+const fs=require('fs'),path=require('path'),vm=require('vm'),assert=require('assert');
+const root=process.argv[2]||path.resolve(__dirname,'..'),source=fs.readFileSync(path.join(root,'web/language.js'),'utf8');
+const header=source.slice(0,source.indexOf('function freshSyntax'));
+const children=source.slice(source.indexOf('function syntaxChildren'),source.indexOf('function syntaxIndex'));
+const context=vm.createContext({});vm.runInContext(header+'\n'+children+'\n globalThis.labels=languageNames;globalThis.setSyntax=x=>syntaxInfo=x',context);
+context.setSyntax({syntax:{async_gen_fn:[['parameters','params'],['returns','str'],['body','node'],['name','str']],async_for:[['name','str'],['iterable','node'],['body','node']],macrocall:[['name','str'],['arguments','nodes']]}});
+assert.strictEqual(context.labels.async_gen_fn,'异步生成器函数');assert.strictEqual(context.labels.async_for,'异步遍历循环');
+const plain=x=>JSON.parse(JSON.stringify(x));
+const body={kind:'block',id:'body'},defaultValue={kind:'literal',id:'default',value:40},iterable={kind:'call',id:'iterable'};
+assert.deepStrictEqual(plain(context.syntaxChildren({kind:'async_gen_fn',parameters:[{name:'value',type:'Int',mode:'positional',default:defaultValue}],returns:'Any',body,name:'stream'})),[['parameters.0.default',defaultValue],['body',body]]);
+assert.deepStrictEqual(plain(context.syntaxChildren({kind:'async_for',name:'value',iterable,body})),[['iterable',iterable],['body',body]]);
+assert.deepStrictEqual(plain(context.syntaxChildren({kind:'macrocall',name:'M.invoke',arguments:[defaultValue]})),[['arguments.0',defaultValue]]);
+console.log(JSON.stringify({status:'passed',checks:5,details:['async generator label','async loop label','async generator defaults and body remain structurally editable','async loop iterable/body are traversed','qualified macro names retain argument editing']}));

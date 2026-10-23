@@ -1,0 +1,6 @@
+// Agent values compose with ordinary functions. Both calls use current Settings.
+// Requires a configured text provider; two model calls may incur API charges.
+import "std/intelligence" as Intelligence;
+fn review_plan(plan) { Intelligence.reviewer({task:input,plan:plan}) }
+let improve=compose(review_plan,Intelligence.planner);
+improve(input)

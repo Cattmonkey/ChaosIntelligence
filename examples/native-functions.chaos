@@ -1,0 +1,4 @@
+fn score(value: Int, weight: Int = 2) -> Int { value * weight + 2 }
+let calculate = compile_function(score);
+let answer = calculate(20);
+{answer: answer, large: calculate(100000000000000000000), compilation: compile_info(calculate)}

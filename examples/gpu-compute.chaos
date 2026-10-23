@@ -1,0 +1,9 @@
+// auto uses an available CUDA or Mac M-series MPS GPU; otherwise reports CPU fallback.
+fn score(x: Number) -> Number { x * x + 2 }
+async fn batch(values: List) -> Record {
+    await gpu_map(score, values)
+}
+let devices = await gpu_devices();
+let mapped = await batch([1, 2, 3, 4]);
+let product = await gpu_matmul([[1, 2], [3, 4]], [[1, 2], [3, 4]]);
+{devices: devices, mapped: mapped, product: product}

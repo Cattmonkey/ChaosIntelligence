@@ -1,0 +1,2 @@
+fn answer(value:Int)->Int {value+1}
+export {answer};

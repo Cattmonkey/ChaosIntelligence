@@ -1,0 +1,2 @@
+let fast=compile_function(fn(x){(x+1)*(x+1)});
+[fast(6),length(compile_info(fast)),compile_optimization_info(fast).schema]

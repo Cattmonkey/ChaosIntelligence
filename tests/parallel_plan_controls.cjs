@@ -1,0 +1,25 @@
+'use strict';
+const fs=require('fs'),path=require('path'),vm=require('vm'),assert=require('assert');
+const root=process.argv[2]||path.resolve(__dirname,'..'),context=vm.createContext({window:{},document:{getElementById(){return null}}});
+vm.runInContext(fs.readFileSync(path.join(root,'web/modes.js'),'utf8'),context);
+const c=context.window.ChaosModeContracts,checks=[],plain=x=>JSON.parse(JSON.stringify(x));
+const definition=plain(c.initial('plan'));
+assert(!Object.hasOwn(definition,'max_concurrency'));c.planConcurrency(definition,'4');assert.equal(definition.max_concurrency,4);
+for(const bad of ['',true,false,'0','129','1.5','NaN','Infinity']){assert.throws(()=>c.planConcurrency(definition,bad),/1–128/);assert.equal(definition.max_concurrency,4);}
+c.planConcurrency(definition,'1');assert(!Object.hasOwn(definition,'max_concurrency'));checks.push('bounded concurrency control canonicalizes serial default without accepting booleans/fractions');
+let draft={serial:2,baseRevision:1,definition:{...definition,max_concurrency:4},dirty:true,remote:{revision:3,definition:{...definition,max_concurrency:8}}};
+c.committed(draft,{revision:2,definition:{...definition,max_concurrency:2}},1);assert.equal(draft.definition.max_concurrency,4);assert(draft.dirty);assert.equal(draft.baseRevision,2);assert.equal(draft.remote.revision,3);c.remote(draft,{revision:2,definition});assert.equal(draft.remote.revision,3);checks.push('new local concurrency and newer remote conflict survive older save/refresh responses');
+const executions=new Map();let seq=0;
+const event=(executionId,type,payload={},run_id='run-A')=>({id:++seq,run_id,type:'mode.plan.'+type,payload:{executionId,name:'same plan',definitionHash:'same hash',maxConcurrency:2,...payload}});
+c.planEvent(executions,event('first','started',{steps:2}));c.planEvent(executions,event('second','started',{steps:2}));
+for(const executionId of ['first','second'])for(const stepId of ['left','right'])c.planEvent(executions,event(executionId,'step.started',{stepId,call:'worker',stepTaskId:executionId+'-'+stepId}));
+assert.equal(executions.size,2);assert.equal(executions.get('run-A:first').steps.size,2);assert.equal(executions.get('run-A:second').steps.get('left').taskId,'second-left');
+c.planEvent(executions,event('first','step.completed',{stepId:'left'}));assert.equal(executions.get('run-A:first').steps.get('left').status,'completed');assert.equal(executions.get('run-A:second').steps.get('left').status,'running');
+const stale=event('first','step.started',{stepId:'left'});stale.id=1;assert.equal(c.planEvent(executions,stale),false);assert.equal(executions.get('run-A:first').steps.get('left').status,'completed');
+c.planEvent(executions,event('first','started',{steps:1},'run-B'));assert.equal(executions.size,3);checks.push('same-definition concurrent invocations and different runs retain distinct step/task identity; stale events cannot regress status');
+c.planEvent(executions,event('first','step.failed',{stepId:'right',errorCode:'mode_error'}));c.planEvent(executions,event('first','failed'));
+assert.equal(executions.get('run-A:first').status,'failed');c.finishRun(executions,{run_id:'run-A',type:'run.cancelled'});assert.equal(executions.get('run-A:first').status,'failed');assert.equal(executions.get('run-A:second').status,'cancelled');assert.equal(executions.get('run-A:second').steps.get('left').status,'cancelled');assert.equal(executions.get('run-B:first').status,'running');checks.push('failure remains failure; run cancellation resolves only unfinished invocations in that run');
+const before=executions.size;assert.equal(c.planEvent(executions,{run_id:'run-A',type:'mode.plan.started',payload:{name:'legacy'}}),false);assert.equal(executions.size,before);
+for(let i=0;i<80;i++){c.planEvent(executions,event('history-'+i,'started'));c.planEvent(executions,event('history-'+i,'completed'));}assert(executions.size<=32);assert(executions.has('run-B:first'));checks.push('identity-free legacy events do not merge unrelated plans; completed history is bounded while active invocation remains');
+const source=fs.readFileSync(path.join(root,'web/modes.js'),'utf8');assert(source.includes('window.ChaosCode.update(preview,result.source'));assert(source.includes('window.ChaosCode.render(data.source'));assert(!source.includes('innerHTML'));checks.push('preview/export keep shared highlighted original source surfaces and trace labels use safe DOM');
+console.log(JSON.stringify({status:'passed',checks:checks.length,details:checks}));

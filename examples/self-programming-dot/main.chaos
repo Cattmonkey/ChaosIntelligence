@@ -1,0 +1,20 @@
+import "behavior.chaos" as Behavior;
+
+if input.mode == "evolve" {
+  let baseline = current_program();
+  agent programmer {
+    provider: get(input, "provider", "model"),
+    role: "planner",
+    tools: [],
+    prompt: "你在改进一个 Chaos 语言程序。返回完整的 Program 定义 JSON，字段只有 kind、entry、files、languageVersions。保持 main.chaos 和 tests.chaos 的运行协议，按 request 修改 behavior.chaos。不要返回 Markdown、解释或凭据。"
+  };
+  let proposed = programmer({definition: program_info(baseline), request: input.request});
+  let candidate = program_from(if type_of(proposed) == "String" { parse_json(proposed) } else { proposed });
+  let checks = await program_probe(candidate, input.cases);
+  if !checks.passed { throw {message: "候选未通过给定测试", checks: checks} } else { null };
+  let candidateResult = await candidate({mode: "run", value: input.value});
+  let receipt = await program_adopt(baseline, candidate, input.cases, reason="采用通过实际候选测试的 dot 行为版本");
+  {before: Behavior.answer(input.value), candidateResult: candidateResult, receipt: receipt}
+} else {
+  Behavior.answer(input.value)
+}

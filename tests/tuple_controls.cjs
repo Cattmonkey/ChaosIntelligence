@@ -1,0 +1,21 @@
+'use strict';
+const fs=require('fs'),path=require('path'),vm=require('vm'),assert=require('assert'),root=path.resolve(__dirname,'..');
+const fixture=JSON.parse(fs.readFileSync(0,'utf8'));
+function el(tag){return {tagName:tag.toUpperCase(),children:[],value:'',attributes:{},append(...xs){this.children.push(...xs);if(tag==='select')for(const x of xs)if(x.selected)this.value=x.value},replaceChildren(...xs){this.children=xs},setAttribute(k,v){this.attributes[k]=v}}}
+const nodes=new Map(),context=vm.createContext({document:{createElement:el},crypto:require('crypto').webcrypto,parseJSON:JSON.parse,stringifyJSON:JSON.stringify,clone:x=>JSON.parse(JSON.stringify(x)),markDirty(){},flushControls(){},toast(){},$:q=>{if(!nodes.has(q))nodes.set(q,el('div'));return nodes.get(q)},fixture});
+let source=fs.readFileSync(path.join(root,'web/language.js'),'utf8');source=source.slice(0,source.indexOf("$('#applyProgram')"));vm.runInContext(source,context);
+const run=s=>vm.runInContext(s,context),json=s=>JSON.parse(run('JSON.stringify('+s+')'));
+run('syntaxInfo=fixture.info;programDraft=fixture.program;renderSyntax=()=>{};syntaxSelection=programDraft.root.statements[1].pattern.id;renderSyntaxFields()');
+const options=contextName=>json('chooseKind("literal",()=>{},'+JSON.stringify(contextName)+').children.map(x=>x.value)');
+assert(options('expression').includes('tuple'));assert(!options('expression').includes('slice'));
+assert(options('structuralPattern').includes('p_tuple'));assert(!options('structuralPattern').includes('p_bind'));
+assert(options('patternRest').includes('p_bind'));assert(!options('patternRest').includes('p_tuple'));
+assert(options('itemKey').includes('slice'));assert(options('keyComponent').includes('slice'));
+assert.strictEqual(run('syntaxContext(syntaxIndex().get(programDraft.root.statements[1].value.items[0].id))'),'expression');
+const keyTuple={id:'keytuple',kind:'tuple',items:[{id:'keycomponent',kind:'literal',value:1}]};
+context.keyTuple=keyTuple;run('const keyAccess={id:"access",kind:"subscript",object:{id:"object",kind:"name",name:"target"},index:keyTuple};programDraft.root.statements.push(keyAccess)');
+assert.strictEqual(run('syntaxContext(syntaxIndex().get("keycomponent"))'),'keyComponent');
+run('keyTuple.items=[{id:"nested",kind:"tuple",items:[{id:"nestedcomponent",kind:"literal",value:2}]}]');
+assert.strictEqual(run('syntaxContext(syntaxIndex().get("nestedcomponent"))'),'expression');
+run('programDraft.root.statements.pop()');
+console.log(JSON.stringify({status:'passed',checks:11,program:json('programDraft')}));
