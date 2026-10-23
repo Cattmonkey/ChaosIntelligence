@@ -111,3 +111,7 @@ python -m http.server 8000 --directory ./docs-site --bind 127.0.0.1
 ## 在终端查阅与提问
 
 运行 `chaos docs list` 查看安装版主题 ID，用 `chaos docs show command-line` 阅读教程；目录包使用 `python3 chaos.py docs ...`。查阅不需要模型、网络或网页。需要解释某页时，将该 ID 显式传给 `ask --topic`；需要修改项目时使用同一 IDE 编程助手的 `assist` 入口。配置与完整步骤集中在[命令行教程](COMMAND_LINE.md)。
+
+## 支持项目
+
+如果你愿意支持持续开发与文档维护，可在 [GitHub 项目的「支持项目」区域](https://github.com/Cattmonkey/ChaosIntelligence#支持项目)查看微信和支付宝赞赏码。赞赏完全自愿，不影响使用权限，也不改变项目许可。

@@ -136,3 +136,13 @@ python3 -m unittest discover -s tests -v
 ```
 
 `docs check` 验证登记的确定性示例及本地链接；真实模型质量、设备和网络服务需要各自验收。文档发布流程见[文档维护](docs/MAINTAINING_DOCS.md)。
+
+## 支持项目
+
+如果 Chaos Intelligence 对你有帮助，欢迎自愿赞赏，支持持续开发、文档完善与维护。赞赏不影响使用权限，也不改变[项目许可](LICENSE)。
+
+| 微信 | 支付宝 |
+| --- | --- |
+| <a href="docs/assets/support/wechat.jpg"><img src="docs/assets/support/wechat.jpg" alt="微信赞赏收款码" width="280"></a> | <a href="docs/assets/support/alipay.jpg"><img src="docs/assets/support/alipay.jpg" alt="支付宝赞赏收款码" width="280"></a> |
+
+点击图片可查看原图，用对应应用扫码即可自愿赞赏。感谢每一位使用、反馈问题、贡献代码或支持项目的朋友。
