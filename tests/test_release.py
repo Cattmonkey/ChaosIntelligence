@@ -66,7 +66,10 @@ class ReleaseTests(unittest.TestCase):
         for name in ('.git/config', '.chaos/settings.json', '.development/receipt.json',
                      'chaos/__pycache__/old.pyc', 'chaos/build/stale.py', 'chaos/.env',
                      'chaos/signing.pem', 'vendor/deepseek/keys/private.key',
-                     'dist/stale.whl', 'unexpected.txt', 'chaos/old.egg-info/PKG-INFO'):
+                     'dist/stale.whl', 'unexpected.txt', 'chaos/old.egg-info/PKG-INFO',
+                     'docs/session.sqlite', 'docs/session.sqlite-wal', 'docs/session.sqlite-shm',
+                     'examples/runtime.sqlite3', 'examples/runtime.sqlite3-journal',
+                     'web/state.db', 'web/state.db-shm', 'vendor/deepseek/debug.log'):
             path = self.source / name
             path.parent.mkdir(parents=True, exist_ok=True)
             path.write_text('fictional excluded fixture')
@@ -78,6 +81,43 @@ class ReleaseTests(unittest.TestCase):
         self.assertFalse(any('fictional excluded fixture' in path.read_text()
                              for path in snapshot.rglob('*') if path.is_file()))
         self.assertNotIn('chaos/old.egg-info', paths)
+
+    def test_snapshot_blocks_credential_literals_without_echoing_value(self):
+        secret = 'sk-' + 'A1b2' * 12
+        (self.source / 'README.md').write_text('Introduction\n' + secret + '\n')
+        with self.assertRaises(ReleaseError) as caught:
+            copy_source(self.source, self.root / 'snapshot')
+        self.assertIn('README.md:2', str(caught.exception))
+        self.assertNotIn(secret, str(caught.exception))
+        self.assertFalse((self.root / 'snapshot/README.md').exists())
+
+    def test_snapshot_blocks_external_private_values_without_packaging_them(self):
+        endpoint = 'https://publisher-' + 'only.invalid/v1'
+        private_file = self.root / 'publisher-values.json'
+        private_file.write_text(json.dumps([endpoint]))
+        (self.source / 'docs/SDK.md').write_text('Example\n' + endpoint)
+        with patch.dict(os.environ, {'CHAOS_RELEASE_PRIVATE_VALUES_FILE': str(private_file)}):
+            with self.assertRaises(ReleaseError) as caught:
+                copy_source(self.source, self.root / 'blocked')
+            self.assertIn('docs/SDK.md:2', str(caught.exception))
+            self.assertNotIn(endpoint, str(caught.exception))
+            (self.source / 'docs/SDK.md').write_text('Safe documented configuration')
+            copy_source(self.source, self.root / 'safe')
+        self.assertFalse((self.root / 'safe/publisher-values.json').exists())
+
+    def test_snapshot_rejects_invalid_or_in_checkout_private_value_lists(self):
+        private_file = self.root / 'publisher-values.json'
+        for contents in ('invalid-json', '{}', '[null]', '[""]'):
+            private_file.write_text(contents)
+            with patch.dict(os.environ, {'CHAOS_RELEASE_PRIVATE_VALUES_FILE': str(private_file)}):
+                with self.assertRaisesRegex(ReleaseError, 'external JSON array'):
+                    copy_source(self.source, self.root / 'snapshot')
+            self.assertFalse((self.root / 'snapshot').exists())
+        private_file = self.source / 'publisher-values.json'
+        private_file.write_text('[]')
+        with patch.dict(os.environ, {'CHAOS_RELEASE_PRIVATE_VALUES_FILE': str(private_file)}):
+            with self.assertRaisesRegex(ReleaseError, 'external JSON array'):
+                copy_source(self.source, self.root / 'snapshot')
 
     def test_symlinks_cannot_smuggle_external_files_into_release(self):
         (self.source / 'docs/external').symlink_to(self.private)
@@ -175,12 +215,14 @@ class ReleaseTests(unittest.TestCase):
         site_directory = self.root / 'user-site'
         site_directory.mkdir()
         with patch.dict(os.environ, {'OPENAI_API_KEY': 'fixture-secret', 'CHAOS_PROVIDER_KEY': 'fixture-secret',
-                                     'PYTHONPATH': '/fixture/untrusted-checkout'}), \
+                                     'PYTHONPATH': '/fixture/untrusted-checkout',
+                                     'CHAOS_RELEASE_PRIVATE_VALUES_FILE': '/fixture/publisher-values.json'}), \
                 patch('chaos.release.site.ENABLE_USER_SITE', True), \
                 patch('chaos.release.site.getusersitepackages', return_value=str(site_directory)):
             environment = _build_environment(self.root / 'isolated-home')
         self.assertNotIn('OPENAI_API_KEY', environment)
         self.assertNotIn('CHAOS_PROVIDER_KEY', environment)
+        self.assertNotIn('CHAOS_RELEASE_PRIVATE_VALUES_FILE', environment)
         self.assertEqual(environment['PYTHONPATH'], str(site_directory.resolve()))
         self.assertEqual(environment['HOME'], str(self.root / 'isolated-home'))
 

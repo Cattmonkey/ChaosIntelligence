@@ -37,6 +37,9 @@ EXCLUDED_DIRECTORIES = frozenset({
     'build', 'dist', 'node_modules', 'venv', '__pycache__', 'htmlcov',
     'keys', 'secrets', 'credentials', 'releases',
 })
+PRIVATE_VALUES_ENV = 'CHAOS_RELEASE_PRIVATE_VALUES_FILE'
+CREDENTIAL_PATTERN = re.compile(rb'(?<![A-Za-z0-9_-])sk-[A-Za-z0-9_-]{20,}')
+STATE_SUFFIXES = ('.sqlite', '.sqlite3', '.db', '.log')
 VERSION_PATTERN = re.compile(r'^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)$')
 
 
@@ -52,7 +55,41 @@ def _excluded(name: str) -> bool:
     lower = name.lower()
     return (name.startswith('.') or lower in EXCLUDED_DIRECTORIES
             or lower.endswith(('.egg-info', '.dist-info', '.pyc', '.pyo', '.key', '.pem', '.p12', '.pfx'))
+            or lower.endswith(STATE_SUFFIXES + tuple(ext + suffix for ext in STATE_SUFFIXES
+                                                       for suffix in ('-wal', '-shm', '-journal')))
             or lower in {'id_rsa', 'id_ed25519', 'credentials.json', 'secrets.json'})
+
+
+
+def _private_values(source: Path) -> tuple:
+    """Load optional publisher-only values; never print or include this file."""
+    filename = os.environ.get(PRIVATE_VALUES_ENV)
+    if not filename:
+        return ()
+    path = Path(filename).expanduser()
+    try:
+        if _inside(path, source) or path.is_symlink() or not path.is_file():
+            raise ValueError('external regular file required')
+        if path.stat().st_size > 1024 * 1024:
+            raise ValueError('private value list too large')
+        values = json.loads(path.read_text(encoding='utf-8'))
+        if not isinstance(values, list) or any(not isinstance(value, str) or not value for value in values):
+            raise ValueError('expected nonempty strings')
+        return tuple(value.encode('utf-8') for value in values)
+    except (OSError, ValueError, UnicodeError):
+        raise ReleaseError(PRIVATE_VALUES_ENV + ' must point to an external JSON array of nonempty strings') from None
+
+
+def _check_source_privacy(path: Path, source: Path, private_values: tuple) -> bytes:
+    data = path.read_bytes()
+    match = CREDENTIAL_PATTERN.search(data)
+    offsets = [match.start()] if match else []
+    offsets.extend(position for value in private_values for position in [data.find(value)] if position >= 0)
+    if offsets:
+        line = data.count(b'\n', 0, min(offsets)) + 1
+        raise ReleaseError('private material in release source: ' + path.relative_to(source).as_posix()
+                           + ':' + str(line))
+    return data
 
 
 def copy_source(source: Path, destination: Path) -> None:
@@ -60,6 +97,7 @@ def copy_source(source: Path, destination: Path) -> None:
     source, destination = Path(source).resolve(), Path(destination)
     if not (source / 'setup.py').is_file() or not (source / 'chaos/version.py').is_file():
         raise ReleaseError('source must be a Chaos checkout containing setup.py and chaos/version.py')
+    private_values = _private_values(source)
     destination.mkdir(parents=True, exist_ok=False)
 
     def copy(path: Path, target: Path) -> None:
@@ -72,7 +110,7 @@ def copy_source(source: Path, destination: Path) -> None:
             for child in sorted(path.iterdir()):
                 copy(child, target / child.name)
         elif path.is_file():
-            shutil.copyfile(path, target)
+            target.write_bytes(_check_source_privacy(path, source, private_values))
             target.chmod(0o755 if path.stat().st_mode & stat.S_IXUSR else 0o644)
         else:
             raise ReleaseError('release source contains a non-regular file: ' + str(path.relative_to(source)))

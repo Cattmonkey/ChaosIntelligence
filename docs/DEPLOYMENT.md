@@ -45,7 +45,7 @@ python3 chaos.py configure --models
 
 | 配置层 | 默认分类与行为 |
 | --- | --- |
-| 提供方 | `text`、`image1k`、`image4k`、`grok` 分别保存连接与凭据；默认地址是 `https://api.example.com/v1`，可统一或逐项修改 |
+| 提供方 | `text`、`image1k`、`image4k`、`grok` 分别保存连接与凭据；全新配置的通用初始地址是 `https://api.openai.com/v1`；请按各服务实际地址和可用模型统一或逐项配置，不代表所有槽位均由该服务支持 |
 | 角色 | `planner` 规划、`executor` 执行、`reviewer` 复核、`image` 出图、`grok`；角色可以独立选择模型 |
 | 智能体 | `agents` 中按智能体 ID 覆盖角色、提供方、模型或连接；向导保留这些更具体的覆盖 |
 | 能力与工具 | 继续由现有项目授权与插件设置控制；保存模型连接不会增加工具权限 |

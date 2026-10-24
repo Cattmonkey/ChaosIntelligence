@@ -16,7 +16,7 @@
 
 ## 服务地址与模型
 
-本系统的示例服务地址为 **`https://api.example.com/v1`**，通过 OpenAI Python SDK 的兼容接口连接。这是可修改的第三方端点；模型名称是配置示例，不代表已验证你账号当前拥有这些模型。完整目录应由该提供方的 `/models` 响应确认。
+公开示例使用占位地址 **`https://api.example.com/v1`**，请替换为自己的服务地址。全新配置的通用初始地址为 `https://api.openai.com/v1`；这不表示所有提供方槽位或下列示例模型均由该服务支持。为每个提供方填写匹配的 Base URL、Key 和账号实际可用的模型；完整目录由对应服务的 `/models` 响应确认。已保存的私有连接不会因更新源码默认值而改变。
 
 | 提供方 ID | 用途 | 示例模型 | Key 环境变量（供本页脚本读取） |
 | --- | --- | --- | --- |
@@ -57,7 +57,7 @@ export CHAOS_REVIEWER_MODEL='gpt-6.1-sol'
 python3 configure_models.py --project .
 ```
 
-只使用文本时可以只提供 `CHAOS_TEXT_KEY`。省略的 Key 保持已有值；首次创建时保持未配置状态。显式设置三个角色模型会将这三个角色固定为相应模型（`autoUpgrade=false`）；未设置的角色保持当前设置。脚本不会因为重新运行就清空其他提供方、插件或自定义智能体。
+只使用文本时无需填写图像或 Grok Key，但必须为文本配置自己的 Base URL、`CHAOS_TEXT_KEY` 和可用模型，并同步选择角色模型。省略的 Key 保持已有值；首次创建时保持未配置状态。显式设置三个角色模型会将这三个角色固定为相应模型（`autoUpgrade=false`）；未设置的角色保持当前设置。脚本不会因为重新运行就清空其他提供方、插件或自定义智能体。
 
 Windows PowerShell 使用对应变量赋值方式：
 
@@ -127,7 +127,7 @@ settings.update({
 }, version=current["version"])
 ```
 
-如果只想改变模型，省略路由中的 baseURL/apiKey，继续继承提供方连接。共享 Key、每框架分配 Key、按智能体分配 Key 都使用同一继承机制。文件中的 `version` 是并发修改检查，不是运行时发布版本。不要打印 `settings.resolve()` 的结果，其中包含供客户端使用的真实凭据；检查配置应使用脱敏的 `settings.public()`。
+如果只想改变模型，省略路由中的 baseURL/apiKey，继续继承提供方连接。共享 Key、每框架分配 Key、按智能体分配 Key 都使用同一继承机制。文件中的 `version` 是并发修改检查，不是运行时发布版本。不要打印 `settings.resolve()` 的结果，其中包含供客户端使用的真实凭据；`settings.public()` 会遮盖 Key，但仍含服务地址和 Key 提示，不应直接发布其输出。
 
 ## 学习、测试与生产的边界
 
