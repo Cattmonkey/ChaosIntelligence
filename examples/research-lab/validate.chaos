@@ -1,0 +1,3 @@
+// Execute with input.json through the SDK runner in experiment.py.
+import "lorenz.chaos" as Numerical;
+Numerical.validate(input)

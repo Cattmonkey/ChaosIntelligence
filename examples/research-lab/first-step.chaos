@@ -1,0 +1,8 @@
+// Run one numerical step. No model, network, NumPy or SciPy is required.
+import "lorenz.chaos" as Numerical;
+let dynamics = fn(point) {
+  let x = point[0]; let y = point[1]; let z = point[2];
+  [10*(y-x), x*(28-z)-y, x*y-(8/3)*z]
+};
+{initial: input.initial, dt: input.dt,
+ next: Numerical.rk4(dynamics, input.initial, input.dt)}

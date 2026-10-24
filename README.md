@@ -12,7 +12,7 @@
 
 <p align="center">
   <a href="https://github.com/Cattmonkey/ChaosIntelligence/releases/latest"><strong>下载使用包</strong></a> ·
-  <a href="#2-分-35-秒认识-chaos-intelligence"><strong>观看宣传片</strong></a> ·
+  <a href="#research-film"><strong>观看《曲线之外》</strong></a> ·
   <a href="docs/GETTING_STARTED.md"><strong>十分钟开始</strong></a> ·
   <a href="docs/README.md"><strong>文档中心</strong></a> ·
   <a href="#支持项目"><strong>支持项目</strong></a>
@@ -24,7 +24,24 @@
 
 一份 `.chaos` 源码，从终端到网页 IDE，再到已有工程。你可以从一个小函数开始，逐步构建有目标、能交互、可观察的智能系统。
 
-## 2 分 35 秒，认识 Chaos Intelligence
+<a id="research-film"></a>
+
+## 3 分 34 秒，《曲线之外》
+
+<a href="https://github.com/Cattmonkey/ChaosIntelligence/releases/download/v0.154.4/Chaos-Intelligence-Beyond-the-Curves-1080p.mp4"><img src="docs/assets/research-film/poster.jpg" alt="曲线之外：五位科学家与三位工程师，都是虚构智能体" width="100%"></a>
+
+**一个研究团队，就是一段可调用的程序。**
+
+5 位科学家、3 位工程师，都是智能体。一张漂亮的拟合图，引出独立验证、初值敏感性与一次新的神经兴奋实验：提出假设，调用函数，用证据修正下一步。
+
+https://github.com/Cattmonkey/ChaosIntelligence/releases/download/v0.154.4/Chaos-Intelligence-Beyond-the-Curves-1080p.mp4
+
+[下载 1080p 影片](https://github.com/Cattmonkey/ChaosIntelligence/releases/download/v0.154.4/Chaos-Intelligence-Beyond-the-Curves-1080p.mp4) · [复现片中的研究](examples/research-lab/README.md) · [角色、数据与制作说明](docs/assets/research-film/README.md)
+
+人物为虚构智能体的剧情演绎；科学图来自实际数值实验。Chaos 执行积分与误差，NumPy／SciPy 完成回归与独立参考。[实验与调用验收](docs/assets/research-film/README.md)。
+
+<details>
+<summary>观看已有的 2 分 35 秒产品介绍</summary>
 
 **让智能，成为语言。** 从能调用的智能体，到围绕目标工作的 Bot，再到可交互的报告与运行网络。
 
@@ -33,6 +50,8 @@ https://github.com/user-attachments/assets/2aa53c85-8d36-4e21-8322-2bdc9188f17a
 [下载 1080p 原片](https://github.com/Cattmonkey/ChaosIntelligence/releases/download/v0.154.4/Chaos-Intelligence-Brand-Film-1080p.mp4) · [中文字幕](https://github.com/Cattmonkey/ChaosIntelligence/releases/download/v0.154.4/captions.zh-CN.srt) · [宣传封面与素材说明](docs/assets/brand-film/README.md)
 
 中文配音、原创配乐与真实界面。角色协作和设备连接使用标注的能力示意；报告数字为演示输入，设备与 GPU 按配置、授权和支持范围启用。
+
+</details>
 
 ### 用它做什么？
 

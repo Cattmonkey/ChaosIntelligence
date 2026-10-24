@@ -1,0 +1,71 @@
+// Pure, reusable Chaos numerical functions. No model, network or host tools.
+// Coefficient rows correspond to dx/dt, dy/dt, dz/dt; columns are
+// [1, x, y, z, x*x, x*y, x*z, y*y, y*z, z*z].
+fn polynomial(c: List, p: List) -> Number {
+  let x = p[0]; let y = p[1]; let z = p[2];
+  c[0] + c[1]*x + c[2]*y + c[3]*z + c[4]*x*x +
+  c[5]*x*y + c[6]*x*z + c[7]*y*y + c[8]*y*z + c[9]*z*z
+}
+
+fn field(coefficients: List, point: List) -> List {
+  [polynomial(coefficients[0], point),
+   polynomial(coefficients[1], point),
+   polynomial(coefficients[2], point)]
+}
+
+fn shifted(point: List, slope: List, amount: Number) -> List {
+  [point[0]+amount*slope[0], point[1]+amount*slope[1], point[2]+amount*slope[2]]
+}
+
+// The integrator accepts an ordinary function. Models are data plus a closure.
+fn rk4(dynamics: Function, state: List, dt: Number) -> List {
+  let a = dynamics(state);
+  let b = dynamics(shifted(state, a, dt/2));
+  let c = dynamics(shifted(state, b, dt/2));
+  let d = dynamics(shifted(state, c, dt));
+  [state[0]+dt*(a[0]+2*b[0]+2*c[0]+d[0])/6,
+   state[1]+dt*(a[1]+2*b[1]+2*c[1]+d[1])/6,
+   state[2]+dt*(a[2]+2*b[2]+2*c[2]+d[2])/6]
+}
+
+fn integrate(dynamics: Function, initial: List, dt: Number, steps: Int) -> List {
+  var state = initial;
+  var trajectory = [state];
+  for index in range(steps) {
+    state = rk4(dynamics, state, dt);
+    trajectory = append(trajectory, state)
+  };
+  trajectory
+}
+
+fn squared_distance(a: List, b: List) -> Number {
+  let dx = a[0]-b[0]; let dy = a[1]-b[1]; let dz = a[2]-b[2];
+  dx*dx+dy*dy+dz*dz
+}
+
+fn validate(request: Record) -> Record {
+  let dynamics = fn(point) { field(request.coefficients, point) };
+  let trajectory = integrate(dynamics, request.initial, request.dt, request.steps);
+  if length(trajectory) != length(request.reference) {
+    throw "Reference and integration grids must match"
+  } else { null };
+  var error = 0;
+  var field_error = 0;
+  var field_energy = 0;
+  var error_curve = [];
+  for index in range(length(trajectory)) {
+    let sample_error = squared_distance(trajectory[index], request.reference[index]);
+    error = error + sample_error;
+    error_curve = append(error_curve, sqrt(sample_error));
+    field_error = field_error + squared_distance(
+      dynamics(request.reference[index]), request.reference_field[index]);
+    field_energy = field_energy + squared_distance(request.reference_field[index], [0,0,0])
+  };
+  {engine: "Chaos RK4 + Chaos error reduction",
+   steps: request.steps, dt: request.dt,
+   trajectory: trajectory, error_curve: error_curve,
+   trajectory_rmse: sqrt(error/(3*length(trajectory))),
+   vector_field_relative_l2: sqrt(field_error/field_energy)}
+}
+
+export {field, rk4, integrate, squared_distance, validate};

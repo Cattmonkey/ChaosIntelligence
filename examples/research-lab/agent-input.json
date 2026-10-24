@@ -1,0 +1,195 @@
+{
+  "evidence": {
+    "lorenz": {
+      "dataKind": "known synthetic Lorenz benchmark, dimensionless",
+      "trainSamples": 6001,
+      "linearDerivativeR2": [
+        0.9998461215137283,
+        0.5279773057722639,
+        0.0018772232712338521
+      ],
+      "nonlinearActiveTerms": 7,
+      "heldOut": [
+        {
+          "initial": [
+            -8.0,
+            7.0,
+            27.0
+          ],
+          "t": [
+            0,
+            2
+          ],
+          "linearRmse": 20.303023942895923,
+          "quadraticRmse": 0.08932430810898355
+        },
+        {
+          "initial": [
+            5.0,
+            5.0,
+            20.0
+          ],
+          "t": [
+            0,
+            2
+          ],
+          "linearRmse": 11.365353112891784,
+          "quadraticRmse": 0.04766714627497179
+        },
+        {
+          "initial": [
+            -12.0,
+            -5.0,
+            35.0
+          ],
+          "t": [
+            0,
+            2
+          ],
+          "linearRmse": 14.78127757345261,
+          "quadraticRmse": 0.07845490592702346
+        }
+      ],
+      "stepRefinement": {
+        "model": "Known exact Lorenz vector field, no regression",
+        "interval": [
+          0,
+          2.0
+        ],
+        "initial": [
+          -8.0,
+          7.0,
+          27.0
+        ],
+        "coarse_dt": 0.005,
+        "fine_dt": 0.0025,
+        "coarse_reference_rmse": 1.543723256744835e-05,
+        "fine_reference_rmse": 6.850097074125063e-07,
+        "error_ratio": 22.535786574119594,
+        "interpretation": "Finite-step check consistent with RK4; not proof of all future-time accuracy."
+      },
+      "divisionOfWork": {
+        "Chaos": [
+          "first-class model closure",
+          "RK4 time stepping",
+          "trajectory RMSE",
+          "held-out vector-field relative L2 error"
+        ],
+        "host_numpy_scipy": [
+          "synthetic reference",
+          "noise and filtering",
+          "least squares and sparse regression",
+          "independent numerical cross-check",
+          "long-horizon sensitivity display"
+        ]
+      },
+      "limitations": [
+        "Synthetic, known Lorenz system; not laboratory observations or discovery of unknown physics",
+        "Polynomial candidate library and sparsity threshold are chosen assumptions; success depends on these choices and state coverage",
+        "Only three held-out initial conditions and a finite horizon are tested; this is not a universal generalization proof",
+        "True vector-field error is observable only because this is a synthetic benchmark",
+        "Long-horizon separation is expected in chaos and alone cannot establish model failure",
+        "These numerical results were computed deterministically, not autonomously discovered by a model. The current role review has separate real model-call receipts."
+      ]
+    },
+    "neural": {
+      "model": "FitzHugh–Nagumo chosen dimensionless normal form",
+      "equations": [
+        "dv/dt = v - v³/3 - w + I(t)",
+        "dw/dt = (v + a - b*w)/tau"
+      ],
+      "parameters": {
+        "a": 0.7,
+        "b": 0.8,
+        "tau": 12.5
+      },
+      "pulse": [
+        10,
+        11
+      ],
+      "amplitudes": [
+        0.1,
+        0.8
+      ],
+      "low": {
+        "joint_vw_rmse_vs_scipy": 1.203024897396752e-11,
+        "sampled_peak_v": -1.1168993845396817,
+        "sampled_peak_time": 11.0,
+        "final_v": -1.1994079812739082,
+        "final_w": -0.6242601752967513,
+        "host_crosscheck_max_abs_error": 8.472045287533092e-11
+      },
+      "high": {
+        "joint_vw_rmse_vs_scipy": 7.269333420838855e-08,
+        "sampled_peak_v": 1.7568958510278962,
+        "sampled_peak_time": 14.950000000000001,
+        "final_v": -1.1997932709448154,
+        "final_w": -0.625099887222892,
+        "host_crosscheck_max_abs_error": 7.047825549832964e-07
+      },
+      "computation": "Both trajectories and RMSE reductions execute in Chaos using the same imported RK4 function as Lorenz",
+      "limitations": [
+        "A simplified qualitative excitability model, not measured neural data",
+        "No claim about a real neuron, brain, consciousness, diagnosis or treatment",
+        "The two selected pulse amplitudes illustrate different responses; no exact firing threshold is estimated",
+        "This normal form and tau=12.5 are illustrative choices, not a literal parameter replication of FitzHugh's 1961 paper"
+      ]
+    },
+    "implementation": {
+      "language": "Chaos 0.154.4",
+      "functionContract": "rk4(dynamics:Function, state:List, dt:Number)->List",
+      "integrationSource": "lorenz.chaos",
+      "sourceReuse": "same RK4 function imported by neural/excitation.chaos",
+      "scope": "no changes to compiler/runtime, no physical hardware operation, no unknown physics discovery"
+    }
+  },
+  "coefficients": [
+    [
+      0.0,
+      -10.00313560061902,
+      10.003079608892408,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    [
+      0.0,
+      28.033273334455142,
+      -1.0087869850304327,
+      0.0,
+      0.0,
+      0.0,
+      -1.0010029210437101,
+      0.0,
+      0.0,
+      0.0
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      -2.6669138130759924,
+      0.0,
+      1.000478503510493,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ]
+  ],
+  "initial": [
+    -8.0,
+    7.0,
+    27.0
+  ],
+  "dt": 0.005,
+  "first_reference": [
+    -7.270449805671067,
+    6.9152604956430395,
+    26.37860172404899
+  ]
+}

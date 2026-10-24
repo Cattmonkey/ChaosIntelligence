@@ -1,0 +1,44 @@
+// Eight real model agents compose ordinary language functions and numeric tools.
+// All evidence is synthetic and measured; no autonomous discovery is claimed.
+import "lorenz.chaos" as Numerical;
+var receipts = [];
+fn equip(worker: Function, identity: String) {
+  fn verify(request: Null) -> Record {
+    let dynamics = fn(point) { Numerical.field(input.coefficients, point) };
+    let next = Numerical.rk4(dynamics, input.initial, input.dt);
+    let checked = {role: identity, experiment: input.evidence,
+      oneStep: {computedIn: "Chaos rk4 function", next: next,
+        referenceDistance: sqrt(Numerical.squared_distance(next, input.first_reference))}};
+    receipts = append(receipts, checked);
+    checked
+  };
+  agent_bind(worker, [agent_tool("verify_numerical_evidence", verify,
+    description="Input null. Read actual Lorenz/FHN synthetic experiment evidence and recompute one RK4 step in Chaos. This does not perform a real-world experiment.",
+    input_type="Null", output_type="Record")])
+}
+agent sera { provider: "model", role: "planner", prompt: "ROLE_ID=sera。你是理论科学家。先调用 verify_numerical_evidence 工具，参数 input 为 null；工具会实际用Chaos复算RK4一步并返回已测记录。之后只用80个汉字以内回答，最多两句。引用记录而非编造实验。时间均无量纲。只提供结论与简短依据，不输出内部思维过程。检查Lorenz候选库与稀疏先验，给出一个可检验的机制判断。", tools: [], maxSteps: 3 }
+agent grid { provider: "model", role: "executor", prompt: "ROLE_ID=grid。你是计算科学家。先调用 verify_numerical_evidence 工具，参数 input 为 null；工具会实际用Chaos复算RK4一步并返回已测记录。之后只用80个汉字以内回答，最多两句。引用记录而非编造实验。时间均无量纲。只提供结论与简短依据，不输出内部思维过程。核对独立初值误差与时间区间，区分宿主回归和Chaos积分，指出一个可复核的比较。", tools: [], maxSteps: 3 }
+agent mirror { provider: "model", role: "reviewer", prompt: "ROLE_ID=mirror。你是审查科学家。先调用 verify_numerical_evidence 工具，参数 input 为 null；工具会实际用Chaos复算RK4一步并返回已测记录。之后只用80个汉字以内回答，最多两句。引用记录而非编造实验。时间均无量纲。只提供结论与简短依据，不输出内部思维过程。审查其他角色结论边界，解释为什么单分量好看或混沌长期分离不能单独判定整个模型。", tools: [], maxSteps: 3 }
+agent delta { provider: "model", role: "planner", prompt: "ROLE_ID=delta。你是实验科学家。先调用 verify_numerical_evidence 工具，参数 input 为 null；工具会实际用Chaos复算RK4一步并返回已测记录。之后只用80个汉字以内回答，最多两句。引用记录而非编造实验。时间均无量纲。只提供结论与简短依据，不输出内部思维过程。核对已完成步长减半检验，并明确提出一个尚未执行的后续实验，禁止说后续实验已完成。", tools: [], maxSteps: 3 }
+agent noema { provider: "model", role: "reviewer", prompt: "ROLE_ID=noema。你是脑神经科学家。先调用 verify_numerical_evidence 工具，参数 input 为 null；工具会实际用Chaos复算RK4一步并返回已测记录。之后只用80个汉字以内回答，最多两句。引用记录而非编造实验。时间均无量纲。只提供结论与简短依据，不输出内部思维过程。仅审查FitzHugh–Nagumo示例。区分弱强脉冲响应、简化机制与真实脑信号，禁止给出临床或意识结论。", tools: [], maxSteps: 3 }
+agent link { provider: "model", role: "executor", prompt: "ROLE_ID=link。你是语言与编译工程师。先调用 verify_numerical_evidence 工具，参数 input 为 null；工具会实际用Chaos复算RK4一步并返回已测记录。之后只用80个汉字以内回答，最多两句。引用记录而非编造实验。时间均无量纲。只提供结论与简短依据，不输出内部思维过程。审查高阶rk4函数、动力学闭包和模块复用如何支持两种模型；不宣称本次改变编译器或运行时。", tools: [], maxSteps: 3 }
+agent anchor { provider: "model", role: "reviewer", prompt: "ROLE_ID=anchor。你是运行时与可靠性工程师。先调用 verify_numerical_evidence 工具，参数 input 为 null；工具会实际用Chaos复算RK4一步并返回已测记录。之后只用80个汉字以内回答，最多两句。引用记录而非编造实验。时间均无量纲。只提供结论与简短依据，不输出内部思维过程。审查可复现参数、固定步长、参考求解器与有限预算的证据边界；不把有限验证说成普遍正确。", tools: [], maxSteps: 3 }
+agent pulse { provider: "model", role: "executor", prompt: "ROLE_ID=pulse。你是控制与实验工程师。先调用 verify_numerical_evidence 工具，参数 input 为 null；工具会实际用Chaos复算RK4一步并返回已测记录。之后只用80个汉字以内回答，最多两句。引用记录而非编造实验。时间均无量纲。只提供结论与简短依据，不输出内部思维过程。检查FHN输入脉冲开关、响应与恢复；讨论下一轮输入实验需哪些观测，明确尚未实际控制硬件。", tools: [], maxSteps: 3 }
+
+async fn inspect(worker: Function, identity: String, context: Record) -> Record {
+  let before = length(receipts);
+  let answer = try { await equip(worker, identity)(context) } catch problem {
+    {failed: true, code: problem.code}
+  };
+  {id: identity, answer: answer, toolCalls: length(receipts)-before}
+}
+let seraResult = await inspect(sera, "sera", {question: "检查候选机制"});
+let gridResult = await inspect(grid, "grid", {theory: seraResult.answer});
+let mirrorResult = await inspect(mirror, "mirror", {theory: seraResult.answer, computation: gridResult.answer});
+let deltaResult = await inspect(delta, "delta", {review: mirrorResult.answer});
+let noemaResult = await inspect(noema, "noema", {question: "审查神经兴奋简化模型的边界"});
+let linkResult = await inspect(link, "link", {theory: seraResult.answer, neural: noemaResult.answer});
+let anchorResult = await inspect(anchor, "anchor", {computation: gridResult.answer, language: linkResult.answer});
+let pulseResult = await inspect(pulse, "pulse", {neural: noemaResult.answer, reliability: anchorResult.answer, nextExperiment: deltaResult.answer});
+let results = [seraResult,gridResult,mirrorResult,deltaResult,noemaResult,linkResult,anchorResult,pulseResult];
+{results: results, receipts: receipts}
