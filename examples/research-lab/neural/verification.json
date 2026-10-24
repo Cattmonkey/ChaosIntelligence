@@ -1,0 +1,37 @@
+{
+  "status": "passed",
+  "model_calls": 0,
+  "checks": [
+    {
+      "label": "low",
+      "language": "Chaos",
+      "sdk": "Framework.evaluate",
+      "wall_seconds": 49.24153387499973,
+      "steps": 1200,
+      "dt": 0.05,
+      "joint_vw_rmse_vs_scipy": 1.203024897396752e-11,
+      "sampled_peak_v": -1.1168993845396817,
+      "sampled_peak_time": 11.0,
+      "final_v": -1.1994079812739082,
+      "final_w": -0.6242601752967513,
+      "host_crosscheck_max_abs_error": 8.472045287533092e-11
+    },
+    {
+      "label": "high",
+      "language": "Chaos",
+      "sdk": "Framework.evaluate",
+      "wall_seconds": 49.54240854200907,
+      "steps": 1200,
+      "dt": 0.05,
+      "joint_vw_rmse_vs_scipy": 7.269333420838855e-08,
+      "sampled_peak_v": 1.7568958510278962,
+      "sampled_peak_time": 14.950000000000001,
+      "final_v": -1.1997932709448154,
+      "final_w": -0.625099887222892,
+      "host_crosscheck_max_abs_error": 7.047825549832964e-07
+    }
+  ],
+  "rk4_source_sha256": "950762a12209255965d35d67ba1b57e058675444561fddc31126fdd8bd0208a6",
+  "neural_source_sha256": "0acbf9ccc13113a9ed0c1f5c4e444f83f57e7c905f60c4436c5d740a9dbe2600",
+  "distribution_note": "Original complete neural validation. Distribution changes import to ../lorenz.chaos and SDK entry to neural/excitation.chaos to preserve the on-disk package layout; a bounded SDK replay and CLI import checks passed after relocation."
+}

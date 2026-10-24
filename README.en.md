@@ -4,6 +4,7 @@
 
 <p align="center">
   <a href="https://github.com/Cattmonkey/ChaosIntelligence/releases/latest"><strong>Download</strong></a> ·
+  <a href="#research-film">Watch the film</a> ·
   <a href="#start-in-your-own-directory">Quick start</a> ·
   <a href="docs/MODEL_EXAMPLES.md">Agent examples</a> ·
   <a href="docs/README.md">Documentation</a> ·
@@ -23,7 +24,24 @@ Use one `.chaos` source file through the native `chaos` CLI, the browser IDE, or
 | A report that explains its own data | Return UI components, tables, charts, or slides as program values. |
 | An observable intelligent system | Follow public execution events and inspect project structure alongside recorded activity. |
 
-## Meet Chaos in 2 minutes 35 seconds
+<a id="research-film"></a>
+
+## 3 minutes 34 seconds: Beyond the Curves
+
+<img src="docs/assets/research-film/poster.jpg" alt="Beyond the Curves: five scientists and three engineers, all fictional agents" width="100%">
+
+**A research team, expressed as a callable program.**
+
+Five scientists and three engineers—all agents. A convincing fit leads them through independent validation, sensitivity to initial conditions, and a new experiment with a simplified neural excitability model. Hypotheses become function calls; evidence shapes the next question.
+
+https://github.com/user-attachments/assets/b3def22d-53de-4867-9644-0367949d7a06
+
+[Download the 1080p film](https://github.com/Cattmonkey/ChaosIntelligence/releases/download/v0.154.4/Chaos-Intelligence-Beyond-the-Curves-1080p.mp4) · [Reproduce the research](examples/research-lab/README.md) · [Cast, data, and production notes](docs/assets/research-film/README.md)
+
+The fictional agents are dramatized; scientific figures come from actual numerical experiments. Chaos executes integration and error calculations, while NumPy/SciPy provide regression and independent references. [Experiments and model-call acceptance](docs/assets/research-film/README.md). Mandarin narration and captions.
+
+<details>
+<summary>Watch the existing 2-minute-35-second product introduction</summary>
 
 The language, the IDE, and the systems you can compose with them. **Mandarin narration and captions.**
 
@@ -32,6 +50,8 @@ https://github.com/user-attachments/assets/2aa53c85-8d36-4e21-8322-2bdc9188f17a
 [Download the 1080p film](https://github.com/Cattmonkey/ChaosIntelligence/releases/download/v0.154.4/Chaos-Intelligence-Brand-Film-1080p.mp4) · [Chinese subtitles](https://github.com/Cattmonkey/ChaosIntelligence/releases/download/v0.154.4/captions.zh-CN.srt)
 
 The film combines actual product screens with labeled capability illustrations. Business figures in the reports are demonstration inputs.
+
+</details>
 
 ## A small language example
 

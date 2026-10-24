@@ -1,0 +1,52 @@
+{
+  "schema": "chaos.agent-team.acceptance/1",
+  "overallTextAcceptance": "not_passed",
+  "executionStatus": "complete",
+  "scope": "one authorized paid attempt; no repeated paid attempt",
+  "execution": {
+    "completed": 8,
+    "expected": 8,
+    "paidRequests": 16,
+    "httpSucceeded": 16,
+    "actualModels": [
+      "gpt-6-astra",
+      "gpt-6.1-sol"
+    ]
+  },
+  "languageToolReceipts": {
+    "verified": 8,
+    "expected": 8,
+    "tool": "verify_numerical_evidence",
+    "work": "Each actual tool call recomputed one RK4 step in Chaos and returned previously validated Lorenz/FHN data"
+  },
+  "replyLength": {
+    "passed": 6,
+    "expected": 8,
+    "criterion": "strict total character count <=80; stricter than counting only Han characters",
+    "warnings": [
+      {
+        "role": "grid",
+        "characters": 100
+      },
+      {
+        "role": "anchor",
+        "characters": 93
+      }
+    ]
+  },
+  "scientificWording": {
+    "manualReviewNeeded": 1,
+    "issues": [
+      {
+        "role": "link",
+        "issue": "The answer juxtaposes Lorenz RMSE and FHN peak values after saying errors respectively; these are different metrics.",
+        "correction": "Lorenz short-horizon candidate RMSE is 0.048–0.089. FHN values -1.117/1.757 are state peaks, not errors; FHN joint state RMSE versus SciPy is 1.203e-11 / 7.269e-8.",
+        "use": "Do not use the raw answer as narration or an authoritative scientific conclusion."
+      }
+    ]
+  },
+  "scientificDataStatus": "Lorenz and FHN curves remain independently validated deterministic code outputs; model wording does not establish their correctness.",
+  "internalReasoningStored": false,
+  "editorialRule": "Replay contains only public execution events and actual numerical tool receipts. Narration is independently reviewed exposition, not a quotation of model reasoning or unreviewed answers.",
+  "displayConstraintNote": "The <=80 total-character limit is an extra film display criterion. The two flagged replies still have fewer than 80 Han characters, as requested in their prompts. These display warnings are not evidence that the original Han-character instruction was violated."
+}

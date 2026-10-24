@@ -1,0 +1,19 @@
+{
+  "status": "passed",
+  "python": "3.13.9",
+  "numpy": "2.3.5",
+  "scipy": "1.16.3",
+  "chaos_sdk": "Framework.evaluate; 8 independent invocations of validate.chaos",
+  "core_files_sha256": {
+    "experiment.py": "0ac2ebe11c1b216b949b7279262dfec37176ad59f1a3a800912bb795278e83b4",
+    "lorenz.chaos": "950762a12209255965d35d67ba1b57e058675444561fddc31126fdd8bd0208a6",
+    "validate.chaos": "63db2a26a35c5b5b37c7545d0491fd23ac15fc035fc076f41da7e1d0d8ca9f43",
+    "input.json": "9e9d871a1e1dd7106c2b06e3bcfec89bf622fa8ccedd594f5387ba3cb1cc3806"
+  },
+  "checks": [
+    "All Chaos RMSE and field reductions match independent NumPy reduction within 1e-10",
+    "Every Chaos candidate trajectory compared with independent high-tolerance SciPy integration",
+    "Known-field RK4 dt / 2 convergence measured independently"
+  ],
+  "distribution_note": "Original complete Lorenz validation. Distribution changes only the experiment.py usage docstring; numerical language files are unchanged."
+}

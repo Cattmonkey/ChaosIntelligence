@@ -1,0 +1,8 @@
+// The same imported RK4 function receives a different dynamics closure.
+import "../lorenz.chaos" as Numerical;
+let dynamics = fn(point) {
+  let v = point[0]; let w = point[1];
+  [v-v*v*v/3-w+input.amplitude, (v+0.7-0.8*w)/12.5, 0]
+};
+{input_amplitude: input.amplitude,
+ next: Numerical.rk4(dynamics, input.initial, input.dt)}

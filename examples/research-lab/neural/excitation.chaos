@@ -1,0 +1,28 @@
+// This program imports the SAME higher-order RK4 function as the Lorenz study.
+// It uses a chosen nondimensional FitzHugh-Nagumo normal form, not real neurons.
+import "../lorenz.chaos" as Numerical;
+
+fn membrane(state: List, current: Number) -> List {
+  let v = state[0]; let w = state[1];
+  [v-v*v*v/3-w+current, (v+input.a-input.b*w)/input.tau, 0]
+}
+
+var state = input.initial;
+var trajectory = [state];
+var currents = [];
+var square_error = 0;
+for index in range(input.steps) {
+  // Boundaries are exact step indices. Forcing is constant throughout each
+  // RK4 step, including all stages, so no step straddles a discontinuity.
+  let current = if index >= input.pulse_start_step && index < input.pulse_end_step {
+    input.amplitude
+  } else { 0 };
+  let dynamics = fn(point) { membrane(point, current) };
+  state = Numerical.rk4(dynamics, state, input.dt);
+  trajectory = append(trajectory, state);
+  currents = append(currents, current);
+  square_error = square_error + Numerical.squared_distance(state, input.reference[index+1])
+};
+{engine: "Same Chaos RK4 function as Lorenz experiment",
+ trajectory: trajectory, applied_current_per_step: currents,
+ joint_vw_rmse: sqrt(square_error/(2*length(trajectory)))}
