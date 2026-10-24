@@ -28,7 +28,7 @@ Use one `.chaos` source file through the native `chaos` CLI, the browser IDE, or
 
 ## 3 minutes 34 seconds: Beyond the Curves
 
-<a href="https://github.com/user-attachments/assets/b3def22d-53de-4867-9644-0367949d7a06"><img src="docs/assets/research-film/poster.jpg" alt="Beyond the Curves: five scientists and three engineers, all fictional agents" width="100%"></a>
+<img src="docs/assets/research-film/poster.jpg" alt="Beyond the Curves: five scientists and three engineers, all fictional agents" width="100%">
 
 **A research team, expressed as a callable program.**
 

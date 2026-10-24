@@ -28,7 +28,7 @@
 
 ## 3 分 34 秒，《曲线之外》
 
-<a href="https://github.com/user-attachments/assets/b3def22d-53de-4867-9644-0367949d7a06"><img src="docs/assets/research-film/poster.jpg" alt="曲线之外：五位科学家与三位工程师，都是虚构智能体" width="100%"></a>
+<img src="docs/assets/research-film/poster.jpg" alt="曲线之外：五位科学家与三位工程师，都是虚构智能体" width="100%">
 
 **一个研究团队，就是一段可调用的程序。**
 
