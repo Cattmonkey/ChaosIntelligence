@@ -43,7 +43,7 @@ class DirectoryProjectTests(unittest.TestCase):
         self.assertEqual({p.name:p.read_bytes()for p in self.root.iterdir()},before)
 
     def test_init_preflights_all_collisions_and_never_overwrites_symlinks(self):
-        for collision in('main.chaos','chaos.py','chaos.project.json'):
+        for collision in project_files():
             target=self.root/collision;self.root.mkdir(parents=True,exist_ok=True);target.write_text('original')
             with self.assertRaises(ProjectError):init_project(self.root)
             self.assertEqual(list(self.root.iterdir()),[target]);self.assertEqual(target.read_text(),'original');target.unlink()

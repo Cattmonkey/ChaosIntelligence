@@ -9,11 +9,11 @@
 从[最新发行版](https://github.com/Cattmonkey/ChaosIntelligence/releases/latest)取得 `Chaos-Project.zip`，解压到新目录。需要 Python 3.9+。在该目录运行：
 
 ```sh
-python3 chaos.py setup --yes
-python3 chaos.py
+./chaos setup --yes
+./chaos
 ```
 
-macOS／Linux 使用 `python3`；Windows 使用 `py -3`。按终端打印的地址打开 IDE。将下列示例内容复制到练习项目的 `main.chaos`，再保存、运行；只选择另一个文件不会切换运行入口。自己的重要项目不需要为演示改写入口。
+macOS／Linux 使用 `./chaos`；Windows PowerShell 使用 `.\chaos.cmd`。按终端打印的地址打开 IDE。将下列示例内容复制到练习项目的 `main.chaos`，再保存、运行；只选择另一个文件不会切换运行入口。自己的重要项目不需要为演示改写入口。
 
 ## 1. 格式化、运行与查看结果
 
@@ -32,7 +32,7 @@ fn twice(value:Int)->Int{value*2};agent checker{provider:"local",mode:"review",t
 也可以把源码保存为 `format-run.chaos`，不打开 IDE，直接运行：
 
 ```sh
-python3 chaos.py run format-run.chaos --input-json 21
+./chaos run format-run.chaos --input-json 21
 ```
 
 输入 `10` 时 `answer` 为 `20`。未提供整数输入时，示例默认使用 `21`。

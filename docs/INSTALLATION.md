@@ -4,19 +4,33 @@
 
 本文的 POSIX 命令适用于常见 macOS/Linux 环境；Windows 使用 `py -3`、对应的 `Scripts` 路径及本机服务管理工具。
 
+## 语言命令与兼容入口
+
+| 使用方式 | 日常命令 | 可选的 Python 入口 |
+| --- | --- | --- |
+| 已安装 CLI | `chaos -c '40 + 2'` | `python3 -m chaos -c '40 + 2'` |
+| 目录包，macOS／Linux | `./chaos -c '40 + 2'` | `python3 chaos.py -c '40 + 2'` |
+| 目录包，Windows PowerShell | `.\chaos.cmd -c '40 + 2'` | `py -3 chaos.py -c '40 + 2'` |
+| 源码，macOS／Linux | `./bin/chaos -c '40 + 2'` | `python3 -m chaos -c '40 + 2'` |
+| 源码，Windows PowerShell | `.\bin\chaos.cmd -c '40 + 2'` | `py -3 -m chaos -c '40 + 2'` |
+
+这些入口复用同一语言运行时，不改变 Chaos 语法。目录命令仍绑定自身项目，已安装／源码 CLI 仍是独立 CLI；二者的配置范围不同。当前发行包需要 Python 3.9+，不自带解释器。命令会寻找可用解释器；指定完整解释器路径可设置 `CHAOS_PYTHON`。旧项目升级只替换运行环境，不会覆盖根目录或自动新增命令文件；没有 `./chaos` 时继续使用 Python 入口。若解压工具未保留可执行权限，可运行 `chmod +x chaos`，或用 `sh ./chaos` 启动。
+
+源码入口可以临时加入当前终端的 PATH：在源码根目录执行 `export PATH="$PWD/bin:$PATH"`，然后使用 `chaos --help`。安装 wheel 后，该 Python 环境会提供正式的 `chaos` 命令，无需修改源码路径。下面的 Windows 命令已提供入口与格式检查；当前实机验证以 macOS 为主。
+
 ## 可直接使用的项目目录
 
 取得可信发布者提供的完整 project ZIP，解压到一个新目录。根目录包含 `chaos.py` 与默认入口 `main.chaos`，初始运行时在 `.chaos/runtime`。不要将它与下方用于嵌入宿主的 portable SDK ZIP 混用；后者的入口是 `run_chaos.py`。
 
 ```sh
 cd /absolute/path/my-project
-python3 chaos.py run
-python3 chaos.py check
-python3 chaos.py fmt
-python3 chaos.py repl
+./chaos run
+./chaos check
+./chaos fmt
+./chaos repl
 ```
 
-`run` 默认执行 `main.chaos`，模板结果为 `42`。纯计算、检查、格式化和 REPL 使用 Python 3.9+ 标准库，可以在没有网络和模型密钥时开始；fmt 输出格式化结果，不覆盖源文件。macOS／Linux 使用 `python3`，Windows 使用 `py -3`。包不包含 Python 本身。
+`run` 默认执行 `main.chaos`，模板结果为 `42`。纯计算、检查、格式化和 REPL 使用 Python 3.9+ 标准库，可以在没有网络和模型密钥时开始；fmt 输出格式化结果，不覆盖源文件。macOS／Linux 使用 `./chaos`，Windows PowerShell 使用 `.\chaos.cmd`。包不包含 Python 本身。
 
 详细的系统检测、彩色进度、自动自检、模型向导、智能建议与持久偏好见[环境检测与配置](DEPLOYMENT.md)。0.153.0 起发行的启动器将 `configure` 和 `setup` 接入同一流程；升级后仍保留更早启动器的项目使用 `setup --yes` 或 `setup --models`，其无参数 `setup` 仍是旧安装入口。
 
@@ -25,25 +39,25 @@ python3 chaos.py repl
 从解压后的 project 包目录执行 install，可以将语言环境放进已有的非空工程：
 
 ```sh
-python3 chaos.py install /absolute/path/existing-project
+./chaos install /absolute/path/existing-project
 cd /absolute/path/existing-project
-python3 chaos.py run
+./chaos run
 ```
 
-install 只安装干净运行时与 `chaos.py`、`chaos.project.json`、`main.chaos` 三个模板文件，不复制当前分发目录中的用户源码、设置、密钥、数据库或任务数据。目标已有的其他工程文件保持原样；安装路径或模板文件冲突时拒绝安装。支持 replace 的 Chaos 工程直接用 replace 更新。对于尚不支持此命令的旧项目，从解压后的新版包执行 install 到旧工程可迁移官方启动器并替换环境；已声明兼容环境协议的启动器原样保留；不兼容协议的旧启动器仅在与旧包完全一致时迁移，其他定制入口拒绝覆盖。install 不修改宿主的 README 或 .gitignore；本项目私有 `.chaos/` 及工作区同步元数据应按宿主规则管理，发布环境请使用干净发行包。
+install 只安装干净运行时与 `chaos`、`chaos.cmd`、`chaos.py`、`chaos.project.json`、`main.chaos` 五个模板文件，不复制当前分发目录中的用户源码、设置、密钥、数据库或任务数据。目标已有的其他工程文件保持原样；安装路径或模板文件冲突时拒绝安装。支持 replace 的 Chaos 工程直接用 replace 更新。对于尚不支持此命令的旧项目，从解压后的新版包执行 install 到旧工程可迁移官方启动器并替换环境；已声明兼容环境协议的启动器原样保留；不兼容协议的旧启动器仅在与旧包完全一致时迁移，其他定制入口拒绝覆盖。install 不修改宿主的 README 或 .gitignore；本项目私有 `.chaos/` 及工作区同步元数据应按宿主规则管理，发布环境请使用干净发行包。
 
 ### 准备 IDE 与依赖
 
 首次使用完整 IDE 和文档功能时，显式准备项目依赖：
 
 ```sh
-python3 chaos.py setup --yes
-python3 chaos.py
+./chaos setup --yes
+./chaos
 ```
 
 setup 使用 pip 的 `--target` 先将依赖装入项目内临时目录，成功后整体启用当前环境的依赖；不向全局 Python 安装；解释器缺少 pip 时，会在临时目录创建安装工具环境，完成后清理。项目运行本身不依赖该临时环境。初始环境依赖位于 `.chaos/deps`，替换后的环境保存自己的匹配依赖。普通运行与打开 IDE 不会自动联网安装依赖。首次安装需要访问配置的包来源；浏览器自动化组件、模型密钥和 GPU 驱动不在 project ZIP 内。可选提供方和设备仍需明确配置与授权，setup 不代表已经连接或调用它们。
 
-无参数启动器进入当前项目 IDE，默认选择本机空闲端口、打印实际地址并打开浏览器；不能假定固定为 8765。自己的入口和模块留在隐藏 `.chaos` 目录之外；运行环境和依赖由 `.chaos` 管理，私有设置保存在 `.chaos/settings.json`，IDE 数据库为 `.chaos/project.sqlite3`。无界面 run 默认使用独立内存数据库；显式 `python3 chaos.py run --persistent` 使用 `.chaos/cli.sqlite3`。CLI 和 IDE 共享源码与设置，不自动共享运行历史。
+无参数启动器进入当前项目 IDE，默认选择本机空闲端口、打印实际地址并打开浏览器；不能假定固定为 8765。自己的入口和模块留在隐藏 `.chaos` 目录之外；运行环境和依赖由 `.chaos` 管理，私有设置保存在 `.chaos/settings.json`，IDE 数据库为 `.chaos/project.sqlite3`。无界面 run 默认使用独立内存数据库；显式 `./chaos run --persistent` 使用 `.chaos/cli.sqlite3`。CLI 和 IDE 共享源码与设置，不自动共享运行历史。
 
 整个工程可以移动，启动器从自身目录定位活动环境。更换 Python、操作系统或架构后，依赖必须与新平台匹配；按提示重新 setup。不要把用户源码写进 `.chaos/runtime` 或更新创建的版本环境。
 
@@ -54,15 +68,15 @@ IDE 复用原 Workspace 的版本比较、保存和冲突保全机制，与本�
 取得可信的新 project ZIP 或 portable ZIP，关闭本项目的 IDE／后台程序，然后在原工程执行：
 
 ```sh
-python3 chaos.py replace /absolute/path/Chaos-Project-New.zip
-python3 chaos.py status
-python3 chaos.py --version
-python3 chaos.py run
+./chaos replace /absolute/path/Chaos-Project-New.zip
+./chaos status
+./chaos --version
+./chaos run
 ```
 
-replace 只使用新包里的完整运行环境，不覆盖其中同名的项目模板到原工程。完整包校验和候选语言自检通过后，原子切换活动环境指针；失败时原环境仍可用。运行时和依赖成对保留，依赖需求及 Python／平台指纹相容时可继承，不匹配时按提示显式执行 `python3 chaos.py setup --yes`。用户源码、设置、SQLite 数据库和任务数据不参与替换。
+replace 只使用新包里的完整运行环境，不覆盖其中同名的项目模板到原工程。完整包校验和候选语言自检通过后，原子切换活动环境指针；失败时原环境仍可用。运行时和依赖成对保留，依赖需求及 Python／平台指纹相容时可继承，不匹配时按提示显式执行 `./chaos setup --yes`。用户源码、设置、SQLite 数据库和任务数据不参与替换。
 
-`python3 chaos.py rollback` 回到上一环境及其依赖；随后按原命令重新启动。回退不撤销业务数据、用户源码或配置修改。系统保留当前和上一环境，以及旧布局的基础 `.chaos/runtime` 兼容目录；这些目录只用于管理程序环境，不放用户文件。不要将新 project ZIP 覆盖解压到已有工程。更完整的边界见[更新说明](UPDATES.md)。
+`./chaos rollback` 回到上一环境及其依赖；随后按原命令重新启动。回退不撤销业务数据、用户源码或配置修改。系统保留当前和上一环境，以及旧布局的基础 `.chaos/runtime` 兼容目录；这些目录只用于管理程序环境，不放用户文件。不要将新 project ZIP 覆盖解压到已有工程。更完整的边界见[更新说明](UPDATES.md)。
 
 replace 使用本地包，不要求更新 feed，也不自动下载或付费调用模型；它与独立服务的托管更新器互不接管。
 
@@ -78,9 +92,9 @@ python -m chaos project run --directory /absolute/path/new-project
 python -m chaos project ide --directory /absolute/path/new-project
 ```
 
-`project init` 只创建三个模板文件，不复制运行时或依赖；setup 在这种工程中检查宿主已安装的依赖，不向项目另装一套。项目命令还可用 `configure --directory DIR --models` 保存模型配置，用 `ask --directory DIR` 读取同一配置，详细选项可在工程外用 `chaos project COMMAND --help` 查看。
+`project init` 只创建五个模板文件，不复制运行时或依赖；setup 在这种工程中检查宿主已安装的依赖，不向项目另装一套。项目命令还可用 `configure --directory DIR --models` 保存模型配置，用 `ask --directory DIR` 读取同一配置，详细选项可在工程外用 `chaos project COMMAND --help` 查看。
 
-全局 `chaos project` 使用当前安装的运行时，`--directory` 选择项目数据。要使用完整目录包自己的活动版本，运行目标工程的 `chaos.py`，它不允许通过 `--directory` 切换到其他工程。要交付不依赖全局 Chaos 安装的完整工程，使用上方 project ZIP 的 install。不要把仅有三个模板的目录当作完整可复制环境。
+全局 `chaos project` 使用当前安装的运行时，`--directory` 选择项目数据。要使用完整目录包自己的活动版本，运行目标工程的 `chaos.py`，它不允许通过 `--directory` 切换到其他工程。要交付不依赖全局 Chaos 安装的完整工程，使用上方 project ZIP 的 install。不要把仅有模板的目录当作完整可复制环境。
 
 发布者可从完整 wheel 创建 project ZIP：
 
@@ -96,7 +110,9 @@ chaos package project /absolute/path/chaos_intelligence-X.Y.Z-py3-none-any.whl -
 
 ```text
 my-project/
-  chaos.py                  稳定启动器
+  chaos                     macOS／Linux 命令入口
+  chaos.cmd                 Windows 命令入口
+  chaos.py                  兼容启动器
   chaos.project.json        默认入口声明
   main.chaos                自己的程序
   src/                      自己的模块（按需创建）
@@ -112,13 +128,25 @@ my-project/
     environments/           后续环境的 runtime 与各自 deps
 ```
 
-后续环境 ID 由系统产生，不在脚本中写死。执行 `python3 chaos.py status`，使用返回的 `runtime` 查找当前包内文档和示例；`dependenciesReady` 只说明依赖指纹匹配，不代表模型账号、浏览器或硬件可用。没有持久设置文件时正常配置即可，不要用空对象 `{}` 手工建立设置文件。
+后续环境 ID 由系统产生，不在脚本中写死。执行 `./chaos status`，使用返回的 `runtime` 查找当前包内文档和示例；`dependenciesReady` 只说明依赖指纹匹配，不代表模型账号、浏览器或硬件可用。没有持久设置文件时正常配置即可，不要用空对象 `{}` 手工建立设置文件。
 
 移动或备份自己的工程时，先停止进程，再保留源码、隐藏 `.chaos` 和 `.chaos-workspace.json` 等同步元数据；仅复制运行时不能恢复 IDE 历史。回退仅恢复环境，因此更新前的工程备份仍需单独保留。源码文件与隐藏 `.chaos` 状态目录用途不同。
 
 ## 从源码安装
 
-在已取得的仓库根目录创建隔离环境：
+在源码仓库根目录，纯语言计算可以直接运行，不需要先下载使用包或安装模型依赖：
+
+```sh
+./bin/chaos -c '40 + 2'
+./bin/chaos run examples/language-tour/main.chaos
+./bin/chaos --help
+```
+
+源码 `bin/chaos`、`bin/chaos.cmd` 经兼容入口 `chaos.py` 转发到现有 `chaos.cli.main`，等价于 `python3 -m chaos`；较早版本没有该文件时直接使用模块命令。它保留当前工作目录，返回相同的结果和退出码，不创建项目环境。文件需与源码中的 `chaos/` 包一起保留，不能只复制这一个文件。
+
+这与 project ZIP 中管理 `.chaos/runtime` 的同名启动器不同：源码项目管理命令使用 `./bin/chaos project --help`，无参数启动独立服务；前文的 `setup`、`install`、`replace` 和目录 IDE 命令在 project ZIP 的项目根目录执行。
+
+需要模型、网页文档等完整依赖时，在已取得的仓库根目录创建隔离环境：
 
 ```sh
 python3 -m venv .venv

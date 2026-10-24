@@ -301,12 +301,14 @@ def verify_portable(root):
 def build_project(wheel, output):
     """Wrap the same verified portable runtime in an editable project directory."""
     from .project import project_files
+    from .launchers import executable_mode
     files = _zip(wheel)
     info = _wheel(files)
-    if any(name not in files for name in ('chaos/project.py', 'chaos/project_launcher.py', 'chaos/project_environment.py', 'chaos/docs/PROJECT_README.md')):
+    if any(name not in files for name in ('chaos/project.py', 'chaos/project_launcher.py', 'chaos/project_environment.py', 'chaos/launchers.py', 'chaos/docs/PROJECT_README.md')):
         raise PackageError('Wheel does not support directory projects')
     starter = project_files()
-    if starter['chaos.py'] != files['chaos/project_launcher.py']:
+    if (starter['chaos.py'] != files['chaos/project_launcher.py']
+            or Path(__file__).with_name('launchers.py').read_bytes() != files['chaos/launchers.py']):
         raise PackageError('Build projects with the matching runtime version')
     output = Path(output).absolute()
     if output.exists() or output.is_symlink():
@@ -327,7 +329,8 @@ def build_project(wheel, output):
             for name, data in sorted(payload.items()):
                 item = zipfile.ZipInfo(name, (1980, 1, 1, 0, 0, 0))
                 item.compress_type = zipfile.ZIP_DEFLATED
-                item.external_attr = (stat.S_IFREG | 0o644) << 16
+                item.create_system = 3
+                item.external_attr = (stat.S_IFREG | executable_mode(name)) << 16
                 stream.writestr(item, data)
         os.link(archive, output)
     return {'schema':'chaos.project/1', 'version':info['version'], 'archive':str(output),

@@ -8,7 +8,7 @@
 
 ## 从本地文件编程
 
-已有目录项目时，在目录中运行 `python3 chaos.py` 即启动同目录 IDE，原 Workspace 协议在后台周期同步已保存的文件。独立 `python3 chaos.py run` 读取同目录源码和配置，默认使用内存数据库；`--persistent` 使用独立的 CLI 数据库，仍不与 IDE 共享运行历史。无需另外 checkout 或启动第二个 watcher。首次使用和移动目录见[快速开始](GETTING_STARTED.md)。
+已有目录项目时，在目录中运行 `./chaos` 即启动同目录 IDE，原 Workspace 协议在后台周期同步已保存的文件。独立 `./chaos run` 读取同目录源码和配置，默认使用内存数据库；`--persistent` 使用独立的 CLI 数据库，仍不与 IDE 共享运行历史。无需另外 checkout 或启动第二个 watcher。首次使用和移动目录见[快速开始](GETTING_STARTED.md)。
 
 下面是连接一个已运行远程／独立服务的另一种方式。先运行服务，再在另一终端检出项目：
 ```sh
@@ -82,8 +82,8 @@ trace=True 产生最多 200 条 program.step 和一条截断说明，包含版�
 把下载的文件保存为工程根目录的 `interactive-progress.chaos`，在该目录执行：
 
 ```sh
-python3 chaos.py check interactive-progress.chaos
-python3 chaos.py run interactive-progress.chaos --input-json '{"waitSeconds":0}' --stream
+./chaos check interactive-progress.chaos
+./chaos run interactive-progress.chaos --input-json '{"waitSeconds":0}' --stream
 ```
 
 `--stream` 持续输出 JSON Lines：每行是独立 JSON，公开进度事件的 `type` 为 `bot.progress`，内容在 `payload.kind` 和 `payload.data` 中。成功结束后追加 `type: "run.result"` 的包装记录，其 `output` 是最终值；它不是带持久事件 ID 的数据库事件。程序失败时返回非零退出码并向 stderr 写错误，不能把之前的进度当作成功。普通 `run` 不加 `--stream` 时仍只输出最终 JSON。
@@ -91,10 +91,10 @@ python3 chaos.py run interactive-progress.chaos --input-json '{"waitSeconds":0}'
 macOS／Linux 的真实交互终端还可以直接追加自然语言：
 
 ```sh
-python3 chaos.py run interactive-progress.chaos --interactive
+./chaos run interactive-progress.chaos --interactive
 ```
 
-在 `guide>` 输入 `先验收，再继续` 并回车，得到与网页相同的指导数据。`/help` 查看控制，`/cancel`、Ctrl-C 或 Ctrl-D 取消并清理这个本地命令拥有的运行。`--interactive` 需要 POSIX 系统和真实 stdin／stdout 终端，不能用于输出重定向、管道或从标准输入读取源码。Windows 使用 `py -3` 运行普通命令或 `--stream`，指导通过网页／SDK／HTTP发送；上述 JSON 引号示例采用 POSIX shell。
+在 `guide>` 输入 `先验收，再继续` 并回车，得到与网页相同的指导数据。`/help` 查看控制，`/cancel`、Ctrl-C 或 Ctrl-D 取消并清理这个本地命令拥有的运行。`--interactive` 需要 POSIX 系统和真实 stdin／stdout 终端，不能用于输出重定向、管道或从标准输入读取源码。Windows 使用 `.\chaos.cmd` 运行普通命令或 `--stream`，指导通过网页／SDK／HTTP发送；上述 JSON 引号示例采用 POSIX shell。
 
 目录终端自己启动的 `run` 使用自己的运行历史，不会自动出现在另一个 IDE 服务的运行面板。要从多个客户端观察或指导同一运行，连接同一个服务并使用它返回的 runId；不要为了获得流而再次提交原任务。完整 CLI 终端生命周期见[SDK 的实时事件与运行中指导](SDK.md#实时事件与运行中指导)。
 

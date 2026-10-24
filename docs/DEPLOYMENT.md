@@ -1,6 +1,6 @@
 # 环境检测、交互配置与自检
 
-解压完整项目包后，在包含 `chaos.py` 的目录执行 `python3 chaos.py setup`。系统检测当前操作系统、CPU 架构、Python 与活动运行环境，配置项目内依赖，实际运行语言自检，然后保存配置和检查记录。Windows 将 `python3` 换成 `py -3`。项目包仍需要机器上已有 Python 3.9+，不包含操作系统安装器或 Python 本体。
+解压完整项目包后，在包含 `chaos.py` 的目录执行 `./chaos setup`。系统检测当前操作系统、CPU 架构、Python 与活动运行环境，配置项目内依赖，实际运行语言自检，然后保存配置和检查记录。Windows PowerShell 将 `./chaos` 换成 `.\chaos.cmd`。项目包仍需要机器上已有 Python 3.9+，不包含操作系统安装器或 Python 本体。
 
 若升级时保留的是 0.153.0 之前的旧官方启动器，请使用 `setup --yes` 或 `setup --models` 进入新运行时的部署流程；这类旧入口的无参数 `setup` 仍执行原安装逻辑，`configure` 会提示使用 `setup --yes`。0.153.0 起发行的启动器支持 `setup`／`configure` 共用流程。
 
@@ -17,9 +17,9 @@ chaos project doctor --directory /absolute/path/my-project --json
 ## 第一次使用
 
 ```sh
-python3 chaos.py setup
-python3 chaos.py run
-python3 chaos.py
+./chaos setup
+./chaos run
+./chaos
 ```
 
 `setup` 首次默认使用 `standard` 层，之后沿用保存的层级；显式 `--profile` 可以更改。标准层准备模型 SDK、加密、版本处理与文档渲染依赖；它不修改全局 Python。终端依次显示环境、依赖、运行时测试、模型设置、保存结果五个阶段。每个阶段显示实际动作和耗时；通过／失败使用不同颜色，不把未知下载时间写成虚构的百分比。安装失败不会将未验证的临时依赖切换成活动依赖。
@@ -27,16 +27,16 @@ python3 chaos.py
 只想离线学习语言核心，可以选择并记住 `core` 层：
 
 ```sh
-python3 chaos.py setup --profile core
-python3 chaos.py run
+./chaos setup --profile core
+./chaos run
 ```
 
-核心层运行递归、模块和异步任务自检，不安装第三方依赖。可以用 `python3 chaos.py docs list` 和 `python3 chaos.py docs show getting-started` 离线查阅随包 Markdown。需要网页文档渲染或模型时，再执行 `python3 chaos.py setup --profile standard`。层级表示本项目要准备的运行依赖，不会自动授予 Agent 电脑控制、文件读写或设备权限。
+核心层运行递归、模块和异步任务自检，不安装第三方依赖。可以用 `./chaos docs list` 和 `./chaos docs show getting-started` 离线查阅随包 Markdown。需要网页文档渲染或模型时，再执行 `./chaos setup --profile standard`。层级表示本项目要准备的运行依赖，不会自动授予 Agent 电脑控制、文件读写或设备权限。
 
 ## 交互填写模型连接
 
 ```sh
-python3 chaos.py configure --models
+./chaos configure --models
 ```
 
 在交互式终端中，向导询问统一 Base URL，以及各提供方的独立地址、Key、默认模型和角色模型。Key 隐藏输入，任何字段直接回车都保留已有设置；独立 Base URL 优先于这次输入的统一地址。`configure` 也会检查依赖、按所选层准备缺失依赖并运行自检。已经准备好依赖、只允许检查时加 `--skip-install`。
@@ -57,9 +57,9 @@ python3 chaos.py configure --models
 ## 无人值守与环境变量
 
 ```sh
-python3 chaos.py setup --yes --no-ai
-python3 chaos.py configure --yes --models --skip-install
-python3 chaos.py doctor --json
+./chaos setup --yes --no-ai
+./chaos configure --yes --models --skip-install
+./chaos doctor --json
 ```
 
 `--yes` 关闭询问；未提供的新值保持原设置。只有显式指定 `--models` 时，向导才把下面的环境变量导入持久配置。无 Key 可以正常完成核心部署，模型建议会说明尚未配置。
@@ -81,7 +81,7 @@ python3 chaos.py doctor --json
 准备好规划角色的连接之后，显式开启一次建议并记住选择：
 
 ```sh
-python3 chaos.py configure --ai
+./chaos configure --ai
 ```
 
 这会调用 `intelligence-deployment` 智能体路由，默认继承 `planner`，也可在同一份 Settings 的 `agents` 中单独覆盖。它复用语言智能体的原生 Harness、插件设置和候选模型切换，**可能产生推理费用**。建议最多一个智能体步骤、总执行期限不超过 20 秒，每次模型请求最多 384 tokens；失败切换可能产生多次请求，384 不是整个建议任务的总用量承诺。
@@ -91,7 +91,7 @@ python3 chaos.py configure --ai
 选择写入项目的 `.chaos/deployment.json`，以后的 `setup`／`configure` 默认沿用，可能再次发起模型请求；普通 `run`、启动 IDE 和 `doctor` 不因这个部署偏好调用建议模型。关闭并记住选择：
 
 ```sh
-python3 chaos.py configure --no-ai
+./chaos configure --no-ai
 ```
 
 没有凭据、SDK 不可用或模型请求失败时，报告跳过／失败原因，已经通过的离线检查仍有效。模型建议不代替实际运行测试，也不自动检测账号模型目录。希望更新提供方模型目录时，按[模型连接](MODEL_CONFIGURATION.md)使用单独的检测操作。
@@ -99,8 +99,8 @@ python3 chaos.py configure --no-ai
 ## 迁移系统与验收
 
 ```sh
-python3 chaos.py doctor
-python3 chaos.py setup --yes
+./chaos doctor
+./chaos setup --yes
 ```
 
 `doctor` 不安装、不询问、不保存模型设置、不调用 AI，只检查当前活动环境。自检在独立临时进程中执行固定的递归函数、跨文件模块和异步任务，不运行用户的 `main.chaos`；标准层还检查实际依赖可导入。GPU 检查报告当前运行环境是否能使用已安装的 PyTorch CUDA／MPS 后端，未安装表示尚未配置，不表示机器没有 GPU。GPU 驱动、PyTorch、浏览器、ADB 和机器人硬件需要另行准备，见 [GPU](GPU_COMPUTE.md)、[机器人与设备](ROBOT_DEVICES.md)。
@@ -110,7 +110,7 @@ python3 chaos.py setup --yes
 如果依赖指纹仍匹配，但实际文件被删除或损坏，`doctor` 会通过真实导入发现问题。标准层可以强制重新准备依赖：
 
 ```sh
-python3 chaos.py setup --profile standard --reinstall
+./chaos setup --profile standard --reinstall
 ```
 
 `--reinstall` 在临时目录重新安装并执行自检；候选全部通过后才切换，旧依赖在此之前保留，安装或测试失败不会启用半成品。该选项需要包来源可用，不能与 `--skip-install` 合用；`doctor` 和 `core` 层拒绝此选项。它只修复环境依赖，不重置自己的源码、模型设置和历史数据。

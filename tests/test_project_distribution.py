@@ -21,7 +21,7 @@ class ProjectDistributionTests(unittest.TestCase):
         import chaos
 
         def extend(files):
-            for name in ('project.py', 'project_launcher.py', 'project_environment.py'):
+            for name in ('project.py', 'project_launcher.py', 'project_environment.py', 'launchers.py'):
                 files['chaos/' + name] = Path(chaos.__file__).with_name(name).read_bytes()
             files['chaos/docs/PROJECT_README.md'] = (Path(chaos.__file__).parent.parent / 'docs/PROJECT_README.md').read_bytes()
             record = next(n for n in files if n.endswith('/RECORD'))

@@ -31,8 +31,8 @@ class ReleaseError(RuntimeError):
     pass
 
 
-SOURCE_DIRECTORIES = ('chaos', 'web', 'vendor', 'docs', 'examples', 'tests', 'scripts')
-SOURCE_FILES = ('setup.py', 'setup.cfg', 'pyproject.toml', 'MANIFEST.in', 'README.md', 'LICENSE', 'THIRD_PARTY_NOTICES.md')
+SOURCE_DIRECTORIES = ('bin', 'chaos', 'web', 'vendor', 'docs', 'examples', 'tests', 'scripts')
+SOURCE_FILES = ('chaos.py', 'setup.py', 'setup.cfg', 'pyproject.toml', 'MANIFEST.in', 'README.md', 'LICENSE', 'THIRD_PARTY_NOTICES.md')
 EXCLUDED_DIRECTORIES = frozenset({
     'build', 'dist', 'node_modules', 'venv', '__pycache__', 'htmlcov',
     'keys', 'secrets', 'credentials', 'releases',

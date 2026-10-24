@@ -95,7 +95,7 @@ project ZIP、portable SDK ZIP 与 wheel 的用途不同，选择方式见[安�
 
 ## 在线与离线阅读
 
-目录项目用 `python3 chaos.py` 启动后，按实际服务地址进入 `/docs`；原 `chaos serve` 使用其配置的监听地址。正文来自随包 Markdown，不依赖另一份手写网站。
+目录项目用 `./chaos` 启动后，按实际服务地址进入 `/docs`；原 `chaos serve` 使用其配置的监听地址。正文来自随包 Markdown，不依赖另一份手写网站。
 
 维护者或已安装 CLI 的用户可以构建只读站点：
 
@@ -110,7 +110,7 @@ python -m http.server 8000 --directory ./docs-site --bind 127.0.0.1
 
 ## 在终端查阅与提问
 
-运行 `chaos docs list` 查看安装版主题 ID，用 `chaos docs show command-line` 阅读教程；目录包使用 `python3 chaos.py docs ...`。查阅不需要模型、网络或网页。需要解释某页时，将该 ID 显式传给 `ask --topic`；需要修改项目时使用同一 IDE 编程助手的 `assist` 入口。配置与完整步骤集中在[命令行教程](COMMAND_LINE.md)。
+运行 `chaos docs list` 查看安装版主题 ID，用 `chaos docs show command-line` 阅读教程；目录包使用 `./chaos docs ...`。查阅不需要模型、网络或网页。需要解释某页时，将该 ID 显式传给 `ask --topic`；需要修改项目时使用同一 IDE 编程助手的 `assist` 入口。配置与完整步骤集中在[命令行教程](COMMAND_LINE.md)。
 
 ## 支持项目
 

@@ -1,5 +1,7 @@
 # 命令行编程与内置智能帮助
 
+目录包的日常入口为 `./chaos`，Windows PowerShell 使用 `.\chaos.cmd`；已安装 CLI 则使用 `chaos`。当前运行时需要 Python 3.9+，命令会自动寻找解释器。旧目录没有这两个入口时，将下文 `./chaos` 换成 `python3 chaos.py`（Windows 为 `py -3 chaos.py`）；换版保留原有根目录文件。
+
 Chaos 可以直接在终端编程，也可以从语言程序调用内置智能体。命令行、网页和 SDK 使用同一语言运行时、模型分层和权限规则；新增入口只是现有能力的入口，不是另一套解释器或模型服务。
 
 ## 使用 chaos 命令
@@ -16,9 +18,9 @@ chaos --help
 
 `X.Y.Z` 替换为实际取得的发行版本；示例路径同样要替换。Windows 创建环境用 `py -3 -m venv .venv`，PowerShell 激活用 `.venv\Scripts\Activate.ps1`；也可直接运行 `.venv\Scripts\chaos.exe`。无法使用激活脚本时，POSIX 可运行 `.venv/bin/chaos`。安装基础依赖需要可访问的 Python 包来源。源码开发者可以在源码根目录使用 `python -m pip install .`。
 
-完整目录包无需安装 PATH 命令：文件运行、`-c`、`repl`、`ask`、`assist` 和 `docs` 可使用 `python3 chaos.py` 入口。全局的 `ir`、`compile`、`service` 等其他命令应使用已安装 CLI 或 portable SDK 的 `python3 /absolute/path/run_chaos.py`，不能把所有命令都机械替换成目录入口。安装好的模块还可以通过 `python -m chaos` 调用全局 CLI。不要在含有同名 `chaos.py` 的项目根目录使用模块入口，以免遮蔽包；此时使用目录启动器。
+完整目录包无需安装 PATH 命令：文件运行、`-c`、`repl`、`ask`、`assist` 和 `docs` 可使用 `./chaos` 入口。全局的 `ir`、`compile`、`service` 等其他命令应使用已安装 CLI 或 portable SDK 的 `python3 /absolute/path/run_chaos.py`，不能把所有命令都机械替换成目录入口。安装好的模块还可以通过 `python -m chaos` 调用全局 CLI。不要在含有同名 `chaos.py` 的项目根目录使用模块入口，以免遮蔽包；此时使用目录启动器。
 
-`chaos project --help` 列出项目命令，`chaos project setup --help`、`chaos project ask --help` 等帮助可在工程外查看，不创建项目、不安装依赖或调用模型。完整目录包也可用 `python3 chaos.py --help` 查看入口。
+`chaos project --help` 列出项目命令，`chaos project setup --help`、`chaos project ask --help` 等帮助可在工程外查看，不创建项目、不安装依赖或调用模型。完整目录包也可用 `./chaos --help` 查看入口。
 
 ## 先选项目，再选择配置
 
@@ -49,7 +51,7 @@ printf '40 + 2\n' | chaos run -
 
 计算结果为 JSON，错误写 stderr 并返回非零状态。`fmt` 只输出排版文本；不直接覆盖源码。文件简写与 `run FILE` 等价，`chaos -` 与 `run -` 等价。`-c` 与 stdin 是独立源输入，只能导入 `std/*` 标准模块；需要本地相对导入时保存为文件并用 `--root` 指定程序根目录。输入长度、模块路径与执行预算沿用语言原有限制。
 
-在目录项目中，`python3 chaos.py run` 执行项目入口；文件简写、`run -` 和 `-c` 不会先执行默认入口。目录路径边界与项目设置仍生效。裸 `python3 chaos.py` 继续打开 IDE；全局裸 `chaos` 保留启动服务的旧行为，交互编程请显式运行 `chaos repl`。
+在目录项目中，`./chaos run` 执行项目入口；文件简写、`run -` 和 `-c` 不会先执行默认入口。目录路径边界与项目设置仍生效。裸 `./chaos` 继续打开 IDE；全局裸 `chaos` 保留启动服务的旧行为，交互编程请显式运行 `chaos repl`。
 
 ## 交互编程时随时获得帮助
 
@@ -64,15 +66,15 @@ chaos> .help
 chaos> .ask 怎样定义并调用一个智能体函数？
 ```
 
-`.help` 显示离线使用提示；`.ask 问题` 显式使用已有模型配置并附上本版本“快速开始”文档，复用下面的 `ask` 运行链。它不会自动发送 REPL 的变量或源码。`chaos repl --config /path/settings.json` 可选择配置文件。目录入口 `python3 chaos.py repl` 保留预加载项目入口的旧行为；不希望执行入口时用 `python3 chaos.py repl --empty`，也可指定待预加载文件。普通 REPL 求值仍是纯 Session；真实模型、Bot 与设备程序使用 `run`，`.ask` 的结果不会成为自动执行的源码。
+`.help` 显示离线使用提示；`.ask 问题` 显式使用已有模型配置并附上本版本“快速开始”文档，复用下面的 `ask` 运行链。它不会自动发送 REPL 的变量或源码。`chaos repl --config /path/settings.json` 可选择配置文件。目录入口 `./chaos repl` 保留预加载项目入口的旧行为；不希望执行入口时用 `./chaos repl --empty`，也可指定待预加载文件。普通 REPL 求值仍是纯 Session；真实模型、Bot 与设备程序使用 `run`，`.ask` 的结果不会成为自动执行的源码。
 
 ## 直接向内置智能体提问
 
 不确定主题 ID 时，先离线查看本版本文档：
 
 ```sh
-python3 chaos.py docs list
-python3 chaos.py docs show function-tools
+./chaos docs list
+./chaos docs show function-tools
 ```
 
 `list` 返回主题目录 JSON，`show` 将指定主题的 Markdown 原文写到 stdout，可重定向到自己的文件。它们读取当前运行时随包文档，不需要网页、模型 Key 或网络；未知主题会报错。已安装 CLI 对应 `chaos docs list`／`chaos docs show function-tools`。
@@ -80,9 +82,9 @@ python3 chaos.py docs show function-tools
 需要解释、规划或示例时，再按[环境配置](DEPLOYMENT.md)或[模型配置](MODEL_CONFIGURATION.md)保存连接，显式调用智能体：
 
 ```sh
-python3 chaos.py setup --models
-python3 chaos.py ask '帮我规划一个数据分析流程' --role planner --stream
-python3 chaos.py ask '这个语言如何使用函数工具？' --role assistant --topic function-tools
+./chaos setup --models
+./chaos ask '帮我规划一个数据分析流程' --role planner --stream
+./chaos ask '这个语言如何使用函数工具？' --role assistant --topic function-tools
 ```
 
 全局形式为 `chaos ask '问题' --config /path/settings.json`，不会自动发现并读取当前目录项目的配置；要使用项目默认配置，运行它的 `chaos.py ask` 或 `chaos project ask --directory DIR`。角色可选 `planner`、`executor`、`reviewer`、`assistant`；默认 executor。`--topic` 从安装版文档读取指定主题作为明确上下文；未知主题报错，不通过关键词猜测主题。`ask -` 从 stdin 读取问题文本。
@@ -125,7 +127,7 @@ import "std/intelligence" as AI;
 
 ## 终端与 IDE 使用同一个编程助手
 
-需要读取项目、查询语言参考、修改草稿并验证时，先启动项目 IDE 服务，然后在另一个终端使用 `assist`。`--server` 填服务打印的实际地址，`--project` 填服务中的项目 ID，目录 IDE 通常是 `workspace`；下列地址仅为示例。完整目录包使用 `python3 chaos.py assist ...`。
+需要读取项目、查询语言参考、修改草稿并验证时，先启动项目 IDE 服务，然后在另一个终端使用 `assist`。`--server` 填服务打印的实际地址，`--project` 填服务中的项目 ID，目录 IDE 通常是 `workspace`；下列地址仅为示例。完整目录包使用 `./chaos assist ...`。
 
 `assist` 读取服务中的项目版本，不自动上传本地文件或网页尚未保存的草稿。需要让它处理最新代码，先保存并确认磁盘／网页同步。即使用 `chaos project assist --directory DIR ...`，本地目录也不会代替 `--server` 和 `--project` 选择远端身份。
 

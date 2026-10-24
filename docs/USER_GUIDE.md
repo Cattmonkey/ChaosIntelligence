@@ -1,6 +1,8 @@
 # 用户指南
 
-从完整 project ZIP 解压出的目录开始：`python3 chaos.py run` 执行程序，首次 `python3 chaos.py setup` 后用 `python3 chaos.py` 打开 IDE。需要 Python 3.9+；Windows 将下文的 `python3` 换为 `py -3`。还没有项目时，先按[快速开始](GETTING_STARTED.md)运行返回 `42` 的默认程序；要放入已有工程，按[安装说明](INSTALLATION.md)使用 `install`，不覆盖解压整个项目包。
+目录包的日常入口为 `./chaos`，Windows PowerShell 使用 `.\chaos.cmd`；已安装 CLI 则使用 `chaos`。当前运行时需要 Python 3.9+，命令会自动寻找解释器。旧目录没有这两个入口时，将下文 `./chaos` 换成 `python3 chaos.py`（Windows 为 `py -3 chaos.py`）；换版保留原有根目录文件。
+
+从完整 project ZIP 解压出的目录开始：`./chaos run` 执行程序，首次 `./chaos setup` 后用 `./chaos` 打开 IDE。需要 Python 3.9+；Windows 将下文的 `python3` 换为 `py -3`。还没有项目时，先按[快速开始](GETTING_STARTED.md)运行返回 `42` 的默认程序；要放入已有工程，按[安装说明](INSTALLATION.md)使用 `install`，不覆盖解压整个项目包。
 
 本页前半部分使用目录入口 `chaos.py`。后半部分的 `chaos ...` 是已安装的 CLI；它也可访问独立 HTTP 服务，但默认配置、数据库和运行历史与目录入口不同。模型连接、工具和长期任务可在基础程序运行成功后逐步配置。
 
@@ -8,8 +10,8 @@
 
 | 目的 | 使用入口 | 输入交给谁，怎样确认结果 |
 | --- | --- | --- |
-| 离线查语言和命令 | `python3 chaos.py docs list`／`docs show TOPIC_ID`，或网页文档 | 读取本版本随包文档，不需要模型或网络 |
-| 请智能体解释用法 | `python3 chaos.py ask '问题' --topic TOPIC_ID`，或 REPL `.ask 问题` | 使用当前模型配置；仅回答，不自动发送源码或执行回复 |
+| 离线查语言和命令 | `./chaos docs list`／`docs show TOPIC_ID`，或网页文档 | 读取本版本随包文档，不需要模型或网络 |
+| 请智能体解释用法 | `./chaos ask '问题' --topic TOPIC_ID`，或 REPL `.ask 问题` | 使用当前模型配置；仅回答，不自动发送源码或执行回复 |
 | 让智能体修改程序 | 编辑器旁“与助手编程”或活动栏“助手” | 编程助手接收当前完整源码草稿；检查文件差异后点“应用并保存”，再运行验证 |
 | 在终端使用项目编程助手 | `assist` 的 ask／show／events／apply | 连接明确的服务和项目，读取已保存版本；检查提案后显式 apply，见[命令行教程](COMMAND_LINE.md) |
 | 调整正在运行的程序 | 命令面板“运行：追加当前运行指导” | 原运行的指导邮箱；程序在 `guidance_receive` 或原生 Bot 检查点接收后才可能影响下一步 |
@@ -23,20 +25,20 @@
 
 | 要做什么 | 命令 | 结果与边界 |
 | --- | --- | --- |
-| 执行默认入口 | `python3 chaos.py run` | 执行 `chaos.project.json` 指定的入口；默认是 `main.chaos` |
-| 连续输出运行事件 | `python3 chaos.py run --stream` | stdout 输出逐行 JSON 事件，成功时以 `run.result` 返回最终结果 |
-| 在终端追加指导 | `python3 chaos.py run --interactive` | POSIX 真实终端显示 `guide>`；程序需要主动接收指导 |
-| 执行另一个文件 | `python3 chaos.py run src/example.chaos --input-json 21` | 本次运行传入 JSON 值 `21`，不修改默认入口 |
-| 检查文件 | `python3 chaos.py check src/example.chaos` | 检查语法、模块与导出，不执行智能体或工具 |
-| 查看格式化结果 | `python3 chaos.py fmt src/example.chaos` | 排版文本写到终端，不覆盖文件 |
-| 交互求值 | `python3 chaos.py repl --empty` | 不预加载入口；`.help` 查用法，`.ask 问题` 请求模型帮助，`.quit` 退出 |
-| 打开 IDE | `python3 chaos.py` | 默认选择本机空闲端口，并打开浏览器 |
-| 启动但不打开浏览器 | `python3 chaos.py ide --no-browser` | 按终端中的实际 URL 访问 |
-| 准备依赖 | `python3 chaos.py setup` | 关闭本项目 IDE／程序后执行，安装到活动环境内 |
-| 配置模型 | `python3 chaos.py configure --models` | 隐藏输入 Key，保存同一项目设置 |
-| 复查环境 | `python3 chaos.py doctor` | 运行隔离自检，不安装依赖、不调用建议模型 |
-| 查看实际环境 | `python3 chaos.py status` | 显示版本、活动运行时路径、上一环境与依赖指纹状态 |
-| 仅查看版本 | `python3 chaos.py --version` | 显示本次加载的语言环境版本 |
+| 执行默认入口 | `./chaos run` | 执行 `chaos.project.json` 指定的入口；默认是 `main.chaos` |
+| 连续输出运行事件 | `./chaos run --stream` | stdout 输出逐行 JSON 事件，成功时以 `run.result` 返回最终结果 |
+| 在终端追加指导 | `./chaos run --interactive` | POSIX 真实终端显示 `guide>`；程序需要主动接收指导 |
+| 执行另一个文件 | `./chaos run src/example.chaos --input-json 21` | 本次运行传入 JSON 值 `21`，不修改默认入口 |
+| 检查文件 | `./chaos check src/example.chaos` | 检查语法、模块与导出，不执行智能体或工具 |
+| 查看格式化结果 | `./chaos fmt src/example.chaos` | 排版文本写到终端，不覆盖文件 |
+| 交互求值 | `./chaos repl --empty` | 不预加载入口；`.help` 查用法，`.ask 问题` 请求模型帮助，`.quit` 退出 |
+| 打开 IDE | `./chaos` | 默认选择本机空闲端口，并打开浏览器 |
+| 启动但不打开浏览器 | `./chaos ide --no-browser` | 按终端中的实际 URL 访问 |
+| 准备依赖 | `./chaos setup` | 关闭本项目 IDE／程序后执行，安装到活动环境内 |
+| 配置模型 | `./chaos configure --models` | 隐藏输入 Key，保存同一项目设置 |
+| 复查环境 | `./chaos doctor` | 运行隔离自检，不安装依赖、不调用建议模型 |
+| 查看实际环境 | `./chaos status` | 显示版本、活动运行时路径、上一环境与依赖指纹状态 |
+| 仅查看版本 | `./chaos --version` | 显示本次加载的语言环境版本 |
 
 把示例中的 `src/example.chaos` 换成实际文件。省略 `run`、`check`、`fmt` 的文件参数时使用默认入口；`repl` 省略 `--empty` 也会预加载该入口。纯语言计算不需要模型 Key；模型示例需要另按[模型配置](MODEL_CONFIGURATION.md)准备服务连接。
 
@@ -55,7 +57,7 @@
 
 默认入口最初是 `main.chaos`，通常保留这个入口并从它导入更多模块即可。还没有打开过 IDE 时，可先创建 `src/main.chaos`，再将 `chaos.project.json` 的 `entry` 改为这个相对路径，保留原有 `schema` 字段。
 
-已经保存 IDE 状态后，入口同时存在于项目标记和 IDE 的持久项目中。需要换入口时，先在 IDE 把目标文件“设为程序入口”并保存；两侧入口暂时不一致会停止自动同步。随后正常关闭 IDE，将 `chaos.project.json` 的 `entry` 改为同一路径，再重新启动，让原同步协议更新本地元数据。仅修改标记再重启不会自动改写数据库中的旧入口。操作前保留源码与状态备份；只想临时运行某个文件时，直接使用 `python3 chaos.py run 文件.chaos`，无需修改入口。
+已经保存 IDE 状态后，入口同时存在于项目标记和 IDE 的持久项目中。需要换入口时，先在 IDE 把目标文件“设为程序入口”并保存；两侧入口暂时不一致会停止自动同步。随后正常关闭 IDE，将 `chaos.project.json` 的 `entry` 改为同一路径，再重新启动，让原同步协议更新本地元数据。仅修改标记再重启不会自动改写数据库中的旧入口。操作前保留源码与状态备份；只想临时运行某个文件时，直接使用 `./chaos run 文件.chaos`，无需修改入口。
 
 模块与入口应留在项目内，避免绝对路径、`..` 或受管理的 `.chaos/` 目录。
 
@@ -66,17 +68,17 @@
 在[快速开始](GETTING_STARTED.md)建立 `double.chaos` 后：
 
 ```sh
-python3 chaos.py check double.chaos
-python3 chaos.py run double.chaos --input-json 21
-python3 chaos.py fmt double.chaos
-python3 chaos.py run double.chaos --input-json 21 --persistent
+./chaos check double.chaos
+./chaos run double.chaos --input-json 21
+./chaos fmt double.chaos
+./chaos run double.chaos --input-json 21 --persistent
 ```
 
 结果为42；fmt 输出文本，不覆盖源文件。默认 run 使用内存库，`--persistent` 明确使用 `.chaos/cli.sqlite3`；IDE 使用 `.chaos/project.sqlite3`。它们共用源码与设置，不自动共享运行历史。IDE 的磁盘同步是周期性的；暂时语法错误会等待修正，冲突或入口改变会报告并停止自动同步，保留双方供合并。
 
 ## 网页中编辑和运行
 
-目录项目首次显式运行 `python3 chaos.py setup` 准备完整依赖，然后执行 `python3 chaos.py`。IDE 选择本机空闲端口、打印实际地址并打开浏览器；默认源码来自本目录，不使用另一套示例替换它。原 `chaos serve` 仍可打开数据库中的 `workspace` 项目，默认端口为8765。两种入口都按以下流程编辑：
+目录项目首次显式运行 `./chaos setup` 准备完整依赖，然后执行 `./chaos`。IDE 选择本机空闲端口、打印实际地址并打开浏览器；默认源码来自本目录，不使用另一套示例替换它。原 `chaos serve` 仍可打开数据库中的 `workspace` 项目，默认端口为8765。两种入口都按以下流程编辑：
 
 1. 默认进入源码工作台，从左侧文件列表选择入口文件及模块。需要修改语法节点时，用命令面板打开“视图：程序结构”；两种视图保存的是同一份程序。
 2. 从“运行 → 输入与调试设置”或活动栏“调试”打开运行面板，在其中输入运行数据。勾选“将输入作为 JSON 解析”时必须提供合法 JSON；不勾选时输入是字符串。
@@ -139,14 +141,14 @@ chaos run-guide RUN_ID --server http://127.0.0.1:8765 --input '{"text":"请先�
 停止本项目的 IDE／程序，先备份自己的源码与持久数据，然后使用可信发布者提供的完整 project ZIP 或 portable ZIP：
 
 ```sh
-python3 chaos.py replace /absolute/path/Chaos-Project-New.zip
-python3 chaos.py status
-python3 chaos.py run
+./chaos replace /absolute/path/Chaos-Project-New.zip
+./chaos status
+./chaos run
 ```
 
-替换先校验包并执行候选语言自检，成功后才选择新环境。用户源码、设置、数据库与任务数据留在原位；依赖需求和 Python／平台指纹相符时可继承，不相符时按提示执行 `python3 chaos.py setup`。普通运行不会自动安装缺少的依赖。
+替换先校验包并执行候选语言自检，成功后才选择新环境。用户源码、设置、数据库与任务数据留在原位；依赖需求和 Python／平台指纹相符时可继承，不相符时按提示执行 `./chaos setup`。普通运行不会自动安装缺少的依赖。
 
-上一环境存在、完整且仍兼容当前 Python 时，可在停止本项目程序后执行 `python3 chaos.py rollback`，恢复那一套运行时与依赖。回退不撤销源码编辑、设置修改、数据库变化或工具的外部效果。历史项目没有 `replace` 命令时，从解压后的新版包执行 `python3 chaos.py install /absolute/path/old-project`；旧官方启动器可以迁移，不符合迁移条件的自定义启动器会拒绝覆盖。
+上一环境存在、完整且仍兼容当前 Python 时，可在停止本项目程序后执行 `./chaos rollback`，恢复那一套运行时与依赖。回退不撤销源码编辑、设置修改、数据库变化或工具的外部效果。历史项目没有 `replace` 命令时，从解压后的新版包执行 `./chaos install /absolute/path/old-project`；旧官方启动器可以迁移，不符合迁移条件的自定义启动器会拒绝覆盖。
 
 完整操作和旧版本边界见[更新说明](UPDATES.md)；可移动包、独立服务及数据备份见[安装与部署](INSTALLATION.md)。整个工程移动时保留隐藏 `.chaos/` 及工作区元数据，更换 Python／系统后重新检查依赖。环境损坏或操作失败时按[故障排查](TROUBLESHOOTING.md)处理，不能假定任何损坏都能通过 rollback 自动修复。
 
@@ -172,7 +174,7 @@ chaos run hello.chaos --trace > result.json 2> trace.jsonl
 
 需要机器读取连续进度时，目录入口和已安装 CLI 都支持 `run --stream`。事件逐行写入 stdout，成功结束后另有 `run.result`；它与默认 run 的单个最终 JSON、`--trace` 的 stderr 追踪是不同输出格式。使用 `--stream` 的调用方应读取到实际终态，而不是把某条 `bot.progress` 当作结束。
 
-在 macOS／Linux 的真实终端可使用 `python3 chaos.py run --interactive`，在 `guide>` 后输入自然语言并回车。普通循环不会自动理解指导，程序需要调用接收函数或使用原生 Bot 的检查点。该模式要求 stdin 和 stdout 都是真实终端，不能同时从 `run -` 读取源码；Windows 或管道可使用 `--stream`，需要追加指导时使用网页或 SDK／HTTP。`/cancel`、Ctrl-C 或 Ctrl-D 会请求取消这个本地运行并等待清理；停止 CLI 不会把它转换为后台工作。详见[SDK 的终端交互协议](SDK.md#实时事件与运行中指导)。
+在 macOS／Linux 的真实终端可使用 `./chaos run --interactive`，在 `guide>` 后输入自然语言并回车。普通循环不会自动理解指导，程序需要调用接收函数或使用原生 Bot 的检查点。该模式要求 stdin 和 stdout 都是真实终端，不能同时从 `run -` 读取源码；Windows 或管道可使用 `--stream`，需要追加指导时使用网页或 SDK／HTTP。`/cancel`、Ctrl-C 或 Ctrl-D 会请求取消这个本地运行并等待清理；停止 CLI 不会把它转换为后台工作。详见[SDK 的终端交互协议](SDK.md#实时事件与运行中指导)。
 
 普通失败也可能写入 stderr；不要把任意 stderr 行都当成成功追踪事件。`check` 只能确认语法、模块和导出等结构条件；工具授权、类型、输入和资源预算仍需运行验证。
 

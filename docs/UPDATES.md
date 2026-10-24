@@ -1,22 +1,24 @@
 # 版本替换与托管更新
 
+目录包的日常入口为 `./chaos`，Windows PowerShell 使用 `.\chaos.cmd`；已安装 CLI 则使用 `chaos`。当前运行时需要 Python 3.9+，命令会自动寻找解释器。旧目录没有这两个入口时，将下文 `./chaos` 换成 `python3 chaos.py`（Windows 为 `py -3 chaos.py`）；换版保留原有根目录文件。
+
 目录项目可直接使用本地新包替换运行环境；独立服务继续使用已有的签名 feed 与托管更新器。先按当前交付方式选择，不混用它们的安装根与配置。
 
 | 当前方式 | 更新入口与边界 |
 | --- | --- |
-| project ZIP／`chaos.py` 目录项目 | `python3 chaos.py replace NEW.zip`；保留本工程源码、配置和数据库，支持环境回退 |
+| project ZIP／`chaos.py` 目录项目 | `./chaos replace NEW.zip`；保留本工程源码、配置和数据库，支持环境回退 |
 | SDK 嵌入／portable 包 | 由宿主选择新的完整导入根并重启，见[安装](INSTALLATION.md#作为完整包放进其他项目) |
 | 已启用托管安装的独立服务 | `chaos update` 的 feed／验签／空闲切换流程，保留原工作目录与业务数据 |
 
 ## 目录项目：直接换新版
 
-在已有工程中首次安装使用 `python3 chaos.py install TARGET`，支持 replace 的 Chaos 项目直接使用 replace。旧项目若没有 replace 命令，可在解压后的新版包目录执行 `python3 chaos.py install /absolute/path/old-project`；对于不支持环境协议的历史启动器，只迁移与旧包完全一致的官方入口；已声明兼容协议的启动器保持原样。其余定制入口拒绝覆盖。回退到不具备环境管理命令的历史运行时后，可继续 run／IDE；再次升级仍从新版包执行 install。请从可信发布者取得完整 project ZIP 或 portable ZIP，先退出本项目的 IDE／后台程序，再在原工程执行：
+在已有工程中首次安装使用 `./chaos install TARGET`，支持 replace 的 Chaos 项目直接使用 replace。旧项目若没有 replace 命令，可在解压后的新版包目录执行 `./chaos install /absolute/path/old-project`；对于不支持环境协议的历史启动器，只迁移与旧包完全一致的官方入口；已声明兼容协议的启动器保持原样。其余定制入口拒绝覆盖。回退到不具备环境管理命令的历史运行时后，可继续 run／IDE；再次升级仍从新版包执行 install。请从可信发布者取得完整 project ZIP 或 portable ZIP，先退出本项目的 IDE／后台程序，再在原工程执行：
 
 ```sh
-python3 chaos.py replace /absolute/path/Chaos-Project-New.zip
-python3 chaos.py status
-python3 chaos.py --version
-python3 chaos.py run
+./chaos replace /absolute/path/Chaos-Project-New.zip
+./chaos status
+./chaos --version
+./chaos run
 ```
 
 同版本完整包可重新安装；比当前版本更旧的包会被拒绝，恢复上一环境使用 rollback。replace 不接受单个 Python 文件、wheel 或“只有改动文件”的补丁包。
@@ -27,7 +29,7 @@ macOS／Linux 使用 `python3`，Windows 换为 `py -3`；所有方式均需要 
 
 1. 验证归档路径、文件集合、长度、清单和 wheel RECORD 等完整性，拒绝损坏或不完整的包。
 2. 将候选运行时放入独立环境并执行语言自检，不向当前运行目录叠加文件。project ZIP 中的初始源码与模板不会覆盖原工程。
-3. 仅在依赖需求和 Python／平台指纹匹配时继承现有依赖；不匹配时新环境保持待准备状态，按提示运行 `python3 chaos.py setup`。纯语言核心仍使用 Python 标准库。
+3. 仅在依赖需求和 Python／平台指纹匹配时继承现有依赖；不匹配时新环境保持待准备状态，按提示运行 `./chaos setup`。纯语言核心仍使用 Python 标准库。
 4. 校验与候选语言自检成功后原子切换活动环境指针。失败时保留原活动环境；下次仍从工程内同一个 `chaos.py` 启动。
 
 共享环境锁保护通过项目启动器进入的程序；替换和 setup 需要独占环境，已有 IDE 还受原项目锁保护。出现忙碌提示时正常停止进程再重试，不删除锁文件强行切换。
@@ -37,9 +39,9 @@ macOS／Linux 使用 `python3`，Windows 换为 `py -3`；所有方式均需要 
 关闭本项目的 IDE／后台程序后可恢复上一环境：
 
 ```sh
-python3 chaos.py rollback
-python3 chaos.py status
-python3 chaos.py
+./chaos rollback
+./chaos status
+./chaos
 ```
 
 rollback 恢复上一运行时及其配套依赖，不回滚源码编辑、配置、数据库或已执行程序的外部效果。替换不会热改已经导入的 Python 模块，启动新版本需要重新运行程序。更换 Python／操作系统／架构后，需要重新检查并准备匹配依赖。

@@ -8,19 +8,19 @@
 
 ```sh
 python3 --version
-python3 chaos.py --version
-python3 chaos.py status
-python3 chaos.py check
+./chaos --version
+./chaos status
+./chaos check
 ```
 
 Windows 将 `python3` 换为 `py -3`。`status` 显示活动运行时、上一环境和配套依赖是否匹配，它不是模型或硬件的健康检查；旧项目可能尚无此命令。运行时已经缺失或损坏时，版本和状态命令本身也可能失败，保留原错误继续定位。
 
 | 现象 | 检查与恢复 |
 | --- | --- |
-| 没有全局 `chaos` 命令 | 在完整项目目录使用 `python3 chaos.py`；目录入口不要求全局安装另一份 Chaos |
-| 提示缺依赖，或 `dependenciesReady` 为 false | 停止本项目 IDE／程序，再执行 `python3 chaos.py setup`。依赖位于活动 `runtime` 同级的 `deps`；只有初始环境使用 `.chaos/deps`。正常 run／IDE 不会自动联网补装 |
+| 没有全局 `chaos` 命令 | 在完整项目目录使用 `./chaos`；目录入口不要求全局安装另一份 Chaos |
+| 提示缺依赖，或 `dependenciesReady` 为 false | 停止本项目 IDE／程序，再执行 `./chaos setup`。依赖位于活动 `runtime` 同级的 `deps`；只有初始环境使用 `.chaos/deps`。正常 run／IDE 不会自动联网补装 |
 | `Project environment is in use`／`Another project IDE is already active` | 正常退出本项目正在运行的 IDE、CLI 或环境维护进程后重试；不要删除锁文件强行并发替换 |
-| 旧项目不认识 `replace`／`status` | 在解压后的新版 project 包目录执行 `python3 chaos.py install /absolute/path/old-project`。迁移官方旧启动器，保留目标工程源码、设置和数据；自定义旧启动器需显式迁移 |
+| 旧项目不认识 `replace`／`status` | 在解压后的新版 project 包目录执行 `./chaos install /absolute/path/old-project`。迁移官方旧启动器，保留目标工程源码、设置和数据；自定义旧启动器需显式迁移 |
 | `Project chaos.py was customized` | 保留自己的启动器和项目备份，按[更新说明](UPDATES.md)处理迁移条件，不直接覆盖定制入口 |
 | `No previous environment is available` | 当前没有可回退目标；停止重试 rollback，使用已验证的工程备份或按完整安装流程处理 |
 | 新包完整性、Python／环境协议校验或候选自检失败 | 活动环境不会因此切换。核对可信包是否完整、Python 是否满足该包要求；不要编辑清单、版本或环境指针跳过校验 |
@@ -134,7 +134,7 @@ chaos run file.chaos --input-json null --trace > result.json 2> trace.jsonl
 
 目录项目的 `replace` 使用本地完整包，不要求在线 feed。独立服务的更新页面显示“未配置”表示尚无可信 feed 和公钥，不是自动发布失败。签名、下载、版本兼容或候选自检失败时保留当前版本，并按 [更新安装](UPDATES.md) 读取错误状态。不要替换成未知公钥或手工修改版本指针规避验证。
 
-目录项目先用 `python3 chaos.py status` 确认活动 `runtime`，并打开本项目当前 IDE 地址下的 `/docs`；初始 `.chaos/runtime` 在替换后可能已是旧版。已安装 CLI 的 `chaos docs path` 显示该 CLI 使用的文档目录。源码改了而网页文档没变时，检查正在运行的服务是否来自另一个 venv 或旧 wheel；普通 wheel 安装需重新构建/安装并重启。静态文档需重新 `chaos docs build` 并发布生成目录。文档构建目录属于生成物，不要在其中保存用户数据。
+目录项目先用 `./chaos status` 确认活动 `runtime`，并打开本项目当前 IDE 地址下的 `/docs`；初始 `.chaos/runtime` 在替换后可能已是旧版。已安装 CLI 的 `chaos docs path` 显示该 CLI 使用的文档目录。源码改了而网页文档没变时，检查正在运行的服务是否来自另一个 venv 或旧 wheel；普通 wheel 安装需重新构建/安装并重启。静态文档需重新 `chaos docs build` 并发布生成目录。文档构建目录属于生成物，不要在其中保存用户数据。
 
 ## 提交可复现问题
 

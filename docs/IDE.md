@@ -6,7 +6,7 @@ Chaos 默认打开源码工作台：左侧活动栏与文件列表、中间编�
 
 ## 打开自己的项目
 
-完整项目目录中先执行 `python3 chaos.py setup`（首次显式安装完整依赖），再执行 `python3 chaos.py`。以终端报告的实际URL为准，端口默认由系统选择；需要无浏览器启动可用 `python3 chaos.py ide --no-browser`。源码留在项目目录，IDE状态在 `.chaos/project.sqlite3`；同目录 CLI 默认 run 的内存历史与它不同。
+完整项目目录中先执行 `./chaos setup`（首次显式安装完整依赖），再执行 `./chaos`。以终端报告的实际URL为准，端口默认由系统选择；需要无浏览器启动可用 `./chaos ide --no-browser`。源码留在项目目录，IDE状态在 `.chaos/project.sqlite3`；同目录 CLI 默认 run 的内存历史与它不同。
 
 从[快速开始](GETTING_STARTED.md)完成第一个程序，再用本页学习保存、调试和跨文件导航。编程助手的连接、角色与密钥来源见[模型配置](MODEL_CONFIGURATION.md)；打开助手或选择代码不会自动发送模型请求。
 

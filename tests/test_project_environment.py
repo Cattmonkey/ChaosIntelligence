@@ -3,6 +3,7 @@ import csv
 import hashlib
 import io
 import json
+import os
 from pathlib import Path
 import shutil
 import subprocess
@@ -23,7 +24,7 @@ from test_portable_package import wheel
 def make_package(root, version='0.79.0', *, requirement='>=3.9', broken=False, project=False, bootstrap=None):
     root.mkdir(parents=True, exist_ok=True)
     def extend(files):
-        for name in ('project.py', 'project_launcher.py', 'project_environment.py', 'portable.py', 'updater.py'):
+        for name in ('project.py', 'project_launcher.py', 'project_environment.py', 'launchers.py', 'portable.py', 'updater.py'):
             files['chaos/' + name] = Path(chaos.__file__).with_name(name).read_bytes()
         files['chaos/docs/PROJECT_README.md'] = (Path(chaos.__file__).parent.parent / 'docs/PROJECT_README.md').read_bytes()
         if bootstrap is not None:files['chaos/project_launcher.py'] = bootstrap
@@ -56,7 +57,7 @@ class ProjectEnvironmentTests(unittest.TestCase):
         for name, data in {'main.chaos':'41+1', '.chaos/settings.json':'{"private":"local-only"}',
                            '.chaos/project.sqlite3':'database sentinel', '.chaos/tasks/keep':'task data'}.items():
             p = self.host / name;p.parent.mkdir(exist_ok=True, parents=True);p.write_text(data)
-        self.saved = {n:(self.host/n).read_bytes() for n in ('main.chaos','chaos.project.json','chaos.py','host.txt',
+        self.saved = {n:(self.host/n).read_bytes() for n in ('main.chaos','chaos.project.json','chaos.py','chaos','chaos.cmd','host.txt',
                             '.chaos/settings.json','.chaos/project.sqlite3','.chaos/tasks/keep')}
 
     def assert_user_data(self):
@@ -97,6 +98,9 @@ class ProjectEnvironmentTests(unittest.TestCase):
         self.assertEqual(status(moved)['version'],'0.80.0')
         result=subprocess.run([sys.executable,'-I','-S',str(moved/'chaos.py'),'--version'],cwd=self.root,capture_output=True,text=True)
         self.assertEqual(result.returncode,0,result.stderr);self.assertEqual(result.stdout.strip(),'0.80.0')
+        if os.name != 'nt':
+            native=subprocess.run([str(moved/'chaos'),'--version'],cwd=self.root,env={**os.environ,'CHAOS_PYTHON':sys.executable},capture_output=True,text=True)
+            self.assertEqual(native.returncode,0,native.stderr);self.assertEqual(native.stdout.strip(),'0.80.0')
 
     def test_damaged_payload_preserves_pointer_runtime_and_user_data(self):
         data=_read_runtime(self.new);data['chaos/version.py']+=b'# damaged'
@@ -147,8 +151,8 @@ class ProjectEnvironmentTests(unittest.TestCase):
         self.assertEqual(selection(self.host)['current'],'base');self.assert_user_data()
 
     def test_install_conflicts_preserve_existing_files(self):
-        for name in ('main.chaos','chaos.py','.chaos'):
-            target=self.root/('conflict-'+name.replace('.',''));target.mkdir()
+        for name in ('main.chaos','chaos.py','chaos','chaos.cmd','.chaos'):
+            target=self.root/('conflict-'+name.replace('.','_'));target.mkdir()
             (target/name).write_text('owned')
             with self.assertRaises((PackageError,ValueError)):install(self.runtime,target)
             self.assertEqual((target/name).read_text(),'owned')
@@ -194,6 +198,7 @@ class ProjectEnvironmentTests(unittest.TestCase):
         install(self.runtime,target)
         self.assertEqual(status(target)['version'],'0.79.0')
         self.assertEqual((target/'main.chaos').read_text(),'40+2')
+        self.assertFalse((target/'chaos').exists());self.assertFalse((target/'chaos.cmd').exists())
 
     def test_future_readme_and_cli_launcher_are_integrity_checked_not_template_locked(self):
         files=_read_runtime(self.new);files['README.md']=b'Future documentation'

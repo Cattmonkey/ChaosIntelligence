@@ -42,16 +42,20 @@ def _root(directory):
 
 
 def project_files():
-    """The same three editable templates used by init and project packaging."""
+    """Shared editable templates and native commands for init and packaging."""
+    from .launchers import native_launchers
     return {MARKER:(json.dumps({'schema':SCHEMA,'entry':'main.chaos'},indent=2)+'\n').encode(),
             'main.chaos':b'42\n',
-            'chaos.py':Path(__file__).with_name('project_launcher.py').read_bytes()}
+            'chaos.py':Path(__file__).with_name('project_launcher.py').read_bytes(),
+            **native_launchers()}
 
 
-def _new_file(path,data):
+def _new_file(path,data,mode=None):
     with path.open('xb')as stream:
         status=os.fstat(stream.fileno())
-        try:stream.write(data);stream.flush();os.fsync(stream.fileno())
+        try:
+            if mode is not None and os.name != 'nt':os.fchmod(stream.fileno(),mode)
+            stream.write(data);stream.flush();os.fsync(stream.fileno())
         except BaseException:
             try:
                 current=path.lstat()
@@ -75,8 +79,9 @@ def init_project(directory):
     try:
         path.mkdir(parents=True,exist_ok=True)
         path=_root(path)
-        for name in('main.chaos','chaos.py',MARKER):
-            target=path/name;status=_new_file(target,templates[name]);written.append((target,status.st_dev,status.st_ino))
+        for name in (*(n for n in templates if n != MARKER),MARKER):
+            target=path/name;status=_new_file(target,templates[name],0o755 if name == 'chaos' else None)
+            written.append((target,status.st_dev,status.st_ino))
     except BaseException:
         for target,device,inode in reversed(written):
             try:

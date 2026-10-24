@@ -1,0 +1,21 @@
+#!/bin/sh
+# Chaos language command. Keep this file beside its bootstrap.
+chaos_launcher_dir=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd -P) || exit 1
+chaos_bootstrap="$chaos_launcher_dir/../chaos.py"
+chaos_python_ready() {
+    "$1" -c 'import sys; raise SystemExit(0 if sys.version_info >= (3, 9) else 1)' </dev/null >/dev/null 2>&1
+}
+if [ -n "${CHAOS_PYTHON:-}" ]; then
+    if chaos_python_ready "$CHAOS_PYTHON"; then
+        exec "$CHAOS_PYTHON" "$chaos_bootstrap" "$@"
+    fi
+    printf '%s\n' 'Chaos: CHAOS_PYTHON must name a Python 3.9+ executable (without arguments).' >&2
+    exit 127
+fi
+for chaos_python in python3 python; do
+    if command -v "$chaos_python" >/dev/null 2>&1 && chaos_python_ready "$chaos_python"; then
+        exec "$chaos_python" "$chaos_bootstrap" "$@"
+    fi
+done
+printf '%s\n' 'Chaos needs Python 3.9+ as its runtime. Install it or set CHAOS_PYTHON to its executable path.' >&2
+exit 127

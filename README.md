@@ -10,6 +10,18 @@
 
 下载页请选择 **`Chaos-Project.zip`**。它含有项目启动器；GitHub 自动生成的 “Source code” 归档用于源码开发。
 
+**编写和运行 Chaos 程序，使用语言自己的 `chaos` 命令。** 已安装的环境直接执行：
+
+```sh
+chaos -c '40 + 2'
+chaos run main.chaos
+chaos repl
+```
+
+免安装的 project ZIP 在 macOS／Linux 使用 `./chaos`，Windows PowerShell 使用 `.\chaos.cmd`。源码仓库使用 `./bin/chaos`；在源码根目录执行 `export PATH="$PWD/bin:$PATH"` 后，当前终端也可直接使用 `chaos`。
+
+当前运行时需要 Python 3.9+，命令入口会寻找可用解释器；日常编程不用写 Python 命令。需要显式选择解释器时，目录包仍支持 `python3 chaos.py`，源码支持 `python3 -m chaos`。旧版目录包没有 `chaos`／`chaos.cmd` 时也可继续用原入口。下文目录操作面向 project ZIP；源码／已安装 CLI 的项目管理使用 `chaos project --help`。[安装与兼容入口](docs/INSTALLATION.md)
+
 ### 用它做什么？
 
 - **把一次问答变成可复用的工作流程。** 让规划、写作、复核各司其职，用普通函数连接输入和结果；把精确计算交给代码，把需要理解的部分交给模型。
@@ -57,7 +69,7 @@ fn add_one(x: Int) -> Int { x + 1 }
 twice(add_one, 40)
 ```
 
-结果是 `42`。函数可以作为参数传递；最后一个表达式就是程序结果。把代码保存为 `hello.chaos`，执行 `python3 chaos.py run hello.chaos` 即可。**纯计算无需网络，也无需模型密钥。** [继续学习函数组合 →](docs/FUNCTION_COMPOSITION.md)
+结果是 `42`。函数可以作为参数传递；最后一个表达式就是程序结果。把代码保存为 `hello.chaos`，执行 `./chaos run hello.chaos` 即可。**纯计算无需网络，也无需模型密钥。** [继续学习函数组合 →](docs/FUNCTION_COMPOSITION.md)
 
 ### 2. 调用智能体，就像调用函数
 
@@ -73,7 +85,7 @@ agent teacher {
 teacher("闭包是什么？")
 ```
 
-配置完成后，运行这段程序会调用真实模型。先在项目的 `/control` 或 `python3 chaos.py configure --models` 中保存 Base URL、Key 和模型选择；`role` 继承项目中的角色配置，源码无需写入密钥。真实调用可能产生供应商费用。
+配置完成后，运行这段程序会调用真实模型。先在项目的 `/control` 或 `./chaos configure --models` 中保存 Base URL、Key 和模型选择；`role` 继承项目中的角色配置，源码无需写入密钥。真实调用可能产生供应商费用。
 
 声明智能体不会发起请求，最后一行的调用才会执行。`tools: []` 表示本例没有授予工具权限。项目中的 `local` 提供方用于确定性演示，真实语义推理使用这里的 `model`。[配置模型 →](docs/MODEL_CONFIGURATION.md) · [完整问答源码 →](examples/learning-models/main.chaos)
 
@@ -104,40 +116,40 @@ ui_artifact("page", "系统实时网络",
 
 ## 三步开始，在自己的目录里用
 
-需要 **Python 3.9+**。macOS／Linux 使用 `python3`；Windows 将以下命令中的 `python3` 换成 `py -3`。
+需要 **Python 3.9+**。macOS／Linux 使用 `./chaos`；Windows PowerShell 将以下命令中的 `./chaos` 换成 `.\chaos.cmd`。
 
 1. 从[最新发行版](https://github.com/Cattmonkey/ChaosIntelligence/releases/latest)下载 **`Chaos-Project.zip`**，解压到一个新目录，在该目录打开终端。
 2. 运行自带程序，确认得到 `42`：
 
    ```sh
-   python3 chaos.py run
+   ./chaos run
    ```
 
 3. 准备 IDE 依赖并打开当前目录：
 
    ```sh
-   python3 chaos.py setup --yes
-   python3 chaos.py
+   ./chaos setup --yes
+   ./chaos
    ```
 
-`setup` 检测系统、在项目内安装依赖、运行自检并保存配置，命令行显示阶段与结果。它需要可访问的 Python 包来源；包本身不包含 Python。后续启动通常只需 `python3 chaos.py`，按终端打印的实际地址使用网页。
+`setup` 检测系统、在项目内安装依赖、运行自检并保存配置，命令行显示阶段与结果。它需要可访问的 Python 包来源；包本身不包含 Python。后续启动通常只需 `./chaos`，按终端打印的实际地址使用网页。
 
 进入 IDE 后：选择 `main.chaos` → 编辑 → 格式化／保存 → 点击“运行” → 查看底部结果与事件。选择其他文件只改变编辑对象，默认运行入口仍由项目设置决定。[跟着快速开始操作 →](docs/GETTING_STARTED.md)
 
-已有工程也能使用：从解压后的使用包运行 `python3 chaos.py install "/absolute/path/my-project"`，安装器遇到冲突会保留原内容。仅需要语言核心可运行 `setup --yes --profile core`。[安装说明](docs/INSTALLATION.md) · [环境检测与配置](docs/DEPLOYMENT.md)
+已有工程也能使用：从解压后的使用包运行 `./chaos install "/absolute/path/my-project"`，安装器遇到冲突会保留原内容。仅需要语言核心可运行 `setup --yes --profile core`。[安装说明](docs/INSTALLATION.md) · [环境检测与配置](docs/DEPLOYMENT.md)
 
 ### 喜欢终端？可以全程不用网页
 
 ```sh
-python3 chaos.py -c '40 + 2'
-python3 chaos.py repl --empty
-python3 chaos.py docs show getting-started
+./chaos -c '40 + 2'
+./chaos repl --empty
+./chaos docs show getting-started
 ```
 
 配置模型后，还可以带着本版本文档提问：
 
 ```sh
-python3 chaos.py ask '给我一个函数组合的短例子' --topic getting-started --stream
+./chaos ask '给我一个函数组合的短例子' --topic getting-started --stream
 ```
 
 `ask` 返回回答，不修改文件；IDE 助手或 `assist` 可以生成需要检查与应用的代码提案。自己的程序也可导入 `std/intelligence`，组合内置规划、执行、复核与助手。[命令行教程 →](docs/COMMAND_LINE.md)
@@ -160,11 +172,11 @@ GPU、设备和工具需要对应依赖、硬件与授权；它们不因写入�
 取得新版完整 project ZIP 或 portable ZIP，停止本项目的 IDE 与程序，然后在原工程中执行：
 
 ```sh
-python3 chaos.py replace "/absolute/path/Chaos-Project-New.zip"
-python3 chaos.py status
+./chaos replace "/absolute/path/Chaos-Project-New.zip"
+./chaos status
 ```
 
-更新先校验与试运行，再切换运行环境；保留项目源码、配置与数据。需要时用 `python3 chaos.py rollback` 恢复上一环境及配套依赖。若 `dependenciesReady` 为 `false`，按提示运行 `python3 chaos.py setup --yes`。
+更新先校验与试运行，再切换运行环境；保留项目源码、配置与数据。需要时用 `./chaos rollback` 恢复上一环境及配套依赖。若 `dependenciesReady` 为 `false`，按提示运行 `./chaos setup --yes`。
 
 **不要把新版 ZIP 直接覆盖解压到旧工程。** [更新与回退指南 →](docs/UPDATES.md)
 

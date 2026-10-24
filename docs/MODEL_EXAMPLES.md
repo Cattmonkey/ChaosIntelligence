@@ -4,9 +4,9 @@
 
 ## 准备一个学习目录
 
-先按[快速开始](GETTING_STARTED.md)准备含有 `chaos.py` 的项目，并按[模型配置](MODEL_CONFIGURATION.md)保存 Base URL、Key 和角色模型。本文只使用文本模型；不需要图像 Key，也不依赖 Codex App。完整环境第一次使用时运行 `python3 chaos.py setup`。每个项目自己的 `.chaos/settings.json` 是这些命令使用的配置。
+先按[快速开始](GETTING_STARTED.md)准备含有 `chaos.py` 的项目，并按[模型配置](MODEL_CONFIGURATION.md)保存 Base URL、Key 和角色模型。本文只使用文本模型；不需要图像 Key，也不依赖 Codex App。完整环境第一次使用时运行 `./chaos setup`。每个项目自己的 `.chaos/settings.json` 是这些命令使用的配置。
 
-在项目根目录新建 `learning` 文件夹，把下表中的源码下载进去，保留文件名。项目分发包内也有这些源码。先运行 `python3 chaos.py status`，在返回的 runtime 目录下找到 `chaos/examples/learning-models/`，复制到自己的 `learning/` 后再编辑和运行；全新未换版项目的 runtime 才是 `.chaos/runtime`。运行环境中的示例是只读学习资源，自己的副本不会被换版覆盖。
+在项目根目录新建 `learning` 文件夹，把下表中的源码下载进去，保留文件名。项目分发包内也有这些源码。先运行 `./chaos status`，在返回的 runtime 目录下找到 `chaos/examples/learning-models/`，复制到自己的 `learning/` 后再编辑和运行；全新未换版项目的 runtime 才是 `.chaos/runtime`。运行环境中的示例是只读学习资源，自己的副本不会被换版覆盖。
 
 | 顺序 | 源码 | 学习重点 |
 | --- | --- | --- |
@@ -19,9 +19,9 @@
 下列命令都在项目根目录执行。Windows 把 `python3` 换成 `py -3`；命令中的 JSON 字符串需要保留内层双引号。
 
 ```sh
-python3 chaos.py check learning/main.chaos
-python3 chaos.py fmt learning/main.chaos
-python3 chaos.py run learning/main.chaos --input-json '"闭包是什么？"'
+./chaos check learning/main.chaos
+./chaos fmt learning/main.chaos
+./chaos run learning/main.chaos --input-json '"闭包是什么？"'
 ```
 
 `check` 检查源码；`fmt` 只输出排版结果，不改写文件。它们不调用模型。`run` 才开始执行，真实回复、耗时与请求费用由提供方决定。`maxSteps` 约束一次智能体调用的步骤，不是整套程序的 HTTP 请求总上限；重试或候选模型切换仍可能产生额外请求。模型出错时先检查连接和所选角色模型，不需要修改语言语法。
@@ -51,8 +51,8 @@ teacher(input)
 [pipeline.chaos](../examples/learning-models/pipeline.chaos) 把一个任务依次交给 planner、executor 和 reviewer 角色。后一步的输入显式带上前一步结果；最后返回 `plan`、`draft`、`review`，便于对照每个角色的贡献。
 
 ```sh
-python3 chaos.py check learning/pipeline.chaos
-python3 chaos.py run learning/pipeline.chaos --input-json '"为第一次接触函数式编程的人写一份十五分钟入门教程"'
+./chaos check learning/pipeline.chaos
+./chaos run learning/pipeline.chaos --input-json '"为第一次接触函数式编程的人写一份十五分钟入门教程"'
 ```
 
 三个智能体声明后的组合函数如下；完整文件已包含声明，可以直接运行：
@@ -76,8 +76,8 @@ develop(input)
 [parallel.chaos](../examples/learning-models/parallel.chaos) 使用 `async fn` 包装智能体调用，再通过 `await gather(...)` 汇合。创建异步调用得到冷 Task，汇合才开始执行；结果的顺序与传入任务的顺序相同，而非网络响应的先后顺序。
 
 ```sh
-python3 chaos.py check learning/parallel.chaos
-python3 chaos.py run learning/parallel.chaos --input-json '"设计一个帮助小团队整理知识、回答问题的助手"'
+./chaos check learning/parallel.chaos
+./chaos run learning/parallel.chaos --input-json '"设计一个帮助小团队整理知识、回答问题的助手"'
 ```
 
 输出是三个 `{perspective, answer}` 记录组成的列表，视角依次为“用户体验”“工程实现”“维护成本”。同一个 `critic` 智能体被当作 `Function` 参数传入，并为每次调用传入不同的 Record；无需复制三套模型实现。
@@ -91,8 +91,8 @@ python3 chaos.py run learning/parallel.chaos --input-json '"设计一个帮助�
 [function-tools.chaos](../examples/learning-models/function-tools.chaos) 把预算计算写成普通函数，用 `agent_tool` 描述输入、输出合同，再通过 `agent_bind` 交给模型。绑定后的调用产生冷 Task，使用 `await` 执行。
 
 ```sh
-python3 chaos.py check learning/function-tools.chaos
-python3 chaos.py run learning/function-tools.chaos --input-json '{"items":[{"unitCents":2500,"quantity":2},{"unitCents":1200,"quantity":3}],"limitCents":10000}'
+./chaos check learning/function-tools.chaos
+./chaos run learning/function-tools.chaos --input-json '{"items":[{"unitCents":2500,"quantity":2},{"unitCents":1200,"quantity":3}],"limitCents":10000}'
 ```
 
 金额使用整数分。语言函数先检查单价、数量与预算，再计算 `2500 × 2 + 1200 × 3 = 8600` 分；预算为 `10000` 分，因此余额是 `1400` 分。`calculate_budget` 工具接收 `null`，从闭包返回这份已计算的结果，模型不能通过工具参数替换原订单。
@@ -114,8 +114,8 @@ python3 chaos.py run learning/function-tools.chaos --input-json '{"items":[{"uni
 [goal-bot.chaos](../examples/learning-models/goal-bot.chaos) 将模型调用放进原生 Bot 的回调。`planner` 得到当前目标与上下文，`execute` 产生本轮结果，`verify` 明确返回 `done`、下一轮 `context` 和 `output`。这些回调由同一个语言运行时执行。
 
 ```sh
-python3 chaos.py check learning/goal-bot.chaos
-python3 chaos.py run learning/goal-bot.chaos --input-json '{"topic":"Chaos：智能体像函数一样调用，普通函数负责计算与流程组合。请概括这门语言。","minChars":10,"maxChars":30}'
+./chaos check learning/goal-bot.chaos
+./chaos run learning/goal-bot.chaos --input-json '{"topic":"Chaos：智能体像函数一样调用，普通函数负责计算与流程组合。请概括这门语言。","minChars":10,"maxChars":30}'
 ```
 
 目标是生成 10～30 个字符的中文说明，最多尝试三轮。`plan` 用普通函数整理主题、上一稿、长度反馈与用户指导；`execute` 调用 writer 模型；`verify` 用语言的 `length` 检查字符数。这里检验的是字符范围，不是字节数、token 数或内容质量。
@@ -133,7 +133,7 @@ python3 chaos.py run learning/goal-bot.chaos --input-json '{"topic":"Chaos：智
 例如，查看 Bot 的事件流：
 
 ```sh
-python3 chaos.py run learning/goal-bot.chaos --input-json '{"topic":"Chaos：智能体像函数一样调用，普通函数负责计算与流程组合。请概括这门语言。","minChars":10,"maxChars":30}' --stream
+./chaos run learning/goal-bot.chaos --input-json '{"topic":"Chaos：智能体像函数一样调用，普通函数负责计算与流程组合。请概括这门语言。","minChars":10,"maxChars":30}' --stream
 ```
 
 在 macOS／Linux 的交互式终端中，把末尾的 `--stream` 换为 `--interactive`。该模式包含事件流，并允许输入自然语言指导；Bot 在自身的指导边界接收新信息。收到 `queued` 只表示已入队，不表示已经采用。若已有外部动作发生，追加指导可能使本轮进入待协调状态，不会自动撤销或重放先前动作。

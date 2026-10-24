@@ -6,10 +6,10 @@
 
 | 目标 | 操作 |
 | --- | --- |
-| 第一次连接模型 | 启动 `python3 chaos.py`，打开实际服务地址的 `/control`，编辑提供方并保存 |
-| 在命令行逐项配置或自动部署 | `python3 chaos.py configure --models`，见[环境向导](DEPLOYMENT.md)；复用本页的配置文件与环境变量 |
+| 第一次连接模型 | 启动 `./chaos`，打开实际服务地址的 `/control`，编辑提供方并保存 |
+| 在命令行逐项配置或自动部署 | `./chaos configure --models`，见[环境向导](DEPLOYMENT.md)；复用本页的配置文件与环境变量 |
 | 多个项目重复配置 | 下载下方配置脚本，从环境变量写入每个项目自己的设置文件 |
-| 随时询问使用与编程问题 | `python3 chaos.py ask '问题' --role assistant --topic getting-started`；REPL 可用 `.ask 问题` |
+| 随时询问使用与编程问题 | `./chaos ask '问题' --role assistant --topic getting-started`；REPL 可用 `.ask 问题` |
 | 学习智能体函数 | 从本页的问答开始，再运行[五个学习示例](MODEL_EXAMPLES.md)中的多角色、并发、函数工具与 Bot |
 | 将某个智能体交给另一模型 | 为该智能体显式设置 `route`，在 `agents` 中配置同名路由 |
 | 查看当前账号实际可用模型 | 保存凭据后手动检测提供方；检测目录与模型推理授权是两件事 |
@@ -31,7 +31,7 @@
 
 ## 在页面中配置
 
-1. 第一次使用完整环境，执行 `python3 chaos.py setup`，再运行 `python3 chaos.py`。
+1. 第一次使用完整环境，执行 `./chaos setup`，再运行 `./chaos`。
 2. 打开启动输出中实际地址的 `/control`。目录 IDE 默认使用空闲端口，不一定是 8765。
 3. 在提供方中填写 Base URL、API Key 和模型，然后保存。Key 留空表示保留原值，清除需用明确的清除操作。
 4. 在角色配置中选择 provider/model；希望固定模型时关闭 `autoUpgrade`。保存后下一次请求读取新配置，已发出的请求不会中途替换连接。
@@ -95,8 +95,8 @@ teacher(input)
 ```
 
 ```sh
-python3 chaos.py check
-python3 chaos.py run --input-json '"闭包是什么？"'
+./chaos check
+./chaos run --input-json '"闭包是什么？"'
 ```
 
 `check` 不调用模型；`run` 会实际请求已配置模型，输出内容不保证固定。`teacher` 是可调用的语言值，可以传给函数、放入列表、与其他函数组合。`tools: []` 表示没有授予宿主工具，不代表无限电脑控制权限。要让模型调用自己的函数，阅读[函数工具](FUNCTION_TOOLS.md)；要离线验证工具执行，阅读[智能体协议测试](AGENT_TESTING.md)。
@@ -144,4 +144,4 @@ settings.update({
 
 `std/intelligence` 的 planner／executor／reviewer 使用对应角色；assistant 采用 executor 角色，独立 route 为 `intelligence-assistant`。因此同一提供方连接既能用于上面的自定义 Agent，也能用于 `ask`，无需再填一套 Key。需要为帮助智能体单独选模型时，按上述 `agents` 路由覆盖方法配置它。
 
-`python3 chaos.py docs list` 列出随包主题，`docs show TOPIC_ID` 可离线阅读；`ask '问题' --topic TOPIC_ID` 才将所选文档作为上下文发送给模型。它不自动发送项目文件，也不执行回复。让智能体读取项目、提出和验证代码改动，应连接现有 IDE 服务使用 `assist`；完整例子和配置边界见[命令行教程](COMMAND_LINE.md)。
+`./chaos docs list` 列出随包主题，`docs show TOPIC_ID` 可离线阅读；`ask '问题' --topic TOPIC_ID` 才将所选文档作为上下文发送给模型。它不自动发送项目文件，也不执行回复。让智能体读取项目、提出和验证代码改动，应连接现有 IDE 服务使用 `assist`；完整例子和配置边界见[命令行教程](COMMAND_LINE.md)。
