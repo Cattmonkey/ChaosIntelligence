@@ -28,13 +28,13 @@ Use one `.chaos` source file through the native `chaos` CLI, the browser IDE, or
 
 ## 3 minutes 34 seconds: Beyond the Curves
 
-<a href="https://github.com/Cattmonkey/ChaosIntelligence/releases/download/v0.154.4/Chaos-Intelligence-Beyond-the-Curves-1080p.mp4"><img src="docs/assets/research-film/poster.jpg" alt="Beyond the Curves: five scientists and three engineers, all fictional agents" width="100%"></a>
+<a href="https://github.com/user-attachments/assets/b3def22d-53de-4867-9644-0367949d7a06"><img src="docs/assets/research-film/poster.jpg" alt="Beyond the Curves: five scientists and three engineers, all fictional agents" width="100%"></a>
 
 **A research team, expressed as a callable program.**
 
 Five scientists and three engineers—all agents. A convincing fit leads them through independent validation, sensitivity to initial conditions, and a new experiment with a simplified neural excitability model. Hypotheses become function calls; evidence shapes the next question.
 
-https://github.com/Cattmonkey/ChaosIntelligence/releases/download/v0.154.4/Chaos-Intelligence-Beyond-the-Curves-1080p.mp4
+https://github.com/user-attachments/assets/b3def22d-53de-4867-9644-0367949d7a06
 
 [Download the 1080p film](https://github.com/Cattmonkey/ChaosIntelligence/releases/download/v0.154.4/Chaos-Intelligence-Beyond-the-Curves-1080p.mp4) · [Reproduce the research](examples/research-lab/README.md) · [Cast, data, and production notes](docs/assets/research-film/README.md)
 

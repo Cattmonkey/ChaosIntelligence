@@ -28,13 +28,13 @@
 
 ## 3 分 34 秒，《曲线之外》
 
-<a href="https://github.com/Cattmonkey/ChaosIntelligence/releases/download/v0.154.4/Chaos-Intelligence-Beyond-the-Curves-1080p.mp4"><img src="docs/assets/research-film/poster.jpg" alt="曲线之外：五位科学家与三位工程师，都是虚构智能体" width="100%"></a>
+<a href="https://github.com/user-attachments/assets/b3def22d-53de-4867-9644-0367949d7a06"><img src="docs/assets/research-film/poster.jpg" alt="曲线之外：五位科学家与三位工程师，都是虚构智能体" width="100%"></a>
 
 **一个研究团队，就是一段可调用的程序。**
 
 5 位科学家、3 位工程师，都是智能体。一张漂亮的拟合图，引出独立验证、初值敏感性与一次新的神经兴奋实验：提出假设，调用函数，用证据修正下一步。
 
-https://github.com/Cattmonkey/ChaosIntelligence/releases/download/v0.154.4/Chaos-Intelligence-Beyond-the-Curves-1080p.mp4
+https://github.com/user-attachments/assets/b3def22d-53de-4867-9644-0367949d7a06
 
 [下载 1080p 影片](https://github.com/Cattmonkey/ChaosIntelligence/releases/download/v0.154.4/Chaos-Intelligence-Beyond-the-Curves-1080p.mp4) · [复现片中的研究](examples/research-lab/README.md) · [角色、数据与制作说明](docs/assets/research-film/README.md)
 

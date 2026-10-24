@@ -2,9 +2,9 @@
 
 **一个研究团队，就是一段可调用的程序。** 3 分 34 秒，8 位虚构智能体，从一个过早的结论走向可复算的研究问题。
 
-[![曲线之外海报](poster.jpg)](https://github.com/Cattmonkey/ChaosIntelligence/releases/download/v0.154.4/Chaos-Intelligence-Beyond-the-Curves-1080p.mp4)
+[![曲线之外海报](poster.jpg)](https://github.com/user-attachments/assets/b3def22d-53de-4867-9644-0367949d7a06)
 
-[观看影片](https://github.com/Cattmonkey/ChaosIntelligence/releases/download/v0.154.4/Chaos-Intelligence-Beyond-the-Curves-1080p.mp4) · [下载 1080p 版](https://github.com/Cattmonkey/ChaosIntelligence/releases/download/v0.154.4/Chaos-Intelligence-Beyond-the-Curves-1080p.mp4) · [运行研究源码](../../../examples/research-lab/README.md)
+[观看影片](https://github.com/user-attachments/assets/b3def22d-53de-4867-9644-0367949d7a06) · [下载 1080p 版](https://github.com/Cattmonkey/ChaosIntelligence/releases/download/v0.154.4/Chaos-Intelligence-Beyond-the-Curves-1080p.mp4) · [运行研究源码](../../../examples/research-lab/README.md)
 
 ## 5 位科学家，3 位工程师
 
