@@ -1,0 +1,46 @@
+// 可执行报告：演示业务数据 + 本次真实运行关系，无需模型密钥。
+fn total(values) { sum(values) }
+fn labels(rows) { map(fn(row) { row.name }, rows) }
+fn delivered(rows) { map(fn(row) { row.done }, rows) }
+fn remaining(rows) { map(fn(row) { row.todo }, rows) }
+fn summary(rows) {
+  {done: total(delivered(rows)), todo: total(remaining(rows)), teams: length(rows)}
+}
+fn metrics(stats) {
+  ui_node("Stack", [[
+    ui_node("Metric", ["已完成", str(stats.done), "项任务 · 演示数据"]),
+    ui_node("Metric", ["进行中", str(stats.todo), "项任务 · 演示数据"]),
+    ui_node("Metric", ["协作小组", str(stats.teams), "组 · 本地计算"])
+  ], "row", "large"])
+}
+fn chart(rows) {
+  ui_node("BarChart", ["各组交付进度", labels(rows), delivered(rows)])
+}
+fn details(rows) {
+  ui_node("Table", [["工作组", "已完成", "进行中"], map(fn(row) {
+    [row.name, row.done, row.todo]
+  }, rows)])
+}
+fn dashboard(rows) {
+  ui_node("Stack", [[metrics(summary(rows)), chart(rows), details(rows)]])
+}
+fn network() {
+  ui_node("RuntimeGraph", ["这份报告如何运行", "radial", "run", "dark"])
+}
+fn report(rows) {
+  ui_artifact("report", "项目进展 · 从代码到报告", ui_node("Stack", [[
+    ui_node("Heading", ["项目进展 · 从代码到报告", 1]),
+    ui_node("Text", ["数据经过 Chaos 函数计算；切换运行网络，查看真实程序与执行记录。"]),
+    ui_node("Tabs", [[
+      ui_node("Tab", ["交付概览", [dashboard(rows)]]),
+      ui_node("Tab", ["真实运行网络", [network()]])
+    ]])
+  ]]))
+}
+let teams = [
+  {name: "产品研究", done: 18, todo: 3},
+  {name: "核心开发", done: 32, todo: 6},
+  {name: "体验设计", done: 24, todo: 2},
+  {name: "测试验收", done: 28, todo: 4}
+];
+report(teams)

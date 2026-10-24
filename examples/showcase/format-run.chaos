@@ -1,0 +1,17 @@
+// 本地演示：不调用大模型。可选 JSON 输入：21
+fn twice(value: Int) -> Int {
+  value * 2
+};
+agent checker {provider: "local", mode: "review", tools: []};
+let amount = if type_of(input) == "Int" {
+  input
+} else {
+  21
+};
+let answer = twice(amount);
+let checked = checker(answer);
+{
+  answer: answer,
+  review: checked.review.nonEmpty,
+  provider: checked.provider
+}

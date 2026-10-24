@@ -1,6 +1,186 @@
 # Chaos Intelligence
 
-Chaos 是以函数为基础、Agent 为一等可调用值的编程语言与开发环境。同一运行时组合函数、模块、异步任务、工具和长期工作；网页、CLI 与 SDK 使用同一语言。语言目标、可依赖能力及验收范围见[语言契约](docs/LANGUAGE_CONTRACT.md)。
+## 把智能体当函数，把想法写成程序。
+
+**Chaos 是一门以函数为基础、把智能体作为可调用值的编程语言，也是一套可以放进项目目录的开发环境。** 普通函数负责计算和流程，智能体负责理解与生成；两者写在同一个程序里，传递数据、组合任务、返回结果。
+
+同一份 `.chaos` 源码，可以在终端运行、在网页 IDE 中编辑，也可以通过 SDK 嵌入 Python 工程。
+
+[**下载最新使用包**](https://github.com/Cattmonkey/ChaosIntelligence/releases/latest) · [**十分钟开始**](docs/GETTING_STARTED.md) · [**大模型示例**](docs/MODEL_EXAMPLES.md) · [**文档中心**](docs/README.md) · [**支持项目**](#支持项目)
+
+下载页请选择 **`Chaos-Project.zip`**。它含有项目启动器；GitHub 自动生成的 “Source code” 归档用于源码开发。
+
+### 用它做什么？
+
+- **把一次问答变成可复用的工作流程。** 让规划、写作、复核各司其职，用普通函数连接输入和结果；把精确计算交给代码，把需要理解的部分交给模型。
+- **让程序直接产出页面、报告和演示。** 计算得到的数据可以变成表格、图表、幻灯片；运行记录可以变成可交互的状态网络，不必先搭建另一套前端应用。
+- **让机器人围绕目标持续协作。** 用 Bot 组合计划、执行与验收，在接收点追加指导，再通过持久会话与进程保留长期工作状态。
+
+这些能力共享语言、项目配置与工具权限。换模型、增加角色或接入设备时，可以继续组合已有函数与模块。[了解语言设计与支持范围 →](docs/LANGUAGE_CONTRACT.md)
+
+## 先看看它怎样工作
+
+**用 40 秒走一遍：编辑代码 → 运行 → 生成看板 → 查看运行网络。** 视频配有中文步骤字幕，从实际效果开始，看完即可按下面的源码复现。
+
+[![播放 Chaos 40 秒操作演示：从代码到可交互的结果](docs/assets/showcase/overview.png)](https://raw.githubusercontent.com/Cattmonkey/ChaosIntelligence/main/docs/assets/showcase/overview.mp4)
+
+[▶ 播放／下载完整演示（MP4，40 秒）](https://raw.githubusercontent.com/Cattmonkey/ChaosIntelligence/main/docs/assets/showcase/overview.mp4) · [跟着演示操作](examples/showcase/README.md)
+
+`00:00` 编写与排版 · `00:08` 运行与事件 · `00:15` 指标、图表与排序 · `00:26` 网络与节点详情
+
+### 写代码 → 格式化 → 运行 → 看结果
+
+![Chaos IDE：格式化源码、保存并运行，查看结果和公开执行事件](docs/assets/showcase/ide-workflow.gif)
+
+左边管理文件，中间编写源码，底部看结果。语义配色、名称补全、参数提示和保存时格式化使用同一语言分析服务。需要帮助时打开“与助手编程”，检查修改提案后再应用。
+
+[查看静态截图](docs/assets/showcase/ide-workflow.png) · [照着动图操作](examples/showcase/README.md) · [IDE 使用指南](docs/IDE.md)
+
+### 让程序展示自己的数据与运行状态
+
+![Chaos 生成式界面：报告、图表与真实运行网络](docs/assets/showcase/live-dashboard.gif)
+
+页面和报告是程序返回的值。OpenUI 组件负责展示，`RuntimeGraph` 读取同一项目的真实结构与运行记录；节点详情可区分声明关系和实际观测。页面收到运行事件后更新状态。
+
+以上视频与动图由 v0.154.3 的真实操作画面剪辑而成，添加步骤字幕并调整停顿以便阅读。示例无需模型 Key；报告中的业务数字是标明的演示数据，网络读取实际运行记录。模型生成内容需要另行配置，公开事件不包含模型内部推理。
+
+[查看静态截图](docs/assets/showcase/live-dashboard.png) · [运行同款报告源码](examples/showcase/live-report.chaos) · [生成页面与报告](docs/GENERATIVE_UI.md) · [实时网络页面](docs/LIVE_NETWORK_UI.md)
+
+## 三个小例子，看懂这门语言
+
+### 1. 普通计算，先从 42 开始
+
+```chaos
+fn twice(f: Function, x) { f(f(x)) }
+fn add_one(x: Int) -> Int { x + 1 }
+
+twice(add_one, 40)
+```
+
+结果是 `42`。函数可以作为参数传递；最后一个表达式就是程序结果。把代码保存为 `hello.chaos`，执行 `python3 chaos.py run hello.chaos` 即可。**纯计算无需网络，也无需模型密钥。** [继续学习函数组合 →](docs/FUNCTION_COMPOSITION.md)
+
+### 2. 调用智能体，就像调用函数
+
+```chaos
+agent teacher {
+  provider: "model",
+  role: "planner",
+  prompt: "用一个短例子解释输入中的编程概念。",
+  tools: [],
+  maxSteps: 3
+}
+
+teacher("闭包是什么？")
+```
+
+配置完成后，运行这段程序会调用真实模型。先在项目的 `/control` 或 `python3 chaos.py configure --models` 中保存 Base URL、Key 和模型选择；`role` 继承项目中的角色配置，源码无需写入密钥。真实调用可能产生供应商费用。
+
+声明智能体不会发起请求，最后一行的调用才会执行。`tools: []` 表示本例没有授予工具权限。项目中的 `local` 提供方用于确定性演示，真实语义推理使用这里的 `model`。[配置模型 →](docs/MODEL_CONFIGURATION.md) · [完整问答源码 →](examples/learning-models/main.chaos)
+
+同一种调用方式，还能组合出更完整的程序：
+
+| 想做的事 | 可运行示例 | 学到的能力 |
+| --- | --- | --- |
+| 规划 → 写作 → 复核 | [多角色流水线](examples/learning-models/pipeline.chaos) | 将前一步的结果明确交给下一步 |
+| 同时获得不同视角 | [并发分析](examples/learning-models/parallel.chaos) | `async fn`、`await` 和任务汇合 |
+| 让模型解释准确的预算 | [函数工具](examples/learning-models/function-tools.chaos) | 函数算数、模型解释，并检查工具调用证据 |
+| 围绕目标迭代修改 | [目标 Bot](examples/learning-models/goal-bot.chaos) | 上下文、完成条件与有界工作轮次 |
+
+按[五个大模型示例教程](docs/MODEL_EXAMPLES.md)复制源码、准备输入，再逐个运行；模型给出的复核意见仍需结合明确的程序验收。
+
+### 3. 程序可以返回一个实时页面
+
+```chaos
+ui_artifact("page", "系统实时网络",
+  ui_node("RuntimeGraph", [
+    "真实运行状态", "radial", "project", "auto"
+  ])
+)
+```
+
+在 IDE 中保存为入口并运行，在“页面 / 报告”中查看自己的项目网络。它是一个普通语言产物，可以从函数返回、由智能体生成，也可以嵌入更大的报告。实时绑定由在线宿主提供；离线导出会明确显示未连接。
+
+[完整网络示例](examples/live-network.chaos) · [表格报告](examples/ui-report.chaos) · [自动翻页演示](examples/ui-slides.chaos) · [给运行追加指导](docs/REALTIME.md#从运行到追加指导)
+
+## 三步开始，在自己的目录里用
+
+需要 **Python 3.9+**。macOS／Linux 使用 `python3`；Windows 将以下命令中的 `python3` 换成 `py -3`。
+
+1. 从[最新发行版](https://github.com/Cattmonkey/ChaosIntelligence/releases/latest)下载 **`Chaos-Project.zip`**，解压到一个新目录，在该目录打开终端。
+2. 运行自带程序，确认得到 `42`：
+
+   ```sh
+   python3 chaos.py run
+   ```
+
+3. 准备 IDE 依赖并打开当前目录：
+
+   ```sh
+   python3 chaos.py setup --yes
+   python3 chaos.py
+   ```
+
+`setup` 检测系统、在项目内安装依赖、运行自检并保存配置，命令行显示阶段与结果。它需要可访问的 Python 包来源；包本身不包含 Python。后续启动通常只需 `python3 chaos.py`，按终端打印的实际地址使用网页。
+
+进入 IDE 后：选择 `main.chaos` → 编辑 → 格式化／保存 → 点击“运行” → 查看底部结果与事件。选择其他文件只改变编辑对象，默认运行入口仍由项目设置决定。[跟着快速开始操作 →](docs/GETTING_STARTED.md)
+
+已有工程也能使用：从解压后的使用包运行 `python3 chaos.py install "/absolute/path/my-project"`，安装器遇到冲突会保留原内容。仅需要语言核心可运行 `setup --yes --profile core`。[安装说明](docs/INSTALLATION.md) · [环境检测与配置](docs/DEPLOYMENT.md)
+
+### 喜欢终端？可以全程不用网页
+
+```sh
+python3 chaos.py -c '40 + 2'
+python3 chaos.py repl --empty
+python3 chaos.py docs show getting-started
+```
+
+配置模型后，还可以带着本版本文档提问：
+
+```sh
+python3 chaos.py ask '给我一个函数组合的短例子' --topic getting-started --stream
+```
+
+`ask` 返回回答，不修改文件；IDE 助手或 `assist` 可以生成需要检查与应用的代码提案。自己的程序也可导入 `std/intelligence`，组合内置规划、执行、复核与助手。[命令行教程 →](docs/COMMAND_LINE.md)
+
+## 从小程序到更复杂的系统
+
+| 能力 | 可以怎样组合 | 深入了解 |
+| --- | --- | --- |
+| 可复用语言核心 | 函数、闭包、模块、模式、宏、生成器与异步任务 | [语言参考](docs/LANGUAGE.md) · [标准库](docs/STDLIB.md) |
+| 持续 Bot | 将目标、计划、执行与验收写成函数；用 Session／Process 持久化长期工作 | [原生 Bot](docs/NATIVE_BOTS.md) · [持久机器人示例](examples/durable-bot/main.chaos) |
+| 实时协作 | 观察公开事件，在程序接收点追加指导，显式停止运行 | [实时交互](docs/REALTIME.md) |
+| 工具与设备 | 注册并授权函数工具、电脑和移动设备能力，在同一程序中调用 | [函数工具](docs/FUNCTION_TOOLS.md) · [电脑](docs/COMPUTERS.md) · [手机](docs/MOBILE_COMPUTERS.md) · [机器人与 HID](docs/ROBOT_DEVICES.md) |
+| GPU 数值计算 | 支持范围内的函数使用 CPU／CUDA／Apple M 系列 MPS 后端；MPS 可选融合 Metal 内核 | [GPU 计算](docs/GPU_COMPUTE.md) · [Metal](docs/GPU_METAL.md) · [控制流范围](docs/GPU_CONTROL_FLOW.md) |
+| 嵌入已有工程 | Python SDK 与 HTTP 接口运行同一语言、订阅同一服务的事件 | [SDK](docs/SDK.md) · [HTTP API](docs/HTTP_API.md) |
+
+GPU、设备和工具需要对应依赖、硬件与授权；它们不因写入提示词就自动可用。当前实机验收以 macOS、Python 3.9／3.13 为基础；Windows／Linux 的命令适配不等于所有功能都已完成该平台实机验收。抽象计算核心的图灵完备论证与工程边界见[语言契约](docs/LANGUAGE_CONTRACT.md)，不以复制 Python／Lisp 全部功能作为目标。
+
+## 更新时保留自己的程序
+
+取得新版完整 project ZIP 或 portable ZIP，停止本项目的 IDE 与程序，然后在原工程中执行：
+
+```sh
+python3 chaos.py replace "/absolute/path/Chaos-Project-New.zip"
+python3 chaos.py status
+```
+
+更新先校验与试运行，再切换运行环境；保留项目源码、配置与数据。需要时用 `python3 chaos.py rollback` 恢复上一环境及配套依赖。若 `dependenciesReady` 为 `false`，按提示运行 `python3 chaos.py setup --yes`。
+
+**不要把新版 ZIP 直接覆盖解压到旧工程。** [更新与回退指南 →](docs/UPDATES.md)
+
+## 按你的目标继续学习
+
+| 我想…… | 从这里开始 |
+| --- | --- |
+| 第一次运行，熟悉界面 | [快速开始](docs/GETTING_STARTED.md) · [用户指南](docs/USER_GUIDE.md) · [IDE](docs/IDE.md) |
+| 配置模型，编写智能体 | [模型配置](docs/MODEL_CONFIGURATION.md) · [五个模型示例](docs/MODEL_EXAMPLES.md) |
+| 学习这门语言 | [语言参考](docs/LANGUAGE.md) · [智能体函数](docs/AGENT_LANGUAGE.md) · [语言契约](docs/LANGUAGE_CONTRACT.md) |
+| 生成报告、演示、网络页面 | [生成式 UI](docs/GENERATIVE_UI.md) · [实时网络](docs/LIVE_NETWORK_UI.md) |
+| 让智能体基于执行经验改进 | [Harness 持续改进](docs/HARNESS_EVOLUTION.md) · [源码与状态演进](docs/PROCESS_EVOLUTION.md) |
+| 开发语言、扩展宿主或发布 | [开发者指南](docs/DEVELOPER.md) · [SDK](docs/SDK.md) · [发布指南](docs/RELEASING.md) |
+| 排查问题 | [环境配置](docs/DEPLOYMENT.md) · [故障排查](docs/TROUBLESHOOTING.md) |
+
+完整专题见[文档中心](docs/README.md)。从 GitHub 源码开发时，先在自己的 Python 虚拟环境里执行 `python3 -m pip install .`，再用 `python3 -m chaos serve`；普通网页无需 npm 构建。[源码安装与测试 →](docs/DEVELOPER.md)
 
 ## 许可：源码可见，禁止用于 AI／大模型训练
 
@@ -8,134 +188,6 @@ Chaos 是以函数为基础、Agent 为一等可调用值的编程语言与开�
 
 完整约束以 [LICENSE](LICENSE) 为准；第三方组件继续适用各自原许可，见 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。这是一项带用途限制的源码可见许可，不是 OSI 定义的开源许可。许可声明不是技术防抓取措施，也不能撤销向托管平台另行授予的权利；范围与平台条款说明见[许可指南](docs/LICENSING.md)。
 
-## 命令行与内置智能帮助
-
-目录包直接运行 `python3 chaos.py -c '40+2'`，用 `repl --empty` 开始交互编程，用 `docs list` 和 `docs show getting-started` 离线查文档。配置模型后，`ask '问题' --topic getting-started` 可以带着本版本文档提供帮助；REPL 中也可输入 `.ask 问题`。需要修改项目时，使用 IDE 助手或连接同一服务的 `assist`，检查提案后显式应用。
-
-自己的程序通过 `std/intelligence` 组合规划、执行、复核与助手，沿用项目的模型配置和工具权限。安装后的全局 `chaos` 命令、项目选择和实际使用示例见[命令行教程](docs/COMMAND_LINE.md)。
-
-## 一个目录开始编程
-
-取得可信的完整 **project ZIP**，解压到新目录并在其中打开终端。需要 **Python 3.9+**；macOS／Linux 使用 `python3`，Windows 将命令中的 `python3` 换成 `py -3`。
-
-```sh
-python3 chaos.py run     # 默认 main.chaos 返回 42
-python3 chaos.py setup --yes   # 检测、安装依赖、自检并保存默认配置
-python3 chaos.py         # 打开当前项目 IDE
-```
-
-纯语言计算可以离线运行，无需模型密钥。setup 安装依赖到项目环境，需要可访问的 Python 包来源。IDE 会打印实际地址并打开浏览器：`/docs` 是文档，`/control` 是模型配置与后台任务。按 `Ctrl+C` 结束前台服务；关闭网页只结束页面观察。
-
-首次配置会显示五个阶段、真实安装耗时和测试结果；交互终端自动着色。需要问答式配置模型时运行 `python3 chaos.py setup --models`，仅使用语言核心可选 `python3 chaos.py setup --yes --profile core`。`python3 chaos.py doctor` 复查当前环境；`--json` 输出机器可读报告，`--no-color` 关闭颜色。
-
-配置按提供方、规划／执行／复核角色、单个智能体继承；已有选择保留在项目中。已配置模型后，可显式用 `setup --ai` 请求一次部署建议并记住此偏好，`setup --no-ai` 关闭。完整流程与旧启动器兼容说明见[环境检测与配置](docs/DEPLOYMENT.md)。
-
-要在已有工程中使用，从刚解压的包目录执行：
-
-```sh
-python3 chaos.py install "/absolute/path/my-project"
-cd "/absolute/path/my-project"
-python3 chaos.py run
-```
-
-install 增加干净运行环境、`chaos.py`、`chaos.project.json` 和 `main.chaos`，遇到冲突保留原内容。它不复制分发目录里的私人源码、设置或运行历史。安装方式与旧项目迁移见[安装说明](docs/INSTALLATION.md)。
-
-## 编辑、运行和查看进度
-
-在 IDE 中选择 `main.chaos`，修改后点击“格式化”“保存”，再点击顶部“运行”。底部“运行结果”展示最终值，“执行事件”展示已发生的工作；向上阅读时暂停跟随，点击“跟随最新”回到底部。`Ctrl/Cmd-Shift-P` 搜索命令，`Ctrl/Cmd-P` 打开文件。
-
-先按[快速开始](docs/GETTING_STARTED.md)完成 `double(21) → 42`，再按[从运行到追加指导](docs/REALTIME.md#从运行到追加指导)下载示例到自己的工程，练习持续进度和运行中输入。
-
-| 要做什么 | 命令或入口 |
-| --- | --- |
-| 检查／运行已有文件 | `python3 chaos.py check hello.chaos` ／ `python3 chaos.py run hello.chaos` |
-| 给程序输入数字 21 | `python3 chaos.py run double.chaos --input-json 21` |
-| 终端持续接收公开事件 | 保存教程里的 `live-progress.chaos` 后，运行 `python3 chaos.py run live-progress.chaos --stream` |
-| 在终端给当前运行追加指导 | POSIX 真实终端运行 `python3 chaos.py run interactive-progress.chaos --interactive`；详见实时教程 |
-| 格式化并保存源码 | IDE“格式化”后“保存”；CLI `python3 chaos.py fmt hello.chaos` 只输出排版文本 |
-| 保存 CLI 运行历史 | `python3 chaos.py run --persistent` |
-| 查看实际版本与环境 | `python3 chaos.py --version` ／ `python3 chaos.py status` |
-| 不开网页查用法 | `python3 chaos.py docs list` ／ `python3 chaos.py docs show command-line` |
-
-普通 `run` 只输出最终 JSON；`--stream` 持续输出 NDJSON 事件，成功时追加同一运行的 `run.result`。`--interactive` 需要 POSIX 的输入和输出都是真实终端；Windows 或重定向场景使用 `--stream`，运行中指导通过网页、SDK 或 HTTP 发送给对应服务运行。事件包含程序公开进度、工具动作与结果。完整协议见[实时交互](docs/REALTIME.md)。
-
-自己的源码放在工程根目录或子目录。默认入口由 `chaos.project.json` 的 entry 指定，选中文件只改变编辑对象。CLI 和 IDE 共用源码与设置，默认 CLI 内存历史、CLI 持久历史和 IDE 历史分别保存。磁盘同步、入口切换与草稿冲突见[用户指南](docs/USER_GUIDE.md)。
-
-## 让智能体参与编程
-
-在实际服务地址的 `/control` 按[模型配置教程](docs/MODEL_CONFIGURATION.md)保存自己有权使用的 Base URL、密钥和准确模型 ID。随后从活动栏打开编程助手，发送需求；对话会显示公开执行过程和代码提案。先核对差异与校验结果，再点击“应用并保存”。断线时保持原任务跟踪和当前草稿，恢复后补读事件，不需要重复提交同一个请求。
-
-要在程序中调用大模型，从[五个模型智能体示例](docs/MODEL_EXAMPLES.md)开始：问答、多角色、并发、函数工具和 Bot。`local` 提供方是无需密钥的确定性演示；真实语义推理由 `model` 连接配置的服务完成。真实密钥留在私人配置中。
-
-通过[Harness 持续改进](docs/HARNESS_EVOLUTION.md)，还可以把候选策略、真实执行比较和经验保留写进程序；同一组语言函数既能使用确定性操作，也能调用已配置的大模型。
-
-## 直接替换新版本
-
-停止本项目的 IDE 和程序，在原工程中执行：
-
-```sh
-python3 chaos.py replace "/absolute/path/Chaos-Project-New.zip"
-python3 chaos.py status
-```
-
-replace 接受完整 project ZIP 或 portable ZIP，先校验并试运行，再切换完整环境；源码、配置、数据库和任务数据保留。如果 `dependenciesReady` 为 `false`，执行 `python3 chaos.py setup --yes` 再使用完整功能。`python3 chaos.py rollback` 恢复上一环境及配套依赖，不撤销用户数据或外部操作。
-
-**不要把新版 ZIP 覆盖解压进旧工程。** 旧版没有 replace 命令时，从解压后的新版包执行 `python3 chaos.py install "/absolute/path/old-project"`。失败恢复与迁移细则见[更新说明](docs/UPDATES.md)。
-
-## 用函数组织智能工作
-
-```chaos
-fn twice(f: Function, x) { f(f(x)) }
-agent preview {
-  prompt: "提供内容预览。",
-  provider: "local",
-  mode: "summarize",
-  tools: []
-};
-{answer: twice(fn(x) { x + 1 }, 40), report: preview("Hello, Chaos")}
-```
-
-这段程序把函数作为参数，并像调用函数一样调用 Agent。`answer` 为42，`report` 是本地规则提供方的结构化预览；没有真实模型请求。类型注解在调用和返回处验证；外部工具需要宿主注册与显式授权。
-
-持续机器人可以进一步组合 Agent／Team、Session、Process 和 Program，保存身份、邮箱、记忆和经测试的行为更新。设备控制使用同一效果与授权体系；软件验证和实际硬件验收范围见[机器人与设备](docs/ROBOT_DEVICES.md)及[树莓派 HID](docs/RASPBERRY_PI.md)。
-
-## 按目标继续学习
-
-| 目标 | 文档 |
-| --- | --- |
-| 第一次运行自己的项目 | [快速开始](docs/GETTING_STARTED.md) · [随包速查](docs/PROJECT_README.md) |
-| 日常编辑、运行与恢复 | [用户指南](docs/USER_GUIDE.md) · [IDE](docs/IDE.md) · [故障排查](docs/TROUBLESHOOTING.md) |
-| 查看实时进度并追加指导 | [实时交互教程与订阅接口](docs/REALTIME.md) |
-| 使用大模型与智能体 | [模型配置](docs/MODEL_CONFIGURATION.md) → [模型示例](docs/MODEL_EXAMPLES.md) |
-| 让智能体根据执行经验改进 | [Harness 持续改进](docs/HARNESS_EVOLUTION.md) · [源码与状态原子演进](docs/PROCESS_EVOLUTION.md) |
-| 学语言及组合能力 | [语言参考](docs/LANGUAGE.md) · [Agent 函数](docs/AGENT_LANGUAGE.md) · [标准库](docs/STDLIB.md) |
-| 嵌入其他工程或调用接口 | [开发者指南](docs/DEVELOPER.md) · [SDK](docs/SDK.md) · [HTTP API](docs/HTTP_API.md) |
-| 安装、维护与发布 | [安装](docs/INSTALLATION.md) · [更新](docs/UPDATES.md) · [发布](docs/RELEASING.md) |
-
-完整专题在[文档中心](docs/README.md)。包不包含 Python、模型密钥和 GPU 驱动；第三方依赖需要匹配目标系统及 Python。现有实机验收基于 macOS 的 Python 3.9 与 3.13，Windows／Linux 的命令适配不等于已经完成原生实机验收。
-
-## 开发语言本身或嵌入宿主
-
-GitHub 源码归档和可直接使用的 project ZIP 是两种交付物。源码根目录没有目录包的 `chaos.py`，从源码开始时先在自己的 Python 虚拟环境中安装，再使用 `chaos` 或 `python -m chaos`；普通网页无需 npm 构建。
-
-```sh
-python3 -m pip install .
-python3 -m chaos serve
-```
-
-此独立服务默认地址是 `http://127.0.0.1:8765`，文档在 `/docs`；默认持久数据库是 `.chaos/workspace.sqlite3`，仅监听本机，面向单用户工作区。目录项目则使用其启动时打印的地址和项目内状态。
-
-Python 宿主通过 `from chaos import Framework, Registry, Workflow, Client` 嵌入语言或调用服务。完整 portable 包可放入 vendor 目录，通过 `run_chaos.py` 使用原 CLI，或添加明确导入路径使用 SDK。公共接口、依赖和能力边界统一见[开发者指南](docs/DEVELOPER.md)与[SDK](docs/SDK.md)。
-
-维护文档与发行包的检查命令：
-
-```sh
-python3 -m chaos docs check
-python3 -m chaos docs build --output ./docs-site
-python3 -m unittest discover -s tests -v
-```
-
-`docs check` 验证登记的确定性示例及本地链接；真实模型质量、设备和网络服务需要各自验收。文档发布流程见[文档维护](docs/MAINTAINING_DOCS.md)。
 
 ## 支持项目
 
