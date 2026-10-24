@@ -30,6 +30,16 @@ chaos repl
 
 这些能力共享语言、项目配置与工具权限。换模型、增加角色或接入设备时，可以继续组合已有函数与模块。[了解语言设计与支持范围 →](docs/LANGUAGE_CONTRACT.md)
 
+## 2 分 35 秒，认识 Chaos Intelligence
+
+**让智能，成为语言。** 从可组合的智能体，到围绕目标工作的 Bot，再到可交互的报告与实时运行网络——用一支有配音的短片，了解这门语言能帮助你构建什么。
+
+https://github.com/user-attachments/assets/2aa53c85-8d36-4e21-8322-2bdc9188f17a
+
+[下载 1080p 完整宣传片](https://github.com/Cattmonkey/ChaosIntelligence/releases/download/v0.154.4/Chaos-Intelligence-Brand-Film-1080p.mp4) · [中文字幕](https://github.com/Cattmonkey/ChaosIntelligence/releases/download/v0.154.4/captions.zh-CN.srt) · [宣传封面与素材说明](docs/assets/brand-film/README.md)
+
+影片包含中文旁白、原创配乐、真实 IDE／报告／运行网络界面和标注的能力示意。真实界面中的业务数字为演示输入；设备与 GPU 能力按配置、授权和支持范围启用。
+
 ## 先看看它怎样工作
 
 **用 40 秒走一遍：编辑代码 → 运行 → 生成看板 → 查看运行网络。** 视频配有中文步骤字幕，从实际效果开始，看完即可按下面的源码复现。
